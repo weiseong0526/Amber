@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Activities</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="activities.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+      <form class="search" role="search" action="#">
+        <input type="text" placeholder="Search activities" aria-label="Search activities" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+      <nav class="top-actions" aria-label="Top actions">
+        <a href="#" class="action"><span>🔔</span><span class="label">Notification</span></a>
+        <a href="#" class="action"><span>👤</span><span class="label">Profile</span></a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item active" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item" href="#"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="#"><span>👥</span>Customers</a>
+        <a class="nav-item" href="#"><span>⚙️</span>Settings</a>
+      </aside>
+
+      <main class="content activities">
+        <h2 class="section-title">Feature Activities</h2>
+        <nav class="filters" aria-label="Filters">
+          <button class="filter active" data-filter="all" aria-pressed="true">All</button>
+          <button class="filter" data-filter="yoga" aria-pressed="false">Yoga</button>
+          <button class="filter" data-filter="weaving" aria-pressed="false">Weaving</button>
+        </nav>
+
+        <section class="card-grid">
+          <article class="activity-card" data-type="yoga">
+            <img src="https://images.unsplash.com/photo-1518617840859-acd0eac7b3fd?q=80&w=1200&auto=format&fit=crop" alt="Yoga" />
+            <div class="body">
+              <header class="title-row">
+                <h3>Yoga</h3>
+                <div class="badges">
+                  <span class="badge people-badge" aria-live="polite" data-default="3/8">3/8</span>
+                  <span class="badge time-badge">120min</span>
+                </div>
+              </header>
+              <p class="desc">Gentle vinyasa to wake up your body and mind.</p>
+              <div class="slot-label">Select time</div>
+              <div class="slots">
+                <button class="slot" data-people="3 / 8 going" data-count="3/8">2025-09-01 14:00</button>
+                <button class="slot" data-people="8 / 8 going" data-count="8/8" disabled>2025-09-01 16:00</button>
+                <button class="slot" data-people="2 / 8 going" data-count="2/8">2025-09-02 14:00</button>
+              </div>
+              <button class="btn slim book disabled" disabled>Book Now</button>
+            </div>
+          </article>
+
+          <article class="activity-card" data-type="weaving">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" alt="Weaving" />
+            <div class="body">
+              <header class="title-row">
+                <h3>Weaving</h3>
+                <div class="badges">
+                  <span class="badge people-badge" aria-live="polite" data-default="8/8">8/8</span>
+                  <span class="badge time-badge">120min</span>
+                </div>
+              </header>
+              <p class="desc">Learn loom setup and basic patterns.</p>
+              <div class="slot-label">Select time</div>
+              <div class="slots">
+                <button class="slot" data-people="7 / 8 going" data-count="7/8">2025-09-03 14:00</button>
+                <button class="slot" data-people="8 / 8 going" data-count="8/8" disabled>2025-09-05 14:00</button>
+                <button class="slot" data-people="6 / 8 going" data-count="6/8">2025-09-08 14:00</button>
+              </div>
+              <button class="btn slim book disabled" disabled>Book Now</button>
+            </div>
+          </article>
+        </section>
+      </main>
+    </div>
+    <script>
+      // Filter cards by category
+      (function(){
+        var filterBar = document.querySelector('.filters');
+        var buttons = Array.prototype.slice.call(document.querySelectorAll('.filters .filter'));
+        var cards = Array.prototype.slice.call(document.querySelectorAll('.activity-card'));
+
+        function applyFilter(key){
+          cards.forEach(function(card){
+            var type = card.getAttribute('data-type');
+            var show = key === 'all' || type === key;
+            card.style.display = show ? '' : 'none';
+          });
+        }
+
+        filterBar.addEventListener('click', function(e){
+          var btn = e.target.closest('.filter');
+          if(!btn) return;
+          var key = btn.getAttribute('data-filter') || 'all';
+          buttons.forEach(function(b){ b.classList.toggle('active', b === btn); b.setAttribute('aria-pressed', b===btn ? 'true' : 'false'); });
+          applyFilter(key);
+        });
+
+        // initial
+        applyFilter('all');
+      })();
+      // Update people badge on hover/focus, and persist when a slot is clicked
+      (function(){
+        document.querySelectorAll('.activity-card').forEach(function(card){
+          var badge = card.querySelector('.people-badge');
+          if(!badge) return;
+          var defaultText = badge.getAttribute('data-default') || (badge.textContent || '').trim();
+          var currentText = defaultText; // persists latest selected value
+          function extractCount(el){
+            var c = el.getAttribute('data-count');
+            if(c) return c;
+            var p = el.getAttribute('data-people') || '';
+            var m = p.match(/(\d+)\s*\/\s*(\d+)/);
+            return m ? (m[1] + '/' + m[2]) : currentText;
+          }
+          card.querySelectorAll('.slot').forEach(function(slot){
+            function show(){ badge.textContent = extractCount(slot); }
+            function hide(){ badge.textContent = currentText; }
+            slot.addEventListener('mouseenter', show);
+            slot.addEventListener('focus', show);
+            slot.addEventListener('mouseleave', hide);
+            slot.addEventListener('blur', hide);
+            slot.addEventListener('click', function(){
+              currentText = extractCount(slot);
+              badge.textContent = currentText;
+              badge.setAttribute('data-default', currentText);
+            });
+          });
+        });
+      })();
+      // Slot selection enables Book Now; full slots are disabled
+      (function(){
+        document.querySelectorAll('.activity-card').forEach(function(card){
+          var slots = Array.prototype.slice.call(card.querySelectorAll('.slot'));
+          var bookBtn = card.querySelector('.book');
+          function activate(){
+            if(!bookBtn) return;
+            bookBtn.classList.remove('disabled');
+            bookBtn.classList.add('active');
+            bookBtn.removeAttribute('disabled');
+          }
+          function deactivate(){
+            if(!bookBtn) return;
+            bookBtn.classList.add('disabled');
+            bookBtn.classList.remove('active');
+            bookBtn.setAttribute('disabled','');
+          }
+          slots.forEach(function(slot){
+            var count = slot.getAttribute('data-count') || '';
+            var m = count.match(/(\d+)\/(\d+)/);
+            if(m){
+              var used = parseInt(m[1],10), cap = parseInt(m[2],10);
+              if(!isNaN(used) && !isNaN(cap) && used >= cap){
+                slot.classList.add('full');
+                slot.setAttribute('disabled','');
+              }
+            }
+            slot.addEventListener('click', function(){
+              slots.forEach(function(s){ s.classList.remove('selected'); });
+              slot.classList.add('selected');
+              activate();
+            });
+          });
+          // Initially disabled
+          deactivate();
+        });
+      })();
+    </script>
+  </body>
+ </html>
+
+

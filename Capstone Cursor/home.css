@@ -182,8 +182,7 @@
   .upcoming-card h3{margin:0;font-size:18px;font-weight:600;color:var(--text)}
   .upcoming-card .date{color:var(--amber);font-weight:600;font-size:16px}
   
-  /* Center text for home page */
-  .content.home .upcoming-section{text-align:center}
+
 
   /* Phones */
   @media (max-width: 600px){

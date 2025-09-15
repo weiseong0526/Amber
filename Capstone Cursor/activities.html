@@ -40,6 +40,7 @@
         <nav class="filters" aria-label="Filters">
           <button class="filter active" data-filter="all" aria-pressed="true">All</button>
           <button class="filter" data-filter="yoga" aria-pressed="false">Yoga</button>
+          <button class="filter" data-filter="dance" aria-pressed="false">Zumba</button>
           <button class="filter" data-filter="weaving" aria-pressed="false">Weaving</button>
         </nav>
 
@@ -60,6 +61,27 @@
                 <button class="slot" data-people="3 / 8 going" data-count="3/8">2025-09-01 14:00</button>
                 <button class="slot" data-people="8 / 8 going" data-count="8/8" disabled>2025-09-01 16:00</button>
                 <button class="slot" data-people="2 / 8 going" data-count="2/8">2025-09-02 14:00</button>
+              </div>
+              <button class="btn slim book disabled" disabled>Book Now</button>
+            </div>
+          </article>
+
+          <article class="activity-card" data-type="dance">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" alt="Zumba Fitness" />
+            <div class="body">
+              <header class="title-row">
+                <h3>Zumba</h3>
+                <div class="badges">
+                  <span class="badge people-badge" aria-live="polite" data-default="6/8">6/8</span>
+                  <span class="badge time-badge">60min</span>
+                </div>
+              </header>
+              <p class="desc">Intense cardio workout with Latin dance moves.</p>
+              <div class="slot-label">Select time</div>
+              <div class="slots">
+                <button class="slot" data-people="6 / 8 going" data-count="6/8">2025-09-03 19:00</button>
+                <button class="slot" data-people="3 / 8 going" data-count="3/8">2025-09-05 19:00</button>
+                <button class="slot" data-people="8 / 8 going" data-count="8/8" disabled>2025-09-10 19:00</button>
               </div>
               <button class="btn slim book disabled" disabled>Book Now</button>
             </div>
@@ -134,16 +156,33 @@
           });
         }
 
+        function setActiveFilter(filterKey){
+          buttons.forEach(function(btn){
+            var btnFilter = btn.getAttribute('data-filter');
+            var isActive = btnFilter === filterKey;
+            btn.classList.toggle('active', isActive);
+            btn.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+          });
+        }
+
         filterBar.addEventListener('click', function(e){
           var btn = e.target.closest('.filter');
           if(!btn) return;
           var key = btn.getAttribute('data-filter') || 'all';
-          buttons.forEach(function(b){ b.classList.toggle('active', b === btn); b.setAttribute('aria-pressed', b===btn ? 'true' : 'false'); });
+          setActiveFilter(key);
           applyFilter(key);
         });
 
-        // initial
-        applyFilter('all');
+        // Check for URL parameter and apply filter
+        var urlParams = new URLSearchParams(window.location.search);
+        var filterParam = urlParams.get('filter');
+        if(filterParam){
+          setActiveFilter(filterParam);
+          applyFilter(filterParam);
+        } else {
+          // initial
+          applyFilter('all');
+        }
       })();
       // Update people badge on hover/focus, and persist when a slot is clicked
       (function(){

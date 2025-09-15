@@ -84,26 +84,18 @@
                 <strong>Max Participants:</strong> 8 people
               </div>
               <div class="info-item">
-                <strong>Schedule:</strong> Mondays & Wednesdays, 6:00 PM
+                <strong>Coach:</strong> Sarah Chen
               </div>
               <div class="info-item">
                 <strong>Location:</strong> Alcove Studio
               </div>
               <div class="info-item">
-                <strong>Time Zone:</strong> Asia/Malaysia GMT+08:00
+                <strong>Price:</strong> RM 75.00
               </div>
             </div>
 
             <div class="booking-section">
-              <h4>Available Time Slots</h4>
-              <span class="people-badge" aria-live="polite" data-default="3/8">3/8</span>
-              <div class="time-slots">
-                <button class="time-slot" data-count="3/8">Mon, Sep 1 - 6:00 PM</button>
-                <button class="time-slot full" data-count="8/8" disabled>Wed, Sep 3 - 6:00 PM</button>
-                <button class="time-slot" data-count="2/8">Mon, Sep 8 - 6:00 PM</button>
-                <button class="time-slot" data-count="5/8">Wed, Sep 10 - 6:00 PM</button>
-              </div>
-              <button class="btn cta">Book Now</button>
+              <button class="btn cta" onclick="window.location.href='activities.html?filter=yoga'">Book Now</button>
             </div>
           </div>
         </section>
@@ -145,77 +137,6 @@
       // optional: prevent submit from navigating on demo search
       document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
       
-      // Slot selection functionality - same as activities.html
-      (function(){
-        var slots = Array.prototype.slice.call(document.querySelectorAll('.time-slot'));
-        var bookBtn = document.querySelector('.btn.cta');
-        var badge = document.querySelector('.people-badge');
-        
-        function activate(){
-          if(!bookBtn) return;
-          bookBtn.style.opacity = '1';
-          bookBtn.style.cursor = 'pointer';
-        }
-        
-        function deactivate(){
-          if(!bookBtn) return;
-          bookBtn.style.opacity = '0.6';
-          bookBtn.style.cursor = 'not-allowed';
-        }
-        
-        slots.forEach(function(slot){
-          var count = slot.getAttribute('data-count') || '';
-          var m = count.match(/(\d+)\/(\d+)/);
-          if(m){
-            var used = parseInt(m[1],10), cap = parseInt(m[2],10);
-            if(!isNaN(used) && !isNaN(cap) && used >= cap){
-              slot.classList.add('full');
-              slot.setAttribute('disabled','');
-            }
-          }
-          
-          if(!slot.hasAttribute('disabled')){
-            slot.addEventListener('click', function(){
-              slots.forEach(function(s){ s.classList.remove('selected'); });
-              slot.classList.add('selected');
-              activate();
-            });
-          }
-        });
-        
-        // People badge update on hover - same as activities.html
-        if(badge){
-          var defaultText = badge.getAttribute('data-default') || (badge.textContent || '').trim();
-          var currentText = defaultText;
-          
-          function extractCount(el){
-            var c = el.getAttribute('data-count');
-            if(c) return c;
-            return currentText;
-          }
-          
-          slots.forEach(function(slot){
-            function show(){ 
-              if(badge) badge.textContent = extractCount(slot); 
-            }
-            function hide(){ 
-              if(badge) badge.textContent = currentText; 
-            }
-            slot.addEventListener('mouseenter', show);
-            slot.addEventListener('focus', show);
-            slot.addEventListener('mouseleave', hide);
-            slot.addEventListener('blur', hide);
-            slot.addEventListener('click', function(){
-              currentText = extractCount(slot);
-              if(badge) badge.textContent = currentText;
-              if(badge) badge.setAttribute('data-default', currentText);
-            });
-          });
-        }
-        
-        // Initially disabled
-        deactivate();
-      })();
     </script>
   </body>
 </html>

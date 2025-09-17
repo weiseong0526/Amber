@@ -248,6 +248,25 @@
           });
           // Initially disabled
           deactivate();
+
+          // Handle Book Now click: require a selected slot and navigate with date
+          if(bookBtn){
+            bookBtn.addEventListener('click', function(){
+              var selected = card.querySelector('.slot.selected');
+              if(!selected){
+                alert('Please select a date/time before booking.');
+                return;
+              }
+              var raw = (selected.textContent || '').trim();
+              // Convert "YYYY-MM-DD HH:MM" to ISO by replacing space with 'T'
+              var iso = raw.replace(' ', 'T');
+              var activityName = (card.querySelector('h3')?.textContent || '').trim();
+              var url = new URL('booking.html', window.location.href);
+              url.searchParams.set('date', iso);
+              if(activityName) url.searchParams.set('activity', activityName);
+              window.location.href = url.toString();
+            });
+          }
         });
       })();
     </script>

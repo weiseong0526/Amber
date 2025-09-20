@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking History - Amber</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #000;
+            min-height: 100vh;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .app-container {
+            background: #f5f0e8;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            background: #ff6b35;
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .search-container {
+            flex: 1;
+            max-width: 500px;
+            margin: 0 30px;
+            position: relative;
+        }
+
+        .search-bar {
+            width: 100%;
+            padding: 12px 20px 12px 45px;
+            border: none;
+            border-radius: 25px;
+            font-size: 16px;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar:focus {
+            outline: none;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 18px;
+        }
+
+        .header-icons {
+            display: flex;
+            gap: 15px;
+        }
+
+        .header-icon {
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-icon:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .main-container {
+            display: flex;
+            flex: 1;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 280px;
+            background: #8b4513;
+            padding: 30px 0;
+            box-shadow: 2px 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar-logo {
+            text-align: center;
+            margin-bottom: 40px;
+            padding: 0 20px;
+        }
+
+        .sidebar-logo h1 {
+            color: white;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .nav-menu {
+            list-style: none;
+            padding: 0 20px;
+            margin-bottom: 30px;
+        }
+
+        .nav-item {
+            margin-bottom: 8px;
+        }
+
+        .nav-link {
+            display: flex;
+            align-items: center;
+            padding: 15px 20px;
+            color: #f5f0e8;
+            text-decoration: none;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .nav-icon {
+            width: 20px;
+            height: 20px;
+            margin-right: 12px;
+            color: #f5f0e8;
+        }
+
+        .nav-link:hover .nav-icon, .nav-link.active .nav-icon {
+            color: white;
+        }
+
+        /* Promotional Cards */
+        .promo-section {
+            padding: 0 20px;
+        }
+
+        .promo-card {
+            background: #ff8c42;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+            color: #8b4513;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .promo-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+        }
+
+        .promo-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .promo-description {
+            font-size: 12px;
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        .promo-btn {
+            background: #8b4513;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .promo-btn:hover {
+            background: #a0522d;
+            transform: translateY(-1px);
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            background: #f5f0e8;
+        }
+
+        .page-header {
+            margin-bottom: 30px;
+        }
+
+        .page-title {
+            font-size: 32px;
+            font-weight: 700;
+            color: #8b4513;
+            margin-bottom: 10px;
+        }
+
+        .page-subtitle {
+            font-size: 16px;
+            color: #a0522d;
+        }
+
+        /* Search & Filter Section - Clean Design */
+        .filters-section {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .filters-container {
+            display: flex;
+            align-items: end;
+            gap: 30px;
+            flex-wrap: wrap;
+        }
+
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 150px;
+        }
+
+        .filter-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin: 0;
+        }
+
+        .filter-select {
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23374151' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+            background-position: right 8px center;
+            background-repeat: no-repeat;
+            background-size: 16px;
+            padding-right: 32px;
+        }
+
+        .filter-select:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+
+        .filter-select:hover {
+            border-color: #9ca3af;
+        }
+
+        .clear-filters-btn {
+            background: #f3f4f6;
+            color: #374151;
+            border: 1px solid #d1d5db;
+            padding: 10px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            white-space: nowrap;
+        }
+
+        .clear-filters-btn:hover {
+            background: #e5e7eb;
+            border-color: #9ca3af;
+        }
+
+        .clear-filters-btn:active {
+            background: #d1d5db;
+        }
+
+        .search-group {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            font-size: 14px;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 1px #3b82f6;
+        }
+
+        .search-input:hover {
+            border-color: #9ca3af;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .filters-container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 20px;
+            }
+
+            .filter-group {
+                min-width: auto;
+            }
+
+            .search-group {
+                min-width: auto;
+            }
+        }
+
+        /* Booking Cards */
+        .bookings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 16px;
+            padding: 0;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        .booking-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #ff8c42 0%, #ff6b35 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .booking-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .booking-image-placeholder {
+            font-size: 48px;
+            color: white;
+            opacity: 0.8;
+        }
+
+        .booking-content {
+            padding: 25px;
+        }
+
+        .booking-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .booking-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
+        }
+
+        .booking-date {
+            font-size: 14px;
+            color: #64748b;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .status-upcoming {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        .status-completed {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-cancelled {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .booking-details {
+            margin-bottom: 20px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: #64748b;
+        }
+
+        .detail-value {
+            color: #1e293b;
+        }
+
+        .booking-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .action-btn {
+            padding: 8px 16px;
+            border: none;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #357abd;
+        }
+
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #64748b;
+        }
+
+        .btn-secondary:hover {
+            background: #e2e8f0;
+        }
+
+        .btn-danger {
+            background: #ef4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #dc2626;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                padding: 20px;
+            }
+
+            .filters-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .bookings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .filters-header {
+                flex-direction: column;
+                gap: 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">Amber</div>
+            <div class="search-container">
+                <div class="search-icon">🔍</div>
+                <input type="text" class="search-bar" placeholder="Search Yoga, Weaving, Dance" id="headerSearch">
+            </div>
+            <div class="header-icons">
+                <div class="header-icon" title="Notifications">
+                    🔔
+                </div>
+                <div class="header-icon" title="My Profile">
+                    👤
+                </div>
+            </div>
+        </div>
+
+        <div class="main-container">
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <div class="sidebar-logo">
+                    <h1>Amber</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+                            </svg>
+                            Home
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M3 13h2v-2H3v2zm0 4h2v-2H3v2zm0-8h2V7H3v2zm4 4h14v-2H7v2zm0 4h14v-2H7v2zM7 7v2h14V7H7z"/>
+                            </svg>
+                            Analytics
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link active">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                            </svg>
+                            Bookings
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M16 4c0-1.11.89-2 2-2s2 .89 2 2-.89 2-2 2-2-.89-2-2zm4 18v-6h2.5l-2.54-7.63A1.5 1.5 0 0 0 18.54 8H16c-.8 0-1.54.5-1.85 1.26L12 15h2v7h6zM12.5 11.5c.83 0 1.5-.67 1.5-1.5s-.67-1.5-1.5-1.5S11 9.17 11 10s.67 1.5 1.5 1.5zM5.5 6c1.11 0 2-.89 2-2s-.89-2-2-2-2 .89-2 2 .89 2 2 2zm2 16v-7H9l-2.5-7.63A1.5 1.5 0 0 0 5.46 8H3c-.8 0-1.54.5-1.85 1.26L-2 15h2v7h9.5z"/>
+                            </svg>
+                            Customers
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <svg class="nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                            </svg>
+                            Settings
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- Promotional Cards -->
+                <div class="promo-section">
+                    <div class="promo-card">
+                        <div class="promo-title">Weekend Retreat</div>
+                        <div class="promo-description">Recharge with 3 Days of yoga & nature walk.</div>
+                        <button class="promo-btn">Read More</button>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-title">Weekend Retreat</div>
+                        <div class="promo-description">Recharge with 3 Days of yoga & nature walk.</div>
+                        <button class="promo-btn">Read More</button>
+                    </div>
+                    <div class="promo-card">
+                        <div class="promo-title">Weekend Retreat</div>
+                        <div class="promo-description">Recharge with 3 Days of yoga & nature walk.</div>
+                        <button class="promo-btn">Read More</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Content -->
+            <div class="main-content">
+            <div class="page-header">
+                <h1 class="page-title">Booking History</h1>
+                <p class="page-subtitle">View and manage your past and upcoming bookings</p>
+            </div>
+
+            <!-- Search & Filter Section -->
+            <div class="filters-section">
+                <div class="filters-container">
+                    <!-- Filter by Activity -->
+                    <div class="filter-group">
+                        <label class="filter-label">Filter by Activity:</label>
+                        <select class="filter-select" id="activityFilter" onchange="filterBookings()">
+                            <option value="">All Activities</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="weaving">Weaving</option>
+                            <option value="dance">Dance</option>
+                            <option value="retreat">Retreat</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter by Status -->
+                    <div class="filter-group">
+                        <label class="filter-label">Filter by Status:</label>
+                        <select class="filter-select" id="statusFilter" onchange="filterBookings()">
+                            <option value="">All Status</option>
+                            <option value="upcoming">Upcoming</option>
+                            <option value="completed">Completed</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+
+                    <!-- Filter by Date -->
+                    <div class="filter-group">
+                        <label class="filter-label">Filter by Date:</label>
+                        <select class="filter-select" id="dateFilter" onchange="filterBookings()">
+                            <option value="">All Dates</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+
+                    <!-- Search Input -->
+                    <div class="filter-group search-group">
+                        <label class="filter-label">Search:</label>
+                        <input type="text" class="search-input" placeholder="Search bookings..." id="searchInput" oninput="filterBookings()">
+                    </div>
+
+                    <!-- Clear Filters Button -->
+                    <div class="filter-group">
+                        <label class="filter-label" style="visibility: hidden;">&nbsp;</label>
+                        <button class="clear-filters-btn" onclick="clearAllFilters()">
+                            <span style="font-size: 16px; font-weight: bold;">×</span>
+                            Clear Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bookings Grid -->
+            <div class="bookings-grid" id="bookingsGrid">
+                <!-- Booking cards will be dynamically generated here -->
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample booking data with images
+        const bookings = [
+            {
+                id: 1,
+                title: "Morning Yoga Session",
+                date: "2024-01-15",
+                time: "09:00 AM",
+                status: "completed",
+                serviceType: "yoga",
+                instructor: "Sarah Johnson",
+                location: "Studio A",
+                price: "$25",
+                duration: "60 min",
+                description: "A peaceful morning yoga session to start your day with energy and mindfulness.",
+                image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=400&h=200&fit=crop",
+                imagePlaceholder: "🧘"
+            },
+            {
+                id: 2,
+                title: "Weaving Workshop",
+                date: "2024-01-20",
+                time: "02:00 PM",
+                status: "upcoming",
+                serviceType: "weaving",
+                instructor: "Maria Rodriguez",
+                location: "Craft Room",
+                price: "$45",
+                duration: "120 min",
+                description: "Learn traditional weaving techniques and create your own beautiful textile.",
+                image: "https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=400&h=200&fit=crop",
+                imagePlaceholder: "🧵"
+            },
+            {
+                id: 3,
+                title: "Salsa Dance Class",
+                date: "2024-01-10",
+                time: "07:00 PM",
+                status: "cancelled",
+                serviceType: "dance",
+                instructor: "Alex Chen",
+                location: "Dance Studio",
+                price: "$30",
+                duration: "90 min",
+                description: "Learn the basics of salsa dancing in a fun and energetic environment.",
+                image: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=400&h=200&fit=crop",
+                imagePlaceholder: "💃"
+            },
+            {
+                id: 4,
+                title: "Mountain Retreat",
+                date: "2024-02-05",
+                time: "08:00 AM",
+                status: "upcoming",
+                serviceType: "retreat",
+                instructor: "Emma Wilson",
+                location: "Mountain Lodge",
+                price: "$150",
+                duration: "480 min",
+                description: "A full-day retreat in the mountains with meditation, yoga, and nature walks.",
+                image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=200&fit=crop",
+                imagePlaceholder: "🏔️"
+            },
+            {
+                id: 5,
+                title: "Evening Yoga Flow",
+                date: "2024-01-08",
+                time: "06:30 PM",
+                status: "completed",
+                serviceType: "yoga",
+                instructor: "Sarah Johnson",
+                location: "Studio B",
+                price: "$25",
+                duration: "75 min",
+                description: "A flowing yoga sequence perfect for unwinding after a long day.",
+                image: "https://images.unsplash.com/photo-1506629905607-2b0a2a5b0b0b?w=400&h=200&fit=crop",
+                imagePlaceholder: "🧘"
+            }
+        ];
+
+        // Simplified filter functionality
+        function filterBookings() {
+            const activityFilter = document.getElementById('activityFilter').value;
+            const statusFilter = document.getElementById('statusFilter').value;
+            const dateFilter = document.getElementById('dateFilter').value;
+            const searchInput = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filteredBookings = bookings.filter(booking => {
+                const matchesActivity = !activityFilter || booking.serviceType === activityFilter;
+                const matchesStatus = !statusFilter || booking.status === statusFilter;
+                const matchesSearch = !searchInput || 
+                                     booking.title.toLowerCase().includes(searchInput) || 
+                                     booking.instructor.toLowerCase().includes(searchInput) ||
+                                     booking.location.toLowerCase().includes(searchInput) ||
+                                     booking.description.toLowerCase().includes(searchInput);
+                const matchesDate = !dateFilter || checkDateRange(booking.date, dateFilter);
+                
+                return matchesActivity && matchesStatus && matchesSearch && matchesDate;
+            });
+            
+            renderBookings(filteredBookings);
+        }
+
+        function checkDateRange(date, range) {
+            const bookingDate = new Date(date);
+            const today = new Date();
+            const startOfDay = new Date(today.getFullYear(), today.getMonth(), today.getDate());
+            
+            switch(range) {
+                case 'today':
+                    return bookingDate.toDateString() === today.toDateString();
+                case 'week':
+                    const weekAgo = new Date(startOfDay);
+                    weekAgo.setDate(weekAgo.getDate() - 7);
+                    return bookingDate >= weekAgo && bookingDate <= today;
+                case 'month':
+                    const monthAgo = new Date(startOfDay);
+                    monthAgo.setMonth(monthAgo.getMonth() - 1);
+                    return bookingDate >= monthAgo && bookingDate <= today;
+                case 'year':
+                    const yearAgo = new Date(startOfDay);
+                    yearAgo.setFullYear(yearAgo.getFullYear() - 1);
+                    return bookingDate >= yearAgo && bookingDate <= today;
+                default:
+                    return true;
+            }
+        }
+
+        function clearAllFilters() {
+            document.getElementById('activityFilter').value = '';
+            document.getElementById('statusFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            document.getElementById('searchInput').value = '';
+            filterBookings();
+        }
+
+
+        function renderBookings(bookingsToRender) {
+            const bookingsGrid = document.getElementById('bookingsGrid');
+            
+            if (bookingsToRender.length === 0) {
+                bookingsGrid.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #64748b;">
+                        <h3>No bookings found</h3>
+                        <p>Try adjusting your filters or search terms</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            bookingsGrid.innerHTML = bookingsToRender.map(booking => `
+                <div class="booking-card">
+                    <div class="booking-image">
+                        <img src="${booking.image}" alt="${booking.title}" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+                        <div class="booking-image-placeholder" style="display: none;">${booking.imagePlaceholder}</div>
+                    </div>
+                    <div class="booking-content">
+                        <div class="booking-header">
+                            <div>
+                                <h3 class="booking-title">${booking.title}</h3>
+                                <p class="booking-date">${formatDate(booking.date)} at ${booking.time}</p>
+                            </div>
+                            <span class="status-badge status-${booking.status}">${booking.status}</span>
+                        </div>
+                        
+                        <div class="booking-details">
+                            <div class="detail-row">
+                                <span class="detail-label">Instructor:</span>
+                                <span class="detail-value">${booking.instructor}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Location:</span>
+                                <span class="detail-value">${booking.location}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Duration:</span>
+                                <span class="detail-value">${booking.duration}</span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="detail-label">Price:</span>
+                                <span class="detail-value">${booking.price}</span>
+                            </div>
+                        </div>
+                        
+                        <p style="color: #64748b; margin-bottom: 20px; font-size: 14px;">${booking.description}</p>
+                        
+                        <div class="booking-actions">
+                            ${getActionButtons(booking.status)}
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function getActionButtons(status) {
+            switch(status) {
+                case 'upcoming':
+                    return `
+                        <button class="action-btn btn-primary" onclick="rescheduleBooking()">Reschedule</button>
+                        <button class="action-btn btn-danger" onclick="cancelBooking()">Cancel</button>
+                    `;
+                case 'completed':
+                    return `
+                        <button class="action-btn btn-primary" onclick="bookAgain()">Book Again</button>
+                        <button class="action-btn btn-secondary" onclick="leaveReview()">Leave Review</button>
+                    `;
+                case 'cancelled':
+                    return `
+                        <button class="action-btn btn-primary" onclick="bookAgain()">Book Again</button>
+                        <button class="action-btn btn-secondary" onclick="contactSupport()">Contact Support</button>
+                    `;
+                default:
+                    return '';
+            }
+        }
+
+        function formatDate(dateString) {
+            const date = new Date(dateString);
+            return date.toLocaleDateString('en-US', { 
+                year: 'numeric', 
+                month: 'long', 
+                day: 'numeric' 
+            });
+        }
+
+        // Action button functions
+        function rescheduleBooking() {
+            alert('Reschedule functionality would open here');
+        }
+
+        function cancelBooking() {
+            if (confirm('Are you sure you want to cancel this booking?')) {
+                alert('Booking cancelled successfully');
+            }
+        }
+
+        function bookAgain() {
+            alert('Redirecting to booking page...');
+        }
+
+        function leaveReview() {
+            alert('Review form would open here');
+        }
+
+        function contactSupport() {
+            alert('Contact support form would open here');
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.getElementById('searchInput');
+            const headerSearch = document.getElementById('headerSearch');
+            
+            // Header search syncs with main search
+            headerSearch.addEventListener('input', function() {
+                searchInput.value = this.value;
+                filterBookings();
+            });
+            
+            // Initial render
+            renderBookings(bookings);
+        });
+    </script>
+</body>
+</html>

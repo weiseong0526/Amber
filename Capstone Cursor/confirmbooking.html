@@ -35,8 +35,8 @@
       <main class="content">
         <div class="booking-wrap">
           <div class="header" style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-            <div class="badge" style="background:#e5e7eb;color:#6b7280;">1</div><span class="muted">Booking</span>
-            <div style="height:2px;background:#e5e7eb;flex:1;margin:0 8px;"></div>
+            <div class="badge" style="background:#00ff00;color:#065f46;">1</div><strong>Booking</strong>
+            <div style="height:2px;background:#00ff00;flex:1;margin:0 8px;"></div>
             <div class="badge" style="background:#00ff00;color:#065f46;">2</div><strong>Confirm Booking</strong>
             <div style="height:2px;background:#e5e7eb;flex:1;margin:0 8px;"></div>
             <div class="badge" style="background:#e5e7eb;color:#6b7280;">3</div><span class="muted">Payment</span>
@@ -152,7 +152,11 @@
             agree.focus();
             return;
           }
-          alert('Proceeding to payment...');
+          
+          // Navigate to payment page with booking data
+          var paymentUrl = new URL('payment.html', window.location.href);
+          paymentUrl.searchParams.set('data', encodeURIComponent(JSON.stringify(payload)));
+          window.location.href = paymentUrl.toString();
         });
       } catch(e){
         console.error('Failed to parse booking data', e);

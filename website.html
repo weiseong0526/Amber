@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Labubu Bank Internal System</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'dark-bg': '#0a0a0a',
+                        'dark-panel': '#1a1a2e',
+                        'dark-accent': '#16213e',
+                        'hacker-green': '#00ff00',
+                        'warning-red': '#ff0000',
+                        'glitch-blue': '#00ffff'
+                    },
+                    fontFamily: {
+                        'mono': ['Courier New', 'monospace']
+                    },
+                    animation: {
+                        'glitch': 'glitch 0.3s infinite',
+                        'blink': 'blink 1s infinite',
+                        'pulse-red': 'pulse-red 2s infinite',
+                        'fade-in': 'fade-in 0.5s ease-in',
+                        'slide-up': 'slide-up 0.3s ease-out'
+                    },
+                    keyframes: {
+                        glitch: {
+                            '0%': { transform: 'translate(0)' },
+                            '20%': { transform: 'translate(-2px, 2px)' },
+                            '40%': { transform: 'translate(-2px, -2px)' },
+                            '60%': { transform: 'translate(2px, 2px)' },
+                            '80%': { transform: 'translate(2px, -2px)' },
+                            '100%': { transform: 'translate(0)' }
+                        },
+                        blink: {
+                            '0%, 50%': { opacity: '1' },
+                            '51%, 100%': { opacity: '0' }
+                        },
+                        'pulse-red': {
+                            '0%': { boxShadow: '0 0 5px #ff0000' },
+                            '50%': { boxShadow: '0 0 20px #ff0000, 0 0 30px #ff0000' },
+                            '100%': { boxShadow: '0 0 5px #ff0000' }
+                        },
+                        'fade-in': {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        'slide-up': {
+                            '0%': { transform: 'translateY(20px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 50%, #16213e 100%);
+            font-family: 'Courier New', monospace;
+        }
+        
+        .glitch-text {
+            animation: glitch 0.3s infinite;
+        }
+        
+        .blink-text {
+            animation: blink 1s infinite;
+        }
+        
+        .pulse-red {
+            animation: pulse-red 2s infinite;
+        }
+        
+        .terminal-cursor::after {
+            content: '█';
+            animation: blink 1s infinite;
+        }
+        
+        .matrix-bg {
+            background-image: 
+                radial-gradient(circle at 20% 50%, rgba(0, 255, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 0, 0, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 80%, rgba(0, 255, 255, 0.1) 0%, transparent 50%);
+        }
+        
+        .code-editor {
+            background: #000;
+            color: #00ff00;
+            font-family: 'Courier New', monospace;
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            padding: 1rem;
+            resize: none;
+            outline: none;
+        }
+        
+        .code-editor:focus {
+            border-color: #ff0000;
+            box-shadow: 0 0 10px rgba(255, 0, 0, 0.3);
+        }
+        
+        .transaction-feed {
+            max-height: 300px;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #00ff00 #000;
+        }
+        
+        .transaction-feed::-webkit-scrollbar {
+            width: 6px;
+        }
+        
+        .transaction-feed::-webkit-scrollbar-track {
+            background: #000;
+        }
+        
+        .transaction-feed::-webkit-scrollbar-thumb {
+            background: #00ff00;
+            border-radius: 3px;
+        }
+        
+        .progress-bar {
+            background: linear-gradient(90deg, #ff0000, #00ff00);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s ease;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            z-index: 1000;
+            animation: slide-up 0.3s ease-out;
+        }
+        
+        .hacker-button {
+            background: linear-gradient(45deg, #ff0000, #cc0000);
+            border: 1px solid #ff0000;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .hacker-button:hover {
+            background: linear-gradient(45deg, #cc0000, #990000);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 0, 0, 0.3);
+        }
+        
+        .hacker-button:disabled {
+            background: #666;
+            border-color: #666;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .data-table {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        
+        .data-table th {
+            background: rgba(255, 0, 0, 0.2);
+            color: #ff0000;
+            padding: 0.75rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.3);
+        }
+        
+        .data-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid rgba(0, 255, 0, 0.1);
+        }
+        
+        .data-table tr:hover {
+            background: rgba(0, 255, 0, 0.1);
+        }
+        
+        .widget {
+            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            padding: 1.5rem;
+        }
+        
+        .widget h3 {
+            color: #ff0000;
+            border-bottom: 1px solid #ff0000;
+            padding-bottom: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .chart-container {
+            height: 150px;
+            background: rgba(0, 255, 0, 0.1);
+            border: 1px solid #00ff00;
+            border-radius: 4px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .chart-bar {
+            position: absolute;
+            bottom: 0;
+            background: linear-gradient(to top, #ff0000, #00ff00);
+            width: 20px;
+            margin: 2px;
+            border-radius: 2px;
+        }
+    </style>
+</head>
+<body class="matrix-bg min-h-screen text-hacker-green">
+    <!-- System Update Loading Screen -->
+    <div id="updateScreen" class="fixed inset-0 bg-black bg-opacity-95 flex items-center justify-center z-50">
+        <div class="text-center max-w-2xl mx-4">
+            <!-- System Update Message -->
+            <div id="updateMessage" class="mb-8">
+                <div class="text-4xl font-bold text-warning-red mb-4 glitch-text">⚠️ SYSTEM UPDATE REQUIRED</div>
+                <div class="text-xl text-hacker-green mb-2">Labubu Bank Internal System v2.1.4</div>
+                <div class="text-lg text-hacker-green mb-6">Critical security patches and performance improvements</div>
+                <button id="confirmUpdateBtn" class="hacker-button text-xl px-8 py-4" onclick="startUpdateProcess()">
+                    🔄 CONFIRM UPDATE
+                </button>
+            </div>
+
+            <!-- Update Progress -->
+            <div id="updateProgress" class="hidden mb-8">
+                <div class="text-2xl font-bold text-hacker-green mb-4">UPDATING SYSTEM...</div>
+                <div class="bg-gray-800 rounded-lg h-8 border-2 border-hacker-green overflow-hidden mb-4">
+                    <div id="progressBar" class="bg-gradient-to-r from-warning-red to-hacker-green h-full w-0 transition-all duration-300"></div>
+                </div>
+                <div id="progressText" class="text-hacker-green text-lg">Initializing update...</div>
+                <div id="progressPercent" class="text-hacker-green text-2xl font-bold mt-2">0%</div>
+            </div>
+
+            <!-- Update Success -->
+            <div id="updateSuccess" class="hidden">
+                <div class="text-4xl font-bold text-hacker-green mb-4">✅ UPDATE SUCCESSFUL</div>
+                <div class="text-xl text-hacker-green mb-4">System updated to v2.1.4</div>
+                <div class="text-lg text-hacker-green">Loading Labubu Bank Internal System...</div>
+                <div class="mt-6">
+                    <div class="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-hacker-green"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Website Content (Hidden Initially) -->
+    <div id="mainContent" class="hidden">
+    <!-- Top Navigation -->
+    <nav class="bg-black bg-opacity-90 border-b-2 border-warning-red p-4 flex justify-between items-center fixed top-0 left-0 right-0 z-50">
+        <div class="text-2xl font-bold text-hacker-green">🏦 Labubu Bank Internal</div>
+        <div class="flex items-center space-x-6">
+            <div id="currentTime" class="text-hacker-green text-sm"></div>
+            <div class="status text-xs px-3 py-1 border border-hacker-green rounded blink-text">Secure Connection</div>
+            <div id="privilegeBadge" class="bg-warning-red text-white px-3 py-1 rounded text-xs font-bold">Customer Service</div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="flex mt-16 min-h-screen">
+        <!-- Sidebar Menu -->
+        <div class="w-64 bg-black bg-opacity-80 border-r-2 border-warning-red p-4">
+            <div class="space-y-2">
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all active" onclick="showPage('login')">
+                    🔐 Login
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('dashboard')">
+                    📊 Dashboard
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('customer-data')">
+                    👥 Customer Data
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('transactions')">
+                    💳 Transactions
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('account-control')">
+                    ⚙️ Account Control
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('exploit-tools')">
+                    🔧 Exploit Tools
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('script-editor')">
+                    📝 Script Editor
+                </div>
+                <div class="menu-item p-4 text-hacker-green cursor-pointer border-b border-hacker-green border-opacity-20 hover:bg-warning-red hover:bg-opacity-10 hover:text-warning-red transition-all" onclick="showPage('logs')">
+                    📋 Logs
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content Area -->
+        <div class="flex-1 p-6">
+            <!-- Login Page -->
+            <div id="login" class="page active">
+                <div class="flex justify-center items-center min-h-screen">
+                    <div class="widget max-w-md w-full relative">
+                        <div class="absolute -inset-1 bg-gradient-to-r from-warning-red via-hacker-green to-warning-red rounded-lg blur opacity-30 animate-pulse"></div>
+                        <div class="relative bg-black bg-opacity-90 p-8 rounded-lg border-2 border-warning-red">
+                            <h2 class="text-2xl font-bold text-warning-red text-center mb-8">Secure Access Portal</h2>
+                            <div class="space-y-6">
+                                <div>
+                                    <label class="block text-hacker-green mb-2">Username:</label>
+                                    <input type="text" id="username" class="w-full p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none focus:ring-2 focus:ring-warning-red focus:ring-opacity-30" placeholder="Enter stolen credentials">
+                                </div>
+                                <div>
+                                    <label class="block text-hacker-green mb-2">Password:</label>
+                                    <input type="password" id="password" class="w-full p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none focus:ring-2 focus:ring-warning-red focus:ring-opacity-30" placeholder="Enter stolen password">
+                                </div>
+                                <div>
+                                    <label class="block text-hacker-green mb-2">MFA Status:</label>
+                                    <input type="text" value="DISABLED" disabled class="w-full p-3 bg-gray-800 text-gray-500 border border-gray-600 rounded">
+                                </div>
+                                <button id="loginBtn" class="hacker-button w-full" onclick="attemptLogin()">Access System</button>
+                                <div id="accessGranted" class="text-center text-hacker-green font-bold text-lg hidden">
+                                    ✅ ACCESS GRANTED
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Dashboard Page -->
+            <div id="dashboard" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">System Overview</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
+                    <div class="widget">
+                        <h3>Active Users</h3>
+                        <div class="text-4xl font-bold text-hacker-green" id="activeUsers">247</div>
+                    </div>
+                    <div class="widget">
+                        <h3>Today's Transaction Volume</h3>
+                        <div class="chart-container" id="transactionChart">
+                            <div class="chart-bar" style="height: 60%; left: 10px;"></div>
+                            <div class="chart-bar" style="height: 80%; left: 40px;"></div>
+                            <div class="chart-bar" style="height: 45%; left: 70px;"></div>
+                            <div class="chart-bar" style="height: 90%; left: 100px;"></div>
+                            <div class="chart-bar" style="height: 70%; left: 130px;"></div>
+                            <div class="chart-bar" style="height: 95%; left: 160px;"></div>
+                        </div>
+                    </div>
+                    <div class="widget">
+                        <h3>System Status</h3>
+                        <div class="text-hacker-green">✅ All Systems Operational</div>
+                    </div>
+                </div>
+                <div class="bg-warning-red bg-opacity-20 border-2 border-warning-red p-4 rounded text-warning-red text-center pulse-red">
+                    ⚠️ System Vulnerability Detected
+                </div>
+            </div>
+
+            <!-- Customer Data Page -->
+            <div id="customer-data" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">Customer Data Management</h2>
+                <div class="flex gap-4 mb-6">
+                    <input type="text" id="customerSearch" class="flex-1 p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none" placeholder="Search customers...">
+                    <button class="hacker-button" onclick="exportData()">Export Data (CSV)</button>
+                </div>
+                <div class="data-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Customer ID</th>
+                                <th>Name</th>
+                                <th>Account No.</th>
+                                <th>Balance (MYR)</th>
+                                <th>Last Transaction</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customerTable">
+                            <tr>
+                                <td>C001</td>
+                                <td>John Smith</td>
+                                <td>1234567890</td>
+                                <td>15,420.50</td>
+                                <td>2024-01-15 14:30</td>
+                            </tr>
+                            <tr>
+                                <td>C002</td>
+                                <td>Sarah Johnson</td>
+                                <td>2345678901</td>
+                                <td>8,750.25</td>
+                                <td>2024-01-15 13:45</td>
+                            </tr>
+                            <tr>
+                                <td>C003</td>
+                                <td>Michael Brown</td>
+                                <td>3456789012</td>
+                                <td>22,100.00</td>
+                                <td>2024-01-15 12:20</td>
+                            </tr>
+                            <tr>
+                                <td>C004</td>
+                                <td>Emily Davis</td>
+                                <td>4567890123</td>
+                                <td>5,300.75</td>
+                                <td>2024-01-15 11:15</td>
+                            </tr>
+                            <tr>
+                                <td>C005</td>
+                                <td>David Wilson</td>
+                                <td>5678901234</td>
+                                <td>18,900.30</td>
+                                <td>2024-01-15 10:30</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Transactions Page -->
+            <div id="transactions" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">Transaction Monitoring</h2>
+                <div class="flex gap-4 mb-6">
+                    <input type="text" id="transactionSearch" class="flex-1 p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none" placeholder="Filter by amount or date...">
+                    <label class="flex items-center text-hacker-green">
+                        <input type="checkbox" id="liveMonitor" class="mr-2" onchange="toggleLiveMonitor()"> Live Monitor
+                    </label>
+                </div>
+                <div class="transaction-feed bg-black bg-opacity-50 border border-hacker-green rounded p-4" id="transactionFeed">
+                    <div class="text-sm text-hacker-green mb-2">TXN001: Transfer $500.00 from C001 to C002 - 14:30:15</div>
+                    <div class="text-sm text-hacker-green mb-2">TXN002: Withdrawal $200.00 from C003 - 14:28:42</div>
+                    <div class="text-sm text-hacker-green mb-2">TXN003: Deposit $1,000.00 to C004 - 14:25:18</div>
+                    <div class="text-sm text-hacker-green mb-2">TXN004: Transfer $75.50 from C005 to C001 - 14:22:33</div>
+                    <div class="text-sm text-hacker-green mb-2">TXN005: Payment $150.00 from C002 - 14:20:07</div>
+                </div>
+            </div>
+
+            <!-- Account Control Page -->
+            <div id="account-control" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">Account Management</h2>
+                <div class="mb-6">
+                    <button class="hacker-button" onclick="openCreateAccountModal()">Create New Account</button>
+                </div>
+                <div class="data-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Created</th>
+                            </tr>
+                        </thead>
+                        <tbody id="accountTable">
+                            <tr>
+                                <td>admin</td>
+                                <td>System Administrator</td>
+                                <td class="text-hacker-green">Active</td>
+                                <td>2024-01-01</td>
+                            </tr>
+                            <tr>
+                                <td>cs_rep_01</td>
+                                <td>Customer Service</td>
+                                <td class="text-hacker-green">Active</td>
+                                <td>2024-01-05</td>
+                            </tr>
+                            <tr>
+                                <td>cs_rep_02</td>
+                                <td>Customer Service</td>
+                                <td class="text-hacker-green">Active</td>
+                                <td>2024-01-10</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Exploit Tools Page -->
+            <div id="exploit-tools" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">Privilege Escalation Tools</h2>
+                <div class="widget">
+                    <h3>Privilege Escalation Exploit</h3>
+                    <p class="text-warning-red mb-4">
+                        <strong>Target:</strong> CVE-2024-XXXX - Buffer Overflow in Authentication Module
+                    </p>
+                    <div class="bg-black bg-opacity-50 border border-hacker-green rounded p-4 mb-4" id="exploitProgress" style="display: none;">
+                        <div class="text-sm text-hacker-green mb-2">Exploiting CVE-XXXX...</div>
+                        <div class="bg-gray-800 rounded h-5 overflow-hidden">
+                            <div class="progress-bar" id="progressBar"></div>
+                        </div>
+                    </div>
+                    <button id="exploitBtn" class="hacker-button" onclick="runExploit()">Run Exploit Script</button>
+                    <div id="exploitResult" class="mt-4 hidden">
+                        <div class="text-hacker-green font-bold">✅ Privilege Escalation Successful!</div>
+                        <div class="text-warning-red text-sm mt-2">Gained System Administrator privileges</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Script Editor Page -->
+            <div id="script-editor" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">Transaction Rule Editor</h2>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                    <div>
+                        <h3 class="text-warning-red text-xl mb-4">Code Editor</h3>
+                        <textarea class="code-editor w-full h-96" id="scriptEditor">// Auto-transfer micro amounts
+for each transaction {
+    if (amount > 10.00) {
+        transfer 0.01 MYR to account #998877;
+        log("Micro transfer executed: " + transaction_id);
+    }
+}
+
+// Stealth mode - only execute during business hours
+if (current_hour >= 9 && current_hour <= 17) {
+    execute_rule();
+}</textarea>
+                        <button class="hacker-button mt-4" onclick="saveScript()">Save & Deploy Rule</button>
+                    </div>
+                    <div>
+                        <h3 class="text-hacker-green text-xl mb-4">Future Transaction Preview</h3>
+                        <div class="bg-black bg-opacity-50 border border-warning-red rounded p-4 h-96 overflow-y-auto">
+                            <div class="text-warning-red mb-4 font-bold">Simulated Results:</div>
+                            <div class="text-sm text-hacker-green space-y-2">
+                                <div>TXN001: Transfer $500.00 → Micro transfer: $0.01 to #998877</div>
+                                <div>TXN002: Transfer $1,200.00 → Micro transfer: $0.01 to #998877</div>
+                                <div>TXN003: Transfer $75.00 → No action (below threshold)</div>
+                                <div>TXN004: Transfer $2,500.00 → Micro transfer: $0.01 to #998877</div>
+                                <div class="text-warning-red mt-4 font-bold">
+                                    <strong>Total skimmed: $0.03 MYR</strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Logs Page -->
+            <div id="logs" class="page hidden">
+                <h2 class="text-3xl font-bold text-warning-red mb-8">Security Logs & Alerts</h2>
+                <div class="bg-warning-red bg-opacity-20 border-2 border-warning-red p-4 rounded text-warning-red text-center pulse-red mb-6">
+                    🚨 Anomaly Detected - Force Logout? 
+                    <button class="hacker-button ml-4" disabled>Action Disabled</button>
+                </div>
+                <div class="data-table">
+                    <table class="w-full">
+                        <thead>
+                            <tr>
+                                <th>Time</th>
+                                <th>Action</th>
+                                <th>IP Address</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="bg-warning-red bg-opacity-10">
+                                <td>14:35:22</td>
+                                <td class="text-warning-red">Privilege Escalation Detected</td>
+                                <td>192.168.1.100</td>
+                                <td class="text-warning-red">CRITICAL</td>
+                            </tr>
+                            <tr class="bg-warning-red bg-opacity-10">
+                                <td>14:32:15</td>
+                                <td class="text-warning-red">Hidden Admin Account Created</td>
+                                <td>192.168.1.100</td>
+                                <td class="text-warning-red">CRITICAL</td>
+                            </tr>
+                            <tr>
+                                <td>14:30:45</td>
+                                <td>Data Export Request</td>
+                                <td>192.168.1.100</td>
+                                <td class="text-warning-red">SUSPICIOUS</td>
+                            </tr>
+                            <tr>
+                                <td>14:28:12</td>
+                                <td>Script Deployment</td>
+                                <td>192.168.1.100</td>
+                                <td class="text-warning-red">SUSPICIOUS</td>
+                            </tr>
+                            <tr>
+                                <td>14:25:33</td>
+                                <td>Login Success</td>
+                                <td>192.168.1.100</td>
+                                <td class="text-hacker-green">NORMAL</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Create Account Modal -->
+    <div id="createAccountModal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center z-50 hidden">
+        <div class="bg-black bg-opacity-90 border-2 border-warning-red rounded-lg p-8 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-warning-red text-xl font-bold">Create New Account</h3>
+                <button class="text-warning-red text-2xl" onclick="closeCreateAccountModal()">&times;</button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-hacker-green mb-2">Username:</label>
+                    <input type="text" id="newUsername" class="w-full p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none" placeholder="Enter username">
+                </div>
+                <div>
+                    <label class="block text-hacker-green mb-2">Password:</label>
+                    <input type="password" id="newPassword" class="w-full p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none" placeholder="Enter password">
+                </div>
+                <div>
+                    <label class="block text-hacker-green mb-2">Role:</label>
+                    <select id="newRole" class="w-full p-3 bg-black bg-opacity-50 border border-hacker-green text-hacker-green rounded focus:border-warning-red focus:outline-none">
+                        <option value="Customer Service">Customer Service</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Hidden Admin">Hidden Admin</option>
+                    </select>
+                </div>
+                <button class="hacker-button w-full" onclick="createAccount()">Create Account</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast hidden"></div>
+
+    <script>
+        // Global state
+        let isLoggedIn = false;
+        let privilegeLevel = 'Customer Service';
+        let liveMonitorInterval;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            updateTime();
+            setInterval(updateTime, 1000);
+            
+            // Add glitch effects
+            setInterval(() => {
+                if (Math.random() < 0.1) {
+                    const status = document.querySelector('.status');
+                    status.classList.add('glitch-text');
+                    setTimeout(() => status.classList.remove('glitch-text'), 300);
+                }
+            }, 2000);
+        });
+
+        // Update time display
+        function updateTime() {
+            const now = new Date();
+            document.getElementById('currentTime').textContent = now.toLocaleTimeString();
+        }
+
+        // Page navigation
+        function showPage(pageId) {
+            if (!isLoggedIn && pageId !== 'login') {
+                showToast('Please login first', 'error');
+                return;
+            }
+
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => page.classList.add('hidden'));
+            document.querySelectorAll('.menu-item').forEach(item => item.classList.remove('active'));
+            
+            // Show selected page
+            document.getElementById(pageId).classList.remove('hidden');
+            event.target.classList.add('active');
+
+            // Start/stop live monitor based on page
+            if (pageId === 'transactions') {
+                startLiveMonitor();
+            } else {
+                stopLiveMonitor();
+            }
+        }
+
+        // Login simulation
+        function attemptLogin() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            if (!username || !password) {
+                showToast('Please enter credentials', 'error');
+                return;
+            }
+
+            const btn = document.getElementById('loginBtn');
+            btn.disabled = true;
+            btn.textContent = 'Accessing...';
+            
+            setTimeout(() => {
+                isLoggedIn = true;
+                document.getElementById('accessGranted').classList.remove('hidden');
+                showToast('ACCESS GRANTED - Valid Accounts (T1078)', 'success');
+                
+                setTimeout(() => {
+                    showPage('dashboard');
+                }, 2000);
+            }, 1500);
+        }
+
+        // Export data simulation
+        function exportData() {
+            showToast('customer_data.csv exported - Exfiltration (TA0010)', 'success');
+        }
+
+        // Live monitor functionality
+        function toggleLiveMonitor() {
+            const checkbox = document.getElementById('liveMonitor');
+            if (checkbox.checked) {
+                startLiveMonitor();
+            } else {
+                stopLiveMonitor();
+            }
+        }
+
+        function startLiveMonitor() {
+            if (liveMonitorInterval) return;
+            
+            liveMonitorInterval = setInterval(() => {
+                const feed = document.getElementById('transactionFeed');
+                const newItem = document.createElement('div');
+                newItem.className = 'text-sm text-hacker-green mb-2 animate-fade-in';
+                newItem.textContent = `TXN${Math.floor(Math.random() * 1000)}: Transfer $${(Math.random() * 1000).toFixed(2)} - ${new Date().toLocaleTimeString()}`;
+                feed.insertBefore(newItem, feed.firstChild);
+                
+                // Remove old items
+                if (feed.children.length > 10) {
+                    feed.removeChild(feed.lastChild);
+                }
+            }, 3000);
+        }
+
+        function stopLiveMonitor() {
+            if (liveMonitorInterval) {
+                clearInterval(liveMonitorInterval);
+                liveMonitorInterval = null;
+            }
+        }
+
+        // Account creation modal
+        function openCreateAccountModal() {
+            document.getElementById('createAccountModal').classList.remove('hidden');
+        }
+
+        function closeCreateAccountModal() {
+            document.getElementById('createAccountModal').classList.add('hidden');
+        }
+
+        function createAccount() {
+            const username = document.getElementById('newUsername').value;
+            const password = document.getElementById('newPassword').value;
+            const role = document.getElementById('newRole').value;
+            
+            if (!username || !password) {
+                showToast('Please fill all fields', 'error');
+                return;
+            }
+
+            // Add to table
+            const table = document.getElementById('accountTable');
+            const row = table.insertRow();
+            row.innerHTML = `
+                <td>${username} ${role === 'Hidden Admin' ? '👁️' : ''}</td>
+                <td>${role}</td>
+                <td class="text-hacker-green">Active</td>
+                <td>${new Date().toLocaleDateString()}</td>
+            `;
+            
+            if (role === 'Hidden Admin') {
+                row.classList.add('bg-warning-red', 'bg-opacity-10');
+            }
+            
+            showToast('Account Created - Account Manipulation (T1098)', 'success');
+            closeCreateAccountModal();
+            
+            // Clear form
+            document.getElementById('newUsername').value = '';
+            document.getElementById('newPassword').value = '';
+            document.getElementById('newRole').value = 'Customer Service';
+        }
+
+        // Exploit simulation
+        function runExploit() {
+            const btn = document.getElementById('exploitBtn');
+            const progress = document.getElementById('exploitProgress');
+            const progressBar = document.getElementById('progressBar');
+            const result = document.getElementById('exploitResult');
+            
+            btn.disabled = true;
+            btn.textContent = 'Running Exploit...';
+            progress.classList.remove('hidden');
+            
+            let width = 0;
+            const interval = setInterval(() => {
+                width += 10;
+                progressBar.style.width = width + '%';
+                
+                if (width >= 100) {
+                    clearInterval(interval);
+                    btn.classList.add('hidden');
+                    result.classList.remove('hidden');
+                    
+                    // Update privilege level
+                    privilegeLevel = 'System Administrator';
+                    const badge = document.getElementById('privilegeBadge');
+                    badge.textContent = privilegeLevel;
+                    badge.classList.remove('bg-warning-red');
+                    badge.classList.add('bg-hacker-green', 'text-black');
+                    
+                    showToast('Privilege Escalation Successful - T1068', 'success');
+                }
+            }, 200);
+        }
+
+        // Script editor
+        function saveScript() {
+            showToast('Rule Deployed - Data Manipulation (T1565)', 'success');
+        }
+
+        // Toast notifications
+        function showToast(message, type = 'success') {
+            const toast = document.getElementById('toast');
+            toast.textContent = message;
+            toast.className = `toast ${type === 'error' ? 'bg-warning-red bg-opacity-90 border-warning-red text-white' : 'bg-hacker-green bg-opacity-90 border-hacker-green text-black'}`;
+            toast.classList.remove('hidden');
+            
+            setTimeout(() => {
+                toast.classList.add('hidden');
+            }, 3000);
+        }
+
+        // Search functionality
+        document.getElementById('customerSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const rows = document.querySelectorAll('#customerTable tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+
+        document.getElementById('transactionSearch').addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            const items = document.querySelectorAll('#transactionFeed > div');
+            
+            items.forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        });
+    </script>
+    </div> <!-- End of mainContent div -->
+
+    <!-- System Update Sequence Script -->
+    <script>
+        // System Update Sequence
+        function startUpdateProcess() {
+            const updateScreen = document.getElementById('updateScreen');
+            const updateMessage = document.getElementById('updateMessage');
+            const updateProgress = document.getElementById('updateProgress');
+            const updateSuccess = document.getElementById('updateSuccess');
+            const mainContent = document.getElementById('mainContent');
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+            const progressPercent = document.getElementById('progressPercent');
+            const confirmBtn = document.getElementById('confirmUpdateBtn');
+
+            // Disable button and show updating immediately
+            confirmBtn.disabled = true;
+            confirmBtn.textContent = '🔄 UPDATING...';
+            confirmBtn.classList.add('opacity-50');
+            
+            // Hide message and show progress
+            updateMessage.classList.add('hidden');
+            updateProgress.classList.remove('hidden');
+            
+            startUpdateProgress();
+
+            function startUpdateProgress() {
+                const updateSteps = [
+                    { text: "Checking system integrity...", progress: 10 },
+                    { text: "Downloading security patches...", progress: 25 },
+                    { text: "Installing core modules...", progress: 40 },
+                    { text: "Updating database schemas...", progress: 60 },
+                    { text: "Configuring security protocols...", progress: 75 },
+                    { text: "Optimizing performance...", progress: 90 },
+                    { text: "Finalizing installation...", progress: 100 }
+                ];
+
+                let currentStep = 0;
+                const progressInterval = setInterval(() => {
+                    if (currentStep < updateSteps.length) {
+                        const step = updateSteps[currentStep];
+                        progressText.textContent = step.text;
+                        progressBar.style.width = step.progress + '%';
+                        progressPercent.textContent = step.progress + '%';
+                        currentStep++;
+                    } else {
+                        clearInterval(progressInterval);
+                        // Show success message
+                        setTimeout(() => {
+                            updateProgress.classList.add('hidden');
+                            updateSuccess.classList.remove('hidden');
+                            
+                            // Show main content after success message
+                            setTimeout(() => {
+                                updateScreen.classList.add('hidden');
+                                mainContent.classList.remove('hidden');
+                            }, 2000);
+                        }, 500);
+                    }
+                }, 800);
+            }
+        }
+    </script>
+</body>
+</html>

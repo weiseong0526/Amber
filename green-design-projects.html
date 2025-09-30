@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Green Design Projects - Eco Creative Studio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e8 100%);
+      min-height: 100vh;
+      color: #2d3748;
+      line-height: 1.6;
+    }
+
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+      padding: 20px 0;
+      box-shadow: 0 4px 20px rgba(45, 90, 39, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: white;
+      font-size: 28px;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-icon {
+      width: 32px;
+      height: 32px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .nav-menu {
+      display: flex;
+      list-style: none;
+      gap: 30px;
+    }
+
+    .nav-link {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 6px;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, rgba(74, 124, 89, 0.9) 0%, rgba(104, 160, 133, 0.9) 100%), url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80');
+      background-size: cover;
+      background-position: center;
+      background-attachment: fixed;
+      padding: 80px 0;
+      text-align: center;
+      color: white;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="leaves" x="0" y="0" width="50" height="50" patternUnits="userSpaceOnUse"><path d="M25 5c-5 0-10 5-10 10s5 10 10 10 10-5 10-10-5-10-10-10zm0 15c-2.5 0-5-2.5-5-5s2.5-5 5-5 5 2.5 5 5-2.5 5-5 5z" fill="%23ffffff" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23leaves)"/></svg>');
+      opacity: 0.3;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-title {
+      font-size: 3.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      line-height: 1.2;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      margin-bottom: 30px;
+      opacity: 0.9;
+    }
+
+    .cta-buttons {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      border: none;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary {
+      background: white;
+      color: #2d5a27;
+    }
+
+    .btn-primary:hover {
+      background: #f8f9fa;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: white;
+      border: 2px solid white;
+    }
+
+    .btn-secondary:hover {
+      background: white;
+      color: #2d5a27;
+      transform: translateY(-2px);
+    }
+
+    /* Main Content */
+    .main-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+    }
+
+    /* Section Headers */
+    .section-header {
+      text-align: center;
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2d5a27;
+      margin-bottom: 15px;
+    }
+
+    .section-subtitle {
+      font-size: 1.1rem;
+      color: #68a085;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(45, 90, 39, 0.1);
+      transition: all 0.3s ease;
+      position: relative;
+    }
+
+    .project-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(45, 90, 39, 0.15);
+    }
+
+    .project-image {
+      height: 250px;
+      background: linear-gradient(135deg, #68a085 0%, #4a7c59 100%);
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.3s ease;
+    }
+
+    .project-card:hover .project-image {
+      transform: scale(1.05);
+    }
+
+    .project-image::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(45, 90, 39, 0.3) 0%, rgba(74, 124, 89, 0.2) 100%);
+      z-index: 1;
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(45, 90, 39, 0.8) 0%, rgba(74, 124, 89, 0.6) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transition: all 0.3s ease;
+      z-index: 2;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .view-project-btn {
+      background: white;
+      color: #2d5a27;
+      padding: 12px 24px;
+      border-radius: 25px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .view-project-btn:hover {
+      background: #f8f9fa;
+      transform: scale(1.05);
+    }
+
+    .project-content {
+      padding: 25px;
+    }
+
+    .project-category {
+      color: #68a085;
+      font-size: 14px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+
+    .project-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+
+    .project-description {
+      color: #718096;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .tag {
+      background: #e8f5e8;
+      color: #2d5a27;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    /* Stats Section */
+    .stats-section {
+      background: linear-gradient(135deg, #2d5a27 0%, #4a7c59 100%);
+      padding: 80px 0;
+      margin: 80px 0;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .stat-item {
+      padding: 20px;
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+      color: #a7f3d0;
+    }
+
+    .stat-label {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+
+    /* Services Section */
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 30px;
+      margin-bottom: 80px;
+    }
+
+    .service-card {
+      background: white;
+      padding: 40px 30px;
+      border-radius: 16px;
+      text-align: center;
+      box-shadow: 0 8px 30px rgba(45, 90, 39, 0.1);
+      transition: all 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      border-color: #68a085;
+      box-shadow: 0 15px 35px rgba(45, 90, 39, 0.15);
+    }
+
+    .service-icon {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #68a085 0%, #4a7c59 100%);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 25px;
+      color: white;
+      font-size: 2rem;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      transition: transform 0.3s ease;
+    }
+
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+    }
+
+    .service-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #2d3748;
+      margin-bottom: 15px;
+    }
+
+    .service-description {
+      color: #718096;
+      line-height: 1.6;
+    }
+
+    /* CTA Section */
+    .cta-section {
+      background: linear-gradient(135deg, #f0f9f4 0%, #e8f5e8 100%);
+      padding: 80px 40px;
+      border-radius: 20px;
+      text-align: center;
+      border: 2px solid #68a085;
+    }
+
+    .cta-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: #2d5a27;
+      margin-bottom: 20px;
+    }
+
+    .cta-description {
+      font-size: 1.1rem;
+      color: #68a085;
+      margin-bottom: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    /* Footer */
+    .footer {
+      background: #2d5a27;
+      color: white;
+      padding: 60px 0 30px;
+      margin-top: 80px;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .footer-section h3 {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin-bottom: 20px;
+      color: #a7f3d0;
+    }
+
+    .footer-section p,
+    .footer-section a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      line-height: 1.8;
+    }
+
+    .footer-section a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      margin-top: 40px;
+      padding-top: 30px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .hero-title {
+        font-size: 2.5rem;
+      }
+
+      .hero-subtitle {
+        font-size: 1.1rem;
+      }
+
+      .cta-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .projects-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-menu {
+        display: none;
+      }
+
+      .section-title {
+        font-size: 2rem;
+      }
+
+      .cta-title {
+        font-size: 2rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .hero {
+        padding: 60px 0;
+      }
+
+      .hero-title {
+        font-size: 2rem;
+      }
+
+      .main-content {
+        padding: 60px 20px;
+      }
+
+      .stats-section {
+        padding: 60px 20px;
+      }
+
+      .cta-section {
+        padding: 60px 20px;
+      }
+    }
+
+    /* Animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .fade-in-up {
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Scroll animations */
+    .scroll-animate {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.6s ease-out;
+    }
+
+    .scroll-animate.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="header">
+    <div class="header-container">
+      <div class="logo">
+        <div class="logo-icon">🌱</div>
+        Eco Creative Studio
+      </div>
+      <nav>
+        <ul class="nav-menu">
+          <li><a href="#" class="nav-link active">Projects</a></li>
+          <li><a href="#" class="nav-link">Services</a></li>
+          <li><a href="#" class="nav-link">About</a></li>
+          <li><a href="#" class="nav-link">Contact</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="hero-title fade-in-up">Sustainable Design Projects</h1>
+      <p class="hero-subtitle fade-in-up">Creating beautiful, eco-friendly designs that make a positive impact on our planet</p>
+      <div class="cta-buttons fade-in-up">
+        <a href="#projects" class="btn btn-primary">View Our Work</a>
+        <a href="#contact" class="btn btn-secondary">Start a Project</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Projects Section -->
+    <section id="projects" class="scroll-animate">
+      <div class="section-header">
+        <h2 class="section-title">Featured Projects</h2>
+        <p class="section-subtitle">Explore our portfolio of sustainable design solutions that combine creativity with environmental responsibility</p>
+      </div>
+
+      <div class="projects-grid">
+        <article class="project-card scroll-animate">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="project-overlay">
+              <a href="#" class="view-project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Brand Identity</div>
+            <h3 class="project-title">GreenTech Solutions</h3>
+            <p class="project-description">Complete brand identity design for a renewable energy startup, focusing on clean, modern aesthetics that reflect their environmental mission.</p>
+            <div class="project-tags">
+              <span class="tag">Logo Design</span>
+              <span class="tag">Brand Guidelines</span>
+              <span class="tag">Web Design</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-animate">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="project-overlay">
+              <a href="#" class="view-project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Packaging Design</div>
+            <h3 class="project-title">Eco-Friendly Packaging</h3>
+            <p class="project-description">Sustainable packaging design for organic food products using recycled materials and minimalist design principles.</p>
+            <div class="project-tags">
+              <span class="tag">Packaging</span>
+              <span class="tag">Sustainability</span>
+              <span class="tag">Print Design</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-animate">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="project-overlay">
+              <a href="#" class="view-project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Web Design</div>
+            <h3 class="project-title">Nature Conservation Website</h3>
+            <p class="project-description">Responsive website design for a wildlife conservation organization with interactive elements and educational content.</p>
+            <div class="project-tags">
+              <span class="tag">UI/UX</span>
+              <span class="tag">Responsive</span>
+              <span class="tag">Accessibility</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-animate">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="project-overlay">
+              <a href="#" class="view-project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Environmental Campaign</div>
+            <h3 class="project-title">Ocean Cleanup Initiative</h3>
+            <p class="project-description">Visual campaign design to raise awareness about ocean pollution with compelling infographics and social media content.</p>
+            <div class="project-tags">
+              <span class="tag">Campaign</span>
+              <span class="tag">Infographics</span>
+              <span class="tag">Social Media</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-animate">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="project-overlay">
+              <a href="#" class="view-project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Architecture</div>
+            <h3 class="project-title">Green Building Design</h3>
+            <p class="project-description">Architectural visualization and branding for sustainable building projects that integrate nature with modern design.</p>
+            <div class="project-tags">
+              <span class="tag">Architecture</span>
+              <span class="tag">3D Visualization</span>
+              <span class="tag">Sustainability</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="project-card scroll-animate">
+          <div class="project-image" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80');">
+            <div class="project-overlay">
+              <a href="#" class="view-project-btn">View Project</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-category">Mobile App</div>
+            <h3 class="project-title">Carbon Footprint Tracker</h3>
+            <p class="project-description">Mobile application design for tracking and reducing personal carbon footprint with intuitive user experience.</p>
+            <div class="project-tags">
+              <span class="tag">Mobile App</span>
+              <span class="tag">UI/UX</span>
+              <span class="tag">Data Visualization</span>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section scroll-animate">
+      <div class="stats-grid">
+        <div class="stat-item">
+          <div class="stat-number">150+</div>
+          <div class="stat-label">Projects Completed</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">98%</div>
+          <div class="stat-label">Client Satisfaction</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">5</div>
+          <div class="stat-label">Years Experience</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-number">50+</div>
+          <div class="stat-label">Happy Clients</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="scroll-animate">
+      <div class="section-header">
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-subtitle">Comprehensive design solutions with a focus on sustainability and environmental responsibility</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card scroll-animate">
+          <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover; background-position: center;"></div>
+          <h3 class="service-title">Brand Identity</h3>
+          <p class="service-description">Create memorable brand identities that reflect your environmental values and connect with eco-conscious audiences.</p>
+        </div>
+
+        <div class="service-card scroll-animate">
+          <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover; background-position: center;"></div>
+          <h3 class="service-title">Web Design</h3>
+          <p class="service-description">Sustainable web design solutions that are fast, accessible, and optimized for minimal environmental impact.</p>
+        </div>
+
+        <div class="service-card scroll-animate">
+          <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover; background-position: center;"></div>
+          <h3 class="service-title">Packaging Design</h3>
+          <p class="service-description">Eco-friendly packaging solutions that reduce waste while maintaining visual appeal and brand recognition.</p>
+        </div>
+
+        <div class="service-card scroll-animate">
+          <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover; background-position: center;"></div>
+          <h3 class="service-title">Mobile Apps</h3>
+          <p class="service-description">User-friendly mobile applications that promote sustainable living and environmental awareness.</p>
+        </div>
+
+        <div class="service-card scroll-animate">
+          <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover; background-position: center;"></div>
+          <h3 class="service-title">Environmental Campaigns</h3>
+          <p class="service-description">Compelling visual campaigns that raise awareness and inspire action for environmental causes.</p>
+        </div>
+
+        <div class="service-card scroll-animate">
+          <div class="service-icon" style="background-image: url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=200&q=80'); background-size: cover; background-position: center;"></div>
+          <h3 class="service-title">Data Visualization</h3>
+          <p class="service-description">Transform complex environmental data into engaging, easy-to-understand visual stories.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section id="contact" class="cta-section scroll-animate">
+      <h2 class="cta-title">Ready to Start Your Green Design Project?</h2>
+      <p class="cta-description">Let's work together to create beautiful, sustainable designs that make a positive impact on our planet.</p>
+      <div class="cta-buttons">
+        <a href="#" class="btn btn-primary">Get Started Today</a>
+        <a href="#" class="btn btn-secondary">View Our Process</a>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Eco Creative Studio</h3>
+        <p>Creating beautiful, sustainable designs that make a positive impact on our planet. We believe in the power of design to inspire change and promote environmental responsibility.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Services</h3>
+        <p><a href="#">Brand Identity</a></p>
+        <p><a href="#">Web Design</a></p>
+        <p><a href="#">Packaging Design</a></p>
+        <p><a href="#">Mobile Apps</a></p>
+        <p><a href="#">Environmental Campaigns</a></p>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>hello@ecocreative.com</p>
+        <p>+1 (555) 123-4567</p>
+        <p>123 Green Street<br>Eco City, EC 12345</p>
+      </div>
+      <div class="footer-section">
+        <h3>Follow Us</h3>
+        <p><a href="#">Instagram</a></p>
+        <p><a href="#">Twitter</a></p>
+        <p><a href="#">LinkedIn</a></p>
+        <p><a href="#">Behance</a></p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; 2024 Eco Creative Studio. All rights reserved. Made with 🌱 for the planet.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Scroll animations
+    function handleScrollAnimations() {
+      const elements = document.querySelectorAll('.scroll-animate');
+      
+      elements.forEach(element => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          element.classList.add('visible');
+        }
+      });
+    }
+
+    // Smooth scrolling for anchor links
+    function handleSmoothScrolling() {
+      const links = document.querySelectorAll('a[href^="#"]');
+      
+      links.forEach(link => {
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          const targetId = this.getAttribute('href');
+          const targetElement = document.querySelector(targetId);
+          
+          if (targetElement) {
+            targetElement.scrollIntoView({
+              behavior: 'smooth',
+              block: 'start'
+            });
+          }
+        });
+      });
+    }
+
+    // Image loading and fallback handling
+    function handleImageLoading() {
+      const projectImages = document.querySelectorAll('.project-image');
+      const serviceIcons = document.querySelectorAll('.service-icon');
+      
+      // Handle project images
+      projectImages.forEach(image => {
+        const img = new Image();
+        img.onload = function() {
+          image.style.backgroundImage = image.style.backgroundImage;
+        };
+        img.onerror = function() {
+          // Fallback to gradient if image fails to load
+          image.style.backgroundImage = 'linear-gradient(135deg, #68a085 0%, #4a7c59 100%)';
+        };
+        img.src = image.style.backgroundImage.replace(/url\(['"]?(.+?)['"]?\)/, '$1');
+      });
+      
+      // Handle service icons
+      serviceIcons.forEach(icon => {
+        const img = new Image();
+        img.onload = function() {
+          icon.style.backgroundImage = icon.style.backgroundImage;
+        };
+        img.onerror = function() {
+          // Fallback to gradient if image fails to load
+          icon.style.backgroundImage = 'linear-gradient(135deg, #68a085 0%, #4a7c59 100%)';
+        };
+        img.src = icon.style.backgroundImage.replace(/url\(['"]?(.+?)['"]?\)/, '$1');
+      });
+    }
+
+    // Initialize animations and interactions
+    document.addEventListener('DOMContentLoaded', function() {
+      handleScrollAnimations();
+      handleSmoothScrolling();
+      handleImageLoading();
+      
+      // Add scroll event listener for animations
+      window.addEventListener('scroll', handleScrollAnimations);
+      
+      // Add hover effects to project cards
+      const projectCards = document.querySelectorAll('.project-card');
+      projectCards.forEach(card => {
+        card.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateY(-8px)';
+        });
+        
+        card.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateY(0)';
+        });
+      });
+    });
+
+    // Add loading animation
+    window.addEventListener('load', function() {
+      document.body.style.opacity = '0';
+      document.body.style.transition = 'opacity 0.5s ease-in-out';
+      
+      setTimeout(() => {
+        document.body.style.opacity = '1';
+      }, 100);
+    });
+  </script>
+</body>
+</html>

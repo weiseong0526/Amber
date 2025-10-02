@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Test</title>
+    <link rel="stylesheet" href="announcement.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        
+        <main class="main-content">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Test Page</h2>
+                    <p class="subtitle">Testing if everything loads correctly</p>
+                </div>
+                <div style="padding: 2rem;">
+                    <p>If you can see this page with proper styling, the CSS is working!</p>
+                    <p>Check the bottom-right corner for the ECE4DB background with Amber logo.</p>
+                    <button class="btn-primary" onclick="testJS()">Test JavaScript</button>
+                    <div id="test-result"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script src="announcement.js"></script>
+    <script>
+        function testJS() {
+            const result = document.getElementById('test-result');
+            if (typeof ActivityManager !== 'undefined') {
+                result.innerHTML = '<div class="message success">✅ JavaScript loaded successfully! ActivityManager class found.</div>';
+            } else {
+                result.innerHTML = '<div class="message error">❌ JavaScript not loaded properly.</div>';
+            }
+        }
+        
+        // Auto-test on load
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Simple test page loaded');
+            if (typeof ActivityManager !== 'undefined') {
+                console.log('ActivityManager class is available');
+            } else {
+                console.error('ActivityManager class not found');
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

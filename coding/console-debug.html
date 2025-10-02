@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Console Debug - Amber Admin</title>
+    <link rel="stylesheet" href="announcement.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .debug-panel {
+            position: fixed;
+            top: 10px;
+            right: 10px;
+            width: 400px;
+            height: 300px;
+            background: #000;
+            color: #0f0;
+            font-family: monospace;
+            font-size: 12px;
+            padding: 10px;
+            border: 2px solid #333;
+            border-radius: 5px;
+            overflow-y: auto;
+            z-index: 9999;
+        }
+        .debug-panel h3 {
+            color: #fff;
+            margin: 0 0 10px 0;
+            border-bottom: 1px solid #333;
+            padding-bottom: 5px;
+        }
+        .error { color: #f00; }
+        .warn { color: #ff0; }
+        .info { color: #0ff; }
+        .success { color: #0f0; }
+    </style>
+</head>
+<body>
+    <div class="debug-panel">
+        <h3>🔍 Console Debug Panel</h3>
+        <div id="console-output">Loading...</div>
+    </div>
+
+    <div class="dashboard">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item active">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Bookings</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main class="main-content">
+            <section class="post-activity-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Post New Activity</h2>
+                        <p class="subtitle">Edit your New Activity</p>
+                    </div>
+                    <form class="activity-form" id="activityForm">
+                        <div class="form-group">
+                            <label for="activityTitle">Activity Title</label>
+                            <input type="text" id="activityTitle" name="title" placeholder="Enter activity title" required>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="activityDate">Date</label>
+                                <div class="input-with-icon">
+                                    <input type="date" id="activityDate" name="date" required>
+                                    <i class="fas fa-calendar"></i>
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="activityTime">Time</label>
+                                <div class="input-with-icon">
+                                    <input type="time" id="activityTime" name="time" required>
+                                    <i class="fas fa-clock"></i>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="activityImage">Upload Image</label>
+                            <div class="upload-area" id="uploadArea">
+                                <i class="fas fa-arrow-up"></i>
+                                <p>Upload Image</p>
+                                <input type="file" id="activityImage" name="image" accept="image/*" hidden>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">Post Activity</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="activities-section">
+                <div class="card">
+                    <div class="card-header">
+                        <h2>Upcoming Activities</h2>
+                    </div>
+                    <div class="table-container">
+                        <table class="activities-table">
+                            <thead>
+                                <tr>
+                                    <th><input type="checkbox" id="selectAll"></th>
+                                    <th>Image</th>
+                                    <th>Title</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="activitiesTableBody">
+                                <!-- Activities will be populated by JavaScript -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Edit Activity Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Activity</h3>
+                <button class="close-btn" id="closeModal">&times;</button>
+            </div>
+            <form class="edit-form" id="editForm">
+                <input type="hidden" id="editId">
+                <div class="form-group">
+                    <label for="editTitle">Activity Title</label>
+                    <input type="text" id="editTitle" name="title" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editDate">Date</label>
+                        <input type="date" id="editDate" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="editTime">Time</label>
+                        <input type="time" id="editTime" name="time" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="editImage">Upload New Image</label>
+                    <div class="upload-area" id="editUploadArea">
+                        <i class="fas fa-arrow-up"></i>
+                        <p>Upload New Image</p>
+                        <input type="file" id="editImage" name="image" accept="image/*" hidden>
+                    </div>
+                </div>
+                
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelEdit">Cancel</button>
+                    <button type="submit" class="btn-primary">Update Activity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Enhanced console debugging
+        const consoleOutput = document.getElementById('console-output');
+        let logCount = 0;
+        
+        function addToConsole(message, type = 'log') {
+            logCount++;
+            const timestamp = new Date().toLocaleTimeString();
+            const colorClass = type === 'error' ? 'error' : type === 'warn' ? 'warn' : type === 'info' ? 'info' : 'success';
+            const prefix = type === 'error' ? '❌' : type === 'warn' ? '⚠️' : type === 'info' ? 'ℹ️' : '✅';
+            
+            consoleOutput.innerHTML += `<div class="${colorClass}">[${timestamp}] ${prefix} ${message}</div>`;
+            consoleOutput.scrollTop = consoleOutput.scrollHeight;
+            
+            // Keep only last 50 messages
+            if (logCount > 50) {
+                const lines = consoleOutput.querySelectorAll('div');
+                if (lines.length > 50) {
+                    lines[0].remove();
+                }
+            }
+        }
+        
+        // Override console methods
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole(args.join(' '), 'log');
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToConsole(args.join(' '), 'warn');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+        
+        // Error handling for uncaught errors
+        window.addEventListener('error', function(e) {
+            addToConsole(`Uncaught Error: ${e.message} at ${e.filename}:${e.lineno}:${e.colno}`, 'error');
+        });
+        
+        // Error handling for unhandled promise rejections
+        window.addEventListener('unhandledrejection', function(e) {
+            addToConsole(`Unhandled Promise Rejection: ${e.reason}`, 'error');
+        });
+        
+        // Test JavaScript loading
+        addToConsole('Starting console debug...', 'info');
+        
+        // Load the main JavaScript file
+        const script = document.createElement('script');
+        script.src = 'announcement.js';
+        script.onload = function() {
+            addToConsole('announcement.js loaded successfully', 'success');
+            
+            // Test if ActivityManager is available
+            if (typeof ActivityManager !== 'undefined') {
+                addToConsole('ActivityManager class found', 'success');
+                
+                // Test if activityManager instance is created
+                if (typeof activityManager !== 'undefined') {
+                    addToConsole('activityManager instance created', 'success');
+                } else {
+                    addToConsole('activityManager instance not found', 'warn');
+                }
+            } else {
+                addToConsole('ActivityManager class not found', 'error');
+            }
+        };
+        script.onerror = function() {
+            addToConsole('Failed to load announcement.js', 'error');
+        };
+        document.head.appendChild(script);
+        
+        // Test form functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            addToConsole('DOM loaded', 'info');
+            
+            // Test form elements
+            const form = document.getElementById('activityForm');
+            if (form) {
+                addToConsole('Activity form found', 'success');
+                
+                form.addEventListener('submit', function(e) {
+                    addToConsole('Form submit event triggered', 'info');
+                });
+            } else {
+                addToConsole('Activity form not found', 'error');
+            }
+            
+            // Test modal elements
+            const modal = document.getElementById('editModal');
+            if (modal) {
+                addToConsole('Edit modal found', 'success');
+            } else {
+                addToConsole('Edit modal not found', 'error');
+            }
+            
+            // Test table elements
+            const tableBody = document.getElementById('activitiesTableBody');
+            if (tableBody) {
+                addToConsole('Activities table body found', 'success');
+            } else {
+                addToConsole('Activities table body not found', 'error');
+            }
+            
+            // Test upload areas
+            const uploadArea = document.getElementById('uploadArea');
+            if (uploadArea) {
+                addToConsole('Upload area found', 'success');
+            } else {
+                addToConsole('Upload area not found', 'error');
+            }
+        });
+        
+        // Test CSS loading
+        addToConsole('Testing CSS loading...', 'info');
+        const testElement = document.createElement('div');
+        testElement.className = 'card';
+        testElement.style.position = 'absolute';
+        testElement.style.left = '-9999px';
+        testElement.style.visibility = 'hidden';
+        document.body.appendChild(testElement);
+        
+        const computedStyle = window.getComputedStyle(testElement);
+        if (computedStyle.backgroundColor && computedStyle.backgroundColor !== 'rgba(0, 0, 0, 0)') {
+            addToConsole('CSS styles applied correctly', 'success');
+        } else {
+            addToConsole('CSS styles may not be loading properly', 'warn');
+        }
+        
+        document.body.removeChild(testElement);
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

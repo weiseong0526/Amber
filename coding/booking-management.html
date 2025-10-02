@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Booking Management</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="booking-management-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar-nav a {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        .sidebar-nav a:hover {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        .sidebar-nav a:visited {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        /* Unified Button Design System */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            height: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Primary Button */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Secondary Button */
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #ee82f9 0%, #f4455a 100%);
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Success Button */
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #3d8bfe 0%, #00e6fe 100%);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Warning Button */
+        .btn-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.4);
+        }
+        
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #f95a8a 0%, #fedc2e 100%);
+            box-shadow: 0 6px 20px rgba(250, 112, 154, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Danger Button */
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #e5501a 100%);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Info Button */
+        .btn-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.4);
+        }
+        
+        .btn-info:hover {
+            background: linear-gradient(135deg, #9cebe8 0%, #fdc4d1 100%);
+            box-shadow: 0 6px 20px rgba(168, 237, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Outline Buttons */
+        .btn-outline-primary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .btn-outline-primary:hover {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Button Sizes */
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 12px;
+            min-width: 80px;
+            height: 36px;
+        }
+        
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 16px;
+            min-width: 160px;
+            height: 52px;
+        }
+        
+        /* Button Groups */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-group .btn {
+            margin: 0;
+        }
+        
+        /* Icon Buttons */
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            padding: 0;
+            border-radius: 50%;
+        }
+        
+        .btn-icon i {
+            font-size: 16px;
+        }
+        
+        /* Action Buttons Container */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .btn {
+                min-width: 100px;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin-dashboard.html">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Activity</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin-create-class.html">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Create Class</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Bookings</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Admin Booking Management</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search activity or customer...">
+                    </div>
+                    <button class="btn-primary" id="addActivityBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Activity
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filter and Stats Section -->
+            <div class="filter-stats-section">
+                <div class="stats-cards">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-calendar-check"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalBookings">0</h3>
+                            <p>Total Bookings</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalCustomers">0</h3>
+                            <p>Active Customers</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-running"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalActivities">0</h3>
+                            <p>Active Activities</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="occupancyRate">0%</h3>
+                            <p>Occupancy Rate</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="filter-controls">
+                    <div class="filter-group">
+                        <label for="activityFilter">Filter by Activity:</label>
+                        <select id="activityFilter" class="filter-select">
+                            <option value="">All Activities</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="statusFilter">Filter by Status:</label>
+                        <select id="statusFilter" class="filter-select">
+                            <option value="">All Status</option>
+                            <option value="confirmed">Confirmed</option>
+                            <option value="pending">Pending</option>
+                            <option value="cancelled">Cancelled</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="dateFilter">Filter by Date:</label>
+                        <select id="dateFilter" class="filter-select">
+                            <option value="">All Dates</option>
+                            <option value="today">Today</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                        </select>
+                    </div>
+                    <button class="btn btn-outline-primary" id="clearFiltersBtn">
+                        <i class="fas fa-times"></i>
+                        Clear Filters
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Changes Dashboard Toggle -->
+            <div class="dashboard-toggle-section">
+                <button class="btn btn-info" onclick="bookingManager.toggleRecentChanges()">
+                    <i class="fas fa-history"></i>
+                    <span>Recent Changes Dashboard</span>
+                    <i class="fas fa-chevron-down toggle-icon" id="toggleIcon"></i>
+                </button>
+                <div class="dashboard-stats-summary" id="dashboardStatsSummary">
+                    <span class="summary-stat">
+                        <i class="fas fa-chart-line"></i>
+                        <span id="totalChangesSummary">0</span> Total
+                    </span>
+                    <span class="summary-stat">
+                        <i class="fas fa-calendar-day"></i>
+                        <span id="todayChangesSummary">0</span> Today
+                    </span>
+                    <span class="summary-stat">
+                        <i class="fas fa-bell"></i>
+                        <span id="pendingNotificationsSummary">0</span> Pending
+                    </span>
+                </div>
+            </div>
+
+            <!-- Recent Changes Dashboard (Hidden by default) -->
+            <div class="recent-changes-dashboard" id="recentChangesDashboard" style="display: none;">
+                <div class="dashboard-header">
+                    <h2 class="dashboard-title">
+                        <i class="fas fa-history"></i>
+                        Recent Changes Dashboard
+                    </h2>
+                    <div class="dashboard-actions">
+                        <button class="btn btn-success" onclick="bookingManager.refreshHistory()">
+                            <i class="fas fa-sync-alt"></i>
+                            Refresh
+                        </button>
+                        <button class="btn btn-danger" onclick="bookingManager.clearHistory()">
+                            <i class="fas fa-trash"></i>
+                            Clear History
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="history-stats">
+                    <div class="history-stat">
+                        <span class="stat-number" id="totalChanges">0</span>
+                        <span class="stat-label">Total Changes</span>
+                    </div>
+                    <div class="history-stat">
+                        <span class="stat-number" id="todayChanges">0</span>
+                        <span class="stat-label">Today</span>
+                    </div>
+                    <div class="history-stat">
+                        <span class="stat-number" id="pendingNotifications">0</span>
+                        <span class="stat-label">Pending Notifications</span>
+                    </div>
+                </div>
+                
+                <div class="recent-changes-list" id="recentChangesList">
+                    <!-- Recent changes will be populated here -->
+                </div>
+            </div>
+
+
+            <!-- Activities Grid -->
+            <div class="activities-grid" id="activitiesGrid">
+                <!-- Activities will be populated here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No Activities Found</h3>
+                <p>Create your first activity to start managing bookings</p>
+                <button class="btn-primary" id="createFirstActivityBtn">
+                    <i class="fas fa-plus"></i>
+                    Create First Activity
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Booking Modal -->
+    <div class="modal" id="addBookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Booking</h3>
+                <button class="modal-close" id="closeAddBookingModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="addBookingForm">
+                <input type="hidden" id="selectedActivityId">
+                <div class="form-group">
+                    <label for="customerName">Customer Name</label>
+                    <input type="text" id="customerName" name="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerEmail">Email</label>
+                    <input type="email" id="customerEmail" name="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="customerPhone">Phone Number</label>
+                    <input type="tel" id="customerPhone" name="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="bookingStatus">Status</label>
+                    <select id="bookingStatus" name="bookingStatus" required>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-danger" id="cancelAddBooking">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                        Add Booking
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Booking Modal -->
+    <div class="modal" id="editBookingModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Booking</h3>
+                <button class="modal-close" id="closeEditBookingModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="editBookingForm">
+                <input type="hidden" id="editBookingId">
+                <input type="hidden" id="editActivityId">
+                <div class="form-group">
+                    <label for="editCustomerName">Customer Name</label>
+                    <input type="text" id="editCustomerName" name="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCustomerEmail">Email</label>
+                    <input type="email" id="editCustomerEmail" name="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCustomerPhone">Phone Number</label>
+                    <input type="tel" id="editCustomerPhone" name="customerPhone" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBookingDate">Booking Date</label>
+                    <input type="date" id="editBookingDate" name="bookingDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBookingTime">Booking Time</label>
+                    <input type="time" id="editBookingTime" name="bookingTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="editBookingStatus">Status</label>
+                    <select id="editBookingStatus" name="bookingStatus" required>
+                        <option value="confirmed">Confirmed</option>
+                        <option value="pending">Pending</option>
+                        <option value="cancelled">Cancelled</option>
+                    </select>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-danger" id="cancelEditBooking">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i>
+                        Update Booking
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Activity Modal -->
+    <div class="modal" id="editActivityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Activity</h3>
+                <button class="modal-close" id="closeEditActivityModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="editActivityForm">
+                <input type="hidden" id="editActivityId">
+                <div class="form-group">
+                    <label for="editActivityName">Activity Name</label>
+                    <input type="text" id="editActivityName" name="activityName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityDate">Date</label>
+                    <input type="date" id="editActivityDate" name="activityDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityTime">Time</label>
+                    <input type="time" id="editActivityTime" name="activityTime" required>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityCapacity">Capacity</label>
+                    <input type="number" id="editActivityCapacity" name="activityCapacity" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityGroup">Group</label>
+                    <input type="text" id="editActivityGroup" name="activityGroup" required>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn btn-danger" id="cancelEditActivity">
+                        <i class="fas fa-times"></i>
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i>
+                        Update Activity
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="shared-data-manager.js"></script>
+    <script src="booking-management-script.js"></script>
+    <script>
+        // Add click handlers for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        e.preventDefault();
+                        window.location.href = link.href;
+                    }
+                });
+                
+                // Add hover effect
+                item.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.cursor = 'pointer';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

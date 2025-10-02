@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amber - Admin Dashboard</title>
+    <link rel="stylesheet" href="admin-dashboard-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar-nav a {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        .sidebar-nav a:hover {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        .sidebar-nav a:visited {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        /* Unified Button Design System */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            height: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Primary Button */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Secondary Button */
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #ee82f9 0%, #f4455a 100%);
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Success Button */
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #3d8bfe 0%, #00e6fe 100%);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Warning Button */
+        .btn-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.4);
+        }
+        
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #f95a8a 0%, #fedc2e 100%);
+            box-shadow: 0 6px 20px rgba(250, 112, 154, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Danger Button */
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #e5501a 100%);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Info Button */
+        .btn-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.4);
+        }
+        
+        .btn-info:hover {
+            background: linear-gradient(135deg, #9cebe8 0%, #fdc4d1 100%);
+            box-shadow: 0 6px 20px rgba(168, 237, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Outline Buttons */
+        .btn-outline-primary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .btn-outline-primary:hover {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Button Sizes */
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 12px;
+            min-width: 80px;
+            height: 36px;
+        }
+        
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 16px;
+            min-width: 160px;
+            height: 52px;
+        }
+        
+        /* Button Groups */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-group .btn {
+            margin: 0;
+        }
+        
+        /* Icon Buttons */
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            padding: 0;
+            border-radius: 50%;
+        }
+        
+        .btn-icon i {
+            font-size: 16px;
+        }
+        
+        /* Action Buttons Container */
+        .action-buttons {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            margin: 2rem 0;
+            flex-wrap: wrap;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .btn {
+                min-width: 100px;
+                padding: 10px 20px;
+                font-size: 13px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .action-buttons .btn {
+                width: 100%;
+                max-width: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="fas fa-dumbbell"></i>
+                        <span>Activity</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin-create-class.html">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Create Class</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="booking-management.html">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Bookings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Header -->
+            <div class="page-header">
+                <div class="search-container">
+                    <i class="fas fa-search"></i>
+                    <input type="text" id="searchInput" placeholder="Search activity or customer...">
+                </div>
+                <div class="header-actions">
+                    <button class="btn-primary" id="addActivityBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Activity
+                    </button>
+                    <button class="btn-secondary" id="resetDataBtn">
+                        <i class="fas fa-sync-alt"></i>
+                        Reset Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- KPI Cards -->
+            <div class="kpi-cards">
+                <div class="kpi-card blue">
+                    <div class="kpi-icon">
+                        <i class="fas fa-calendar-check"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3 id="totalBookings">43</h3>
+                        <p>Total Bookings</p>
+                    </div>
+                </div>
+                <div class="kpi-card green">
+                    <div class="kpi-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3 id="activeCustomers">40</h3>
+                        <p>Active Customers</p>
+                    </div>
+                </div>
+                <div class="kpi-card orange">
+                    <div class="kpi-icon">
+                        <i class="fas fa-running"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3 id="activeActivities">3</h3>
+                        <p>Active Activities</p>
+                    </div>
+                </div>
+                <div class="kpi-card purple">
+                    <div class="kpi-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="kpi-content">
+                        <h3 id="occupancyRate">78%</h3>
+                        <p>Occupancy Rate</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filters Section -->
+            <div class="filters-section">
+                <div class="filter-group">
+                    <label for="activityFilter">Filter by Activity:</label>
+                    <select id="activityFilter" class="filter-select">
+                        <option value="">All Activities</option>
+                        <option value="yoga">Yoga</option>
+                        <option value="fitness">Fitness</option>
+                        <option value="meditation">Meditation</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="statusFilter">Filter by Status:</label>
+                    <select id="statusFilter" class="filter-select">
+                        <option value="">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="inactive">Inactive</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="dateFilter">Filter by Date:</label>
+                    <select id="dateFilter" class="filter-select">
+                        <option value="">All Dates</option>
+                        <option value="today">Today</option>
+                        <option value="week">This Week</option>
+                        <option value="month">This Month</option>
+                    </select>
+                </div>
+                <button class="btn btn-outline-primary" id="clearFiltersBtn">
+                    <i class="fas fa-times"></i>
+                    Clear Filters
+                </button>
+            </div>
+
+            <!-- Recent Changes Dashboard -->
+            <div class="recent-changes-section">
+                <button class="btn btn-info" id="recentChangesBtn">
+                    <i class="fas fa-sync-alt"></i>
+                    Recent Changes Dashboard
+                    <i class="fas fa-chevron-down" id="recentChangesIcon"></i>
+                </button>
+                <div class="dashboard-summary">
+                    <span class="summary-item">
+                        <i class="fas fa-chart-line"></i>
+                        <span id="totalSummary">0</span> Total
+                    </span>
+                    <span class="summary-item">
+                        <i class="fas fa-calendar-day"></i>
+                        <span id="todaySummary">0</span> Today
+                    </span>
+                    <span class="summary-item">
+                        <i class="fas fa-bell"></i>
+                        <span id="pendingSummary">0</span> Pending
+                    </span>
+                </div>
+            </div>
+
+            <!-- Activities Grid -->
+            <div class="activities-grid" id="activitiesGrid">
+                <!-- Activity cards will be populated here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-calendar-times"></i>
+                <h3>No Activities Found</h3>
+                <p>Create your first activity to start managing bookings</p>
+                <button class="btn-primary" id="createFirstActivityBtn">
+                    <i class="fas fa-plus"></i>
+                    Create First Activity
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Activity Modal -->
+    <div class="modal" id="addActivityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Activity</h3>
+                <button class="modal-close" id="closeAddActivityModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="addActivityForm">
+                <div class="form-group">
+                    <label for="activityName">Activity Name</label>
+                    <input type="text" id="activityName" name="activityName" required>
+                </div>
+                <div class="form-group">
+                    <label for="activityDescription">Description</label>
+                    <textarea id="activityDescription" name="activityDescription" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="activityCapacity">Capacity</label>
+                        <input type="number" id="activityCapacity" name="activityCapacity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="activityDuration">Duration (minutes)</label>
+                        <input type="number" id="activityDuration" name="activityDuration" min="30" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="activityImage">Image URL</label>
+                    <input type="url" id="activityImage" name="activityImage" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="activityTimes">Available Times (one per line)</label>
+                    <textarea id="activityTimes" name="activityTimes" rows="3" placeholder="2025-09-16 18:32&#10;2025-10-02 18:33&#10;2025-09-18 18:33"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelAddActivity">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Activity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Activity Modal -->
+    <div class="modal" id="editActivityModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Activity</h3>
+                <button class="modal-close" id="closeEditActivityModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="editActivityForm">
+                <input type="hidden" id="editActivityId">
+                <div class="form-group">
+                    <label for="editActivityName">Activity Name</label>
+                    <input type="text" id="editActivityName" name="activityName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityDescription">Description</label>
+                    <textarea id="editActivityDescription" name="activityDescription" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editActivityCapacity">Capacity</label>
+                        <input type="number" id="editActivityCapacity" name="activityCapacity" min="1" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editActivityDuration">Duration (minutes)</label>
+                        <input type="number" id="editActivityDuration" name="activityDuration" min="30" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editActivityImage">Image URL</label>
+                    <input type="url" id="editActivityImage" name="activityImage" placeholder="https://example.com/image.jpg">
+                </div>
+                <div class="form-group">
+                    <label for="editActivityTimes">Available Times (one per line)</label>
+                    <textarea id="editActivityTimes" name="activityTimes" rows="3" placeholder="2025-09-16 18:32&#10;2025-10-02 18:33&#10;2025-09-18 18:33"></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelEditActivity">Cancel</button>
+                    <button type="submit" class="btn-primary">Update Activity</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="shared-data-manager.js"></script>
+    <script src="admin-dashboard-script.js"></script>
+    <script>
+        // Add click handlers for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        e.preventDefault();
+                        window.location.href = link.href;
+                    }
+                });
+                
+                // Add hover effect
+                item.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.cursor = 'pointer';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>

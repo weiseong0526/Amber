@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Announcement Management</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="announcement-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-calendar"></i>
+                        <span>Bookings</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Activity Info</span>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Post New Announcement</h1>
+            </div>
+
+            <div class="content-layout-vertical">
+                <!-- Create New Announcement Form -->
+                <div class="create-announcement-section">
+                    <div class="create-announcement-header">
+                        <div class="header-content">
+                            <h2>Create New Announcement</h2>
+                            <p class="header-subtitle">Share important updates and news with your customers</p>
+                        </div>
+                        <div class="header-icon">
+                            <i class="fas fa-bullhorn"></i>
+                        </div>
+                    </div>
+                    
+                    <div class="create-announcement-card">
+                        <form class="modern-announcement-form" id="announcementForm">
+                            <!-- Title Section -->
+                            <div class="form-section-modern">
+                                <div class="section-header">
+                                    <i class="fas fa-heading"></i>
+                                    <h3>Announcement Details</h3>
+                                </div>
+                                <div class="form-group-modern">
+                                    <label for="announcementTitle" class="modern-label">
+                                        <i class="fas fa-tag"></i>
+                                        Announcement Title
+                                    </label>
+                                    <input type="text" id="announcementTitle" name="announcementTitle" 
+                                           placeholder="Enter a compelling title for your announcement" 
+                                           class="modern-input" required>
+                                </div>
+                                
+                                <div class="form-group-modern">
+                                    <label for="announcementContent" class="modern-label">
+                                        <i class="fas fa-edit"></i>
+                                        Content
+                                    </label>
+                                    <textarea id="announcementContent" name="announcementContent" rows="6" 
+                                              placeholder="Write your announcement content here. Be clear and engaging to capture your audience's attention..." 
+                                              class="modern-textarea" required></textarea>
+                                </div>
+                            </div>
+
+                            <!-- Audience & Media Section -->
+                            <div class="form-section-modern">
+                                <div class="section-header">
+                                    <i class="fas fa-users"></i>
+                                    <h3>Audience & Media</h3>
+                                </div>
+                                <div class="form-row-modern">
+                                    <div class="form-group-modern">
+                                        <label for="sendTo" class="modern-label">
+                                            <i class="fas fa-user-friends"></i>
+                                            Target Audience
+                                        </label>
+                                        <select id="sendTo" name="sendTo" class="modern-select" required>
+                                            <option value="">Select recipients</option>
+                                            <option value="all">All Customers</option>
+                                            <option value="active">Active Members Only</option>
+                                            <option value="new">New Members Only</option>
+                                            <option value="premium">Premium Members Only</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group-modern">
+                                        <label class="modern-label">
+                                            <i class="fas fa-image"></i>
+                                            Featured Image
+                                        </label>
+                                        <div class="modern-upload-area" id="uploadArea">
+                                            <div class="upload-content">
+                                                <i class="fas fa-cloud-upload-alt"></i>
+                                                <p class="upload-text">Drop your image here or <span class="upload-link">browse</span></p>
+                                                <p class="upload-subtext">PNG, JPG, GIF up to 10MB</p>
+                                            </div>
+                                            <input type="file" id="announcementImage" name="image" accept="image/*" hidden>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Settings Section -->
+                            <div class="form-section-modern">
+                                <div class="section-header">
+                                    <i class="fas fa-cog"></i>
+                                    <h3>Announcement Settings</h3>
+                                </div>
+                                <div class="form-row-modern">
+                                    <div class="form-group-modern">
+                                        <label for="priority" class="modern-label">
+                                            <i class="fas fa-flag"></i>
+                                            Priority Level
+                                        </label>
+                                        <select id="priority" name="priority" class="modern-select" required>
+                                            <option value="">Select Priority</option>
+                                            <option value="low">Low</option>
+                                            <option value="normal">Normal</option>
+                                            <option value="high">High</option>
+                                            <option value="urgent">Urgent</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group-modern">
+                                        <label for="expiryDate" class="modern-label">
+                                            <i class="fas fa-calendar-times"></i>
+                                            Expiry Date
+                                        </label>
+                                        <input type="date" id="expiryDate" name="expiryDate" class="modern-input">
+                                        <small class="modern-help">Leave empty if announcement has no expiry</small>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="modern-action-buttons">
+                                <button type="button" class="btn-modern-cancel" id="cancelBtn">
+                                    <i class="fas fa-times"></i>
+                                    Cancel
+                                </button>
+                                <button type="submit" class="btn-modern-publish" id="publishBtn">
+                                    <i class="fas fa-paper-plane"></i>
+                                    Publish Announcement
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Past Announcements Section -->
+                <div class="announcements-section">
+                    <div class="announcements-header">
+                        <h2>Past Announcements</h2>
+                        <div class="announcements-actions">
+                            <button class="btn-secondary" id="selectAllBtn">
+                                <i class="fas fa-check-square"></i>
+                                Select All
+                            </button>
+                            <button class="btn-danger" id="deleteSelectedBtn">
+                                <i class="fas fa-trash"></i>
+                                Delete Selected
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Search and Filter Section -->
+                    <div class="search-filter-section">
+                        <div class="search-container">
+                            <div class="search-input-group">
+                                <i class="fas fa-search search-icon"></i>
+                                <input type="text" id="searchInput" placeholder="Search announcements by title or content..." class="search-input">
+                                <button class="btn-clear-search" id="clearSearchBtn" style="display: none;">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="filter-container">
+                            <div class="filter-group">
+                                <label for="priorityFilter">Priority:</label>
+                                <select id="priorityFilter" class="filter-select">
+                                    <option value="">All Priorities</option>
+                                    <option value="low">Low</option>
+                                    <option value="normal">Normal</option>
+                                    <option value="high">High</option>
+                                    <option value="urgent">Urgent</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="statusFilter">Status:</label>
+                                <select id="statusFilter" class="filter-select">
+                                    <option value="">All Status</option>
+                                    <option value="published">Published</option>
+                                    <option value="draft">Draft</option>
+                                    <option value="expired">Expired</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="recipientsFilter">Recipients:</label>
+                                <select id="recipientsFilter" class="filter-select">
+                                    <option value="">All Recipients</option>
+                                    <option value="all">All Customers</option>
+                                    <option value="active">Active Members</option>
+                                    <option value="new">New Members</option>
+                                    <option value="premium">Premium Members</option>
+                                </select>
+                            </div>
+                            
+                            <div class="filter-group">
+                                <label for="dateFilter">Date Range:</label>
+                                <select id="dateFilter" class="filter-select">
+                                    <option value="">All Time</option>
+                                    <option value="today">Today</option>
+                                    <option value="week">This Week</option>
+                                    <option value="month">This Month</option>
+                                    <option value="custom">Custom Range</option>
+                                </select>
+                            </div>
+                            
+                            <div class="custom-date-range" id="customDateRange" style="display: none;">
+                                <input type="date" id="startDate" class="date-input">
+                                <span>to</span>
+                                <input type="date" id="endDate" class="date-input">
+                            </div>
+                            
+                            <button class="btn-clear-filters" id="clearFiltersBtn">
+                                <i class="fas fa-times"></i>
+                                Clear Filters
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- Search Results Info -->
+                    <div class="search-results-info" id="searchResultsInfo" style="display: none;">
+                        <div class="search-results-count" id="searchResultsCount">0 results found</div>
+                        <div id="searchQuery"></div>
+                    </div>
+                    
+                    <!-- Announcements Grid -->
+                    <div class="announcements-grid" id="announcementsGrid">
+                        <!-- Announcements will be populated here -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="announcement-management-script.js"></script>
+</body>
+</html>

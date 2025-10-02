@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Create Class</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .sidebar-nav a {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        .sidebar-nav a:hover {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        .sidebar-nav a:visited {
+            color: inherit !important;
+            text-decoration: none !important;
+        }
+        
+        /* Progress Steps Styling */
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+        
+        .step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+        
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: #e9ecef;
+            color: #6c757d;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .step.active .step-circle {
+            background: #28a745;
+            color: white;
+        }
+        
+        .step.completed .step-circle {
+            background: #28a745;
+            color: white;
+        }
+        
+        .step-label {
+            font-size: 14px;
+            font-weight: 500;
+            color: #6c757d;
+            text-align: center;
+        }
+        
+        .step.active .step-label {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .step-connector {
+            width: 60px;
+            height: 2px;
+            background: #e9ecef;
+            margin: 0 20px;
+            position: relative;
+            top: -20px;
+        }
+        
+        .step.active + .step-connector {
+            background: #28a745;
+        }
+        
+        .step.completed + .step-connector {
+            background: #28a745;
+        }
+        
+        /* Unified Button Design System */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            min-width: 120px;
+            height: 44px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn:hover:before {
+            left: 100%;
+        }
+        
+        .btn:active {
+            transform: translateY(1px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        /* Primary Button */
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #5a6fd8 0%, #6a4190 100%);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Secondary Button */
+        .btn-secondary {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+        }
+        
+        .btn-secondary:hover {
+            background: linear-gradient(135deg, #ee82f9 0%, #f4455a 100%);
+            box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Success Button */
+        .btn-success {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-success:hover {
+            background: linear-gradient(135deg, #3d8bfe 0%, #00e6fe 100%);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Warning Button */
+        .btn-warning {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(250, 112, 154, 0.4);
+        }
+        
+        .btn-warning:hover {
+            background: linear-gradient(135deg, #f95a8a 0%, #fedc2e 100%);
+            box-shadow: 0 6px 20px rgba(250, 112, 154, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Danger Button */
+        .btn-danger {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);
+        }
+        
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #ff5252 0%, #e5501a 100%);
+            box-shadow: 0 6px 20px rgba(255, 107, 107, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Info Button */
+        .btn-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            color: #333;
+            box-shadow: 0 4px 15px rgba(168, 237, 234, 0.4);
+        }
+        
+        .btn-info:hover {
+            background: linear-gradient(135deg, #9cebe8 0%, #fdc4d1 100%);
+            box-shadow: 0 6px 20px rgba(168, 237, 234, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        /* Outline Buttons */
+        .btn-outline-primary {
+            background: transparent;
+            color: #667eea;
+            border: 2px solid #667eea;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.2);
+        }
+        
+        .btn-outline-primary:hover {
+            background: #667eea;
+            color: white;
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+        
+        /* Button Sizes */
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 12px;
+            min-width: 80px;
+            height: 36px;
+        }
+        
+        .btn-lg {
+            padding: 16px 32px;
+            font-size: 16px;
+            min-width: 160px;
+            height: 52px;
+        }
+        
+        /* Button Groups */
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        
+        .btn-group .btn {
+            margin: 0;
+        }
+        
+        /* Icon Buttons */
+        .btn-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            padding: 0;
+            border-radius: 50%;
+        }
+        
+        .btn-icon i {
+            font-size: 16px;
+        }
+        
+        /* Back and Next Button Styling */
+        .btn-back {
+            background: linear-gradient(135deg, #6c757d 0%, #495057 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 117, 125, 0.4);
+        }
+        
+        .btn-back:hover {
+            background: linear-gradient(135deg, #5a6268 0%, #3d4449 100%);
+            box-shadow: 0 6px 20px rgba(108, 117, 125, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .btn-next {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            box-shadow: 0 4px 15px rgba(40, 167, 69, 0.4);
+        }
+        
+        .btn-next:hover {
+            background: linear-gradient(135deg, #218838 0%, #1ea085 100%);
+            box-shadow: 0 6px 20px rgba(40, 167, 69, 0.6);
+            transform: translateY(-2px);
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+        
+        /* Time Slots Styling */
+        .time-slot-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 12px;
+            background: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .btn-remove-slot {
+            background: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .btn-remove-slot:hover {
+            background: #c82333;
+        }
+        
+        .btn-remove-image {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .btn-remove-image:hover {
+            background: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="admin-dashboard.html">
+                            <i class="fas fa-dumbbell"></i>
+                            <span>Activity</span>
+                        </a>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Create Class</span>
+                    </li>
+                    <li class="nav-item">
+                        <a href="booking-management.html">
+                            <i class="fas fa-calendar-check"></i>
+                            <span>Bookings</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Analytics</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Admin - Create Class</h1>
+            </div>
+
+            <!-- Progress Steps -->
+            <div class="progress-steps">
+                <div class="step active">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">New Activity</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Activity Information</div>
+                </div>
+                <div class="step-connector"></div>
+                <div class="step">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Upcoming Activity</div>
+                </div>
+            </div>
+
+            <div class="content-layout">
+                <!-- Class Information Form -->
+                <div class="form-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Class Information</h2>
+                        </div>
+                        <form class="class-form" id="classForm">
+                            <div class="form-group">
+                                <label for="activityType">Activity Type</label>
+                                <select id="activityType" name="activityType" required>
+                                    <option value="">Select Activity Type</option>
+                                    <option value="yoga">Yoga</option>
+                                    <option value="pilates">Pilates</option>
+                                    <option value="dance">Dance</option>
+                                    <option value="fitness">Fitness</option>
+                                    <option value="martial-arts">Martial Arts</option>
+                                    <option value="swimming">Swimming</option>
+                                    <option value="weaving">Weaving</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="className">Class Name / Variation</label>
+                                <input type="text" id="className" name="className" placeholder="e.g., Hatha Yoga, Vinyasa Flow, Morning Yoga" required>
+                                <small class="form-help">Enter specific class name or variation (e.g., "Morning Yoga", "Advanced Pilates")</small>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Time Slots</label>
+                                <div class="time-slots-management">
+                                    <div class="current-time-slots" id="currentTimeSlots">
+                                        <p class="no-slots-message">No time slots added yet</p>
+                                    </div>
+                                    <button type="button" class="btn-add-time-slot" id="addTimeSlotBtn">
+                                        <i class="fas fa-plus"></i> Add Time Slot
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea id="description" name="description" rows="4" placeholder="e.g., Learning yoga" required></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="classImage">Upload Image</label>
+                                <div class="upload-area" id="uploadArea">
+                                    <i class="fas fa-arrow-up"></i>
+                                    <p>Upload Image</p>
+                                    <input type="file" id="classImage" name="image" accept="image/*" hidden>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="preview-section">
+                    <div class="card">
+                        <div class="card-header">
+                            <h2>Preview</h2>
+                        </div>
+                        <div class="preview-content">
+                            <div class="preview-activity" id="previewActivity">
+                                <!-- Activity Image -->
+                                <div class="preview-image" id="previewImage">
+                                    <i class="fas fa-image"></i>
+                                    <p>No image uploaded</p>
+                                </div>
+
+                                <!-- Activity Details -->
+                                <div class="preview-details">
+                                    <div class="preview-title" id="previewTitle">Class Name</div>
+                                    
+                                    <div class="preview-meta">
+                                        <div class="meta-item">
+                                            <i class="fas fa-users"></i>
+                                            <span id="previewCapacity">0/8</span>
+                                        </div>
+                                        <div class="meta-item">
+                                            <i class="fas fa-clock"></i>
+                                            <span id="previewDuration">0min</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="preview-description" id="previewDescription">
+                                        Enter a description to see it here
+                                    </div>
+
+                                    <!-- Time Slots -->
+                                    <div class="time-slots">
+                                        <h4>Select time:</h4>
+                                        <div class="time-options" id="timeOptions">
+                                            <!-- Time slots will be dynamically generated here -->
+                                        </div>
+                                    </div>
+
+                                    <!-- Book Now Button -->
+                                    <button class="book-now-btn" id="bookNowBtn">Book Now</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button type="button" class="btn btn-danger" id="cancelBtn">
+                    <i class="fas fa-times"></i>
+                    Cancel
+                </button>
+                <button type="button" class="btn btn-back" id="backBtn">
+                    <i class="fas fa-arrow-left"></i>
+                    Back
+                </button>
+                <button type="button" class="btn btn-warning" id="saveBtn">
+                    <i class="fas fa-save"></i>
+                    Save Schedule
+                </button>
+                <button type="button" class="btn btn-next" id="nextBtn">
+                    Next Step
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Time Slot Modal -->
+    <div id="addTimeSlotModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Time Slot</h3>
+                <button class="close-btn" id="closeTimeSlotModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="slotDate">Date</label>
+                    <input type="date" id="slotDate" name="slotDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="slotTime">Time</label>
+                    <input type="time" id="slotTime" name="slotTime" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="slotCapacity">Capacity</label>
+                        <input type="number" id="slotCapacity" name="slotCapacity" min="1" max="100" value="8" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="slotPrice">Price (RM)</label>
+                        <input type="number" id="slotPrice" name="slotPrice" min="0" step="0.01" value="0" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="slotDuration">Duration (minutes)</label>
+                    <input type="number" id="slotDuration" name="slotDuration" min="1" max="480" value="120" required>
+                </div>
+                <div class="form-group">
+                    <label for="slotStatus">Status</label>
+                    <select id="slotStatus" name="slotStatus" required>
+                        <option value="">Select Status</option>
+                        <option value="active">Active</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="closed">Closed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="cancelTimeSlot">Cancel</button>
+                <button type="button" class="btn-save" id="saveTimeSlot">Add Time Slot</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Time Slot Modal -->
+    <div id="editTimeSlotModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Time Slot</h3>
+                <button class="close-btn" id="closeEditTimeSlotModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="editSlotDate">Date</label>
+                    <input type="date" id="editSlotDate" name="editSlotDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="editSlotTime">Time</label>
+                    <input type="time" id="editSlotTime" name="editSlotTime" required>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editSlotCapacity">Capacity</label>
+                        <input type="number" id="editSlotCapacity" name="editSlotCapacity" min="1" max="100" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editSlotPrice">Price (RM)</label>
+                        <input type="number" id="editSlotPrice" name="editSlotPrice" min="0" step="0.01" required>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editSlotDuration">Duration (minutes)</label>
+                    <input type="number" id="editSlotDuration" name="editSlotDuration" min="1" max="480" required>
+                </div>
+                <div class="form-group">
+                    <label for="editSlotStatus">Status</label>
+                    <select id="editSlotStatus" name="editSlotStatus" required>
+                        <option value="">Select Status</option>
+                        <option value="active">Active</option>
+                        <option value="upcoming">Upcoming</option>
+                        <option value="closed">Closed</option>
+                        <option value="cancelled">Cancelled</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+                <input type="hidden" id="editSlotIndex" name="editSlotIndex">
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn-cancel" id="cancelEditTimeSlot">Cancel</button>
+                <button type="button" class="btn-save" id="saveEditTimeSlot">Update Time Slot</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="shared-data-manager.js"></script>
+    <script src="admin-script.js"></script>
+    <script>
+        // Override AdminClassManager to integrate with our data persistence
+        document.addEventListener('DOMContentLoaded', function() {
+            // Wait for AdminClassManager to be initialized
+            setTimeout(function() {
+                if (window.adminClassManager) {
+                    // Override the saveTimeSlot method
+                    const originalSaveTimeSlot = window.adminClassManager.saveTimeSlot;
+                    if (originalSaveTimeSlot) {
+                        window.adminClassManager.saveTimeSlot = function(timeSlotData) {
+                            const result = originalSaveTimeSlot.call(this, timeSlotData);
+                            // Trigger our save function
+                            if (window.saveFormData) {
+                                window.saveFormData();
+                            }
+                            return result;
+                        };
+                    }
+                    
+                    // Override the removeTimeSlot method
+                    const originalRemoveTimeSlot = window.adminClassManager.removeTimeSlot;
+                    if (originalRemoveTimeSlot) {
+                        window.adminClassManager.removeTimeSlot = function(index) {
+                            const result = originalRemoveTimeSlot.call(this, index);
+                            // Trigger our save function
+                            if (window.saveFormData) {
+                                window.saveFormData();
+                            }
+                            return result;
+                        };
+                    }
+                }
+            }, 500);
+        });
+    </script>
+    <script>
+        // Add click handlers for navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            const navItems = document.querySelectorAll('.sidebar-nav .nav-item');
+            navItems.forEach(item => {
+                item.addEventListener('click', function(e) {
+                    const link = this.querySelector('a');
+                    if (link) {
+                        e.preventDefault();
+                        window.location.href = link.href;
+                    }
+                });
+                
+                // Add hover effect
+                item.addEventListener('mouseenter', function() {
+                    this.style.backgroundColor = 'rgba(255, 255, 255, 0.1)';
+                    this.style.cursor = 'pointer';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.backgroundColor = '';
+                });
+            });
+            
+            // Function to save form data (make it global)
+            window.saveFormData = function() {
+                console.log('Saving form data...');
+                
+                // Get time slots from various possible sources
+                let timeSlots = [];
+                if (window.timeSlots) {
+                    timeSlots = window.timeSlots;
+                } else if (window.adminClassManager && window.adminClassManager.currentClass) {
+                    timeSlots = window.adminClassManager.currentClass.timeSlots || [];
+                }
+                
+                console.log('Time slots found:', timeSlots);
+                
+                // Get image data
+                const imageInput = document.getElementById('classImage');
+                let imageData = null;
+                if (imageInput && imageInput.files && imageInput.files[0]) {
+                    const file = imageInput.files[0];
+                    const reader = new FileReader();
+                    reader.onload = function(e) {
+                        imageData = e.target.result;
+                        // Save form data with image
+                        const formData = {
+                            activityType: document.getElementById('activityType').value,
+                            className: document.getElementById('className').value,
+                            description: document.getElementById('description').value,
+                            timeSlots: timeSlots,
+                            imageData: imageData
+                        };
+                        console.log('Saving with image:', formData);
+                        localStorage.setItem('activityFormData', JSON.stringify(formData));
+                    };
+                    reader.readAsDataURL(file);
+                } else {
+                    // Save form data without image
+                    const formData = {
+                        activityType: document.getElementById('activityType').value,
+                        className: document.getElementById('className').value,
+                        description: document.getElementById('description').value,
+                        timeSlots: timeSlots,
+                        imageData: localStorage.getItem('activityFormData') ? JSON.parse(localStorage.getItem('activityFormData')).imageData : null
+                    };
+                    console.log('Saving without image:', formData);
+                    localStorage.setItem('activityFormData', JSON.stringify(formData));
+                }
+            }
+            
+            // Function to load form data
+            function loadFormData() {
+                const savedData = localStorage.getItem('activityFormData');
+                if (savedData) {
+                    const formData = JSON.parse(savedData);
+                    if (formData.activityType) document.getElementById('activityType').value = formData.activityType;
+                    if (formData.className) document.getElementById('className').value = formData.className;
+                    if (formData.description) document.getElementById('description').value = formData.description;
+                    if (formData.timeSlots) {
+                        window.timeSlots = formData.timeSlots;
+                        // Restore time slots display
+                        updateTimeSlotsDisplay();
+                    }
+                    if (formData.imageData) {
+                        // Restore uploaded image
+                        restoreImage(formData.imageData);
+                    }
+                }
+            }
+            
+            // Function to update time slots display
+            function updateTimeSlotsDisplay() {
+                const container = document.getElementById('currentTimeSlots');
+                if (window.timeSlots && window.timeSlots.length > 0) {
+                    container.innerHTML = window.timeSlots.map((slot, index) => `
+                        <div class="time-slot-item">
+                            <span>${slot.date} ${slot.time} - Capacity: ${slot.capacity} - Price: RM${slot.price} - Duration: ${slot.duration}min</span>
+                            <button type="button" onclick="removeTimeSlot(${index})" class="btn-remove-slot">×</button>
+                        </div>
+                    `).join('');
+                } else {
+                    container.innerHTML = '<p class="no-slots-message">No time slots added yet</p>';
+                }
+            }
+            
+            // Function to restore image
+            function restoreImage(imageData) {
+                const uploadArea = document.getElementById('uploadArea');
+                const imageInput = document.getElementById('classImage');
+                
+                // Create image element
+                const img = document.createElement('img');
+                img.src = imageData;
+                img.style.maxWidth = '100%';
+                img.style.maxHeight = '200px';
+                img.style.borderRadius = '8px';
+                
+                // Clear upload area and add image
+                uploadArea.innerHTML = '';
+                uploadArea.appendChild(img);
+                
+                // Add remove button
+                const removeBtn = document.createElement('button');
+                removeBtn.type = 'button';
+                removeBtn.textContent = 'Remove Image';
+                removeBtn.className = 'btn-remove-image';
+                removeBtn.style.marginTop = '10px';
+                removeBtn.onclick = function() {
+                    uploadArea.innerHTML = '<i class="fas fa-arrow-up"></i><p>Upload Image</p>';
+                    uploadArea.appendChild(imageInput);
+                    // Remove image data from localStorage
+                    const formData = JSON.parse(localStorage.getItem('activityFormData') || '{}');
+                    delete formData.imageData;
+                    localStorage.setItem('activityFormData', JSON.stringify(formData));
+                };
+                uploadArea.appendChild(removeBtn);
+            }
+            
+            // Load saved data when page loads
+            loadFormData();
+            
+            // Additional hook for AdminClassManager's currentClass
+            setTimeout(function() {
+                if (window.adminClassManager && window.adminClassManager.currentClass) {
+                    // Override the timeSlots setter
+                    const currentClass = window.adminClassManager.currentClass;
+                    let timeSlots = currentClass.timeSlots || [];
+                    
+                    Object.defineProperty(currentClass, 'timeSlots', {
+                        get: function() { return timeSlots; },
+                        set: function(value) { 
+                            timeSlots = value; 
+                            window.saveFormData(); // Save when timeSlots changes
+                        }
+                    });
+                }
+            }, 1000);
+            
+            // Save data on any input change
+            document.getElementById('activityType').addEventListener('change', saveFormData);
+            document.getElementById('className').addEventListener('input', saveFormData);
+            document.getElementById('description').addEventListener('input', saveFormData);
+            
+            // Save data when image is uploaded
+            const imageInput = document.getElementById('classImage');
+            if (imageInput) {
+                imageInput.addEventListener('change', function() {
+                    if (this.files && this.files[0]) {
+                        saveFormData(); // This will handle the image conversion
+                    }
+                });
+            }
+            
+            // Hook into the existing AdminClassManager for time slots
+            const originalSaveTimeSlot = window.AdminClassManager?.prototype?.saveTimeSlot;
+            if (originalSaveTimeSlot) {
+                window.AdminClassManager.prototype.saveTimeSlot = function(...args) {
+                    const result = originalSaveTimeSlot.apply(this, args);
+                    saveFormData(); // Save after adding time slot
+                    return result;
+                };
+            }
+            
+            // Also hook into the global timeSlots array if it exists
+            let timeSlotsArray = window.timeSlots || [];
+            Object.defineProperty(window, 'timeSlots', {
+                get: function() { return timeSlotsArray; },
+                set: function(value) { 
+                    timeSlotsArray = value; 
+                    saveFormData(); // Save when timeSlots changes
+                }
+            });
+            
+            // Watch for changes in the time slots container
+            const timeSlotsContainer = document.getElementById('currentTimeSlots');
+            if (timeSlotsContainer) {
+                const observer = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                            // Time slots were added, save the data
+                            setTimeout(saveFormData, 100);
+                        }
+                    });
+                });
+                observer.observe(timeSlotsContainer, { childList: true, subtree: true });
+            }
+            
+            // Also watch for changes in the preview time options
+            const timeOptionsContainer = document.getElementById('timeOptions');
+            if (timeOptionsContainer) {
+                const observer2 = new MutationObserver(function(mutations) {
+                    mutations.forEach(function(mutation) {
+                        if (mutation.type === 'childList' && mutation.addedNodes.length > 0) {
+                            // Time options were updated, save the data
+                            setTimeout(saveFormData, 100);
+                        }
+                    });
+                });
+                observer2.observe(timeOptionsContainer, { childList: true, subtree: true });
+            }
+            
+            // Periodic save as fallback (every 2 seconds)
+            setInterval(function() {
+                if (window.saveFormData) {
+                    window.saveFormData();
+                }
+            }, 2000);
+            
+            // Back Button functionality
+            const backBtn = document.getElementById('backBtn');
+            console.log('Back button found:', backBtn); // Debug log
+            if (backBtn) {
+                backBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    console.log('Back button clicked'); // Debug log
+                    saveFormData(); // Save before going back
+                    window.location.href = 'admin-dashboard.html';
+                });
+            } else {
+                console.error('Back button not found!');
+            }
+            
+            // Next Step Button functionality
+            const nextBtn = document.getElementById('nextBtn');
+            if (nextBtn) {
+                nextBtn.addEventListener('click', function() {
+                    // Validate form before proceeding
+                    const activityType = document.getElementById('activityType').value;
+                    const className = document.getElementById('className').value;
+                    const description = document.getElementById('description').value;
+                    
+                    if (!activityType || !className || !description) {
+                        alert('Please fill in all required fields before proceeding to the next step.');
+                        return;
+                    }
+                    
+                    saveFormData(); // Save form data
+                    window.location.href = 'activity-information.html';
+                });
+            }
+        });
+    </script>
+</body>
+</html>

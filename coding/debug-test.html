@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Test - Amber Admin</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test { margin: 10px 0; padding: 15px; border: 2px solid #ddd; border-radius: 8px; }
+        .success { background: #d4edda; border-color: #c3e6cb; color: #155724; }
+        .error { background: #f8d7da; border-color: #f5c6cb; color: #721c24; }
+        .warning { background: #fff3cd; border-color: #ffeaa7; color: #856404; }
+        .info { background: #d1ecf1; border-color: #bee5eb; color: #0c5460; }
+        h1 { color: #333; text-align: center; }
+        h2 { color: #666; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+        .console { background: #000; color: #0f0; padding: 10px; border-radius: 5px; font-family: monospace; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🔍 Amber Admin Console - Debug Test</h1>
+    
+    <div id="file-tests">
+        <h2>📁 File Loading Tests</h2>
+        <div class="test" id="css-test">Testing announcement.css...</div>
+        <div class="test" id="js-test">Testing announcement.js...</div>
+        <div class="test" id="html-test">Testing HTML structure...</div>
+    </div>
+    
+    <div id="functionality-tests">
+        <h2>⚙️ Functionality Tests</h2>
+        <div class="test" id="form-test">Testing form elements...</div>
+        <div class="test" id="modal-test">Testing modal elements...</div>
+        <div class="test" id="table-test">Testing table elements...</div>
+        <div class="test" id="upload-test">Testing upload areas...</div>
+    </div>
+    
+    <div id="css-tests">
+        <h2>🎨 CSS Tests</h2>
+        <div class="test" id="background-test">Testing ECE4DB background...</div>
+        <div class="test" id="logo-test">Testing Amber logo...</div>
+        <div class="test" id="responsive-test">Testing responsive design...</div>
+    </div>
+    
+    <div id="console-output">
+        <h2>📝 Console Output</h2>
+        <div class="console" id="console-log">Loading...</div>
+    </div>
+
+    <script>
+        // Console capture
+        const originalLog = console.log;
+        const originalWarn = console.warn;
+        const originalError = console.error;
+        const consoleOutput = document.getElementById('console-log');
+        
+        function addToConsole(message, type = 'log') {
+            const timestamp = new Date().toLocaleTimeString();
+            const color = type === 'error' ? '#f00' : type === 'warn' ? '#ff0' : '#0f0';
+            consoleOutput.innerHTML += `<div style="color: ${color}">[${timestamp}] ${message}</div>`;
+        }
+        
+        console.log = function(...args) {
+            originalLog.apply(console, args);
+            addToConsole(args.join(' '), 'log');
+        };
+        
+        console.warn = function(...args) {
+            originalWarn.apply(console, args);
+            addToConsole(args.join(' '), 'warn');
+        };
+        
+        console.error = function(...args) {
+            originalError.apply(console, args);
+            addToConsole(args.join(' '), 'error');
+        };
+
+        // Test CSS loading
+        function testCSS() {
+            const cssLink = document.createElement('link');
+            cssLink.rel = 'stylesheet';
+            cssLink.href = 'announcement.css';
+            cssLink.onload = () => {
+                document.getElementById('css-test').className = 'test success';
+                document.getElementById('css-test').innerHTML = '✅ announcement.css loaded successfully';
+                console.log('CSS file loaded successfully');
+            };
+            cssLink.onerror = () => {
+                document.getElementById('css-test').className = 'test error';
+                document.getElementById('css-test').innerHTML = '❌ announcement.css failed to load';
+                console.error('CSS file failed to load');
+            };
+            document.head.appendChild(cssLink);
+        }
+
+        // Test JS loading
+        function testJS() {
+            const jsScript = document.createElement('script');
+            jsScript.src = 'announcement.js';
+            jsScript.onload = () => {
+                document.getElementById('js-test').className = 'test success';
+                document.getElementById('js-test').innerHTML = '✅ announcement.js loaded successfully';
+                console.log('JavaScript file loaded successfully');
+                testFunctionality();
+            };
+            jsScript.onerror = () => {
+                document.getElementById('js-test').className = 'test error';
+                document.getElementById('js-test').innerHTML = '❌ announcement.js failed to load';
+                console.error('JavaScript file failed to load');
+            };
+            document.head.appendChild(jsScript);
+        }
+
+        // Test HTML structure
+        function testHTML() {
+            fetch('announcement.html')
+                .then(response => response.text())
+                .then(html => {
+                    const requiredElements = [
+                        'activityForm', 'editForm', 'closeModal', 'cancelEdit', 
+                        'selectAll', 'editModal', 'activitiesTableBody'
+                    ];
+                    
+                    let missingElements = [];
+                    requiredElements.forEach(id => {
+                        if (!html.includes(`id="${id}"`)) {
+                            missingElements.push(id);
+                        }
+                    });
+                    
+                    if (missingElements.length === 0) {
+                        document.getElementById('html-test').className = 'test success';
+                        document.getElementById('html-test').innerHTML = '✅ All required HTML elements found';
+                        console.log('HTML structure is valid');
+                    } else {
+                        document.getElementById('html-test').className = 'test error';
+                        document.getElementById('html-test').innerHTML = `❌ Missing elements: ${missingElements.join(', ')}`;
+                        console.error('Missing HTML elements:', missingElements);
+                    }
+                })
+                .catch(error => {
+                    document.getElementById('html-test').className = 'test error';
+                    document.getElementById('html-test').innerHTML = '❌ Could not load HTML file';
+                    console.error('Could not load HTML file:', error);
+                });
+        }
+
+        // Test functionality
+        function testFunctionality() {
+            // Test form elements
+            const formTest = document.getElementById('form-test');
+            if (typeof ActivityManager !== 'undefined') {
+                formTest.className = 'test success';
+                formTest.innerHTML = '✅ ActivityManager class found';
+                console.log('ActivityManager class is available');
+            } else {
+                formTest.className = 'test error';
+                formTest.innerHTML = '❌ ActivityManager class not found';
+                console.error('ActivityManager class not found');
+            }
+
+            // Test modal elements
+            const modalTest = document.getElementById('modal-test');
+            const modal = document.getElementById('editModal');
+            if (modal) {
+                modalTest.className = 'test success';
+                modalTest.innerHTML = '✅ Modal elements found';
+                console.log('Modal elements are available');
+            } else {
+                modalTest.className = 'test warning';
+                modalTest.innerHTML = '⚠️ Modal elements not found (expected in main page)';
+                console.warn('Modal elements not found in debug page');
+            }
+
+            // Test table elements
+            const tableTest = document.getElementById('table-test');
+            const table = document.getElementById('activitiesTableBody');
+            if (table) {
+                tableTest.className = 'test success';
+                tableTest.innerHTML = '✅ Table elements found';
+                console.log('Table elements are available');
+            } else {
+                tableTest.className = 'test warning';
+                tableTest.innerHTML = '⚠️ Table elements not found (expected in main page)';
+                console.warn('Table elements not found in debug page');
+            }
+
+            // Test upload areas
+            const uploadTest = document.getElementById('upload-test');
+            const uploadArea = document.getElementById('uploadArea');
+            if (uploadArea) {
+                uploadTest.className = 'test success';
+                uploadTest.innerHTML = '✅ Upload areas found';
+                console.log('Upload areas are available');
+            } else {
+                uploadTest.className = 'test warning';
+                uploadTest.innerHTML = '⚠️ Upload areas not found (expected in main page)';
+                console.warn('Upload areas not found in debug page');
+            }
+        }
+
+        // Test CSS features
+        function testCSSFeatures() {
+            // Test ECE4DB background
+            const backgroundTest = document.getElementById('background-test');
+            fetch('announcement.css')
+                .then(response => response.text())
+                .then(css => {
+                    if (css.includes('#ECE4DB')) {
+                        backgroundTest.className = 'test success';
+                        backgroundTest.innerHTML = '✅ ECE4DB background color found in CSS';
+                        console.log('ECE4DB background color found');
+                    } else {
+                        backgroundTest.className = 'test error';
+                        backgroundTest.innerHTML = '❌ ECE4DB background color not found';
+                        console.error('ECE4DB background color not found');
+                    }
+                });
+
+            // Test Amber logo
+            const logoTest = document.getElementById('logo-test');
+            fetch('announcement.css')
+                .then(response => response.text())
+                .then(css => {
+                    if (css.includes('amber-7q7.pages.dev')) {
+                        logoTest.className = 'test success';
+                        logoTest.innerHTML = '✅ Amber logo URL found in CSS';
+                        console.log('Amber logo URL found');
+                    } else {
+                        logoTest.className = 'test error';
+                        logoTest.innerHTML = '❌ Amber logo URL not found';
+                        console.error('Amber logo URL not found');
+                    }
+                });
+
+            // Test responsive design
+            const responsiveTest = document.getElementById('responsive-test');
+            fetch('announcement.css')
+                .then(response => response.text())
+                .then(css => {
+                    if (css.includes('@media')) {
+                        responsiveTest.className = 'test success';
+                        responsiveTest.innerHTML = '✅ Responsive media queries found';
+                        console.log('Responsive design found');
+                    } else {
+                        responsiveTest.className = 'test error';
+                        responsiveTest.innerHTML = '❌ Responsive media queries not found';
+                        console.error('Responsive design not found');
+                    }
+                });
+        }
+
+        // Run all tests
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Starting debug tests...');
+            testCSS();
+            testJS();
+            testHTML();
+            testCSSFeatures();
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+

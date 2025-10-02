@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Customer Payment Records</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="customer-payment-records-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Visitor Records</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Bookings</span>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Activity Info</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="container">
+                <!-- Page Header -->
+                <div class="page-header">
+                    <div class="page-title">
+                        <h1>Customer Payment Records</h1>
+                        <p class="page-subtitle">Check Customer Payment Records</p>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn-primary" onclick="paymentManager.openAddPaymentModal()">
+                            <i class="fas fa-plus"></i> Add Payment
+                        </button>
+                        <button class="btn-secondary" onclick="paymentManager.exportData()">
+                            <i class="fas fa-download"></i> Export
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Filter Section -->
+                <div class="filter-section">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search Customer Name..." onkeyup="paymentManager.searchPayments()">
+                    </div>
+                    <div class="filter-controls">
+                        <div class="filter-group">
+                            <label for="paymentDateFilter">Payment Date:</label>
+                            <input type="date" id="paymentDateFilter" onchange="paymentManager.filterPayments()">
+                        </div>
+                        <div class="filter-group">
+                            <label for="methodFilter">Method:</label>
+                            <select id="methodFilter" onchange="paymentManager.filterPayments()">
+                                <option value="">All Method</option>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="bank_transfer">Bank Transfer</option>
+                                <option value="tng_ewallet">TNG E-Wallet</option>
+                                <option value="cash">Cash</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <button class="btn-reset" onclick="paymentManager.resetFilters()">
+                            <i class="fas fa-refresh"></i> Reset
+                        </button>
+                    </div>
+                    <div class="total-income">
+                        <span class="total-label">Total Income:</span>
+                        <span class="total-amount" id="totalIncome">RM 0.00</span>
+                    </div>
+                </div>
+
+                <!-- Stats Section -->
+                <div class="stats-section">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-receipt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="totalPayments">0</h3>
+                            <p>Total Payments</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-check-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="paidPayments">0</h3>
+                            <p>Paid</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="pendingPayments">0</h3>
+                            <p>Pending</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-times-circle"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 id="failedPayments">0</h3>
+                            <p>Failed</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Payment Records Table -->
+                <div class="table-container">
+                    <table class="payment-table">
+                        <thead>
+                            <tr>
+                                <th>Customer Name</th>
+                                <th>Activity</th>
+                                <th>Activity Date</th>
+                                <th>Time</th>
+                                <th>Payment Date</th>
+                                <th>Method</th>
+                                <th>Amount</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="paymentTableBody">
+                            <!-- Payment records will be populated here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Add Payment Modal -->
+    <div class="modal" id="addPaymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> Add New Payment</h3>
+                <button class="btn-close" onclick="paymentManager.closeModal('addPaymentModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="addPaymentForm" onsubmit="paymentManager.handleAddPayment(event)">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="customerName">Customer Name *</label>
+                        <input type="text" id="customerName" name="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="activity">Activity *</label>
+                        <select id="activity" name="activity" required>
+                            <option value="">Select Activity</option>
+                            <option value="yoga">Yoga</option>
+                            <option value="weaving">Weaving</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="dance">Dance</option>
+                            <option value="art">Art</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="activityDate">Activity Date *</label>
+                        <input type="date" id="activityDate" name="activityDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="activityTime">Time *</label>
+                        <input type="time" id="activityTime" name="activityTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="paymentDate">Payment Date *</label>
+                        <input type="date" id="paymentDate" name="paymentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="paymentMethod">Payment Method *</label>
+                        <select id="paymentMethod" name="paymentMethod" required>
+                            <option value="">Select Method</option>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                            <option value="tng_ewallet">TNG E-Wallet</option>
+                            <option value="cash">Cash</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="amount">Amount (RM) *</label>
+                        <input type="number" id="amount" name="amount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="status">Status *</label>
+                        <select id="status" name="status" required>
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="notes">Notes (Optional)</label>
+                    <textarea id="notes" name="notes" rows="3" placeholder="Additional payment notes..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="paymentManager.closeModal('addPaymentModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Add Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Edit Payment Modal -->
+    <div class="modal" id="editPaymentModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-edit"></i> Edit Payment</h3>
+                <button class="btn-close" onclick="paymentManager.closeModal('editPaymentModal')">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form id="editPaymentForm" onsubmit="paymentManager.handleEditPayment(event)">
+                <input type="hidden" id="editPaymentId" name="paymentId">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editCustomerName">Customer Name *</label>
+                        <input type="text" id="editCustomerName" name="customerName" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editActivity">Activity *</label>
+                        <select id="editActivity" name="activity" required>
+                            <option value="yoga">Yoga</option>
+                            <option value="weaving">Weaving</option>
+                            <option value="fitness">Fitness</option>
+                            <option value="dance">Dance</option>
+                            <option value="art">Art</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editActivityDate">Activity Date *</label>
+                        <input type="date" id="editActivityDate" name="activityDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editActivityTime">Time *</label>
+                        <input type="time" id="editActivityTime" name="activityTime" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editPaymentDate">Payment Date *</label>
+                        <input type="date" id="editPaymentDate" name="paymentDate" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editPaymentMethod">Payment Method *</label>
+                        <select id="editPaymentMethod" name="paymentMethod" required>
+                            <option value="credit_card">Credit Card</option>
+                            <option value="bank_transfer">Bank Transfer</option>
+                            <option value="tng_ewallet">TNG E-Wallet</option>
+                            <option value="cash">Cash</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="editAmount">Amount (RM) *</label>
+                        <input type="number" id="editAmount" name="amount" step="0.01" min="0" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="editStatus">Status *</label>
+                        <select id="editStatus" name="status" required>
+                            <option value="paid">Paid</option>
+                            <option value="pending">Pending</option>
+                            <option value="failed">Failed</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="editNotes">Notes (Optional)</label>
+                    <textarea id="editNotes" name="notes" rows="3" placeholder="Additional payment notes..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" onclick="paymentManager.closeModal('editPaymentModal')">Cancel</button>
+                    <button type="submit" class="btn-primary">Update Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Message Container -->
+    <div class="message-container" id="messageContainer"></div>
+
+    <script src="customer-payment-records-script.js"></script>
+</body>
+</html>

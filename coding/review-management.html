@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin - Review Management</title>
+    <link rel="stylesheet" href="admin-styles.css">
+    <link rel="stylesheet" href="review-management-styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="dashboard">
+        <!-- Left Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="brand">Amber</h1>
+                <p class="subtitle">Dashboard Admin Console</p>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Home</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-chart-bar"></i>
+                        <span>Visitor Records</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-calendar-check"></i>
+                        <span>Bookings</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Activity Info</span>
+                    </li>
+                    <li class="nav-item active">
+                        <i class="fas fa-users"></i>
+                        <span>Customers</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-bullhorn"></i>
+                        <span>Announcements</span>
+                    </li>
+                    <li class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Settings</span>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <div class="page-header">
+                <h1>Review Management</h1>
+                <div class="header-actions">
+                    <div class="search-container">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search reviews...">
+                    </div>
+                    <button class="btn-primary" id="addReviewBtn">
+                        <i class="fas fa-plus"></i>
+                        Add Review
+                    </button>
+                </div>
+            </div>
+
+            <!-- Review Stats -->
+            <div class="review-stats">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="averageRating">0.0</h3>
+                        <p>Average Rating</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-comments"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="totalReviews">0</h3>
+                        <p>Total Reviews</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-reply"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="repliedReviews">0</h3>
+                        <p>Replied Reviews</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-content">
+                        <h3 id="pendingReviews">0</h3>
+                        <p>Pending Reply</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Filter Section -->
+            <div class="filter-section">
+                <div class="filter-group">
+                    <label for="ratingFilter">Filter by Rating:</label>
+                    <select id="ratingFilter" class="filter-select">
+                        <option value="">All Ratings</option>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="activityFilter">Filter by Activity:</label>
+                    <select id="activityFilter" class="filter-select">
+                        <option value="">All Activities</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="dateFrom">From Date:</label>
+                    <input type="date" id="dateFrom" class="filter-input">
+                </div>
+                <div class="filter-group">
+                    <label for="dateTo">To Date:</label>
+                    <input type="date" id="dateTo" class="filter-input">
+                </div>
+                <button class="btn-secondary" id="resetFiltersBtn">
+                    <i class="fas fa-times"></i>
+                    Reset
+                </button>
+            </div>
+
+            <!-- Reviews List -->
+            <div class="reviews-container" id="reviewsContainer">
+                <!-- Reviews will be populated here -->
+            </div>
+
+            <!-- Empty State -->
+            <div class="empty-state" id="emptyState" style="display: none;">
+                <i class="fas fa-star"></i>
+                <h3>No Reviews Found</h3>
+                <p>No reviews match your current filter criteria</p>
+            </div>
+        </main>
+    </div>
+
+    <!-- Reply to Review Modal -->
+    <div class="modal" id="replyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Reply to Review</h3>
+                <button class="modal-close" id="closeReplyModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="review-preview">
+                    <div class="review-header">
+                        <h4 id="reviewActivityName">Activity Name</h4>
+                        <div class="review-rating" id="reviewRatingDisplay"></div>
+                    </div>
+                    <div class="review-content">
+                        <p id="reviewComment">Review comment...</p>
+                        <div class="review-tags" id="reviewTags"></div>
+                        <div class="review-meta">
+                            <span id="reviewCustomerName">Customer Name</span>
+                            <span id="reviewDate">Date</span>
+                        </div>
+                    </div>
+                </div>
+                <form class="modal-form" id="replyForm">
+                    <input type="hidden" id="reviewId">
+                    <div class="form-group">
+                        <label for="adminReply">Admin Reply:</label>
+                        <textarea id="adminReply" name="adminReply" rows="4" placeholder="Write your reply..."></textarea>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn-secondary" id="cancelReply">Cancel</button>
+                        <button type="submit" class="btn-primary">Send Reply</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Review Modal -->
+    <div class="modal" id="editReviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Review</h3>
+                <button class="modal-close" id="closeEditReviewModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <form class="modal-form" id="editReviewForm">
+                <input type="hidden" id="editReviewId">
+                <div class="form-group">
+                    <label for="editActivityId">Activity:</label>
+                    <select id="editActivityId" name="activityId" required>
+                        <option value="">Select Activity</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editCustomerName">Customer Name:</label>
+                    <input type="text" id="editCustomerName" name="customerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="editCustomerEmail">Customer Email:</label>
+                    <input type="email" id="editCustomerEmail" name="customerEmail" required>
+                </div>
+                <div class="form-group">
+                    <label for="editRating">Rating:</label>
+                    <select id="editRating" name="rating" required>
+                        <option value="5">5 Stars</option>
+                        <option value="4">4 Stars</option>
+                        <option value="3">3 Stars</option>
+                        <option value="2">2 Stars</option>
+                        <option value="1">1 Star</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="editComment">Comment:</label>
+                    <textarea id="editComment" name="comment" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="editTags">Tags (comma separated):</label>
+                    <input type="text" id="editTags" name="tags" placeholder="e.g., Relaxing, Fun, Challenging">
+                </div>
+                <div class="modal-actions">
+                    <button type="button" class="btn-secondary" id="cancelEditReview">Cancel</button>
+                    <button type="submit" class="btn-primary">Update Review</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="review-management-script.js"></script>
+</body>
+</html>

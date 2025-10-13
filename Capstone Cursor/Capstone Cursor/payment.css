@@ -1,0 +1,766 @@
+/* Payment Page Styles */
+.payment-content {
+  background: #fde6d8;
+  min-height: 100vh;
+  padding: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.payment-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(173, 216, 230, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 218, 185, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.payment-container {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.payment-detail-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.booking-summary {
+  border: 2px solid #3b82f6;
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background: #f8fafc;
+}
+
+.activity-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3b82f6;
+  margin-bottom: 8px;
+}
+
+.booking-info {
+  color: #6b7280;
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.price-info {
+  color: #6b7280;
+  font-size: 14px;
+}
+
+.pricing-breakdown {
+  border-top: 1px solid #e5e7eb;
+  padding-top: 15px;
+}
+
+.pricing-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.total-price {
+  background: #fef3c7;
+  padding: 10px 15px;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.payment-options-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.payment-option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.payment-option:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.payment-option.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.payment-icon {
+  width: 40px;
+  height: 40px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
+
+.payment-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.payment-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d5db;
+  border-radius: 4px;
+  position: relative;
+}
+
+.payment-checkbox.checked {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.payment-checkbox.checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.next-button {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: block;
+  margin: 0 auto;
+  min-width: 200px;
+}
+
+.next-button:hover {
+  background: #059669;
+}
+
+.next-button:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.section-title {
+  font-size: 20px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #1f2937;
+}
+
+.tng-logo {
+  background: linear-gradient(135deg, #00d4aa 0%, #00a8cc 100%);
+  color: white;
+  border-radius: 6px;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.banking-icon {
+  background: #1e40af;
+  color: white;
+  border-radius: 6px;
+}
+
+.card-icon {
+  background: #dc2626;
+  color: white;
+  border-radius: 6px;
+}
+
+/* TNG Modal Styles */
+.tng-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.tng-modal-overlay.show {
+  display: flex;
+}
+
+.tng-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 400px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.tng-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.tng-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tng-logo-square {
+  width: 40px;
+  height: 40px;
+  background: #0066cc;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tng-logo-square::after {
+  content: 'TNG';
+  color: white;
+  font-weight: bold;
+  font-size: 12px;
+}
+
+.tng-brand {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+}
+
+.tng-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+.tng-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.phone-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.phone-country {
+  width: 80px;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 14px;
+  background: #f9fafb;
+  color: #6b7280;
+}
+
+.phone-number {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+}
+
+.phone-number:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.pin-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.pin-input-group {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+.pin-digit {
+  width: 40px;
+  height: 40px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  transition: border-color 0.2s ease;
+}
+
+.pin-digit:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+.pin-digit.filled {
+  border-color: #0066cc;
+  background: #f0f9ff;
+}
+
+.tng-login-btn {
+  background: #d1d5db;
+  color: #6b7280;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+.tng-login-btn.active {
+  background: #0066cc;
+  color: white;
+}
+
+.tng-login-btn.active:hover {
+  background: #0052a3;
+}
+
+.tng-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.tng-close-btn:hover {
+  background: #f3f4f6;
+}
+
+/* Online Banking Modal Styles */
+.banking-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.banking-modal-overlay.show {
+  display: flex;
+}
+
+.banking-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.banking-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 25px 0;
+  text-align: center;
+}
+
+.bank-list {
+  margin-bottom: 25px;
+}
+
+.bank-option {
+  display: flex;
+  align-items: center;
+  padding: 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.bank-option:hover {
+  border-color: #3b82f6;
+  background: #f8fafc;
+}
+
+.bank-option.selected {
+  border-color: #3b82f6;
+  background: #eff6ff;
+}
+
+.bank-logo {
+  width: 50px;
+  height: 50px;
+  margin-right: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 8px;
+  color: white;
+}
+
+.maybank-logo {
+  background: #ffd700;
+  color: #000;
+}
+
+.cimb-logo {
+  background: #dc2626;
+}
+
+.public-logo {
+  background: #dc2626;
+}
+
+.rhb-logo {
+  background: #1e40af;
+}
+
+.hongleong-logo {
+  background: #dc2626;
+}
+
+.bank-name {
+  flex: 1;
+  font-weight: 500;
+  font-size: 16px;
+  color: #333;
+}
+
+.bank-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #d1d5db;
+  border-radius: 50%;
+  position: relative;
+}
+
+.bank-checkbox.checked {
+  background: #3b82f6;
+  border-color: #3b82f6;
+}
+
+.bank-checkbox.checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.terms-section {
+  margin-bottom: 25px;
+  padding: 15px;
+  background: #f9fafb;
+  border-radius: 8px;
+}
+
+.terms-checkbox-label {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.terms-checkbox {
+  margin-top: 2px;
+  width: 16px;
+  height: 16px;
+}
+
+.terms-text {
+  color: #374151;
+}
+
+.terms-link {
+  color: #3b82f6;
+  text-decoration: none;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
+.banking-pay-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: block;
+  margin: 0 auto;
+  min-width: 200px;
+}
+
+.banking-pay-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.banking-pay-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.banking-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.banking-close-btn:hover {
+  background: #f3f4f6;
+}
+
+/* Credit Card Modal Styles */
+.card-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.card-modal-overlay.show {
+  display: flex;
+}
+
+.card-modal {
+  background: white;
+  border-radius: 12px;
+  padding: 30px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 25px 0;
+  text-align: center;
+  letter-spacing: 0.5px;
+}
+
+.card-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.card-number-input,
+.cvv-input,
+.cardholder-input {
+  padding: 12px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.2s ease;
+  font-family: 'Courier New', monospace;
+}
+
+.card-number-input:focus,
+.cvv-input:focus,
+.cardholder-input:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.card-number-input {
+  font-size: 18px;
+  letter-spacing: 2px;
+}
+
+.cvv-input {
+  width: 100px;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.cardholder-input {
+  text-transform: uppercase;
+}
+
+.expiry-group {
+  display: flex;
+  gap: 10px;
+}
+
+.expiry-month,
+.expiry-year {
+  padding: 12px 15px;
+  border: 2px solid #e5e7eb;
+  border-radius: 8px;
+  font-size: 16px;
+  background: white;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  appearance: none;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 16px;
+  padding-right: 40px;
+}
+
+.expiry-month:focus,
+.expiry-year:focus {
+  outline: none;
+  border-color: #3b82f6;
+}
+
+.expiry-month {
+  flex: 1;
+}
+
+.expiry-year {
+  flex: 2;
+}
+
+.card-pay-btn {
+  background: #10b981;
+  color: white;
+  border: none;
+  padding: 15px 40px;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  display: block;
+  margin: 20px auto 0 auto;
+  min-width: 200px;
+}
+
+.card-pay-btn:hover:not(:disabled) {
+  background: #059669;
+}
+
+.card-pay-btn:disabled {
+  background: #d1d5db;
+  cursor: not-allowed;
+}
+
+.card-close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #6b7280;
+  cursor: pointer;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: background 0.2s ease;
+}
+
+.card-close-btn:hover {
+  background: #f3f4f6;
+}

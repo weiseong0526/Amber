@@ -1,0 +1,551 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Review</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+
+      <form class="search" role="search" action="#">
+        <input type="text" placeholder="Search reviews..." aria-label="Search reviews" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <nav class="top-actions" aria-label="Top actions">
+        <a href="notifications.html" class="action"><span>🔔</span><span class="label">Notification</span></a>
+        <a href="#" class="action"><span>👤</span><span class="label">Profile</span></a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="#"><span>👥</span>Customers</a>
+        <a class="nav-item" href="#"><span>⚙️</span>Settings</a>
+
+        <div class="promos">
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip">View Retreat</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">Claim Offer</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">See Schedule</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="page-header">
+          <h1>Activity Reviews & Coach Ratings</h1>
+          <p>Share your experience and help others make informed decisions</p>
+        </div>
+
+        <!-- Review Section -->
+        <div class="review-section">
+          <div class="review-container">
+            <!-- Leave a Review -->
+            <div class="leave-review">
+              <h2>Leave a review</h2>
+              <form class="review-form">
+                <div class="form-group">
+                  <label for="activity-select">Activity</label>
+                  <select id="activity-select" name="activity">
+                    <option value="yoga">Yoga</option>
+                    <option value="pilates">Pilates</option>
+                    <option value="zumba">Zumba</option>
+                    <option value="mindfulness">Mindfulness</option>
+                    <option value="meditation">Meditation</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="coach-select">Coach</label>
+                  <select id="coach-select" name="coach">
+                    <option value="mr-onn">Mr Onn</option>
+                    <option value="sarah-chen">Sarah Chen</option>
+                    <option value="maria-rodriguez">Maria Rodriguez</option>
+                    <option value="david-kim">David Kim</option>
+                    <option value="lisa-wang">Lisa Wang</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label>Ratings</label>
+                  <div class="star-rating">
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" class="star">★</label>
+                    <input type="radio" id="star4" name="rating" value="4" checked>
+                    <label for="star4" class="star">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" class="star">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" class="star">★</label>
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" class="star">★</label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Feedback Tags (Optional)</label>
+                  <div class="feedback-tags">
+                    <button type="button" class="tag">Friendly</button>
+                    <button type="button" class="tag">Fun</button>
+                    <button type="button" class="tag">Relax</button>
+                    <button type="button" class="tag">Clear Instructions</button>
+                    <button type="button" class="tag add-tag">+</button>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="comments">Comments</label>
+                  <textarea id="comments" name="comments" placeholder="Tell us what went well or what could be improved" rows="4"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="button" class="btn secondary" onclick="window.location.href='bookings.html'">Back to Bookings</button>
+                  <button type="submit" class="btn primary submit-review">Submit Review</button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Review Search -->
+            <div class="review-search">
+              <h2>Review Search</h2>
+              
+              <div class="rating-distribution">
+                <h3>Rating Distribution</h3>
+                <div class="rating-bars">
+                  <div class="rating-bar">
+                    <span class="stars">★★★★★</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 33%"></div>
+                    </div>
+                    <span class="percentage">33%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★★★★☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 33%"></div>
+                    </div>
+                    <span class="percentage">33%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★★★☆☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 33%"></div>
+                    </div>
+                    <span class="percentage">33%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★★☆☆☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 0%"></div>
+                    </div>
+                    <span class="percentage">0%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★☆☆☆☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 0%"></div>
+                    </div>
+                    <span class="percentage">0%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="reviews-list">
+                <h3>Recent Reviews</h3>
+                <div class="review-item" data-review-id="1">
+                  <div class="review-header">
+                    <span class="reviewer-name">James</span>
+                    <span class="review-activity">Yoga</span>
+                    <span class="review-date">28 Aug 2025</span>
+                    <div class="review-rating">
+                      <span class="stars">★★★★☆</span>
+                    </div>
+                  </div>
+                  <p class="review-text">goods, i like this activities</p>
+                  <div class="review-tags">
+                    <span class="tag">Relax</span>
+                  </div>
+                  
+                  <!-- Comments Section -->
+                  <div class="comments-section">
+                    <div class="comments-header">
+                      <span class="comments-count">2 comments</span>
+                      <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+                    </div>
+                    
+                    <div class="comments-list" style="display: none;">
+                      <div class="comment-item" data-comment-id="1" data-author="current-user">
+                        <div class="comment-header">
+                          <span class="comment-author">You</span>
+                          <span class="comment-date">28 Aug 2025, 2:30 PM</span>
+                          <div class="comment-actions">
+                            <button class="edit-comment-btn" onclick="editComment(this)">Edit</button>
+                            <button class="delete-comment-btn" onclick="deleteComment(this)">Delete</button>
+                          </div>
+                        </div>
+                        <p class="comment-text">Great class! The instructor was very helpful.</p>
+                      </div>
+                      
+                      <div class="comment-item" data-comment-id="2" data-author="other-user">
+                        <div class="comment-header">
+                          <span class="comment-author">Sarah M.</span>
+                          <span class="comment-date">28 Aug 2025, 3:15 PM</span>
+                        </div>
+                        <p class="comment-text">I agree! The breathing exercises were amazing.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                      <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+                      <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="review-item" data-review-id="2">
+                  <div class="review-header">
+                    <span class="reviewer-name">Janes</span>
+                    <span class="review-activity">Yoga</span>
+                    <span class="review-date">29 Aug 2025</span>
+                    <div class="review-rating">
+                      <span class="stars">★★★☆☆</span>
+                    </div>
+                  </div>
+                  <p class="review-text">goods, i like this activities</p>
+                  <div class="review-tags">
+                    <span class="tag">Clear Instructions</span>
+                  </div>
+                  
+                  <!-- Comments Section -->
+                  <div class="comments-section">
+                    <div class="comments-header">
+                      <span class="comments-count">1 comment</span>
+                      <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+                    </div>
+                    
+                    <div class="comments-list" style="display: none;">
+                      <div class="comment-item" data-comment-id="3" data-author="other-user">
+                        <div class="comment-header">
+                          <span class="comment-author">Mike R.</span>
+                          <span class="comment-date">29 Aug 2025, 1:45 PM</span>
+                        </div>
+                        <p class="comment-text">The instructions were indeed very clear!</p>
+                      </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                      <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+                      <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="review-item" data-review-id="3">
+                  <div class="review-header">
+                    <span class="reviewer-name">Jacks</span>
+                    <span class="review-activity">Yoga</span>
+                    <span class="review-date">28 Aug 2025</span>
+                    <div class="review-rating">
+                      <span class="stars">★★★★★</span>
+                    </div>
+                    <button class="review-options">⋮</button>
+                  </div>
+                  <p class="review-text">goods, i like this activities</p>
+                  <div class="review-tags">
+                    <span class="tag">Fun</span>
+                    <span class="tag">Relax</span>
+                  </div>
+                  
+                  <!-- Comments Section -->
+                  <div class="comments-section">
+                    <div class="comments-header">
+                      <span class="comments-count">0 comments</span>
+                      <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+                    </div>
+                    
+                    <div class="comments-list" style="display: none;">
+                      <!-- No comments yet -->
+                    </div>
+                    
+                    <div class="add-comment">
+                      <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+                      <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Review functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const reviewForm = document.querySelector('.review-form');
+        const feedbackTags = document.querySelectorAll('.feedback-tags .tag:not(.add-tag)');
+        const addTagBtn = document.querySelector('.add-tag');
+        
+        // Star rating functionality
+        const starInputs = document.querySelectorAll('.star-rating input[type="radio"]');
+        const starLabels = document.querySelectorAll('.star-rating label.star');
+        
+        starLabels.forEach((label, index) => {
+          label.addEventListener('click', () => {
+            // Uncheck all stars
+            starInputs.forEach(input => input.checked = false);
+            // Check stars up to clicked one
+            for (let i = 0; i <= index; i++) {
+              starInputs[i].checked = true;
+            }
+          });
+        });
+        
+        // Feedback tags functionality
+        feedbackTags.forEach(tag => {
+          tag.addEventListener('click', () => {
+            tag.classList.toggle('selected');
+          });
+        });
+        
+        // Add new tag functionality
+        addTagBtn.addEventListener('click', () => {
+          const newTagText = prompt('Enter new tag:');
+          if (newTagText && newTagText.trim()) {
+            const newTag = document.createElement('button');
+            newTag.type = 'button';
+            newTag.className = 'tag';
+            newTag.textContent = newTagText.trim();
+            newTag.addEventListener('click', () => {
+              newTag.classList.toggle('selected');
+            });
+            addTagBtn.parentNode.insertBefore(newTag, addTagBtn);
+          }
+        });
+        
+        // Form submission
+        reviewForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const formData = new FormData(reviewForm);
+          const selectedTags = Array.from(document.querySelectorAll('.feedback-tags .tag.selected:not(.add-tag)'))
+            .map(tag => tag.textContent);
+          
+          const reviewData = {
+            activity: formData.get('activity'),
+            coach: formData.get('coach'),
+            rating: formData.get('rating'),
+            tags: selectedTags,
+            comments: formData.get('comments')
+          };
+          
+          // Show success message
+          alert('Review submitted successfully! Thank you for your feedback.');
+          
+          // Reset form
+          reviewForm.reset();
+          document.querySelectorAll('.feedback-tags .tag.selected').forEach(tag => {
+            tag.classList.remove('selected');
+          });
+          // Reset to 4-star default
+          document.getElementById('star4').checked = true;
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search input');
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const reviewItems = document.querySelectorAll('.review-item');
+          
+          reviewItems.forEach(item => {
+            const itemText = item.textContent.toLowerCase();
+            if (itemText.includes(searchTerm)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+
+        // Prevent search form submission
+        document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+      });
+
+      // Comment functionality
+      function toggleComments(button) {
+        const commentsList = button.closest('.comments-section').querySelector('.comments-list');
+        const isVisible = commentsList.style.display !== 'none';
+        
+        if (isVisible) {
+          commentsList.style.display = 'none';
+          button.textContent = 'Show Comments';
+        } else {
+          commentsList.style.display = 'block';
+          button.textContent = 'Hide Comments';
+        }
+      }
+
+      function submitComment(button) {
+        const commentInput = button.previousElementSibling;
+        const commentText = commentInput.value.trim();
+        
+        if (!commentText) {
+          alert('Please enter a comment before posting.');
+          return;
+        }
+        
+        const commentsList = button.closest('.comments-section').querySelector('.comments-list');
+        const reviewId = button.closest('.review-item').dataset.reviewId;
+        
+        // Create new comment element
+        const commentId = Date.now(); // Simple ID generation
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-item';
+        newComment.dataset.commentId = commentId;
+        newComment.dataset.author = 'current-user';
+        
+        const currentDate = new Date().toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+        
+        newComment.innerHTML = `
+          <div class="comment-header">
+            <span class="comment-author">You</span>
+            <span class="comment-date">${currentDate}</span>
+            <div class="comment-actions">
+              <button class="edit-comment-btn" onclick="editComment(this)">Edit</button>
+              <button class="delete-comment-btn" onclick="deleteComment(this)">Delete</button>
+            </div>
+          </div>
+          <p class="comment-text">${commentText}</p>
+        `;
+        
+        // Add to comments list
+        commentsList.appendChild(newComment);
+        
+        // Clear input
+        commentInput.value = '';
+        
+        // Update comment count
+        updateCommentCount(button.closest('.comments-section'));
+        
+        // Show comments if hidden
+        if (commentsList.style.display === 'none') {
+          toggleComments(button.closest('.comments-section').querySelector('.toggle-comments-btn'));
+        }
+      }
+
+      function editComment(button) {
+        const commentItem = button.closest('.comment-item');
+        const commentText = commentItem.querySelector('.comment-text');
+        const currentText = commentText.textContent;
+        
+        // Add edit input
+        const editInput = document.createElement('textarea');
+        editInput.className = 'comment-edit-input';
+        editInput.value = currentText;
+        
+        // Add edit actions
+        const editActions = document.createElement('div');
+        editActions.className = 'comment-edit-actions';
+        editActions.innerHTML = `
+          <button class="save-comment-btn" onclick="saveComment(this)">Save</button>
+          <button class="cancel-edit-btn" onclick="cancelEdit(this)">Cancel</button>
+        `;
+        
+        // Insert edit elements
+        commentText.parentNode.insertBefore(editInput, commentText);
+        commentText.parentNode.insertBefore(editActions, commentText.nextSibling);
+        
+        // Add editing class
+        commentItem.classList.add('editing');
+        
+        // Focus on input
+        editInput.focus();
+        editInput.select();
+      }
+
+      function saveComment(button) {
+        const commentItem = button.closest('.comment-item');
+        const editInput = commentItem.querySelector('.comment-edit-input');
+        const commentText = commentItem.querySelector('.comment-text');
+        const newText = editInput.value.trim();
+        
+        if (!newText) {
+          alert('Comment cannot be empty.');
+          return;
+        }
+        
+        // Update comment text
+        commentText.textContent = newText;
+        
+        // Remove edit elements
+        editInput.remove();
+        button.closest('.comment-edit-actions').remove();
+        
+        // Remove editing class
+        commentItem.classList.remove('editing');
+      }
+
+      function cancelEdit(button) {
+        const commentItem = button.closest('.comment-item');
+        
+        // Remove edit elements
+        commentItem.querySelector('.comment-edit-input').remove();
+        button.closest('.comment-edit-actions').remove();
+        
+        // Remove editing class
+        commentItem.classList.remove('editing');
+      }
+
+      function deleteComment(button) {
+        if (confirm('Are you sure you want to delete this comment?')) {
+          const commentItem = button.closest('.comment-item');
+          const commentsSection = commentItem.closest('.comments-section');
+          
+          commentItem.remove();
+          
+          // Update comment count
+          updateCommentCount(commentsSection);
+        }
+      }
+
+      function updateCommentCount(commentsSection) {
+        const commentsList = commentsSection.querySelector('.comments-list');
+        const commentCount = commentsList.querySelectorAll('.comment-item').length;
+        const countElement = commentsSection.querySelector('.comments-count');
+        
+        countElement.textContent = `${commentCount} comment${commentCount !== 1 ? 's' : ''}`;
+      }
+    </script>
+  </body>
+</html>

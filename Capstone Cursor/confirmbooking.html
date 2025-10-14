@@ -96,7 +96,14 @@
         var payload = JSON.parse(decodeURIComponent(dataRaw || ''));
         var count = (payload.bookingFor === 'friend_only') ? (payload.friends?.length || 0) : (1 + (payload.friends?.length || 0));
         document.getElementById('sumActivity').textContent = payload.activity || 'Activity';
-        document.getElementById('sumDate').textContent = new Date(payload.date).toDateString();
+        document.getElementById('sumDate').textContent = new Date(payload.date).toLocaleString('en-US', { 
+          weekday: 'short', 
+          month: 'short', 
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
         document.getElementById('sumCount').textContent = 'Price per person: Rm50';
         document.getElementById('sumNote').textContent = 'You are booking for ' + count + ' ' + (count===1?'person':'people') + '.';
         var pricePer = 50; var subtotal = pricePer * count; // demo price

@@ -85,7 +85,7 @@
                 <div class="booking-meta">
                   <div class="meta-item">
                     <span class="meta-icon">🕐</span>
-                    <span>Mon & Wed, 6:00 PM</span>
+                    <span>Mon, 6:00 PM</span>
                   </div>
                   <div class="meta-item">
                     <span class="meta-icon">📍</span>
@@ -97,7 +97,7 @@
                   </div>
                 </div>
                 <div class="booking-actions">
-                  <button class="btn secondary">Reschedule</button>
+                  <button class="btn secondary">View Detail</button>
                   <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
                 </div>
               </div>
@@ -119,7 +119,7 @@
                 <div class="booking-meta">
                   <div class="meta-item">
                     <span class="meta-icon">🕐</span>
-                    <span>Tue & Thu, 6:00 PM</span>
+                    <span>Tue, 6:00 PM</span>
                   </div>
                   <div class="meta-item">
                     <span class="meta-icon">📍</span>
@@ -131,7 +131,7 @@
                   </div>
                 </div>
                 <div class="booking-actions">
-                  <button class="btn secondary">Reschedule</button>
+                  <button class="btn secondary">View Detail</button>
                   <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
                 </div>
               </div>
@@ -392,9 +392,170 @@
       </div>
     </div>
 
+    <!-- View Detail Modal -->
+    <div class="modal-overlay" id="viewDetailModal">
+      <div class="modal view-detail-modal">
+        <div class="modal-header">
+          <h2>Booking Details</h2>
+          <button class="close-btn" onclick="closeViewDetailModal()">&times;</button>
+        </div>
+        
+        <div class="booking-detail-content" id="bookingDetailContent">
+          <!-- Booking details will be populated here -->
+        </div>
+        
+        <div class="modal-buttons">
+          <button class="btn secondary" onclick="closeViewDetailModal()">Close</button>
+        </div>
+      </div>
+    </div>
+
     <script>
+      // Load bookings from localStorage and display them
+      function loadBookingsFromStorage() {
+        try {
+          var storedBookings = JSON.parse(localStorage.getItem('userBookings') || '[]');
+          var bookingsGrid = document.querySelector('.bookings-grid');
+          console.log('Loading bookings from storage:', storedBookings);
+          
+          // Clear existing dynamic bookings (keep the static ones for demo)
+          var existingDynamicBookings = document.querySelectorAll('.booking-card[data-dynamic="true"]');
+          console.log('Removing existing dynamic bookings:', existingDynamicBookings.length);
+          existingDynamicBookings.forEach(booking => booking.remove());
+          
+          // Add new bookings from localStorage
+          storedBookings.forEach(function(booking) {
+            var bookingCard = createBookingCard(booking);
+            bookingsGrid.insertBefore(bookingCard, bookingsGrid.firstChild);
+          });
+          console.log('Added', storedBookings.length, 'bookings to display');
+          
+          // Apply current filter after loading
+          applyCurrentFilter();
+          
+        } catch(e) {
+          console.error('Failed to load bookings from storage', e);
+        }
+      }
+      
+      // Apply the current active filter
+      function applyCurrentFilter() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const bookingCards = document.querySelectorAll('.booking-card');
+        const emptyState = document.querySelector('.empty-state');
+        
+        // Find the active filter tab
+        let activeFilter = 'upcoming'; // default
+        filterTabs.forEach(tab => {
+          if (tab.classList.contains('active')) {
+            activeFilter = tab.getAttribute('data-filter');
+          }
+        });
+        
+        console.log('Applying filter:', activeFilter);
+        
+        let visibleCount = 0;
+        bookingCards.forEach(card => {
+          const cardStatus = card.getAttribute('data-status');
+          if (cardStatus === activeFilter) {
+            card.style.display = 'block';
+            visibleCount++;
+          } else {
+            card.style.display = 'none';
+          }
+        });
+        
+        // Show/hide empty state
+        if (visibleCount === 0) {
+          emptyState.style.display = 'block';
+        } else {
+          emptyState.style.display = 'none';
+        }
+        
+        console.log('Filter applied. Visible bookings:', visibleCount);
+      }
+      
+      // Create a booking card element
+      function createBookingCard(booking) {
+        var card = document.createElement('article');
+        card.className = 'booking-card ' + booking.status;
+        card.setAttribute('data-status', booking.status);
+        card.setAttribute('data-dynamic', 'true');
+        card.setAttribute('data-booking-id', booking.id);
+        
+        var dateObj = new Date(booking.date);
+        var formattedDate = dateObj.toLocaleDateString('en-US', { 
+          month: 'short', 
+          day: 'numeric', 
+          year: 'numeric' 
+        });
+        
+        // Extract day of week and start time
+        var dayOfWeek = dateObj.toLocaleDateString('en-US', { weekday: 'short' });
+        var startTime = booking.time.split(' - ')[0]; // Get start time before the dash
+        var timeOnly = startTime.replace(/\s*(AM|PM)/i, ''); // Remove AM/PM
+        var period = startTime.match(/\s*(AM|PM)/i) ? startTime.match(/\s*(AM|PM)/i)[1] : '';
+        var formattedDateTime = dayOfWeek + ' ' + timeOnly.toLowerCase() + period.toLowerCase();
+        
+        // Determine status display
+        var statusClass = booking.status === 'canceled' ? 'canceled' : 'upcoming';
+        var statusText = booking.status === 'canceled' ? 'Canceled' : 'Upcoming';
+        
+        // Create action buttons based on status
+        var actionButtons = '';
+        if (booking.status === 'canceled') {
+          actionButtons = `
+            <div class="booking-actions">
+              <button class="btn secondary" onclick="openViewDetailModal(${booking.id})">View Detail</button>
+            </div>
+          `;
+        } else {
+          actionButtons = `
+            <div class="booking-actions">
+              <button class="btn secondary" onclick="openViewDetailModal(${booking.id})">View Detail</button>
+              <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
+            </div>
+          `;
+        }
+        
+        card.innerHTML = `
+          <div class="booking-header">
+            <div class="booking-status ${statusClass}">
+              <span class="status-dot"></span>
+              <span class="status-text">${statusText}</span>
+            </div>
+            <div class="booking-date">${formattedDate}</div>
+          </div>
+          <div class="booking-content">
+            <img src="https://images.unsplash.com/photo-1518617840859-acd0eac7b3fd?q=80&w=1200&auto=format&fit=crop" alt="${booking.activity}" />
+            <div class="booking-details">
+              <h3>${booking.activity}</h3>
+              <div class="booking-meta">
+                <div class="meta-item">
+                  <span class="meta-icon">🕐</span>
+                  <span>${formattedDateTime}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-icon">👥</span>
+                  <span>${booking.numberOfPeople} person${booking.numberOfPeople > 1 ? 's' : ''}</span>
+                </div>
+                <div class="meta-item">
+                  <span class="meta-icon">💳</span>
+                  <span>Paid via ${booking.paymentMethod}</span>
+                </div>
+              </div>
+              ${actionButtons}
+            </div>
+          </div>
+        `;
+        
+        return card;
+      }
+      
       // Filter functionality
       document.addEventListener('DOMContentLoaded', function() {
+        // Load bookings from localStorage first
+        loadBookingsFromStorage();
         const filterTabs = document.querySelectorAll('.filter-tab');
         const bookingCards = document.querySelectorAll('.booking-card');
         const emptyState = document.querySelector('.empty-state');
@@ -415,24 +576,8 @@
             // Add active class to clicked tab
             this.classList.add('active');
 
-            const filter = this.getAttribute('data-filter');
-            let visibleCount = 0;
-
-            bookingCards.forEach(card => {
-              if (card.getAttribute('data-status') === filter) {
-                card.style.display = 'block';
-                visibleCount++;
-              } else {
-                card.style.display = 'none';
-              }
-            });
-
-            // Show/hide empty state
-            if (visibleCount === 0) {
-              emptyState.style.display = 'block';
-            } else {
-              emptyState.style.display = 'none';
-            }
+            // Apply the filter
+            applyCurrentFilter();
           });
         });
 
@@ -475,33 +620,68 @@
         const bookingDate = bookingCard.querySelector('.booking-date').textContent;
         const bookingMeta = bookingCard.querySelectorAll('.meta-item');
         
-        // Extract booking details
-        const time = bookingMeta[0]?.textContent || '';
-        const location = bookingMeta[1]?.textContent || '';
-        const instructor = bookingMeta[2]?.textContent || '';
+        // Get booking ID if it's a dynamic booking
+        const bookingId = bookingCard.getAttribute('data-booking-id');
+        const isDynamicBooking = bookingCard.getAttribute('data-dynamic') === 'true';
+        
+        // Extract booking details based on booking type
+        let time = '';
+        let location = '';
+        let instructor = '';
+        let numberOfPeople = '';
+        let paymentMethod = '';
+        
+        if (isDynamicBooking) {
+          // For dynamic bookings: time, number of people, payment method
+          time = bookingMeta[0]?.textContent || '';
+          numberOfPeople = bookingMeta[1]?.textContent || '';
+          paymentMethod = bookingMeta[2]?.textContent || '';
+        } else {
+          // For static bookings: time, location, instructor
+          time = bookingMeta[0]?.textContent || '';
+          location = bookingMeta[1]?.textContent || '';
+          instructor = bookingMeta[2]?.textContent || '';
+        }
 
         // Store selected booking data
         selectedBooking = {
+          id: bookingId,
           title: bookingTitle,
           date: bookingDate,
           time: time,
           location: location,
-          instructor: instructor
+          instructor: instructor,
+          numberOfPeople: numberOfPeople,
+          paymentMethod: paymentMethod,
+          isDynamic: isDynamicBooking
         };
 
-        // Populate selected booking display
+        // Populate selected booking display based on booking type
         const selectedBookingDiv = document.getElementById('selectedBooking');
-        selectedBookingDiv.innerHTML = `
-          <h4>${bookingTitle}</h4>
-          <div class="booking-meta">
+        let metaHTML = `
+          <div class="meta-item">
+            <span class="meta-icon">📅</span>
+            <span>${bookingDate}</span>
+          </div>
+          <div class="meta-item">
+            <span class="meta-icon">🕐</span>
+            <span>${time}</span>
+          </div>
+        `;
+        
+        if (isDynamicBooking) {
+          metaHTML += `
             <div class="meta-item">
-              <span class="meta-icon">📅</span>
-              <span>${bookingDate}</span>
+              <span class="meta-icon">👥</span>
+              <span>${numberOfPeople}</span>
             </div>
             <div class="meta-item">
-              <span class="meta-icon">🕐</span>
-              <span>${time}</span>
+              <span class="meta-icon">💳</span>
+              <span>${paymentMethod}</span>
             </div>
+          `;
+        } else {
+          metaHTML += `
             <div class="meta-item">
               <span class="meta-icon">📍</span>
               <span>${location}</span>
@@ -510,6 +690,13 @@
               <span class="meta-icon">👤</span>
               <span>${instructor}</span>
             </div>
+          `;
+        }
+        
+        selectedBookingDiv.innerHTML = `
+          <h4>${bookingTitle}</h4>
+          <div class="booking-meta">
+            ${metaHTML}
           </div>
         `;
 
@@ -642,9 +829,180 @@
           // Close the cancel modal
           closeCancelModal();
           
-          // In a real app, you would update the booking status here
-          // For now, we'll just show a success message
+          // Update booking status to canceled instead of removing
+          updateBookingStatusToCanceled(selectedBooking);
+          
+          // Reload the bookings display
+          loadBookingsFromStorage();
+          
         }, 500);
+      }
+      
+      // Function to update booking status to canceled
+      function updateBookingStatusToCanceled(bookingToCancel) {
+        try {
+          var storedBookings = JSON.parse(localStorage.getItem('userBookings') || '[]');
+          console.log('Updating booking status to canceled:', bookingToCancel);
+          
+          // Find and update the booking status
+          var updatedBookings = storedBookings.map(function(booking) {
+            if (booking.id == bookingToCancel.id || booking.id == parseInt(bookingToCancel.id)) {
+              console.log('Found booking to cancel:', booking);
+              booking.status = 'canceled';
+              booking.canceledDate = new Date().toISOString();
+            }
+            return booking;
+          });
+          
+          // Save updated bookings back to localStorage
+          localStorage.setItem('userBookings', JSON.stringify(updatedBookings));
+          console.log('Booking status updated to canceled');
+          
+        } catch(e) {
+          console.error('Failed to update booking status', e);
+        }
+      }
+      
+      // Function to remove booking from localStorage
+      function removeBookingFromStorage(bookingToRemove) {
+        try {
+          var storedBookings = JSON.parse(localStorage.getItem('userBookings') || '[]');
+          console.log('Removing booking:', bookingToRemove);
+          console.log('Current stored bookings:', storedBookings);
+          
+          // If we have a booking ID, use it for precise removal
+          if (bookingToRemove.id) {
+            console.log('Using ID for removal:', bookingToRemove.id);
+            var updatedBookings = storedBookings.filter(function(booking) {
+              return booking.id != bookingToRemove.id && booking.id != parseInt(bookingToRemove.id);
+            });
+            console.log('Updated bookings after ID removal:', updatedBookings);
+          } else {
+            console.log('Using fallback matching for removal');
+            // Fallback to matching by activity and date for static bookings
+            var updatedBookings = storedBookings.filter(function(booking) {
+              return !(booking.activity === bookingToRemove.title && 
+                      booking.date === formatDateForComparison(bookingToRemove.date));
+            });
+            console.log('Updated bookings after fallback removal:', updatedBookings);
+          }
+          
+          // Save updated bookings back to localStorage
+          localStorage.setItem('userBookings', JSON.stringify(updatedBookings));
+          console.log('Bookings saved to localStorage');
+          
+        } catch(e) {
+          console.error('Failed to remove booking from storage', e);
+        }
+      }
+      
+      // Helper function to format date for comparison
+      function formatDateForComparison(dateString) {
+        try {
+          var date = new Date(dateString);
+          return date.toISOString().split('T')[0];
+        } catch(e) {
+          return dateString;
+        }
+      }
+
+      // View Detail Modal functionality
+      function openViewDetailModal(bookingId) {
+        try {
+          var storedBookings = JSON.parse(localStorage.getItem('userBookings') || '[]');
+          var booking = storedBookings.find(b => b.id == bookingId);
+          
+          if (!booking) {
+            alert('Booking not found');
+            return;
+          }
+          
+          var dateObj = new Date(booking.date);
+          var formattedDate = dateObj.toLocaleDateString('en-US', { 
+            weekday: 'long',
+            year: 'numeric', 
+            month: 'long', 
+            day: 'numeric' 
+          });
+          
+          var bookingTime = new Date(booking.bookingDate);
+          var formattedBookingTime = bookingTime.toLocaleDateString('en-US', { 
+            year: 'numeric', 
+            month: 'short', 
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit'
+          });
+          
+          // Create myself section
+          var myselfSection = '';
+          if (booking.bookingFor !== 'friend_only') {
+            myselfSection = '<div class="detail-section"><h4>👤 Myself:</h4><ul class="friends-list"><li>You (Main Book)</li></ul></div>';
+          }
+          
+          // Create friends section
+          var friendsList = '';
+          if (booking.friends && booking.friends.length > 0) {
+            friendsList = '<div class="detail-section"><h4>👥 Friends Booked For:</h4><ul class="friends-list">';
+            booking.friends.forEach(function(friend) {
+              friendsList += '<li>' + (friend.name || 'Friend') + ' - ' + (friend.email || 'No email provided') + '</li>';
+            });
+            friendsList += '</ul></div>';
+          }
+          
+          var detailContent = `
+            <div class="booking-detail-info">
+              <div class="detail-section">
+                <h3>${booking.activity}</h3>
+                <div class="detail-item">
+                  <span class="detail-label">📅 Date:</span>
+                  <span class="detail-value">${formattedDate}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">🕐 Time:</span>
+                  <span class="detail-value">${booking.time}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">👥 Number of People:</span>
+                  <span class="detail-value">${booking.numberOfPeople} person${booking.numberOfPeople > 1 ? 's' : ''}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">💳 Payment Method:</span>
+                  <span class="detail-value">${booking.paymentMethod}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">💰 Price per Person:</span>
+                  <span class="detail-value">RM ${booking.pricePerPerson}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">💵 Total Amount:</span>
+                  <span class="detail-value">RM ${booking.totalPrice}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">📝 Booking Date:</span>
+                  <span class="detail-value">${formattedBookingTime}</span>
+                </div>
+                <div class="detail-item">
+                  <span class="detail-label">📊 Status:</span>
+                  <span class="detail-value status-upcoming">${booking.status.charAt(0).toUpperCase() + booking.status.slice(1)}</span>
+                </div>
+              </div>
+              ${myselfSection}
+              ${friendsList}
+            </div>
+          `;
+          
+          document.getElementById('bookingDetailContent').innerHTML = detailContent;
+          document.getElementById('viewDetailModal').classList.add('active');
+          
+        } catch(e) {
+          console.error('Failed to open view detail modal', e);
+          alert('Failed to load booking details');
+        }
+      }
+      
+      function closeViewDetailModal() {
+        document.getElementById('viewDetailModal').classList.remove('active');
       }
 
       // Close modals when clicking outside
@@ -654,6 +1012,8 @@
             closeCancelModal();
           } else if (e.target.id === 'confirmationModal') {
             closeConfirmationModal();
+          } else if (e.target.id === 'viewDetailModal') {
+            closeViewDetailModal();
           }
         }
       });

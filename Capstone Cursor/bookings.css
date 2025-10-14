@@ -623,3 +623,148 @@ body{
     flex-direction: column;
   }
 }
+
+/* View Detail Modal Styles */
+.view-detail-modal {
+  max-width: 600px;
+  width: 90%;
+}
+
+.booking-detail-content {
+  padding: 20px 0;
+}
+
+.booking-detail-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.detail-section {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid #e9ecef;
+}
+
+.detail-section h3 {
+  margin: 0 0 15px 0;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.detail-section h4 {
+  margin: 0 0 10px 0;
+  color: var(--text);
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid #e9ecef;
+}
+
+.detail-item:last-child {
+  border-bottom: none;
+}
+
+.detail-label {
+  font-weight: 600;
+  color: var(--text);
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.detail-value {
+  color: var(--muted);
+  font-weight: 500;
+  text-align: right;
+  flex: 1;
+  margin-left: 15px;
+}
+
+.status-upcoming {
+  background: #d4edda;
+  color: #155724;
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.friends-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.friends-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid #e9ecef;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.friends-list li:last-child {
+  border-bottom: none;
+}
+
+.friends-list li:before {
+  content: "👤";
+  margin-right: 8px;
+}
+
+/* Special styling for myself section */
+.detail-section h4:first-of-type {
+  color: var(--amber);
+}
+
+.detail-section:has(h4:first-of-type) {
+  background: linear-gradient(135deg, #fff5e6 0%, #f8f9fa 100%);
+  border-left: 4px solid var(--amber);
+}
+
+/* Modal Header Styles */
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #e9ecef;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: var(--text);
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: var(--muted);
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: #f8f9fa;
+  color: var(--text);
+}

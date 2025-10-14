@@ -93,7 +93,7 @@ body{
 .hero h1{margin:0 0 10px;font-size:28px}
 .btn.cta{
   display:inline-block;background:var(--amber);color:#fff;text-decoration:none;
-  padding:8px 16px;border-radius:8px;font-weight:800
+  padding:8px 16px;border-radius:8px;font-weight:800;border:none;
 }
 .btn.cta:hover{background:var(--amber-700)}
 
@@ -128,6 +128,49 @@ body{
 /* full/disabled state - same as activities.html */
 .time-slot.full, .time-slot[disabled]{border-color:#fecaca;background:#fff7f7;color:#b91c1c;cursor:not-allowed}
 .time-slot.full:hover, .time-slot[disabled]:hover{background:#fff7f7}
+
+/* Things to Bring */
+.things-to-bring{
+  margin-top:24px;
+  padding-top:20px;
+  border-top:1px solid #e5e7eb;
+}
+.things-to-bring h4{
+  margin:0 0 16px;
+  color:var(--text);
+  font-size:14px;
+  font-weight:700;
+  text-transform:uppercase;
+  letter-spacing:0.5px;
+}
+.bring-items{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));
+  gap:16px;
+}
+.bring-item{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  padding:12px;
+  background:#f8f9fa;
+  border-radius:8px;
+  transition:background-color 0.2s ease;
+}
+.bring-item:hover{
+  background:#f0f2f5;
+}
+.bring-icon{
+  font-size:24px;
+  margin-bottom:8px;
+}
+.bring-item span{
+  font-size:12px;
+  font-weight:600;
+  color:var(--text);
+}
+
 
 /* Upcoming Activities */
 .upcoming-section{
@@ -177,4 +220,5 @@ body{
   .upcoming-card-content{padding:16px}
   .upcoming-card h3{font-size:16px}
   .upcoming-card .date{font-size:14px}
+  .bring-items{grid-template-columns:repeat(2,1fr);gap:12px}
 }

@@ -7,22 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="home.css" />
-    <link rel="stylesheet" href="booking.css" />
-    <style>
-      .summary{display:grid;gap:10px}
-      .pill{background:#e8f7e9;border:1px solid #bfe6c2;color:#065f46;border-radius:8px;padding:8px 10px;font-size:13px}
-      .muted{color:#6b7280}
-      .promo{display:flex;gap:8px}
-      .promo input{flex:1}
-      .list{display:grid;gap:8px}
-      .rule{background:#fee2e2;border:1px solid #fecaca;color:#7f1d1d;border-radius:10px;padding:10px 12px;font-size:12px}
-    </style>
+    <link rel="stylesheet" href="confirmbooking.css" />
   </head>
   <body>
     <header class="topbar">
       <div class="brand">Amber</div>
-      <nav><a id="backBooking" href="#" style="color:#fff; text-decoration:none; font-weight:600;">Back to Booking</a></nav>
+      <nav><a id="backBooking" href="#" class="back-link">Back to Booking</a></nav>
     </header>
     <div class="layout">
       <aside class="sidebar" aria-label="Main navigation">
@@ -34,19 +24,28 @@
       </aside>
       <main class="content">
         <div class="booking-wrap">
-          <div class="header" style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-            <div class="badge" style="background:#00ff00;color:#065f46;">1</div><strong>Booking</strong>
-            <div style="height:2px;background:#00ff00;flex:1;margin:0 8px;"></div>
-            <div class="badge" style="background:#00ff00;color:#065f46;">2</div><strong>Confirm Booking</strong>
-            <div style="height:2px;background:#e5e7eb;flex:1;margin:0 8px;"></div>
-            <div class="badge" style="background:#e5e7eb;color:#6b7280;">3</div><span class="muted">Payment</span>
+          <div class="progress-header">
+            <div class="progress-step">
+              <div class="badge progress-badge active">1</div>
+              <strong>Booking</strong>
+            </div>
+            <div class="progress-line active"></div>
+            <div class="progress-step">
+              <div class="badge progress-badge active">2</div>
+              <strong>Confirm Booking</strong>
+            </div>
+            <div class="progress-line"></div>
+            <div class="progress-step">
+              <div class="badge progress-badge">3</div>
+              <span class="muted">Payment</span>
+            </div>
           </div>
 
           <div class="card">
-            <h3 style="margin:6px 0 12px;">Confirm Your Booking</h3>
+            <h3 class="booking-title">Confirm Your Booking</h3>
             <div class="summary">
-              <div class="card" style="padding:12px;">
-                <div style="font-weight:700" id="sumActivity">-</div>
+              <div class="card summary-card">
+                <div class="activity-name" id="sumActivity">-</div>
                 <div class="muted" id="sumDate">-</div>
                 <div class="muted" id="sumCount">-</div>
               </div>
@@ -55,23 +54,23 @@
                 <input id="promo" type="text" placeholder="Enter Promo Code" />
                 <button class="btn btn-secondary" type="button" onclick="alert('Demo: promo applied')">Apply</button>
               </div>
-              <div class="card" style="padding:10px;">
+              <div class="card pricing-card">
                 <div><strong>Subtotal:</strong> <span id="subtotal">Rm 0.00</span></div>
-                <div style="font-weight:800">Total Price: <span id="total">Rm 0.00</span></div>
+                <div class="total-price">Total Price: <span id="total">Rm 0.00</span></div>
               </div>
 
-              <div class="card" style="padding:12px;" id="yourInfo"></div>
-              <div class="card" style="padding:12px;" id="friendsInfo"></div>
+              <div class="card info-card" id="yourInfo"></div>
+              <div class="card info-card" id="friendsInfo"></div>
               <div class="rule">
-                <div style="font-weight:700; margin-bottom:6px;">Rules of the Policy</div>
-                <ol style="margin:0; padding-left:18px">
+                <div class="rule-title">Rules of the Policy</div>
+                <ol class="rule-list">
                   <li>No refunds within 2 days before the activity starts.</li>
                   <li>Helmet are not allow to the room.</li>
                   <li>Dating are no allow.</li>
                   <li>Do not bring pet to the shop.</li>
                 </ol>
               </div>
-              <label style="display:flex;align-items:center;gap:8px;justify-content:center;">
+              <label class="policy-checkbox">
                 <input id="agreePolicy" type="checkbox" />
                 <span>I have read the Rules of the policy</span>
               </label>
@@ -79,8 +78,8 @@
           </div>
 
           <div class="footer">
-            <div class="card" style="display:flex; justify-content:center;">
-              <button id="proceedPay" class="btn btn-primary" type="button" style="min-width:160px" disabled>Next</button>
+            <div class="card footer-card">
+              <button id="proceedPay" class="btn btn-primary proceed-btn" type="button" disabled>Next</button>
             </div>
           </div>
         </div>

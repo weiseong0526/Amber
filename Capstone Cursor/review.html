@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="review.css" />
   </head>
   <body>
@@ -141,6 +140,16 @@
                       <option value="3">★★★☆☆ (3 stars)</option>
                       <option value="2">★★☆☆☆ (2 stars)</option>
                       <option value="1">★☆☆☆☆ (1 star)</option>
+                    </select>
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="activity-filter">Filter by Activity:</label>
+                    <select id="activity-filter" class="filter-select">
+                      <option value="all">All Activities</option>
+                      <option value="yoga">Yoga</option>
+                      <option value="zumba">Zumba</option>
+                      <option value="weaving">Weaving</option>
                     </select>
                   </div>
                   
@@ -290,7 +299,6 @@
                     <div class="review-rating">
                       <span class="stars">★★★★★</span>
                     </div>
-                    <button class="review-options">⋮</button>
                   </div>
                   <p class="review-text">Amazing weaving workshop with Emma! Learned so much and created beautiful pieces.</p>
                   <div class="review-tags">
@@ -445,9 +453,14 @@
 
         // Filter functionality
         const ratingFilter = document.getElementById('rating-filter');
+        const activityFilter = document.getElementById('activity-filter');
         const dateSort = document.getElementById('date-sort');
         
         ratingFilter.addEventListener('change', function() {
+          applyFilters();
+        });
+        
+        activityFilter.addEventListener('change', function() {
           applyFilters();
         });
         
@@ -825,10 +838,14 @@
       // Filter functions
       function applyFilters() {
         const rating = document.getElementById('rating-filter').value;
+        const activity = document.getElementById('activity-filter').value;
         const sortBy = document.getElementById('date-sort').value;
         
         // First filter by rating
         filterReviewsByRating(rating);
+        
+        // Then filter by activity
+        filterReviewsByActivity(activity);
         
         // Then sort by date if requested
         if (sortBy !== 'none') {
@@ -860,6 +877,21 @@
           const starText = '★'.repeat(parseInt(rating)) + '☆'.repeat(5 - parseInt(rating));
           filterStatus.textContent = `Showing ${starText} reviews (${visibleCount} found)`;
         }
+      }
+
+      function filterReviewsByActivity(activity) {
+        const reviewItems = document.querySelectorAll('.review-item');
+        
+        reviewItems.forEach(item => {
+          const activityElement = item.querySelector('.review-activity');
+          const currentActivity = activityElement ? activityElement.textContent.toLowerCase() : '';
+          
+          if (activity === 'all' || currentActivity === activity) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
       }
 
       function sortReviewsByDate(sortBy) {
@@ -911,9 +943,11 @@
 
       function clearFilter() {
         const ratingFilter = document.getElementById('rating-filter');
+        const activityFilter = document.getElementById('activity-filter');
         const dateSort = document.getElementById('date-sort');
         
         ratingFilter.value = 'all';
+        activityFilter.value = 'all';
         dateSort.value = 'newest';
         
         applyFilters();

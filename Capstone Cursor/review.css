@@ -198,3 +198,270 @@
 .cancel-edit-btn:hover {
   background-color: #f3f4f6;
 }
+
+/* Kebab menu styles */
+.review-options {
+  position: relative;
+  display: inline-block;
+}
+
+.kebab-menu-btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.kebab-menu-btn:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+.kebab-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 10;
+  min-width: 120px;
+  overflow: hidden;
+}
+
+.kebab-menu button {
+  display: block;
+  width: 100%;
+  padding: 8px 12px;
+  border: none;
+  background: none;
+  text-align: left;
+  color: #374151;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  font-size: 14px;
+}
+
+.kebab-menu button:hover {
+  background-color: #f3f4f6;
+}
+
+.edit-review-btn {
+  color: #059669;
+}
+
+.edit-review-btn:hover {
+  background-color: #d1fae5;
+}
+
+.delete-review-btn {
+  color: #dc2626;
+}
+
+.delete-review-btn:hover {
+  background-color: #fee2e2;
+}
+
+/* Review edit form styles */
+.review-edit-form {
+  margin: 8px 0;
+}
+
+.review-edit-input {
+  width: 100%;
+  min-height: 80px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.review-edit-input:focus {
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.review-edit-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+
+.save-review-btn,
+.cancel-edit-review-btn {
+  padding: 6px 12px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-review-btn {
+  background-color: #3b82f6;
+  color: white;
+}
+
+.save-review-btn:hover {
+  background-color: #2563eb;
+}
+
+.cancel-edit-review-btn {
+  background-color: #f3f4f6;
+  color: #6b7280;
+}
+
+.cancel-edit-review-btn:hover {
+  background-color: #e5e7eb;
+}
+
+/* Edit rating section styles */
+.edit-rating-section {
+  margin-bottom: 12px;
+  padding: 12px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.edit-rating-label {
+  display: block;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.edit-star-rating {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.edit-star-rating input[type="radio"] {
+  display: none;
+}
+
+.edit-star {
+  font-size: 20px;
+  color: #d1d5db;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  user-select: none;
+}
+
+.edit-star:hover {
+  color: #fbbf24;
+}
+
+.edit-star-rating input[type="radio"]:checked + .edit-star,
+.edit-star-rating input[type="radio"]:checked ~ .edit-star {
+  color: #fbbf24;
+}
+
+.edit-star-rating input[type="radio"]:checked + .edit-star {
+  color: #f59e0b;
+}
+
+/* Hover effect for star rating */
+.edit-star-rating:hover .edit-star {
+  color: #fbbf24;
+}
+
+.edit-star-rating .edit-star:hover ~ .edit-star {
+  color: #d1d5db;
+}
+
+/* Filter section styles */
+.filter-section {
+  margin-bottom: 24px;
+  padding: 16px;
+  background-color: #f9fafb;
+  border-radius: 8px;
+  border: 1px solid #e5e7eb;
+}
+
+.filter-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-controls > * {
+  flex-shrink: 0;
+}
+
+.filter-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.filter-group:last-of-type {
+  margin-bottom: 0;
+}
+
+.filter-controls label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+.filter-select {
+  padding: 8px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  background-color: white;
+  font-size: 14px;
+  color: #374151;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+  min-width: 160px;
+}
+
+.filter-select:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.clear-filter-btn {
+  padding: 8px 16px;
+  background-color: #6b7280;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.clear-filter-btn:hover {
+  background-color: #4b5563;
+}
+
+.filter-results {
+  font-size: 14px;
+  color: #6b7280;
+  font-style: italic;
+}
+
+#filter-status {
+  font-weight: 500;
+}

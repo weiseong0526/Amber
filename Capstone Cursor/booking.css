@@ -53,7 +53,7 @@ body{
 .friends{margin-top:8px;display:flex;flex-direction:column;gap:16px}
 .friend{background:#fff7ed;border:1px solid #fdba74;border-radius:12px;padding:12px}
 
-.btn{appearance:none;border:0;border-radius:999px;padding:12px 18px;font-weight:700;cursor:pointer}
+.btn{appearance:none;border:0;border-radius:8px;padding:12px 18px;font-weight:700;cursor:pointer}
 .btn-primary{background:#12b76a;color:#fff}
 .btn-secondary{background:#111827;color:#fff}
 .btn-danger{background:#ef4444;color:#fff}
@@ -61,7 +61,7 @@ body{
 /* Add some breathing room between friend list and Add Friend button */
 #addFriend{margin-top:14px}
 
-.footer{position:sticky;bottom:0;background:rgba(255,255,255,.8);backdrop-filter:blur(6px);padding:12px 0;margin-top:18px}
+.footer{margin-top:16px;padding-top:16px;border-top:1px solid #e5e7eb}
 .note{color:#b54708;background:#fff7ed;border:1px solid #fdba74;padding:10px 12px;border-radius:8px}
 
 /* Responsive tweaks */

@@ -12,10 +12,7 @@
   <body>
     <header class="topbar">
       <div class="brand">Amber</div>
-      <nav>
-        <a href="#" style="color:#fff; text-decoration:none; font-weight:600;">🔔 Notification</a>
-        <a href="#" style="color:#fff; text-decoration:none; font-weight:600; margin-left:15px;">👤 Profile</a>
-      </nav>
+      <nav><a href="confirmbooking.html" style="color:#fff; text-decoration:none; font-weight:600;">Back to Confirm Booking</a></nav>
     </header>
     
     <div class="layout">
@@ -28,42 +25,45 @@
         
       </aside>
       
-      <main class="payment-content">
-        <div class="payment-container">
-          <div class="header" style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
-            <div class="badge" style="background:#00ff00;color:#065f46;">1</div><strong>Booking</strong>
-            <div style="height:2px;background:#00ff00;flex:1;margin:0 8px;"></div>
-            <div class="badge" style="background:#00ff00;color:#065f46;">2</div><strong>Confirm Booking</strong>
-            <div style="height:2px;background:#00ff00;flex:1;margin:0 8px;"></div>
-            <div class="badge" style="background:#00ff00;color:#065f46;">3</div><strong>Payment Method</strong>
-          </div>
-          
-          <!-- Payment Detail Section -->
-          <div class="payment-detail-card">
-            <h2 class="section-title">Payment Detail</h2>
-            
-            <div class="booking-summary">
-              <div class="activity-name" id="paymentActivity">Yoga</div>
-              <div class="booking-info">Date: <span id="paymentDate">2025-09-15</span></div>
-              <div class="booking-info">Time: <span id="paymentTime">10:00 AM - 11:30 AM</span></div>
-              <div class="price-info">Price per person: <span id="paymentPricePer">RM50</span></div>
+      <main class="content">
+        <div class="booking-wrap">
+          <div class="progress-header">
+            <div class="progress-step">
+              <div class="progress-badge active">1</div>
+              <strong>Booking</strong>
             </div>
-            
-            <div class="pricing-breakdown">
-              <div class="pricing-row">
-                <span>Subtotal:</span>
-                <span id="paymentSubtotal">RM 100.00</span>
-              </div>
-              <div class="pricing-row total-price">
-                <span>Total Price:</span>
-                <span id="paymentTotal">RM 100.00</span>
-              </div>
+            <div class="progress-line active"></div>
+            <div class="progress-step">
+              <div class="progress-badge active">2</div>
+              <strong>Confirm Booking</strong>
+            </div>
+            <div class="progress-line active"></div>
+            <div class="progress-step">
+              <div class="progress-badge active">3</div>
+              <strong>Payment Method</strong>
             </div>
           </div>
-          
-          <!-- Payment Options Section -->
-          <div class="payment-options-card">
-            <h2 class="section-title">Payment Options</h2>
+
+          <div class="card">
+            <h3 style="margin:6px 0 10px;">Payment Detail</h3>
+            <div class="summary">
+              <div class="card summary-card">
+                <div class="activity-name" id="paymentActivity">Yoga</div>
+                <div class="muted">Date: <span id="paymentDate">2025-09-15</span></div>
+                <div class="muted">Time: <span id="paymentTime">10:00 AM - 11:30 AM</span></div>
+                <div class="muted">Price per person: <span id="paymentPricePer">RM50</span></div>
+              </div>
+              <div class="card pricing-card">
+                <div><strong>Subtotal:</strong> <span id="paymentSubtotal">RM 100.00</span></div>
+                <div class="total-price">Total Price: <span id="paymentTotal">RM 100.00</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div style="height:2px;background:#e5e7eb;margin:20px 0;"></div>
+
+          <div class="card">
+            <h3 style="margin:6px 0 10px;">Payment Options</h3>
             
             <div class="payment-option" data-method="tng">
               <div class="payment-icon tng-logo">
@@ -85,9 +85,12 @@
               <div class="payment-checkbox"></div>
             </div>
           </div>
-          
-          <!-- Next Button -->
-          <button class="next-button" id="proceedNext" disabled>Next</button>
+
+          <div class="footer">
+            <div class="card" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <button id="proceedNext" class="btn btn-primary" type="button" disabled>Next</button>
+            </div>
+          </div>
         </div>
       </main>
     </div>

@@ -21,10 +21,9 @@ body{
 /* Top bar */
 .topbar{
   height:64px;
-  display:grid;
-  grid-template-columns: 220px 1fr auto;
+  display:flex;
   align-items:center;
-  gap:16px;
+  justify-content:space-between;
   padding:0 16px;
   background:#232323;
   color:#fff;
@@ -81,98 +80,27 @@ body{
 
 /* Content */
 .content{padding:16px 18px 32px}
+.booking-wrap{max-width:720px;margin:0 auto}
 
-/* Payment Page Styles */
-.payment-content {
-  background: #fde6d8;
-  min-height: 100vh;
-  padding: 20px;
-  position: relative;
-  overflow: hidden;
-}
+/* Cards and general UI */
+.card{background:var(--card);border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);padding:16px}
+.section{margin-top:16px}
+.badge{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;font-weight:700}
 
-.payment-content::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-image: 
-    radial-gradient(circle at 20% 80%, rgba(255, 182, 193, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 80% 20%, rgba(173, 216, 230, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 40%, rgba(255, 218, 185, 0.1) 0%, transparent 50%);
-  pointer-events: none;
-}
+.btn{padding:10px 16px;border-radius:8px;border:0;cursor:pointer;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s}
+.btn-primary{background:var(--amber);color:#fff}
+.btn-primary:hover{background:var(--amber-700)}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
 
-.payment-container {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
-  z-index: 1;
-}
+.muted{color:var(--muted)}
+.hidden{display:none!important}
 
-.payment-detail-card {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
-
-.booking-summary {
-  border: 2px solid #3b82f6;
-  border-radius: 8px;
-  padding: 15px;
-  margin-bottom: 20px;
-  background: #f8fafc;
-}
-
-.activity-name {
-  font-size: 18px;
-  font-weight: 700;
-  color: #3b82f6;
-  margin-bottom: 8px;
-}
-
-.booking-info {
-  color: #6b7280;
-  font-size: 14px;
-  margin-bottom: 4px;
-}
-
-.price-info {
-  color: #6b7280;
-  font-size: 14px;
-}
-
-.pricing-breakdown {
-  border-top: 1px solid #e5e7eb;
-  padding-top: 15px;
-}
-
-.pricing-row {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 8px;
-  font-size: 14px;
-}
-
-.total-price {
-  background: #fef3c7;
-  padding: 10px 15px;
-  border-radius: 6px;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.payment-options-card {
-  background: white;
-  border-radius: 12px;
-  padding: 25px;
-  margin-bottom: 25px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-}
+/* Payment Specific Styles */
+.summary{display:grid;gap:10px}
+.summary-card{padding:12px}
+.pricing-card{padding:10px}
+.activity-name{font-weight:700;font-size:16px;color:var(--text)}
+.total-price{font-weight:800;font-size:16px;color:var(--text)}
 
 .payment-option {
   display: flex;
@@ -849,22 +777,31 @@ body{
   background: #f3f4f6;
 }
 
-/* Responsive */
+/* Progress Header */
+.progress-header{display:flex;align-items:center;gap:8px;margin-bottom:12px}
+.progress-step{display:flex;align-items:center;gap:8px}
+.progress-line{height:2px;background:#e5e7eb;flex:1;margin:0 8px}
+.progress-line.active{background:#00ff00}
+.progress-badge{background:#e5e7eb;color:#6b7280;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.progress-badge.active{background:#00ff00;color:#065f46}
+
+/* Footer */
+.footer{margin-top:16px;padding-top:16px;border-top:1px solid #e5e7eb}
+
+/* Responsive Design */
 @media (max-width: 840px){
   .layout{grid-template-columns: 1fr}
   .sidebar{order:2}
 }
 
-/* Phones */
 @media (max-width: 600px){
   .topbar{grid-template-columns: 1fr; height:auto; gap:8px; padding:10px 12px}
   .brand{justify-content:center}
   .search{max-width:100%;}
   .top-actions{justify-content:center}
   .content{padding:12px}
-  .payment-content{padding:12px}
-  .payment-container{max-width:100%}
-  .payment-detail-card, .payment-options-card{padding:16px}
+  .booking-wrap{padding:0}
+  .card{padding:12px}
   .tng-modal, .banking-modal, .card-modal{width:95%; padding:20px}
   .phone-input-group{flex-direction:column}
   .phone-country{width:100%}

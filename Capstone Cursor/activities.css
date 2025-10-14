@@ -3,11 +3,12 @@
   --amber: #f08a24;
   --amber-light: #ffd0b9;
   --amber-dark: #a4571a;
+  --sidebar: #b8735f;
   --card: #ffffff;
   --text: #1a1a1a;
   --text-light: #6b7280;
   --border: #e5e7eb;
-  --bg: #f9fafb;
+  --bg: #fde6d8;
   --success: #10b981;
   --warning: #f59e0b;
   --error: #ef4444;
@@ -18,31 +19,57 @@
 html,body{height:100%}
 body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.5;color:var(--text);background:var(--bg);margin:0;padding:0}
 
-/* Top Bar */
-.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns: 220px 1fr auto;gap:20px;align-items:center;position:sticky;top:0;z-index:100}
-.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;color:var(--text)}
-.logo-dot{width:8px;height:8px;background:var(--amber);border-radius:50%}
-.brand-name{color:var(--text)}
-.search{position:relative;max-width:400px}
-.search input{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg)}
-.search input:focus{outline:0;border-color:var(--amber);box-shadow:0 0 0 3px rgba(240,138,36,.1)}
-.search button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:4px}
+/* Top bar */
+.topbar{
+  height:64px;
+  display:grid;
+  grid-template-columns: 220px 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:0 16px;
+  background:#232323;
+  color:#fff;
+}
+.brand{
+  display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px;
+}
+.logo-dot{width:14px;height:14px;border-radius:50%;background:var(--amber)}
+.brand-name{color:#ffd9bf}
+
+.search{
+  display:grid;grid-template-columns:1fr 44px;gap:0;align-items:center;
+  background:#fff;border-radius:24px; padding:4px; max-width:680px; width:100%;
+  margin:0 auto;
+}
+.search input{
+  border:0;outline:0;padding:10px 12px;font-size:14px;border-radius:20px;
+}
+.search button{
+  border:0;background:var(--amber);color:#fff;height:36px;border-radius:20px;cursor:pointer;
+}
+
 .top-actions{display:flex;gap:16px}
-.action{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--text);font-size:14px;font-weight:500;transition:background-color 0.2s}
-.action:hover{background:var(--bg)}
-.action span{font-size:16px}
-.action .label{font-size:14px}
+.action{display:flex;align-items:center;gap:8px;color:#fff;text-decoration:none;font-weight:600}
+.action .label{font-size:12px;opacity:.9}
 
 /* Layout */
 .layout{display:grid;grid-template-columns: 260px 1fr; min-height: calc(100vh - 64px);}
-.sidebar{background:var(--card);border-right:1px solid var(--border);padding:20px 0;display:flex;flex-direction:column;gap:4px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 20px;color:var(--text);text-decoration:none;font-weight:500;transition:all 0.2s;border-left:3px solid transparent}
-.nav-item:hover{background:var(--bg);color:var(--amber)}
-.nav-item.active{background:var(--amber-light);color:var(--amber-dark);border-left-color:var(--amber);font-weight:600}
-.nav-item span{font-size:18px;width:20px;text-align:center}
+.sidebar{
+  background:var(--sidebar);
+  color:#fff;
+  padding:16px 12px;
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.nav-item{
+  display:flex;align-items:center;gap:10px;
+  color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600;
+}
+.nav-item.active, .nav-item:hover{background:rgba(255,255,255,.12)}
 
 /* Content */
-.content{padding:24px;max-width:1200px;margin:0 auto;width:100%}
+.content{padding:16px 18px 32px}
 .content h1{font-size:28px;font-weight:700;margin:0 0 8px 0;color:var(--text)}
 .content h2{font-size:24px;font-weight:600;margin:0 0 16px 0;color:var(--text)}
 .content h3{font-size:20px;font-weight:600;margin:0 0 12px 0;color:var(--text)}
@@ -50,11 +77,9 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
 
 /* Promos */
 .promos{margin-top:14px;display:grid;gap:10px}
-.promo{background:linear-gradient(135deg,var(--amber) 0%,#ff8c42 100%);border-radius:12px;padding:16px;color:white;text-align:center;position:relative;overflow:hidden}
-.promo::before{content:"";position:absolute;top:-50%;right:-50%;width:100%;height:200%;background:radial-gradient(circle,rgba(255,255,255,0.1) 0%,transparent 70%);transform:rotate(45deg)}
-.promo h3{margin:0 0 8px 0;font-size:18px;font-weight:600}
-.promo p{margin:0;font-size:14px;opacity:0.9}
-.promo-content{position:relative;z-index:1}
+.promo{background:#e6b2a4;color:#351a12;border-radius:10px;padding:10px 12px}
+.promo h4{margin:0 0 6px 0;font-size:14px}
+.promo p{margin:0 0 8px 0;font-size:12px}
 
 /* Hero Section */
 .hero{background:linear-gradient(135deg,var(--amber) 0%,#ff8c42 100%);color:white;padding:60px 0;text-align:center;position:relative;overflow:hidden}
@@ -133,6 +158,83 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
 .book.disabled{background:#e9edf2 !important;color:#8b95a5 !important;cursor:not-allowed}
 .book.active{background:var(--amber) !important;color:#fff !important}
 
+/* About Us */
+.about-us{
+  margin:32px 0;padding:32px 0;background:linear-gradient(135deg,#fef7f0,#f8f9fa);border-radius:16px
+}
+.about-content{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px
+}
+.about-image{
+  position:relative;border-radius:12px;overflow:hidden
+}
+.about-image img{
+  width:100%;height:300px;object-fit:cover;display:block;border-radius:12px
+}
+.about-text{
+  padding:0 16px
+}
+.about-text h2{
+  margin:0 0 20px;font-size:32px;font-weight:700;color:var(--text)
+}
+.about-text p{
+  margin:0 0 16px;font-size:16px;line-height:1.6;color:var(--text)
+}
+.about-text p:last-child{
+  margin-bottom:0
+}
+
+/* Intro */
+.intro{text-align:center;margin:20px 0 10px}
+.intro h2{margin:0 0 6px}
+.intro p{margin:0;color:var(--muted)}
+
+/* Why Join Us */
+.why-join-us{
+  margin:40px 0;padding:40px 0;text-align:center;background:#f8f9fa;border-radius:16px
+}
+.why-join-us h2{
+  margin:0 0 40px;font-size:32px;font-weight:700;color:var(--text)
+}
+.benefits-row{
+  display:flex;justify-content:center;gap:32px;max-width:1200px;margin:0 auto;flex-wrap:wrap
+}
+.benefit-item{
+  display:flex;flex-direction:column;align-items:center;text-align:center;flex:1;min-width:200px;max-width:220px
+}
+.benefit-icon{
+  font-size:48px;margin-bottom:16px;display:block
+}
+.benefit-item p{
+  margin:0;font-size:14px;line-height:1.4;color:var(--text);font-weight:500
+}
+
+/* Our Instructors */
+.our-instructors{
+  margin:40px 0;padding:40px 0;background:linear-gradient(135deg,#fef7f0,#f8f9fa);border-radius:16px
+}
+.instructors-content{
+  display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:center;max-width:1200px;margin:0 auto;padding:0 20px
+}
+.instructors-image{
+  position:relative;border-radius:12px;overflow:hidden
+}
+.instructors-image img{
+  width:100%;height:300px;object-fit:cover;display:block;border-radius:12px
+}
+.instructors-text{
+  padding:0 16px
+}
+.instructors-text h2{
+  margin:0 0 20px;font-size:32px;font-weight:700;color:var(--text)
+}
+.instructors-text p{
+  margin:0 0 16px;font-size:16px;line-height:1.6;color:var(--text)
+}
+.instructors-text p:last-child{
+  margin-bottom:0
+}
+
 /* Upcoming Section */
 .upcoming-section{padding:60px 0;background:var(--bg);margin-top:60px}
 .upcoming-section h2{font-size:32px;font-weight:700;text-align:center;margin:0 0 16px 0;color:var(--text)}
@@ -157,7 +259,11 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
   .sidebar{display:none}
   .cards{grid-template-columns: repeat(2, minmax(0,1fr));}
   .about-content{grid-template-columns:1fr;gap:24px;text-align:center}
+  .about-text{padding:0}
+  .benefits-row{flex-direction:column;gap:32px;align-items:center}
+  .benefit-item{max-width:300px}
   .instructors-content{grid-template-columns:1fr;gap:24px;text-align:center}
+  .instructors-text{padding:0}
 }
 
 @media (max-width: 768px){
@@ -174,6 +280,23 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
   .instructors-text h2{font-size:28px}
   .about-text p{font-size:16px}
   .instructors-text p{font-size:16px}
+  .about-us{margin:24px 0;padding:24px 0}
+  .about-content{padding:0 12px;gap:20px}
+  .about-image img{height:250px}
+  .about-text h2{font-size:24px;margin-bottom:16px}
+  .about-text p{font-size:14px;margin-bottom:12px}
+  .why-join-us{margin:32px 0;padding:32px 0}
+  .why-join-us h2{font-size:24px;margin-bottom:24px}
+  .benefits-row{gap:20px}
+  .benefit-icon{font-size:40px;margin-bottom:12px}
+  .benefit-item p{font-size:13px}
+  .our-instructors{margin:32px 0;padding:32px 0}
+  .instructors-content{padding:0 12px;gap:20px}
+  .instructors-image img{height:250px}
+  .instructors-text h2{font-size:24px;margin-bottom:16px}
+  .instructors-text p{font-size:14px;margin-bottom:12px}
+  .intro h2{font-size:18px}
+  .intro p{font-size:13px}
   .cards{grid-template-columns: 1fr}
   .upcoming-section h2{font-size:24px}
   .upcoming-section .subtitle{font-size:16px}

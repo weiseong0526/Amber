@@ -1,53 +1,110 @@
-/* CSS Variables */
-:root {
+:root{
+  /* Reuse site palette from home.css */
   --amber: #f08a24;
-  --amber-light: #ffd0b9;
-  --amber-dark: #a4571a;
+  --amber-700: #d97614;
+  --sidebar: #b8735f;
+  --bg: #fde6d8;
   --card: #ffffff;
   --text: #1a1a1a;
-  --text-light: #6b7280;
   --muted: #6b7280;
-  --border: #e5e7eb;
-  --bg: #f9fafb;
-  --success: #10b981;
-  --warning: #f59e0b;
-  --error: #ef4444;
+  --ring: rgba(240,138,36,.25);
 }
 
-/* Base Styles */
 *{box-sizing:border-box}
 html,body{height:100%}
-body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;line-height:1.5;color:var(--text);background:var(--bg);margin:0;padding:0}
+body{
+  margin:0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color:var(--text);
+  background:var(--bg);
+}
 
-/* Top Bar */
-.topbar{background:var(--card);border-bottom:1px solid var(--border);padding:12px 20px;display:grid;grid-template-columns: 220px 1fr auto;gap:20px;align-items:center;position:sticky;top:0;z-index:100}
-.brand{display:flex;align-items:center;gap:8px;font-weight:700;font-size:18px;color:var(--text)}
-.logo-dot{width:8px;height:8px;background:var(--amber);border-radius:50%}
-.brand-name{color:var(--text)}
-.search{position:relative;max-width:400px}
-.search input{width:100%;padding:8px 12px;border:1px solid var(--border);border-radius:8px;font-size:14px;background:var(--bg)}
-.search input:focus{outline:0;border-color:var(--amber);box-shadow:0 0 0 3px rgba(240,138,36,.1)}
-.search button{position:absolute;right:8px;top:50%;transform:translateY(-50%);background:none;border:none;cursor:pointer;padding:4px}
-.top-actions{display:flex;gap:16px}
-.action{display:flex;align-items:center;gap:6px;padding:8px 12px;border-radius:8px;text-decoration:none;color:var(--text);font-size:14px;font-weight:500;transition:background-color 0.2s}
-.action:hover{background:var(--bg)}
-.action span{font-size:16px}
-.action .label{font-size:14px}
+/* Top bar layout to match site */
+.topbar{
+  height:64px; display:flex; align-items:center; justify-content:space-between;
+  padding:0 16px; background:#232323; color:#fff;
+}
+.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px}
 
-/* Layout */
-.layout{display:grid;grid-template-columns: 260px 1fr; min-height: calc(100vh - 64px);}
-.sidebar{background:var(--card);border-right:1px solid var(--border);padding:20px 0;display:flex;flex-direction:column;gap:4px}
-.nav-item{display:flex;align-items:center;gap:12px;padding:12px 20px;color:var(--text);text-decoration:none;font-weight:500;transition:all 0.2s;border-left:3px solid transparent}
-.nav-item:hover{background:var(--bg);color:var(--amber)}
-.nav-item.active{background:var(--amber-light);color:var(--amber-dark);border-left-color:var(--amber);font-weight:600}
-.nav-item span{font-size:18px;width:20px;text-align:center}
+/* Two-column layout with sidebar */
+.layout{display:grid;grid-template-columns: 260px 1fr; min-height: calc(100vh - 64px)}
+.sidebar{background:var(--sidebar);color:#fff;padding:16px 12px;display:flex;flex-direction:column;gap:8px}
+.nav-item{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600}
+.nav-item:hover{background:rgba(255,255,255,.12)}
 
-/* Content */
-.content{padding:24px;max-width:1200px;margin:0 auto;width:100%}
-.content h1{font-size:28px;font-weight:700;margin:0 0 8px 0;color:var(--text)}
-.content h2{font-size:24px;font-weight:600;margin:0 0 16px 0;color:var(--text)}
-.content h3{font-size:20px;font-weight:600;margin:0 0 12px 0;color:var(--text)}
-.content p{color:var(--text-light);margin:0 0 16px 0;line-height:1.6}
+.content{padding:16px 18px 32px}
+.booking-wrap{max-width:720px;margin:0 auto}
+
+/* Cards and general UI */
+.card{background:var(--card);border-radius:14px;box-shadow:0 12px 28px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);padding:16px}
+.section{margin-top:16px}
+.badge{width:28px;height:28px;display:grid;place-items:center;border-radius:50%;font-weight:700}
+
+.toggle{display:flex;gap:8px}
+.toggle button{padding:8px 12px;border-radius:10px;border:1px solid #e5e7eb;background:#fff;cursor:pointer;font-weight:600}
+.toggle .active{background:#111827;color:#fff;border-color:#111827}
+
+.grid{display:grid;grid-template-columns:1fr;gap:10px}
+.grid.two{grid-template-columns:repeat(2, minmax(0,1fr))}
+.field{display:flex;flex-direction:column;gap:6px}
+.field input,.field select{padding:10px 12px;border:1px solid #e5e7eb;border-radius:8px;background:#f9fafb}
+.field input:focus,.field select:focus{outline:0;border-color:var(--amber);box-shadow:0 0 0 3px var(--ring)}
+.field label{font-weight:600;color:var(--text)}
+
+.btn{padding:10px 16px;border-radius:8px;border:0;cursor:pointer;font-weight:600;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:all 0.2s}
+.btn-primary{background:#12b76a;color:#fff}
+.btn-secondary{background:#f3f4f6;color:var(--text);border:1px solid #d1d5db}
+.btn-secondary:hover{background:#e5e7eb}
+.btn-danger{background:#ef4444;color:#fff}
+.btn-danger:hover{background:#dc2626}
+.btn:disabled{opacity:0.5;cursor:not-allowed}
+
+.muted{color:var(--muted)}
+.hidden{display:none!important}
+
+/* Confirm Booking Specific Styles */
+.summary{display:grid;gap:10px}
+.pill{background:#e8f7e9;border:1px solid #bfe6c2;color:#065f46;border-radius:8px;padding:8px 10px;font-size:13px}
+.promo{display:flex;gap:8px}
+.promo input{flex:1;padding:8px 12px;border:1px solid #e5e7eb;border-radius:8px;font-size:14px}
+.promo input:focus{outline:0;border-color:var(--amber);box-shadow:0 0 0 3px var(--ring)}
+.list{display:grid;gap:8px}
+.rule{background:#fee2e2;border:1px solid #fecaca;color:#7f1d1d;border-radius:10px;padding:10px 12px;font-size:12px}
+
+/* Footer */
+.footer{margin-top:16px;padding-top:16px;border-top:1px solid #e5e7eb}
+
+/* Summary Cards */
+.summary-card{padding:12px}
+.pricing-card{padding:10px}
+.info-card{padding:12px}
+.activity-name{font-weight:700;font-size:16px;color:var(--text)}
+.total-price{font-weight:800;font-size:16px;color:var(--text)}
+
+/* Rule Styles */
+.rule-title{font-weight:700;margin-bottom:6px;color:#7f1d1d}
+.rule-list{margin:0;padding-left:18px;color:#7f1d1d}
+
+/* Policy Checkbox */
+.policy-checkbox{display:flex;align-items:center;gap:8px;justify-content:center;margin-top:16px}
+.policy-checkbox input[type="checkbox"]{width:16px;height:16px;accent-color:var(--amber)}
+.policy-checkbox span{font-size:14px;color:var(--text)}
+
+/* Responsive Design */
+@media (max-width: 840px){
+  .layout{grid-template-columns: 1fr}
+  .sidebar{order:2}
+  .grid.two{grid-template-columns:1fr}
+}
+
+@media (max-width: 600px){
+  .topbar{flex-direction:column;height:auto;gap:8px;padding:10px 12px}
+  .content{padding:12px}
+  .booking-wrap{padding:0}
+  .card{padding:12px}
+  .grid.two{grid-template-columns:1fr}
+  .btn{padding:12px 16px;font-size:14px}
+}
 
 /* Promos */
 .promos{margin-top:14px;display:grid;gap:10px}
@@ -65,8 +122,7 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
 .hero p{font-size:20px;margin:0 0 32px 0;opacity:0.9;line-height:1.5}
 .hero-cta{display:inline-flex;gap:12px;flex-wrap:wrap;justify-content:center}
 .btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;border-radius:8px;font-weight:600;text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;font-size:16px}
-.btn-primary{background:var(--amber);color:white;box-shadow:0 4px 12px rgba(240,138,36,0.3)}
-.btn-primary:hover{background:var(--amber-dark);transform:translateY(-2px);box-shadow:0 8px 24px rgba(240,138,36,0.4)}
+.btn-primary{background:#12b76a;color:white;box-shadow:0 4px 12px rgba(18,183,106,0.3)}
 .btn-secondary{background:rgba(255,255,255,0.2);color:white;border:1px solid rgba(255,255,255,0.3)}
 .btn-secondary:hover{background:rgba(255,255,255,0.3);transform:translateY(-2px)}
 .btn:disabled{background:#e9edf2;color:#8b95a5;cursor:not-allowed;transform:none;box-shadow:none}
@@ -89,8 +145,7 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
 
 /* Cards */
 .cards{display:grid;grid-template-columns: repeat(3, minmax(0,1fr));gap:24px;margin:32px 0}
-.card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 4px 6px rgba(0,0,0,0.05);transition:transform 0.2s, box-shadow 0.2s}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 24px rgba(0,0,0,0.1)}
+.card{background:var(--card);border-radius:12px;overflow:hidden;box-shadow:0 12px 28px rgba(0,0,0,.08), 0 2px 6px rgba(0,0,0,.06);transition:transform 0.2s, box-shadow 0.2s}
 .card img{width:100%;height:140px;object-fit:cover}
 .card-body{padding:12px;display:grid;gap:8px}
 .card-body h3{margin:0;font-size:16px;font-weight:600;color:var(--text)}
@@ -224,7 +279,7 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
 .progress-step{display:flex;align-items:center;gap:8px}
 .progress-line{height:2px;background:#e5e7eb;flex:1;margin:0 8px}
 .progress-line.active{background:#00ff00}
-.progress-badge{background:#e5e7eb;color:#6b7280;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:600}
+.progress-badge{background:#e5e7eb;color:#6b7280;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
 .progress-badge.active{background:#00ff00;color:#065f46}
 
 /* Back Link */

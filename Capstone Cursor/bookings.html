@@ -7,7 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="home.css" />
+    <link rel="stylesheet" href="bookings.css" />
   </head>
   <body>
     <header class="topbar">
@@ -98,7 +98,7 @@
                 </div>
                 <div class="booking-actions">
                   <button class="btn secondary">Reschedule</button>
-                  <button class="btn danger">Cancel</button>
+                  <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
                 </div>
               </div>
             </div>
@@ -132,7 +132,7 @@
                 </div>
                 <div class="booking-actions">
                   <button class="btn secondary">Reschedule</button>
-                  <button class="btn danger">Cancel</button>
+                  <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
                 </div>
               </div>
             </div>
@@ -283,6 +283,115 @@
       </main>
     </div>
 
+    <!-- Cancel Booking Modal -->
+    <div class="modal-overlay" id="cancelModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Cancel Booking</h2>
+          <button class="close-btn" onclick="closeCancelModal()">&times;</button>
+        </div>
+        
+        <div class="cancel-steps">
+          <div class="steps-container">
+            <div class="step active" id="step1">
+              <div class="step-number">1</div>
+              <div class="step-title">Select Booking</div>
+            </div>
+            <div class="step" id="step2">
+              <div class="step-number">2</div>
+              <div class="step-title">Provide Reason</div>
+            </div>
+            <div class="step" id="step3">
+              <div class="step-number">3</div>
+              <div class="step-title">Confirm Cancellation</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cancellation Policy -->
+        <div class="cancellation-policy">
+          <div class="policy-title">
+            <span class="policy-icon">⚠️</span>
+            Cancellation Policy
+          </div>
+          <div class="policy-content">
+            <div class="policy-item">Cancellations made 24+ hours before the session: Full refund</div>
+            <div class="policy-item">Cancellations made 2-24 hours before the session: 50% refund</div>
+            <div class="policy-item">Cancellations made less than 2 hours before the session: No refund</div>
+            <div class="policy-item">Refunds will be processed within 3-5 business days</div>
+          </div>
+        </div>
+
+        <!-- Booking Selection -->
+        <div class="booking-selection" id="bookingSelection">
+          <h3>Select a Booking to Cancel</h3>
+          <div class="selected-booking" id="selectedBooking">
+            <!-- Selected booking details will be populated here -->
+          </div>
+          <div class="action-buttons">
+            <button class="btn secondary" onclick="closeCancelModal()">Cancel</button>
+            <button class="btn primary" id="continueBtn" onclick="proceedToReason()">Continue to Reason</button>
+          </div>
+        </div>
+
+        <!-- Cancellation Form -->
+        <div class="cancellation-form" id="cancellationForm" style="display: none;">
+          <h3>Why are you cancelling?</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Select a reason for cancellation:</label>
+            <div class="form-radio-group" id="reasonGroup">
+              <div class="radio-item" onclick="selectReason(this, 'schedule')">
+                <input type="radio" name="reason" value="schedule" class="radio-input">
+                <label class="radio-label">Schedule conflict</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'illness')">
+                <input type="radio" name="reason" value="illness" class="radio-input">
+                <label class="radio-label">Illness or emergency</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'weather')">
+                <input type="radio" name="reason" value="weather" class="radio-input">
+                <label class="radio-label">Weather conditions</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'personal')">
+                <input type="radio" name="reason" value="personal" class="radio-input">
+                <label class="radio-label">Personal reasons</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'other')">
+                <input type="radio" name="reason" value="other" class="radio-input">
+                <label class="radio-label">Other</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Additional comments (optional):</label>
+            <textarea class="form-textarea" id="comments" placeholder="Please provide any additional details about your cancellation..."></textarea>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn secondary" onclick="goBackToSelection()">Back to Selection</button>
+            <button class="btn danger" id="confirmCancelBtn" onclick="showConfirmationModal()">Confirm Cancellation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmationModal">
+      <div class="modal">
+        <div class="modal-icon">⚠️</div>
+        <h2 class="modal-title">Confirm Cancellation</h2>
+        <p class="modal-message" id="modalMessage">
+          Are you sure you want to cancel this booking? This action cannot be undone.
+        </p>
+        <div class="modal-buttons">
+          <button class="btn secondary" onclick="closeConfirmationModal()">Keep Booking</button>
+          <button class="btn danger" onclick="processCancellation()">Yes, Cancel Booking</button>
+        </div>
+      </div>
+    </div>
+
     <script>
       // Filter functionality
       document.addEventListener('DOMContentLoaded', function() {
@@ -353,6 +462,200 @@
 
         // Prevent search form submission
         document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+      });
+
+      // Cancel Booking Modal Functionality
+      let selectedBooking = null;
+      let selectedReason = null;
+
+      function openCancelModal(button) {
+        // Get the booking card that contains this button
+        const bookingCard = button.closest('.booking-card');
+        const bookingTitle = bookingCard.querySelector('h3').textContent;
+        const bookingDate = bookingCard.querySelector('.booking-date').textContent;
+        const bookingMeta = bookingCard.querySelectorAll('.meta-item');
+        
+        // Extract booking details
+        const time = bookingMeta[0]?.textContent || '';
+        const location = bookingMeta[1]?.textContent || '';
+        const instructor = bookingMeta[2]?.textContent || '';
+
+        // Store selected booking data
+        selectedBooking = {
+          title: bookingTitle,
+          date: bookingDate,
+          time: time,
+          location: location,
+          instructor: instructor
+        };
+
+        // Populate selected booking display
+        const selectedBookingDiv = document.getElementById('selectedBooking');
+        selectedBookingDiv.innerHTML = `
+          <h4>${bookingTitle}</h4>
+          <div class="booking-meta">
+            <div class="meta-item">
+              <span class="meta-icon">📅</span>
+              <span>${bookingDate}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">🕐</span>
+              <span>${time}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">📍</span>
+              <span>${location}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">👤</span>
+              <span>${instructor}</span>
+            </div>
+          </div>
+        `;
+
+        // Show the modal
+        document.getElementById('cancelModal').classList.add('active');
+        
+        // Reset form state
+        resetCancelForm();
+      }
+
+      function closeCancelModal() {
+        document.getElementById('cancelModal').classList.remove('active');
+        selectedBooking = null;
+        selectedReason = null;
+        resetCancelForm();
+      }
+
+      function resetCancelForm() {
+        // Reset steps
+        document.getElementById('step1').classList.remove('completed');
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step2').classList.remove('active', 'completed');
+        document.getElementById('step3').classList.remove('active');
+
+        // Reset form elements
+        document.querySelectorAll('.radio-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+          radio.checked = false;
+        });
+        document.getElementById('comments').value = '';
+
+        // Show booking selection, hide form
+        document.getElementById('bookingSelection').style.display = 'block';
+        document.getElementById('cancellationForm').style.display = 'none';
+        document.getElementById('continueBtn').disabled = false;
+      }
+
+      function proceedToReason() {
+        if (!selectedBooking) return;
+        
+        // Update steps
+        document.getElementById('step1').classList.add('completed');
+        document.getElementById('step2').classList.add('active');
+        
+        // Hide booking selection and show form
+        document.getElementById('bookingSelection').style.display = 'none';
+        document.getElementById('cancellationForm').style.display = 'block';
+      }
+
+      function selectReason(element, reason) {
+        // Remove previous selection
+        document.querySelectorAll('.radio-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        
+        // Add selection to clicked item
+        element.classList.add('selected');
+        
+        // Check the radio button
+        const radioInput = element.querySelector('.radio-input');
+        radioInput.checked = true;
+        
+        selectedReason = reason;
+      }
+
+      function goBackToSelection() {
+        // Update steps
+        document.getElementById('step1').classList.remove('completed');
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step2').classList.remove('active');
+        
+        // Show booking selection and hide form
+        document.getElementById('bookingSelection').style.display = 'block';
+        document.getElementById('cancellationForm').style.display = 'none';
+      }
+
+      function showConfirmationModal() {
+        if (!selectedReason) {
+          alert('Please select a reason for cancellation');
+          return;
+        }
+        
+        const modal = document.getElementById('confirmationModal');
+        const modalMessage = document.getElementById('modalMessage');
+        
+        const refundAmount = calculateRefund(selectedBooking);
+        modalMessage.innerHTML = `
+          Are you sure you want to cancel "${selectedBooking.title}"?<br><br>
+          <strong>Refund Amount: ${refundAmount}</strong><br>
+          This action cannot be undone.
+        `;
+        
+        modal.classList.add('active');
+      }
+
+      function calculateRefund(booking) {
+        // Simple refund calculation based on time until booking
+        // In a real app, this would use actual booking dates
+        const now = new Date();
+        const bookingDate = new Date(now.getTime() + (24 * 60 * 60 * 1000)); // Mock: 24 hours from now
+        const hoursUntilBooking = (bookingDate - now) / (1000 * 60 * 60);
+        
+        if (hoursUntilBooking >= 24) {
+          return "Full refund";
+        } else if (hoursUntilBooking >= 2) {
+          return "50% refund";
+        } else {
+          return "No refund";
+        }
+      }
+
+      function closeConfirmationModal() {
+        document.getElementById('confirmationModal').classList.remove('active');
+      }
+
+      function processCancellation() {
+        // Update steps
+        document.getElementById('step2').classList.add('completed');
+        document.getElementById('step3').classList.add('active');
+        
+        // Close confirmation modal
+        closeConfirmationModal();
+        
+        // Show success message
+        setTimeout(() => {
+          alert('Booking cancelled successfully! You will receive a confirmation email shortly.');
+          
+          // Close the cancel modal
+          closeCancelModal();
+          
+          // In a real app, you would update the booking status here
+          // For now, we'll just show a success message
+        }, 500);
+      }
+
+      // Close modals when clicking outside
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+          if (e.target.id === 'cancelModal') {
+            closeCancelModal();
+          } else if (e.target.id === 'confirmationModal') {
+            closeConfirmationModal();
+          }
+        }
       });
     </script>
   </body>

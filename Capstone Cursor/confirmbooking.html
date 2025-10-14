@@ -12,7 +12,7 @@
   <body>
     <header class="topbar">
       <div class="brand">Amber</div>
-      <nav><a id="backBooking" href="#" class="back-link">Back to Booking</a></nav>
+      <nav><a id="backBooking" href="#" style="color:#fff; text-decoration:none; font-weight:600;">Back to Booking</a></nav>
     </header>
     <div class="layout">
       <aside class="sidebar" aria-label="Main navigation">
@@ -24,25 +24,25 @@
       </aside>
       <main class="content">
         <div class="booking-wrap">
-          <div class="progress-header">
-            <div class="progress-step">
-              <div class="badge progress-badge active">1</div>
-              <strong>Booking</strong>
-            </div>
-            <div class="progress-line active"></div>
-            <div class="progress-step">
-              <div class="badge progress-badge active">2</div>
-              <strong>Confirm Booking</strong>
-            </div>
-            <div class="progress-line"></div>
-            <div class="progress-step">
-              <div class="badge progress-badge">3</div>
-              <span class="muted">Payment</span>
-            </div>
+        <div class="progress-header">
+          <div class="progress-step">
+            <div class="progress-badge active">1</div>
+            <strong>Booking</strong>
           </div>
+          <div class="progress-line active"></div>
+          <div class="progress-step">
+            <div class="progress-badge active">2</div>
+            <strong>Confirm Booking</strong>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <div class="progress-badge">3</div>
+            <span class="muted">Payment</span>
+          </div>
+        </div>
 
           <div class="card">
-            <h3 class="booking-title">Confirm Your Booking</h3>
+            <h3 style="margin:6px 0 10px;">Confirm Your Booking</h3>
             <div class="summary">
               <div class="card summary-card">
                 <div class="activity-name" id="sumActivity">-</div>
@@ -78,8 +78,8 @@
           </div>
 
           <div class="footer">
-            <div class="card footer-card">
-              <button id="proceedPay" class="btn btn-primary proceed-btn" type="button" disabled>Next</button>
+            <div class="card" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <button id="proceedPay" class="btn btn-primary" type="button" disabled>Next</button>
             </div>
           </div>
         </div>

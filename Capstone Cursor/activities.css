@@ -124,8 +124,8 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
 .card-body p{margin:0;font-size:14px;color:var(--text-light);line-height:1.4}
 
 /* Activities Specific Styles */
-.activities .section-title{margin:0 0 8px 0;text-align:center}
-.filters{display:flex;gap:10px;margin:4px 0 14px;justify-content:center;flex-wrap:wrap}
+.activities .section-title{margin:0 0 8px 0;text-align:left}
+.filters{display:flex;gap:10px;margin:4px 0 14px;justify-content:flex-start;flex-wrap:wrap}
 .filter{appearance:none;border:1px solid #e6e6e9;background:#fff;border-radius:999px;padding:6px 12px;font-weight:600;cursor:pointer}
 .filter.active{background:#ffe9dd;border-color:#ffd0b9;color:#a4571a}
 .filter:focus{outline:0; box-shadow:0 0 0 3px rgba(240,138,36,.25)}
@@ -268,7 +268,7 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
   .benefit-item{max-width:300px}
   .instructors-content{grid-template-columns:1fr;gap:24px;text-align:center}
   .instructors-text{padding:0}
-  .filters{justify-content:center;flex-wrap:wrap}
+  .filters{justify-content:flex-start;flex-wrap:wrap}
 }
 
 @media (max-width: 768px){
@@ -320,6 +320,6 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
   .instructors{padding:40px 0}
   .upcoming-section{padding:40px 0}
   .upcoming-cards{padding:0 16px}
-  .filters{gap:8px;justify-content:center}
+  .filters{gap:8px;justify-content:flex-start}
   .filter{padding:8px 12px;font-size:14px}
 }

@@ -90,14 +90,15 @@ body{
 /* Bookings Page Styles */
 .content.bookings{padding:20px 24px 32px}
 
+.section-title{margin:0 0 8px 0;text-align:left;font-size:32px;font-weight:800;color:var(--text)}
 .page-header{
-  margin-bottom:24px;text-align:center
+  margin-bottom:24px;text-align:left
 }
 .page-header h1{margin:0 0 8px;font-size:32px;font-weight:800;color:var(--text)}
 .page-header p{margin:0;color:var(--muted);font-size:16px}
 
 .filter-tabs{
-  display:flex;gap:8px;margin-bottom:24px;justify-content:center;flex-wrap:wrap
+  display:flex;gap:8px;margin-bottom:24px;justify-content:flex-start;flex-wrap:wrap
 }
 .filter-tab{
   appearance:none;border:1px solid #d1d5db;background:#fff;border-radius:24px;

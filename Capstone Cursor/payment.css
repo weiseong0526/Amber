@@ -60,6 +60,10 @@ body{
   display:flex;
   flex-direction:column;
   gap:8px;
+  position:sticky;
+  top:0;
+  height:100vh;
+  overflow-y:auto;
 }
 .nav-item{
   display:flex;align-items:center;gap:10px;
@@ -791,7 +795,7 @@ body{
 /* Responsive Design */
 @media (max-width: 840px){
   .layout{grid-template-columns: 1fr}
-  .sidebar{order:2}
+  .sidebar{order:2; position:static; height:auto}
 }
 
 @media (max-width: 600px){

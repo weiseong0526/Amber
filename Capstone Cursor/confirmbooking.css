@@ -28,7 +28,7 @@ body{
 
 /* Two-column layout with sidebar */
 .layout{display:grid;grid-template-columns: 260px 1fr; min-height: calc(100vh - 64px)}
-.sidebar{background:var(--sidebar);color:#fff;padding:16px 12px;display:flex;flex-direction:column;gap:8px}
+.sidebar{background:var(--sidebar);color:#fff;padding:16px 12px;display:flex;flex-direction:column;gap:8px;position:sticky;top:0;height:100vh;overflow-y:auto}
 .nav-item{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;padding:10px 12px;border-radius:10px;font-weight:600}
 .nav-item:hover{background:rgba(255,255,255,.12)}
 
@@ -93,7 +93,7 @@ body{
 /* Responsive Design */
 @media (max-width: 840px){
   .layout{grid-template-columns: 1fr}
-  .sidebar{order:2}
+  .sidebar{order:2; position:static; height:auto}
   .grid.two{grid-template-columns:1fr}
 }
 

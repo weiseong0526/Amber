@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings - Amber</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #f4e6d7;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    /* Header */
+    .header {
+      background-color: #232323;
+      height: 64px;
+      display: grid;
+      grid-template-columns: 220px 1fr auto;
+      align-items: center;
+      gap: 16px;
+      padding: 0 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo {
+      color: white;
+      font-size: 28px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .logo-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background-color: #f08a24;
+    }
+
+    .search-container {
+      display: grid;
+      grid-template-columns: 1fr 44px;
+      gap: 0;
+      align-items: center;
+      background: white;
+      border-radius: 24px;
+      padding: 4px;
+      max-width: 680px;
+      width: 100%;
+      margin: 0 auto;
+    }
+
+    .search-button {
+      background-color: #f08a24;
+      border: none;
+      border-radius: 20px;
+      height: 36px;
+      border-radius: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .search-button svg {
+      width: 16px;
+      height: 16px;
+      color: white;
+    }
+
+    .search-input {
+      border: none;
+      outline: none;
+      padding: 10px 12px;
+      font-size: 14px;
+      border-radius: 20px;
+    }
+
+    .search-input::placeholder {
+      color: #999;
+    }
+
+    .header-right {
+      display: flex;
+      gap: 16px;
+    }
+
+    .header-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .header-item .label {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+
+    .main-container {
+      display: flex;
+      min-height: calc(100vh - 64px);
+    }
+
+    /* Sidebar */
+    .sidebar {
+      width: 260px;
+      background: #b8735f;
+      padding: 16px 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+    }
+
+    .nav-menu {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .nav-item {
+      margin-bottom: 0;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: white;
+      text-decoration: none;
+      padding: 10px 12px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 16px;
+      margin-bottom: 0;
+      transition: all 0.3s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.12);
+    }
+
+    .nav-link.active {
+      background: rgba(255, 255, 255, 0.12);
+      color: white;
+    }
+
+    .nav-icon {
+      width: 20px;
+      height: 20px;
+      margin-right: 0;
+    }
+
+    .nav-link.logout {
+      color: #ffcccb;
+    }
+
+    .nav-link.logout:hover {
+      background: rgba(255, 204, 203, 0.1);
+    }
+
+    /* Promotional Cards */
+    .promo-cards {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+      padding: 0;
+    }
+
+    .promo-card {
+      background: #e6b2a4;
+      color: #351a12;
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 0;
+      box-shadow: none;
+    }
+
+    .promo-card h4 {
+      margin: 0 0 6px 0;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .promo-card p {
+      margin: 0 0 8px 0;
+      font-size: 12px;
+      opacity: 1;
+    }
+
+    .promo-btn {
+      border: 0;
+      border-radius: 14px;
+      padding: 4px 10px;
+      background: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      font-size: 12px;
+      color: #351a12;
+    }
+
+    .promo-btn:hover {
+      background: #f0f0f0;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      background: #f4e6d7;
+      padding: 40px;
+      position: relative;
+    }
+
+    .main-content::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="swirl" x="0" y="0" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="2" fill="%23d2b48c" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23swirl)"/></svg>');
+      opacity: 0.3;
+      z-index: 0;
+    }
+
+    .content-wrapper {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      gap: 30px;
+    }
+
+    .page-header {
+      margin-bottom: 30px;
+    }
+
+    .page-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: #8B4513;
+      margin-bottom: 8px;
+    }
+
+    .page-subtitle {
+      font-size: 16px;
+      color: #8B4513;
+      font-weight: 400;
+    }
+
+    /* Left Profile Summary */
+    .profile-summary {
+      width: 300px;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      height: fit-content;
+    }
+
+    .profile-avatar {
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b35, #ff8c42);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 32px;
+      font-weight: 700;
+      margin: 0 auto 20px;
+    }
+
+    .profile-name {
+      font-size: 18px;
+      font-weight: 600;
+      color: #2D3748;
+      text-align: center;
+      margin-bottom: 5px;
+    }
+
+    .profile-email {
+      font-size: 14px;
+      color: #718096;
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-nav {
+      list-style: none;
+    }
+
+    .profile-nav-item {
+      margin-bottom: 8px;
+    }
+
+    .profile-nav-link {
+      display: flex;
+      align-items: center;
+      padding: 12px 16px;
+      text-decoration: none;
+      color: #2D3748;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .profile-nav-link:hover {
+      background: #f7fafc;
+    }
+
+    .profile-nav-link.active {
+      background: linear-gradient(135deg, #8b5cf6, #a855f7);
+      color: white;
+    }
+
+    .profile-nav-icon {
+      width: 18px;
+      height: 18px;
+      margin-right: 12px;
+    }
+
+    /* Right Profile Form */
+    .profile-form-section {
+      flex: 1;
+      background: white;
+      border-radius: 12px;
+      padding: 30px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-header {
+      margin-bottom: 30px;
+    }
+
+    .form-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #2D3748;
+      margin-bottom: 8px;
+    }
+
+    .form-subtitle {
+      font-size: 14px;
+      color: #718096;
+    }
+
+    .profile-picture-section {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+
+    .profile-picture-container {
+      position: relative;
+      display: inline-block;
+    }
+
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #ff6b35, #ff8c42);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 40px;
+      font-weight: 700;
+      margin: 0 auto;
+    }
+
+    .edit-photo-btn {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      width: 28px;
+      height: 28px;
+      background: #3B82F6;
+      border: 3px solid white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .edit-photo-btn:hover {
+      background: #2563EB;
+      transform: scale(1.1);
+    }
+
+    .form-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    .form-group {
+      margin-bottom: 25px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #2D3748;
+      font-size: 14px;
+
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: 14px;
+      transition: all 0.3s ease;
+      background: #ffffff;
+      color: #2D3748;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .form-input::placeholder {
+      color: #A0AEC0;
+    }
+
+    .form-select {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid #E2E8F0;
+      border-radius: 8px;
+      font-size: 14px;
+      background: #ffffff;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%232D3748' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='m6 8 4 4 4-4'/%3e%3c/svg%3e");
+      background-position: right 12px center;
+      background-repeat: no-repeat;
+      background-size: 16px;
+      padding-right: 40px;
+      color: #2D3748;
+    }
+
+    .form-select:focus {
+      outline: none;
+      border-color: #3B82F6;
+      box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+    }
+
+    .date-input-container {
+      position: relative;
+    }
+
+    .date-icon {
+      position: absolute;
+      right: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #2D3748;
+      pointer-events: all;
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+
+    .date-icon:hover {
+      color: #3B82F6;
+    }
+
+    .date-input {
+      color-scheme: light;
+    }
+
+    .date-input::-webkit-calendar-picker-indicator {
+      opacity: 0;
+      position: absolute;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      cursor: pointer;
+    }
+
+    .update-btn {
+      background: linear-gradient(135deg, #8b5cf6, #a855f7);
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      float: right;
+      margin-top: 20px;
+    }
+
+    .update-btn:hover {
+      background: linear-gradient(135deg, #7c3aed, #9333ea);
+      transform: translateY(-1px);
+    }
+
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .main-container {
+        flex-direction: column;
+        gap: 20px;
+        padding: 0 15px 40px;
+      }
+      
+      .sidebar {
+        order: 2;
+        padding: 25px;
+        position: static;
+        height: auto;
+        width: 100%;
+      }
+      
+      .main-content {
+        order: 1;
+        padding: 30px;
+      }
+      
+      .form-container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+      
+      .form-group {
+        margin-bottom: 25px;
+      }
+      
+      .header h1 {
+        font-size: 32px;
+      }
+      
+      .page-title {
+        font-size: 24px;
+      }
+      
+      .profile-picture {
+        width: 100px;
+        height: 100px;
+        font-size: 40px;
+      }
+      
+      .edit-photo-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .header {
+        padding: 25px 0;
+      }
+      
+      .header h1 {
+        font-size: 28px;
+      }
+      
+      .main-content {
+        padding: 20px;
+      }
+      
+      .form-container {
+        gap: 25px;
+      }
+      
+      .form-group {
+        margin-bottom: 20px;
+      }
+      
+      .form-input, .form-select {
+        padding: 14px 16px;
+        font-size: 16px;
+      }
+      
+      .update-btn {
+        width: 100%;
+        margin-top: 15px;
+        padding: 14px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span>Amber</span>
+    </div>
+    <div class="search-container">
+      <input type="text" class="search-input" placeholder="Search Yoga, Weaving, dance">
+      <button class="search-button" type="submit">
+        <svg viewBox="0 0 24 24" fill="currentColor">
+          <path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/>
+        </svg>
+      </button>
+    </div>
+    <div class="header-right">
+      <a href="#" class="header-item">
+        <span>🔔</span>
+        <span class="label">Notification</span>
+      </a>
+      <a href="#" class="header-item">
+        <span>👤</span>
+        <span class="label">Profile</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <ul class="nav-menu">
+        <li class="nav-item">
+          <a href="home.html" class="nav-link">
+            <span>🏠</span>
+            Home
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="activities.html" class="nav-link">
+            <span>🎯</span>
+            Activities
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="bookings.html" class="nav-link">
+            <span>📅</span>
+            Bookings
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <span>👥</span>
+            Customers
+          </a>
+        </li>
+        <li class="nav-item">
+          <a href="Settings.html" class="nav-link active">
+            <span>⚙️</span>
+            Settings
+          </a>
+        </li>
+      </ul>
+      
+      <div class="promo-cards">
+        <div class="promo-card">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="promo-btn">View Retreat</button>
+        </div>
+        <div class="promo-card">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="promo-btn">Claim Offer</button>
+        </div>
+        <div class="promo-card">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="promo-btn">See Schedule</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="page-header">
+        <h1 class="page-title">My Profile</h1>
+        <p class="page-subtitle">Manage your personal details and keep them up-to-date</p>
+      </div>
+
+      <div class="content-wrapper">
+        <!-- Left Profile Summary -->
+        <div class="profile-summary">
+          <div class="profile-avatar">JD</div>
+          <div class="profile-name">John Doe</div>
+          <div class="profile-email">John Doe@email.com</div>
+          
+          <ul class="profile-nav">
+            <li class="profile-nav-item">
+              <a href="#" class="profile-nav-link active">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                My Profile
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="Settings.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
+                Settings
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="privacy-policy.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.6C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                Privacy and Policy
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="terms-conditions.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                Terms and Conditions
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="#" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                </svg>
+                Log out
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Profile Form -->
+        <div class="profile-form-section">
+          <div class="form-header">
+            <h2 class="form-title">My Profile</h2>
+            <p class="form-subtitle">Manage your personal details and keep them up-to-date.</p>
+          </div>
+
+          <div class="profile-picture-section">
+            <div class="profile-picture-container">
+              <div class="profile-picture">JD</div>
+              <div class="edit-photo-btn" onclick="editPhoto()">+</div>
+            </div>
+          </div>
+
+          <form class="profile-form">
+            <div class="form-container">
+              <!-- Left Column -->
+              <div class="form-column">
+                <div class="form-group">
+                  <label class="form-label" for="fullName">Full Name</label>
+                  <input type="text" id="fullName" class="form-input" value="John Doe">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="phoneNumber">Phone Number</label>
+                  <input type="tel" id="phoneNumber" class="form-input" value="+60 123456789">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="gender">Gender</label>
+                  <select id="gender" class="form-select">
+                    <option value="">Select Gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Right Column -->
+              <div class="form-column">
+                <div class="form-group">
+                  <label class="form-label" for="email">Email</label>
+                  <input type="email" id="email" class="form-input" value="John Doe@email.com">
+                </div>
+                
+                <div class="form-group">
+                  <label class="form-label" for="dateOfBirth">Date of birth</label>
+                  <div class="date-input-container">
+                    <input type="date" id="dateOfBirth" class="form-input date-input">
+                    <svg class="date-icon" viewBox="0 0 24 24" fill="currentColor" onclick="openDatePicker()">
+                      <path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-1.99.9-1.99 2L3 19c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/>
+                    </svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="submit" class="update-btn" onclick="updateProfile(event)">Update Profile</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function editPhoto() {
+      // Create file input
+      const input = document.createElement('input');
+      input.type = 'file';
+      input.accept = 'image/*';
+      input.onchange = function(e) {
+        const file = e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = function(e) {
+            // Update the profile picture in the form section
+            const profilePicture = document.querySelector('.profile-picture');
+            profilePicture.style.backgroundImage = `url(${e.target.result})`;
+            profilePicture.style.backgroundSize = 'cover';
+            profilePicture.style.backgroundPosition = 'center';
+            profilePicture.style.color = 'transparent'; // Hide text but keep it for accessibility
+
+            // Update the profile avatar in the left panel
+            const profileAvatar = document.querySelector('.profile-avatar');
+            profileAvatar.style.backgroundImage = `url(${e.target.result})`;
+            profileAvatar.style.backgroundSize = 'cover';
+            profileAvatar.style.backgroundPosition = 'center';
+            profileAvatar.style.color = 'transparent'; // Hide text but keep it for accessibility
+
+            // Save photo to localStorage for persistence
+            localStorage.setItem('userProfilePhoto', e.target.result);
+
+            // Show success message
+            showNotification('✅ Profile photo updated successfully!', 'success');
+          };
+          reader.readAsDataURL(file);
+        }
+      };
+      input.click();
+    }
+
+    function updateProfile(event) {
+      event.preventDefault();
+      
+      // Get form data
+      const formData = {
+        fullName: document.getElementById('fullName').value,
+        phoneNumber: document.getElementById('phoneNumber').value,
+        gender: document.getElementById('gender').value,
+        email: document.getElementById('email').value,
+        dateOfBirth: document.getElementById('dateOfBirth').value
+      };
+
+      // Validate form data
+      if (!formData.fullName.trim()) {
+        showNotification('❌ Please enter your full name', 'error');
+        return;
+      }
+
+      if (!formData.email.trim()) {
+        showNotification('❌ Please enter your email address', 'error');
+        return;
+      }
+
+      // Validate email format
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(formData.email)) {
+        showNotification('❌ Please enter a valid email address', 'error');
+        return;
+      }
+
+      // Validate date of birth
+      if (formData.dateOfBirth && !validateDateOfBirth(formData.dateOfBirth)) {
+        showNotification('❌ Please enter a valid date of birth', 'error');
+        return;
+      }
+
+      // Save to localStorage for persistence across pages
+      localStorage.setItem('userProfile', JSON.stringify(formData));
+
+      // Update the left panel profile summary
+      updateProfileSummary(formData);
+
+      // Show success message
+      showNotification('✅ Profile updated successfully!', 'success');
+      
+      // Here you would typically send the data to your backend
+      console.log('Profile data:', formData);
+    }
+
+    function updateProfileSummary(formData) {
+      // Update profile name
+      const profileName = document.querySelector('.profile-name');
+      if (profileName && formData.fullName) {
+        profileName.textContent = formData.fullName;
+      }
+
+      // Update profile email
+      const profileEmail = document.querySelector('.profile-email');
+      if (profileEmail && formData.email) {
+        profileEmail.textContent = formData.email;
+      }
+
+      // Update profile avatar initials
+      const profileAvatar = document.querySelector('.profile-avatar');
+      if (profileAvatar && formData.fullName) {
+        const initials = getInitials(formData.fullName);
+        profileAvatar.textContent = initials;
+        // Only show initials if no background image is set
+        if (!profileAvatar.style.backgroundImage || profileAvatar.style.backgroundImage === 'none') {
+          profileAvatar.style.color = 'white';
+        }
+      }
+
+      // Update the profile picture in the form section
+      const profilePicture = document.querySelector('.profile-picture');
+      if (profilePicture && formData.fullName) {
+        const initials = getInitials(formData.fullName);
+        profilePicture.textContent = initials;
+        // Only show initials if no background image is set
+        if (!profilePicture.style.backgroundImage || profilePicture.style.backgroundImage === 'none') {
+          profilePicture.style.color = 'white';
+        }
+      }
+    }
+
+    function getInitials(fullName) {
+      return fullName
+        .split(' ')
+        .map(name => name.charAt(0).toUpperCase())
+        .join('')
+        .substring(0, 2);
+    }
+
+    function validateDateOfBirth(dateString) {
+      if (!dateString) return false;
+      
+      const birthDate = new Date(dateString);
+      const today = new Date();
+      
+      // Check if date is valid
+      if (isNaN(birthDate.getTime())) return false;
+      
+      // Check if date is not in the future
+      if (birthDate > today) return false;
+      
+      return true;
+    }
+
+    function showNotification(message, type) {
+      // Create notification element
+      const notification = document.createElement('div');
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 25px;
+        background: ${type === 'success' ? 'linear-gradient(135deg, #10b981, #059669)' : 'linear-gradient(135deg, #ef4444, #dc2626)'};
+        color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        z-index: 1000;
+        font-weight: 600;
+        animation: slideInRight 0.3s ease-out;
+      `;
+      notification.textContent = message;
+      
+      // Add animation keyframes
+      if (!document.getElementById('notification-styles')) {
+        const style = document.createElement('style');
+        style.id = 'notification-styles';
+        style.textContent = `
+          @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+          }
+        `;
+        document.head.appendChild(style);
+      }
+      
+      document.body.appendChild(notification);
+      
+      // Remove notification after 3 seconds
+      setTimeout(() => {
+        notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+        setTimeout(() => {
+          if (notification.parentNode) {
+            notification.parentNode.removeChild(notification);
+          }
+        }, 300);
+      }, 3000);
+    }
+
+    function openDatePicker() {
+      // Trigger the date input's native date picker
+      const dateInput = document.getElementById('dateOfBirth');
+      dateInput.focus();
+      dateInput.showPicker();
+    }
+
+    // Navigation Functions
+    function navigateToMyProfile() {
+      console.log('navigateToMyProfile called');
+      showNotification("👤 You are already on the My Profile page!", "info");
+    }
+
+    function navigateToSettings() {
+      console.log('navigateToSettings called');
+      showNotification("⚙️ Redirecting to Settings...", "info");
+      setTimeout(() => {
+        try {
+          window.location.href = 'Settings.html';
+        } catch (error) {
+          console.error('Error navigating to Settings:', error);
+          showNotification("❌ Error navigating to Settings page", "error");
+        }
+      }, 500);
+    }
+
+    function navigateToPrivacyPolicy() {
+      console.log('navigateToPrivacyPolicy called');
+      showNotification("🔒 Redirecting to Privacy Policy...", "info");
+      setTimeout(() => {
+        try {
+          window.location.href = 'privacy-policy.html';
+        } catch (error) {
+          console.error('Error navigating to Privacy Policy:', error);
+          showNotification("❌ Error navigating to Privacy Policy page", "error");
+        }
+      }, 500);
+    }
+
+    function navigateToTerms() {
+      console.log('navigateToTerms called');
+      showNotification("📄 Redirecting to Terms and Conditions...", "info");
+      setTimeout(() => {
+        try {
+          window.location.href = 'terms-conditions.html';
+        } catch (error) {
+          console.error('Error navigating to Terms and Conditions:', error);
+          showNotification("❌ Error navigating to Terms and Conditions page", "error");
+        }
+      }, 500);
+    }
+
+    function logout() {
+      console.log('logout called');
+      if (confirm("🚪 Are you sure you want to log out?")) {
+        showNotification("👋 Logging out... Goodbye!", "success");
+        setTimeout(() => {
+          showNotification("✅ Successfully logged out!", "success");
+          // Redirect to home page
+          window.location.href = 'home.html';
+        }, 1000);
+      }
+    }
+
+    // Load profile data from localStorage
+    function loadProfileData() {
+      const savedProfile = localStorage.getItem('userProfile');
+      if (savedProfile) {
+        try {
+          const profileData = JSON.parse(savedProfile);
+          
+          // Update form fields
+          if (profileData.fullName) {
+            document.getElementById('fullName').value = profileData.fullName;
+          }
+          if (profileData.phoneNumber) {
+            document.getElementById('phoneNumber').value = profileData.phoneNumber;
+          }
+          if (profileData.gender) {
+            document.getElementById('gender').value = profileData.gender;
+          }
+          if (profileData.email) {
+            document.getElementById('email').value = profileData.email;
+          }
+          if (profileData.dateOfBirth) {
+            document.getElementById('dateOfBirth').value = profileData.dateOfBirth;
+          }
+
+          // Update profile summary
+          updateProfileSummary(profileData);
+        } catch (error) {
+          console.error('Error loading profile data:', error);
+        }
+      }
+
+      // Load saved profile photo
+      const savedPhoto = localStorage.getItem('userProfilePhoto');
+      if (savedPhoto) {
+        const profilePicture = document.querySelector('.profile-picture');
+        const profileAvatar = document.querySelector('.profile-avatar');
+        
+        if (profilePicture) {
+          profilePicture.style.backgroundImage = `url(${savedPhoto})`;
+          profilePicture.style.backgroundSize = 'cover';
+          profilePicture.style.backgroundPosition = 'center';
+          profilePicture.style.color = 'transparent';
+        }
+        
+        if (profileAvatar) {
+          profileAvatar.style.backgroundImage = `url(${savedPhoto})`;
+          profileAvatar.style.backgroundSize = 'cover';
+          profileAvatar.style.backgroundPosition = 'center';
+          profileAvatar.style.color = 'transparent';
+        }
+      }
+    }
+
+    // Initialize date input functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load saved profile data
+      loadProfileData();
+
+      // Set up date input with proper formatting
+      const dateInput = document.getElementById('dateOfBirth');
+      
+      // Add event listener for date change
+      dateInput.addEventListener('change', function() {
+        // Format the date for display if needed
+        if (this.value) {
+          const date = new Date(this.value);
+          // You can add additional formatting here if needed
+          console.log('Date selected:', this.value);
+        }
+      });
+
+      // Left navigation links functionality
+      const profileNavLinks = document.querySelectorAll('.profile-nav-link');
+      
+      console.log('Found profile nav links:', profileNavLinks.length);
+      
+      profileNavLinks.forEach((link, index) => {
+        console.log(`Link ${index}:`, link.href, link.textContent.trim());
+        
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log(`Clicked link ${index}:`, link.textContent.trim());
+          
+          // Handle each link based on its href or position
+          if (link.href.includes('Settings.html') || link.textContent.trim() === 'Settings') {
+            console.log('Navigating to Settings');
+            navigateToSettings();
+          } else if (link.href.includes('privacy-policy.html') || link.textContent.trim() === 'Privacy and Policy') {
+            console.log('Navigating to Privacy Policy');
+            navigateToPrivacyPolicy();
+          } else if (link.href.includes('terms-conditions.html') || link.textContent.trim() === 'Terms and Conditions') {
+            console.log('Navigating to Terms and Conditions');
+            navigateToTerms();
+          } else if (index === 0 || link.textContent.trim() === 'My Profile') { // First link is My Profile
+            console.log('My Profile clicked');
+            navigateToMyProfile();
+          } else if (index === profileNavLinks.length - 1 || link.textContent.trim() === 'Log out') { // Last link is Logout
+            console.log('Logout clicked');
+            logout();
+          } else {
+            console.log('Unknown link clicked:', link.textContent.trim());
+            showNotification("🔗 Link clicked: " + link.textContent.trim(), "info");
+          }
+        });
+        
+        // Add visual feedback on hover
+        link.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateX(5px)';
+          this.style.transition = 'transform 0.2s ease';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateX(0)';
+        });
+      });
+
+      // Header navigation functionality
+      const notificationHeader = document.querySelector('.header-item:first-of-type');
+      if (notificationHeader) {
+        notificationHeader.addEventListener('click', function(e) {
+          e.preventDefault();
+          showNotification("🔔 You have no new notifications!", "info");
+        });
+      }
+
+      const profileHeader = document.querySelector('.header-item:last-of-type');
+      if (profileHeader) {
+        profileHeader.addEventListener('click', function(e) {
+          e.preventDefault();
+          showNotification("👤 You are already on the profile page!", "info");
+        });
+      }
+
+      // Search functionality
+      const searchInput = document.querySelector('.search-input');
+      const searchButton = document.querySelector('.search-button');
+      
+      if (searchInput && searchButton) {
+        const performSearch = () => {
+          const query = searchInput.value.trim();
+          if (query) {
+            showNotification(`🔍 Searching for "${query}"...`, "info");
+          } else {
+            showNotification("🔍 Please enter a search term!", "info");
+          }
+        };
+
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            performSearch();
+          }
+        });
+      }
+    });
+  </script>
+</body>
+</html>
+</html>

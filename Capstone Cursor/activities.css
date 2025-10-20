@@ -260,7 +260,7 @@ body{font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Rob
   .card-grid{grid-template-columns:1fr}
   .upcoming-cards{grid-template-columns:1fr;gap:16px}
   .layout{grid-template-columns: 1fr}
-  .sidebar{display:none; position:static; height:auto}
+  .sidebar{order:-1; position:static; height:auto}
   .cards{grid-template-columns: repeat(2, minmax(0,1fr));}
   .about-content{grid-template-columns:1fr;gap:24px;text-align:center}
   .about-text{padding:0}

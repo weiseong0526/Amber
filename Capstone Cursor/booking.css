@@ -67,7 +67,7 @@ body{
 /* Responsive tweaks */
 @media (max-width: 840px){
   .layout{grid-template-columns: 1fr}
-  .sidebar{order:2; position:static; height:auto}
+  .sidebar{order:-1; position:static; height:auto}
   .grid.two{grid-template-columns:1fr}
 }
 

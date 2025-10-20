@@ -193,7 +193,7 @@ body{
 @media (max-width: 900px){
   .bookings-grid{grid-template-columns:1fr}
   .layout{grid-template-columns: 1fr}
-  .sidebar{display:none; position:static; height:auto}
+  .sidebar{order:-1; position:static; height:auto}
 }
 @media (max-width: 600px){
   .booking-content{grid-template-columns:1fr;gap:12px}

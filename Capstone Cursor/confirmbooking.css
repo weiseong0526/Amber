@@ -93,7 +93,7 @@ body{
 /* Responsive Design */
 @media (max-width: 840px){
   .layout{grid-template-columns: 1fr}
-  .sidebar{order:2; position:static; height:auto}
+  .sidebar{order:-1; position:static; height:auto}
   .grid.two{grid-template-columns:1fr}
 }
 
@@ -311,7 +311,7 @@ body{
 
 @media (max-width: 900px){
   .layout{grid-template-columns: 1fr}
-  .sidebar{display:none}
+  .sidebar{order:-1; position:static; height:auto}
   .cards{grid-template-columns: repeat(2, minmax(0,1fr));}
   .about-content{grid-template-columns:1fr;gap:24px;text-align:center}
   .instructors-content{grid-template-columns:1fr;gap:24px;text-align:center}

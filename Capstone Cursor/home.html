@@ -11,6 +11,11 @@
   </head>
   <body>
     <header class="topbar">
+      <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
       <div class="brand">
         <span class="logo-dot"></span>
         <span class="brand-name">Amber</span>
@@ -26,6 +31,16 @@
         <a href="#" class="action"><span>👤</span><span class="label">Profile</span></a>
       </nav>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a class="mobile-nav-item active" href="home.html"><span>🏠</span>Home</a>
+      <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="mobile-nav-item" href="bookings.html"><span>📅</span>Booking</a>
+      <a class="mobile-nav-item" href="#"><span>👥</span>Customer</a>
+      <a class="mobile-nav-item" href="#"><span>⚙️</span>Settings</a>
+    </nav>
 
     <div class="layout">
       <aside class="sidebar" aria-label="Main navigation">
@@ -234,6 +249,53 @@
     <script>
       // optional: prevent submit from navigating on demo search
       document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+
+      // Mobile Menu Toggle
+      (function(){
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        var isOpen = false;
+
+        function openMenu(){
+          isOpen = true;
+          mobileMenu.classList.add('open');
+          mobileMenuOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuToggle.classList.add('active');
+        }
+
+        function closeMenu(){
+          isOpen = false;
+          mobileMenu.classList.remove('open');
+          mobileMenuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          menuToggle.classList.remove('active');
+        }
+
+        if(menuToggle){
+          menuToggle.addEventListener('click', function(){
+            if(isOpen){
+              closeMenu();
+            } else {
+              openMenu();
+            }
+          });
+        }
+
+        if(mobileMenuOverlay){
+          mobileMenuOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when clicking on a menu item
+        if(mobileMenu){
+          mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+            item.addEventListener('click', function(){
+              closeMenu();
+            });
+          });
+        }
+      })();
     </script>
   </body>
 </html>

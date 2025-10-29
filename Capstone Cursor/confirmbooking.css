@@ -21,10 +21,158 @@ body{
 
 /* Top bar layout to match site */
 .topbar{
-  height:64px; display:flex; align-items:center; justify-content:space-between;
-  padding:0 16px; background:#232323; color:#fff;
+  height:64px; 
+  display:grid;
+  grid-template-columns: auto 1fr auto;
+  align-items:center;
+  gap:16px;
+  padding:0 16px; 
+  background:#232323; 
+  color:#fff;
+  position:relative;
 }
-.brand{display:flex;align-items:center;gap:10px;font-weight:800;font-size:24px}
+.brand{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:24px;
+}
+.logo-dot{
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  background:var(--amber);
+}
+.brand-name{
+  color:#ffd9bf;
+}
+.top-nav{
+  display:flex;
+  align-items:center;
+}
+
+/* Mobile Menu Toggle (Hamburger Icon) */
+.menu-toggle{
+  display:none;
+  width:28px;
+  height:24px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  padding:0;
+  z-index:1001;
+  position:relative;
+}
+
+.menu-toggle span{
+  display:block;
+  width:28px;
+  height:3px;
+  background:#fff;
+  border-radius:3px;
+  transition:all 0.3s ease;
+  transform-origin:center;
+  position:absolute;
+  left:0;
+}
+
+.menu-toggle span:nth-child(1){
+  top:4px;
+}
+
+.menu-toggle span:nth-child(2){
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.menu-toggle span:nth-child(3){
+  bottom:4px;
+}
+
+.menu-toggle.active span:nth-child(1){
+  top:50%;
+  transform:translateY(-50%) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2){
+  opacity:0;
+  transform:translateY(-50%) scaleX(0);
+}
+
+.menu-toggle.active span:nth-child(3){
+  bottom:auto;
+  top:50%;
+  transform:translateY(-50%) rotate(-45deg);
+}
+
+/* Mobile Menu Overlay */
+.mobile-menu-overlay{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background:rgba(0,0,0,0.5);
+  z-index:999;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.3s ease;
+}
+
+.mobile-menu-overlay.active{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* Mobile Menu (Slide-out Drawer) */
+.mobile-menu{
+  display:none;
+  position:fixed;
+  top:0;
+  left:0;
+  width:280px;
+  height:100%;
+  background:var(--sidebar);
+  z-index:1000;
+  padding:80px 20px 20px;
+  transform:translateX(-100%);
+  transition:transform 0.3s ease;
+  box-shadow:2px 0 10px rgba(0,0,0,0.2);
+  overflow-y:auto;
+  pointer-events:none;
+}
+
+.mobile-menu.open{
+  transform:translateX(0);
+  pointer-events:auto;
+}
+
+.mobile-nav-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+  color:#fff;
+  text-decoration:none;
+  padding:14px 16px;
+  border-radius:10px;
+  font-weight:600;
+  font-size:16px;
+  margin-bottom:8px;
+  transition:background 0.2s ease;
+}
+
+.mobile-nav-item:hover,
+.mobile-nav-item.active{
+  background:rgba(255,255,255,0.15);
+}
+
+.mobile-nav-item span:first-child{
+  font-size:20px;
+  width:24px;
+  text-align:center;
+}
 
 /* Two-column layout with sidebar */
 .layout{display:grid;grid-template-columns: 260px 1fr; min-height: calc(100vh - 64px)}
@@ -322,9 +470,40 @@ body{
 }
 
 @media (max-width: 768px){
-  .topbar{grid-template-columns: 1fr; height:auto; gap:8px; padding:10px 12px}
-  .search{max-width:none}
-  .top-actions{justify-content:center}
+  .topbar{
+    grid-template-columns: auto 1fr auto;
+    grid-template-rows: auto auto;
+    height:auto;
+    gap:10px;
+    padding:12px 16px;
+    align-items:center;
+  }
+  .menu-toggle{
+    display:block;
+    grid-row:1;
+    grid-column:1;
+  }
+  .brand{
+    grid-row:1;
+    grid-column:2;
+    justify-self:start;
+  }
+  .top-nav{
+    grid-row:2;
+    grid-column:1/-1;
+    justify-content:center;
+    margin-top:4px;
+  }
+  .mobile-menu-overlay,
+  .mobile-menu{
+    display:block;
+  }
+  .sidebar{
+    display:none;
+  }
+  .layout{
+    grid-template-columns:1fr;
+  }
   .hero h1{font-size:36px}
   .hero p{font-size:18px}
   .hero-cta{flex-direction:column;align-items:center}
@@ -343,6 +522,34 @@ body{
 }
 
 @media (max-width: 480px){
+  .topbar{
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    padding:10px 12px;
+    gap:8px;
+  }
+  .menu-toggle{
+    grid-row:1;
+    grid-column:1;
+  }
+  .brand{
+    grid-row:1;
+    grid-column:2;
+    font-size:20px;
+    justify-self:start;
+  }
+  .brand-name{
+    font-size:20px;
+  }
+  .top-nav{
+    grid-row:2;
+    grid-column:1/-1;
+    width:100%;
+    justify-content:center;
+  }
+  .mobile-menu{
+    width:260px;
+  }
   .content{padding:16px}
   .hero{padding:40px 0}
   .hero h1{font-size:28px}

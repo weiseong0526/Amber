@@ -1,0 +1,720 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Bookings</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="bookings.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+
+      <form class="search" role="search" action="#">
+        <input type="text" placeholder="Search bookings..." aria-label="Search bookings" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <nav class="top-actions" aria-label="Top actions">
+        <a href="notifications.html" class="action" onclick="showNotificationPageNotification(event)"><span>🔔</span><span class="label">Notification</span></a>
+        <a href="my-profile.html" class="action" onclick="showProfileNotification(event)"><span>👤</span><span class="label">Profile</span></a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item active" href="bookings.html"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="#" onclick="showCustomersNotification(event)"><span>👥</span>Customers</a>
+        <a class="nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+
+        <div class="promos">
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip">View Retreat</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">Claim Offer</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">See Schedule</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content bookings">
+        <div class="page-header">
+          <h1>My Bookings</h1>
+          <p>Manage your upcoming, completed, and canceled bookings</p>
+        </div>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+          <button class="filter-tab active" data-filter="upcoming">Upcoming</button>
+          <button class="filter-tab" data-filter="completed">Completed</button>
+          <button class="filter-tab" data-filter="canceled">Canceled</button>
+        </div>
+
+        <!-- Bookings Grid -->
+        <div class="bookings-grid">
+          <!-- Upcoming Bookings -->
+          <article class="booking-card upcoming" data-status="upcoming">
+            <div class="booking-header">
+              <div class="booking-status upcoming">
+                <span class="status-dot"></span>
+                <span class="status-text">Upcoming</span>
+              </div>
+              <div class="booking-date">Dec 15, 2024</div>
+            </div>
+            <div class="booking-content">
+              <img src="https://images.unsplash.com/photo-1518617840859-acd0eac7b3fd?q=80&w=1200&auto=format&fit=crop" alt="Yoga Basics" />
+              <div class="booking-details">
+                <h3>Yoga Basics</h3>
+                <div class="booking-meta">
+                  <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>Mon & Wed, 6:00 PM</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Alcove Studio</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span>Instructor: Sarah Chen</span>
+                  </div>
+                </div>
+                <div class="booking-actions">
+                  <button class="btn secondary">Reschedule</button>
+                  <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="booking-card upcoming" data-status="upcoming">
+            <div class="booking-header">
+              <div class="booking-status upcoming">
+                <span class="status-dot"></span>
+                <span class="status-text">Upcoming</span>
+              </div>
+              <div class="booking-date">Dec 18, 2024</div>
+            </div>
+            <div class="booking-content">
+              <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" alt="Zumba Dance" />
+              <div class="booking-details">
+                <h3>Zumba Dance</h3>
+                <div class="booking-meta">
+                  <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>Tue & Thu, 6:00 PM</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Adeline Studio</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span>Instructor: Maria Rodriguez</span>
+                  </div>
+                </div>
+                <div class="booking-actions">
+                  <button class="btn secondary">Reschedule</button>
+                  <button class="btn danger" onclick="openCancelModal(this)">Cancel</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Completed Bookings -->
+          <article class="booking-card completed" data-status="completed">
+            <div class="booking-header">
+              <div class="booking-status completed">
+                <span class="status-dot"></span>
+                <span class="status-text">Completed</span>
+              </div>
+              <div class="booking-date">Dec 10, 2024</div>
+            </div>
+            <div class="booking-content">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop" alt="Mindfulness Session" />
+              <div class="booking-details">
+                <h3>Mindfulness Session</h3>
+                <div class="booking-meta">
+                  <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>Mon, 7:00 PM</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Zen Garden</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span>Instructor: David Kim</span>
+                  </div>
+                </div>
+                <div class="booking-actions">
+                  <a href="review.html" class="btn secondary">Leave Review</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="booking-card completed" data-status="completed">
+            <div class="booking-header">
+              <div class="booking-status completed">
+                <span class="status-dot"></span>
+                <span class="status-text">Completed</span>
+              </div>
+              <div class="booking-date">Dec 8, 2024</div>
+            </div>
+            <div class="booking-content">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop" alt="Pilates Class" />
+              <div class="booking-details">
+                <h3>Pilates Class</h3>
+                <div class="booking-meta">
+                  <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>Wed, 5:30 PM</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Fitness Center</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span>Instructor: Lisa Wang</span>
+                  </div>
+                </div>
+                <div class="booking-actions">
+                  <a href="review.html" class="btn secondary">Leave Review</a>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <!-- Canceled Bookings -->
+          <article class="booking-card canceled" data-status="canceled">
+            <div class="booking-header">
+              <div class="booking-status canceled">
+                <span class="status-dot"></span>
+                <span class="status-text">Canceled</span>
+              </div>
+              <div class="booking-date">Dec 5, 2024</div>
+            </div>
+            <div class="booking-content">
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=1200&auto=format&fit=crop" alt="Pottery Workshop" />
+              <div class="booking-details">
+                <h3>Pottery Workshop</h3>
+                <div class="booking-meta">
+                  <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>Sat, 10:00 AM</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Art Studio</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span>Instructor: James Wilson</span>
+                  </div>
+                </div>
+                <div class="booking-actions">
+                  <button class="btn secondary">View Details</button>
+                </div>
+              </div>
+            </div>
+          </article>
+
+          <article class="booking-card canceled" data-status="canceled">
+            <div class="booking-header">
+              <div class="booking-status canceled">
+                <span class="status-dot"></span>
+                <span class="status-text">Canceled</span>
+              </div>
+              <div class="booking-date">Dec 3, 2024</div>
+            </div>
+            <div class="booking-content">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop" alt="Meditation Retreat" />
+              <div class="booking-details">
+                <h3>Meditation Retreat</h3>
+                <div class="booking-meta">
+                  <div class="meta-item">
+                    <span class="meta-icon">🕐</span>
+                    <span>Sun, 9:00 AM</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">📍</span>
+                    <span>Peace Garden</span>
+                  </div>
+                  <div class="meta-item">
+                    <span class="meta-icon">👤</span>
+                    <span>Instructor: Anna Patel</span>
+                  </div>
+                </div>
+                <div class="booking-actions">
+                  <button class="btn secondary">View Details</button>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" style="display: none;">
+          <div class="empty-icon">📅</div>
+          <h3>No bookings found</h3>
+          <p>Try adjusting your filter or book a new activity.</p>
+          <button class="btn primary">Browse Activities</button>
+        </div>
+      </main>
+    </div>
+
+    <!-- Cancel Booking Modal -->
+    <div class="modal-overlay" id="cancelModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Cancel Booking</h2>
+          <button class="close-btn" onclick="closeCancelModal()">&times;</button>
+        </div>
+        
+        <div class="cancel-steps">
+          <div class="steps-container">
+            <div class="step active" id="step1">
+              <div class="step-number">1</div>
+              <div class="step-title">Select Booking</div>
+            </div>
+            <div class="step" id="step2">
+              <div class="step-number">2</div>
+              <div class="step-title">Provide Reason</div>
+            </div>
+            <div class="step" id="step3">
+              <div class="step-number">3</div>
+              <div class="step-title">Confirm Cancellation</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cancellation Policy -->
+        <div class="cancellation-policy">
+          <div class="policy-title">
+            <span class="policy-icon">⚠️</span>
+            Cancellation Policy
+          </div>
+          <div class="policy-content">
+            <div class="policy-item">Cancellations made 24+ hours before the session: Full refund</div>
+            <div class="policy-item">Cancellations made 2-24 hours before the session: 50% refund</div>
+            <div class="policy-item">Cancellations made less than 2 hours before the session: No refund</div>
+            <div class="policy-item">Refunds will be processed within 3-5 business days</div>
+          </div>
+        </div>
+
+        <!-- Booking Selection -->
+        <div class="booking-selection" id="bookingSelection">
+          <h3>Select a Booking to Cancel</h3>
+          <div class="selected-booking" id="selectedBooking">
+            <!-- Selected booking details will be populated here -->
+          </div>
+          <div class="action-buttons">
+            <button class="btn secondary" onclick="closeCancelModal()">Cancel</button>
+            <button class="btn primary" id="continueBtn" onclick="proceedToReason()">Continue to Reason</button>
+          </div>
+        </div>
+
+        <!-- Cancellation Form -->
+        <div class="cancellation-form" id="cancellationForm" style="display: none;">
+          <h3>Why are you cancelling?</h3>
+          
+          <div class="form-group">
+            <label class="form-label">Select a reason for cancellation:</label>
+            <div class="form-radio-group" id="reasonGroup">
+              <div class="radio-item" onclick="selectReason(this, 'schedule')">
+                <input type="radio" name="reason" value="schedule" class="radio-input">
+                <label class="radio-label">Schedule conflict</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'illness')">
+                <input type="radio" name="reason" value="illness" class="radio-input">
+                <label class="radio-label">Illness or emergency</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'weather')">
+                <input type="radio" name="reason" value="weather" class="radio-input">
+                <label class="radio-label">Weather conditions</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'personal')">
+                <input type="radio" name="reason" value="personal" class="radio-input">
+                <label class="radio-label">Personal reasons</label>
+              </div>
+              <div class="radio-item" onclick="selectReason(this, 'other')">
+                <input type="radio" name="reason" value="other" class="radio-input">
+                <label class="radio-label">Other</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label">Additional comments (optional):</label>
+            <textarea class="form-textarea" id="comments" placeholder="Please provide any additional details about your cancellation..."></textarea>
+          </div>
+
+          <div class="action-buttons">
+            <button class="btn secondary" onclick="goBackToSelection()">Back to Selection</button>
+            <button class="btn danger" id="confirmCancelBtn" onclick="showConfirmationModal()">Confirm Cancellation</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Confirmation Modal -->
+    <div class="modal-overlay" id="confirmationModal">
+      <div class="modal">
+        <div class="modal-icon">⚠️</div>
+        <h2 class="modal-title">Confirm Cancellation</h2>
+        <p class="modal-message" id="modalMessage">
+          Are you sure you want to cancel this booking? This action cannot be undone.
+        </p>
+        <div class="modal-buttons">
+          <button class="btn secondary" onclick="closeConfirmationModal()">Keep Booking</button>
+          <button class="btn danger" onclick="processCancellation()">Yes, Cancel Booking</button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // Navigation functions
+      function showCustomersNotification(event) {
+        event.preventDefault();
+        showNotification("👥 Customers page coming soon!", "info");
+      }
+
+      function showNotificationPageNotification(event) {
+        // Let the default link behavior happen
+      }
+
+      function showProfileNotification(event) {
+        // Let the default link behavior happen
+      }
+
+      function showNotification(message, type) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+          position: fixed;
+          top: 20px;
+          right: 20px;
+          padding: 15px 25px;
+          background: ${type === 'success' ? 'linear-gradient(135deg, #4CAF50, #45a049)' : 'linear-gradient(135deg, #2196F3, #1976D2)'};
+          color: white;
+          border-radius: 10px;
+          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+          z-index: 1000;
+          font-weight: 500;
+          animation: slideInRight 0.3s ease-out;
+        `;
+        notification.textContent = message;
+        
+        // Add animation keyframes
+        if (!document.getElementById('notification-styles')) {
+          const style = document.createElement('style');
+          style.id = 'notification-styles';
+          style.textContent = `
+            @keyframes slideInRight {
+              from { transform: translateX(100%); opacity: 0; }
+              to { transform: translateX(0); opacity: 1; }
+            }
+          `;
+          document.head.appendChild(style);
+        }
+        
+        document.body.appendChild(notification);
+        
+        // Remove notification after 3 seconds
+        setTimeout(() => {
+          notification.style.animation = 'slideInRight 0.3s ease-out reverse';
+          setTimeout(() => {
+            if (notification.parentNode) {
+              notification.parentNode.removeChild(notification);
+            }
+          }, 300);
+        }, 3000);
+      }
+
+      // Filter functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const bookingCards = document.querySelectorAll('.booking-card');
+        const emptyState = document.querySelector('.empty-state');
+
+        // Initialize page to show only upcoming bookings
+        bookingCards.forEach(card => {
+          if (card.getAttribute('data-status') === 'upcoming') {
+            card.style.display = 'block';
+          } else {
+            card.style.display = 'none';
+          }
+        });
+
+        filterTabs.forEach(tab => {
+          tab.addEventListener('click', function() {
+            // Remove active class from all tabs
+            filterTabs.forEach(t => t.classList.remove('active'));
+            // Add active class to clicked tab
+            this.classList.add('active');
+
+            const filter = this.getAttribute('data-filter');
+            let visibleCount = 0;
+
+            bookingCards.forEach(card => {
+              if (card.getAttribute('data-status') === filter) {
+                card.style.display = 'block';
+                visibleCount++;
+              } else {
+                card.style.display = 'none';
+              }
+            });
+
+            // Show/hide empty state
+            if (visibleCount === 0) {
+              emptyState.style.display = 'block';
+            } else {
+              emptyState.style.display = 'none';
+            }
+          });
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search input');
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          let visibleCount = 0;
+
+          bookingCards.forEach(card => {
+            const cardText = card.textContent.toLowerCase();
+            if (cardText.includes(searchTerm)) {
+              card.style.display = 'block';
+              visibleCount++;
+            } else {
+              card.style.display = 'none';
+            }
+          });
+
+          // Show/hide empty state
+          if (visibleCount === 0 && searchTerm !== '') {
+            emptyState.style.display = 'block';
+          } else {
+            emptyState.style.display = 'none';
+          }
+        });
+
+        // Prevent search form submission
+        document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+      });
+
+      // Cancel Booking Modal Functionality
+      let selectedBooking = null;
+      let selectedReason = null;
+
+      function openCancelModal(button) {
+        // Get the booking card that contains this button
+        const bookingCard = button.closest('.booking-card');
+        const bookingTitle = bookingCard.querySelector('h3').textContent;
+        const bookingDate = bookingCard.querySelector('.booking-date').textContent;
+        const bookingMeta = bookingCard.querySelectorAll('.meta-item');
+        
+        // Extract booking details
+        const time = bookingMeta[0]?.textContent || '';
+        const location = bookingMeta[1]?.textContent || '';
+        const instructor = bookingMeta[2]?.textContent || '';
+
+        // Store selected booking data
+        selectedBooking = {
+          title: bookingTitle,
+          date: bookingDate,
+          time: time,
+          location: location,
+          instructor: instructor
+        };
+
+        // Populate selected booking display
+        const selectedBookingDiv = document.getElementById('selectedBooking');
+        selectedBookingDiv.innerHTML = `
+          <h4>${bookingTitle}</h4>
+          <div class="booking-meta">
+            <div class="meta-item">
+              <span class="meta-icon">📅</span>
+              <span>${bookingDate}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">🕐</span>
+              <span>${time}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">📍</span>
+              <span>${location}</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-icon">👤</span>
+              <span>${instructor}</span>
+            </div>
+          </div>
+        `;
+
+        // Show the modal
+        document.getElementById('cancelModal').classList.add('active');
+        
+        // Reset form state
+        resetCancelForm();
+      }
+
+      function closeCancelModal() {
+        document.getElementById('cancelModal').classList.remove('active');
+        selectedBooking = null;
+        selectedReason = null;
+        resetCancelForm();
+      }
+
+      function resetCancelForm() {
+        // Reset steps
+        document.getElementById('step1').classList.remove('completed');
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step2').classList.remove('active', 'completed');
+        document.getElementById('step3').classList.remove('active');
+
+        // Reset form elements
+        document.querySelectorAll('.radio-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        document.querySelectorAll('input[type="radio"]').forEach(radio => {
+          radio.checked = false;
+        });
+        document.getElementById('comments').value = '';
+
+        // Show booking selection, hide form
+        document.getElementById('bookingSelection').style.display = 'block';
+        document.getElementById('cancellationForm').style.display = 'none';
+        document.getElementById('continueBtn').disabled = false;
+      }
+
+      function proceedToReason() {
+        if (!selectedBooking) return;
+        
+        // Update steps
+        document.getElementById('step1').classList.add('completed');
+        document.getElementById('step2').classList.add('active');
+        
+        // Hide booking selection and show form
+        document.getElementById('bookingSelection').style.display = 'none';
+        document.getElementById('cancellationForm').style.display = 'block';
+      }
+
+      function selectReason(element, reason) {
+        // Remove previous selection
+        document.querySelectorAll('.radio-item').forEach(item => {
+          item.classList.remove('selected');
+        });
+        
+        // Add selection to clicked item
+        element.classList.add('selected');
+        
+        // Check the radio button
+        const radioInput = element.querySelector('.radio-input');
+        radioInput.checked = true;
+        
+        selectedReason = reason;
+      }
+
+      function goBackToSelection() {
+        // Update steps
+        document.getElementById('step1').classList.remove('completed');
+        document.getElementById('step1').classList.add('active');
+        document.getElementById('step2').classList.remove('active');
+        
+        // Show booking selection and hide form
+        document.getElementById('bookingSelection').style.display = 'block';
+        document.getElementById('cancellationForm').style.display = 'none';
+      }
+
+      function showConfirmationModal() {
+        if (!selectedReason) {
+          alert('Please select a reason for cancellation');
+          return;
+        }
+        
+        const modal = document.getElementById('confirmationModal');
+        const modalMessage = document.getElementById('modalMessage');
+        
+        const refundAmount = calculateRefund(selectedBooking);
+        modalMessage.innerHTML = `
+          Are you sure you want to cancel "${selectedBooking.title}"?<br><br>
+          <strong>Refund Amount: ${refundAmount}</strong><br>
+          This action cannot be undone.
+        `;
+        
+        modal.classList.add('active');
+      }
+
+      function calculateRefund(booking) {
+        // Simple refund calculation based on time until booking
+        // In a real app, this would use actual booking dates
+        const now = new Date();
+        const bookingDate = new Date(now.getTime() + (24 * 60 * 60 * 1000)); // Mock: 24 hours from now
+        const hoursUntilBooking = (bookingDate - now) / (1000 * 60 * 60);
+        
+        if (hoursUntilBooking >= 24) {
+          return "Full refund";
+        } else if (hoursUntilBooking >= 2) {
+          return "50% refund";
+        } else {
+          return "No refund";
+        }
+      }
+
+      function closeConfirmationModal() {
+        document.getElementById('confirmationModal').classList.remove('active');
+      }
+
+      function processCancellation() {
+        // Update steps
+        document.getElementById('step2').classList.add('completed');
+        document.getElementById('step3').classList.add('active');
+        
+        // Close confirmation modal
+        closeConfirmationModal();
+        
+        // Show success message
+        setTimeout(() => {
+          alert('Booking cancelled successfully! You will receive a confirmation email shortly.');
+          
+          // Close the cancel modal
+          closeCancelModal();
+          
+          // In a real app, you would update the booking status here
+          // For now, we'll just show a success message
+        }, 500);
+      }
+
+      // Close modals when clicking outside
+      document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('modal-overlay')) {
+          if (e.target.id === 'cancelModal') {
+            closeCancelModal();
+          } else if (e.target.id === 'confirmationModal') {
+            closeConfirmationModal();
+          }
+        }
+      });
+    </script>
+  </body>
+</html>

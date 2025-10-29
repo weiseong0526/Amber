@@ -1,0 +1,1055 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Review</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="review.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+
+      <form class="search" role="search" action="#">
+        <input type="text" placeholder="Search reviews..." aria-label="Search reviews" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <nav class="top-actions" aria-label="Top actions">
+        <a href="notifications.html" class="action"><span>🔔</span><span class="label">Notification</span></a>
+        <a href="#" class="action"><span>👤</span><span class="label">Profile</span></a>
+      </nav>
+    </header>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="#"><span>👥</span>Customers</a>
+        <a class="nav-item" href="#"><span>⚙️</span>Settings</a>
+
+        <div class="promos">
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip">View Retreat</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">Claim Offer</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">See Schedule</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content">
+        <div class="page-header">
+          <h1>Activity Reviews & Coach Ratings</h1>
+          <p>Share your experience and help others make informed decisions</p>
+        </div>
+
+        <!-- Review Section -->
+        <div class="review-section">
+          <div class="review-container">
+            <!-- Leave a Review -->
+            <div class="leave-review">
+              <h2>Leave a review</h2>
+              <form class="review-form">
+                <div class="form-group">
+                  <label for="activity-select">Activity</label>
+                  <select id="activity-select" name="activity">
+                    <option value="yoga">Yoga</option>
+                    <option value="zumba">Zumba</option>
+                    <option value="weaving">Weaving</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label for="coach-select">Coach</label>
+                  <select id="coach-select" name="coach">
+                    <option value="sarah-chen">Sarah Chen</option>
+                    <option value="maria-rodriguez">Maria Rodriguez</option>
+                    <option value="emma-thompson">Emma Thompson</option>
+                  </select>
+                </div>
+                
+                <div class="form-group">
+                  <label>Ratings</label>
+                  <div class="star-rating">
+                    <input type="radio" id="star1" name="rating" value="1">
+                    <label for="star1" class="star">★</label>
+                    <input type="radio" id="star2" name="rating" value="2">
+                    <label for="star2" class="star">★</label>
+                    <input type="radio" id="star3" name="rating" value="3">
+                    <label for="star3" class="star">★</label>
+                    <input type="radio" id="star4" name="rating" value="4" checked>
+                    <label for="star4" class="star">★</label>
+                    <input type="radio" id="star5" name="rating" value="5">
+                    <label for="star5" class="star">★</label>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label>Feedback Tags (Optional)</label>
+                  <div class="feedback-tags">
+                    <button type="button" class="tag">Friendly</button>
+                    <button type="button" class="tag">Fun</button>
+                    <button type="button" class="tag">Relax</button>
+                    <button type="button" class="tag">Clear Instructions</button>
+                    <button type="button" class="tag add-tag">+</button>
+                  </div>
+                </div>
+                
+                <div class="form-group">
+                  <label for="comments">Comments</label>
+                  <textarea id="comments" name="comments" placeholder="Tell us what went well or what could be improved" rows="4"></textarea>
+                </div>
+                
+                <div class="form-actions">
+                  <button type="button" class="btn secondary" onclick="window.location.href='bookings.html'">Back to Bookings</button>
+                  <button type="submit" class="btn primary submit-review">Submit Review</button>
+                </div>
+              </form>
+            </div>
+            
+            <!-- Review Search -->
+            <div class="review-search">
+              <h2>Review Search</h2>
+              
+              <!-- Filter Section -->
+              <div class="filter-section">
+                <div class="filter-controls">
+                  <div class="filter-group">
+                    <label for="rating-filter">Filter by Rating:</label>
+                    <select id="rating-filter" class="filter-select">
+                      <option value="all">All Ratings</option>
+                      <option value="5">★★★★★ (5 stars)</option>
+                      <option value="4">★★★★☆ (4 stars)</option>
+                      <option value="3">★★★☆☆ (3 stars)</option>
+                      <option value="2">★★☆☆☆ (2 stars)</option>
+                      <option value="1">★☆☆☆☆ (1 star)</option>
+                    </select>
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="activity-filter">Filter by Activity:</label>
+                    <select id="activity-filter" class="filter-select">
+                      <option value="all">All Activities</option>
+                      <option value="yoga">Yoga</option>
+                      <option value="zumba">Zumba</option>
+                      <option value="weaving">Weaving</option>
+                    </select>
+                  </div>
+                  
+                  <div class="filter-group">
+                    <label for="date-sort">Sort by Date:</label>
+                    <select id="date-sort" class="filter-select">
+                      <option value="newest">Newest First</option>
+                      <option value="oldest">Oldest First</option>
+                      <option value="none">No Sorting</option>
+                    </select>
+                  </div>
+                  
+                  <button class="clear-filter-btn" onclick="clearFilter()">Clear All</button>
+                </div>
+                <div class="filter-results">
+                  <span id="filter-status">Showing all reviews</span>
+                </div>
+              </div>
+              
+              <div class="rating-distribution">
+                <h3>Rating Distribution</h3>
+                <div class="rating-bars">
+                  <div class="rating-bar">
+                    <span class="stars">★★★★★</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 33%"></div>
+                    </div>
+                    <span class="percentage">33%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★★★★☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 33%"></div>
+                    </div>
+                    <span class="percentage">33%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★★★☆☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 33%"></div>
+                    </div>
+                    <span class="percentage">33%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★★☆☆☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 0%"></div>
+                    </div>
+                    <span class="percentage">0%</span>
+                  </div>
+                  <div class="rating-bar">
+                    <span class="stars">★☆☆☆☆</span>
+                    <div class="bar">
+                      <div class="fill" style="width: 0%"></div>
+                    </div>
+                    <span class="percentage">0%</span>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="reviews-list">
+                <h3>Recent Reviews</h3>
+                <div class="review-item" data-review-id="1">
+                  <div class="review-header">
+                    <span class="reviewer-name">James</span>
+                    <span class="review-activity">Yoga</span>
+                    <span class="review-date">28 Aug 2025, 2:30 PM</span>
+                    <div class="review-rating">
+                      <span class="stars">★★★★☆</span>
+                    </div>
+                  </div>
+                  <p class="review-text">Great yoga session with Sarah! Very relaxing and well-structured.</p>
+                  <div class="review-tags">
+                    <span class="tag">Relax</span>
+                    <span class="tag">Clear Instructions</span>
+                  </div>
+                  
+                  <!-- Comments Section -->
+                  <div class="comments-section">
+                    <div class="comments-header">
+                      <span class="comments-count">1 comment</span>
+                      <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+                    </div>
+                    
+                    <div class="comments-list" style="display: none;">
+                      
+                      <div class="comment-item" data-comment-id="2" data-author="other-user">
+                        <div class="comment-header">
+                          <span class="comment-author">Sarah M.</span>
+                          <span class="comment-date">28 Aug 2025, 3:15 PM</span>
+                        </div>
+                        <p class="comment-text">I agree! The breathing exercises were amazing.</p>
+                      </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                      <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+                      <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="review-item" data-review-id="2">
+                  <div class="review-header">
+                    <span class="reviewer-name">Janes</span>
+                    <span class="review-activity">Zumba</span>
+                    <span class="review-date">29 Aug 2025, 7:15 PM</span>
+                    <div class="review-rating">
+                      <span class="stars">★★★☆☆</span>
+                    </div>
+                  </div>
+                  <p class="review-text">Fun Zumba class with Maria! Good energy but could be more challenging.</p>
+                  <div class="review-tags">
+                    <span class="tag">Fun</span>
+                    <span class="tag">Clear Instructions</span>
+                  </div>
+                  
+                  <!-- Comments Section -->
+                  <div class="comments-section">
+                    <div class="comments-header">
+                      <span class="comments-count">1 comment</span>
+                      <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+                    </div>
+                    
+                    <div class="comments-list" style="display: none;">
+                      <div class="comment-item" data-comment-id="3" data-author="other-user">
+                        <div class="comment-header">
+                          <span class="comment-author">Mike R.</span>
+                          <span class="comment-date">29 Aug 2025, 1:45 PM</span>
+                        </div>
+                        <p class="comment-text">The instructions were indeed very clear!</p>
+                      </div>
+                    </div>
+                    
+                    <div class="add-comment">
+                      <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+                      <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="review-item" data-review-id="3">
+                  <div class="review-header">
+                    <span class="reviewer-name">Jacks</span>
+                    <span class="review-activity">Weaving</span>
+                    <span class="review-date">28 Aug 2025, 10:45 AM</span>
+                    <div class="review-rating">
+                      <span class="stars">★★★★★</span>
+                    </div>
+                  </div>
+                  <p class="review-text">Amazing weaving workshop with Emma! Learned so much and created beautiful pieces.</p>
+                  <div class="review-tags">
+                    <span class="tag">Friendly</span>
+                    <span class="tag">Clear Instructions</span>
+                  </div>
+                  
+                  <!-- Comments Section -->
+                  <div class="comments-section">
+                    <div class="comments-header">
+                      <span class="comments-count">0 comments</span>
+                      <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+                    </div>
+                    
+                    <div class="comments-list" style="display: none;">
+                      <!-- No comments yet -->
+                    </div>
+                    
+                    <div class="add-comment">
+                      <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+                      <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      // Review functionality
+      document.addEventListener('DOMContentLoaded', function() {
+        const reviewForm = document.querySelector('.review-form');
+        const feedbackTags = document.querySelectorAll('.feedback-tags .tag:not(.add-tag)');
+        const addTagBtn = document.querySelector('.add-tag');
+        
+        // Initialize rating distribution on page load
+        updateRatingDistribution();
+        
+        // Activity-coach mapping
+        const activityCoachMap = {
+          'yoga': 'sarah-chen',
+          'zumba': 'maria-rodriguez', 
+          'weaving': 'emma-thompson'
+        };
+        
+        // Update coach options based on selected activity
+        const activitySelect = document.getElementById('activity-select');
+        const coachSelect = document.getElementById('coach-select');
+        
+        activitySelect.addEventListener('change', function() {
+          const selectedActivity = this.value;
+          const assignedCoach = activityCoachMap[selectedActivity];
+          
+          // Update coach select to show only the assigned coach
+          coachSelect.innerHTML = '';
+          const coachOption = document.createElement('option');
+          coachOption.value = assignedCoach;
+          coachOption.textContent = getCoachName(assignedCoach);
+          coachSelect.appendChild(coachOption);
+        });
+        
+        // Initialize coach selection based on default activity
+        activitySelect.dispatchEvent(new Event('change'));
+        
+        // Star rating functionality
+        const starInputs = document.querySelectorAll('.star-rating input[type="radio"]');
+        const starLabels = document.querySelectorAll('.star-rating label.star');
+        
+        starLabels.forEach((label, index) => {
+          label.addEventListener('click', () => {
+            // Uncheck all stars
+            starInputs.forEach(input => input.checked = false);
+            // Check only the clicked star
+            starInputs[index].checked = true;
+          });
+        });
+        
+        // Feedback tags functionality
+        feedbackTags.forEach(tag => {
+          tag.addEventListener('click', () => {
+            tag.classList.toggle('selected');
+          });
+        });
+        
+        // Add new tag functionality
+        addTagBtn.addEventListener('click', () => {
+          const newTagText = prompt('Enter new tag:');
+          if (newTagText && newTagText.trim()) {
+            const newTag = document.createElement('button');
+            newTag.type = 'button';
+            newTag.className = 'tag';
+            newTag.textContent = newTagText.trim();
+            newTag.addEventListener('click', () => {
+              newTag.classList.toggle('selected');
+            });
+            addTagBtn.parentNode.insertBefore(newTag, addTagBtn);
+          }
+        });
+        
+        // Form submission
+        reviewForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          
+          const formData = new FormData(reviewForm);
+          const selectedTags = Array.from(document.querySelectorAll('.feedback-tags .tag.selected:not(.add-tag)'))
+            .map(tag => tag.textContent);
+          
+          const reviewData = {
+            activity: formData.get('activity'),
+            coach: formData.get('coach'),
+            rating: formData.get('rating'),
+            tags: selectedTags,
+            comments: formData.get('comments')
+          };
+          
+          // Add new review to the reviews list
+          addNewReview(reviewData);
+          
+          // Update rating distribution
+          updateRatingDistribution();
+          
+          // Show success message
+          alert('Review submitted successfully! Thank you for your feedback.');
+          
+          // Reset form
+          reviewForm.reset();
+          document.querySelectorAll('.feedback-tags .tag.selected').forEach(tag => {
+            tag.classList.remove('selected');
+          });
+          // Reset to 4-star default
+          document.getElementById('star4').checked = true;
+        });
+
+        // Search functionality
+        const searchInput = document.querySelector('.search input');
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          const reviewItems = document.querySelectorAll('.review-item');
+          
+          reviewItems.forEach(item => {
+            const itemText = item.textContent.toLowerCase();
+            if (itemText.includes(searchTerm)) {
+              item.style.display = 'block';
+            } else {
+              item.style.display = 'none';
+            }
+          });
+        });
+
+        // Filter functionality
+        const ratingFilter = document.getElementById('rating-filter');
+        const activityFilter = document.getElementById('activity-filter');
+        const dateSort = document.getElementById('date-sort');
+        
+        ratingFilter.addEventListener('change', function() {
+          applyFilters();
+        });
+        
+        activityFilter.addEventListener('change', function() {
+          applyFilters();
+        });
+        
+        dateSort.addEventListener('change', function() {
+          applyFilters();
+        });
+
+        // Prevent search form submission
+        document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+      });
+
+      // Function to add new review to the reviews list
+      function addNewReview(reviewData) {
+        const reviewsList = document.querySelector('.reviews-list');
+        const newReviewId = Date.now(); // Simple ID generation
+        
+        // Get current date and time
+        const now = new Date();
+        const currentDate = now.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric'
+        });
+        const currentTime = now.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        const dateTimeString = `${currentDate}, ${currentTime}`;
+        
+        // Create stars display
+        const rating = parseInt(reviewData.rating) || 4;
+        const stars = '★'.repeat(rating) + '☆'.repeat(5 - rating);
+        
+        // Create tags HTML
+        const tagsHtml = reviewData.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+        
+        // Create new review element
+        const newReview = document.createElement('div');
+        newReview.className = 'review-item';
+        newReview.dataset.reviewId = newReviewId;
+        
+        newReview.innerHTML = `
+          <div class="review-header">
+            <span class="reviewer-name">You</span>
+            <span class="review-activity">${reviewData.activity}</span>
+            <span class="review-date">${dateTimeString}</span>
+            <div class="review-rating">
+              <span class="stars">${stars}</span>
+            </div>
+            <div class="review-options">
+              <button class="kebab-menu-btn" onclick="toggleKebabMenu(this)">⋮</button>
+              <div class="kebab-menu" style="display: none;">
+                <button class="edit-review-btn" onclick="editReview(this)">Edit</button>
+                <button class="delete-review-btn" onclick="deleteReview(this)">Delete</button>
+              </div>
+            </div>
+          </div>
+          <p class="review-text">${reviewData.comments || 'No additional comments'}</p>
+          <div class="review-tags">
+            ${tagsHtml}
+          </div>
+          
+          <!-- Comments Section -->
+          <div class="comments-section">
+            <div class="comments-header">
+              <span class="comments-count">0 comments</span>
+              <button class="toggle-comments-btn" onclick="toggleComments(this)">Show Comments</button>
+            </div>
+            
+            <div class="comments-list" style="display: none;">
+              <!-- No comments yet -->
+            </div>
+            
+            <div class="add-comment">
+              <textarea placeholder="Add a comment..." class="comment-input"></textarea>
+              <button class="submit-comment-btn" onclick="submitComment(this)">Post Comment</button>
+            </div>
+          </div>
+        `;
+        
+        // Insert at the beginning of the reviews list
+        reviewsList.insertBefore(newReview, reviewsList.firstChild);
+      }
+
+      // Comment functionality
+      function toggleComments(button) {
+        const commentsList = button.closest('.comments-section').querySelector('.comments-list');
+        const isVisible = commentsList.style.display !== 'none';
+        
+        if (isVisible) {
+          commentsList.style.display = 'none';
+          button.textContent = 'Show Comments';
+        } else {
+          commentsList.style.display = 'block';
+          button.textContent = 'Hide Comments';
+        }
+      }
+
+      function submitComment(button) {
+        const commentInput = button.previousElementSibling;
+        const commentText = commentInput.value.trim();
+        
+        if (!commentText) {
+          alert('Please enter a comment before posting.');
+          return;
+        }
+        
+        const commentsList = button.closest('.comments-section').querySelector('.comments-list');
+        const reviewId = button.closest('.review-item').dataset.reviewId;
+        
+        // Create new comment element
+        const commentId = Date.now(); // Simple ID generation
+        const newComment = document.createElement('div');
+        newComment.className = 'comment-item';
+        newComment.dataset.commentId = commentId;
+        newComment.dataset.author = 'current-user';
+        
+        const now = new Date();
+        const currentDate = now.toLocaleDateString('en-GB', {
+          day: '2-digit',
+          month: 'short',
+          year: 'numeric'
+        });
+        const currentTime = now.toLocaleTimeString('en-US', {
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        const dateTimeString = `${currentDate}, ${currentTime}`;
+        
+        newComment.innerHTML = `
+          <div class="comment-header">
+            <span class="comment-author">You</span>
+            <span class="comment-date">${dateTimeString}</span>
+            <div class="comment-actions">
+              <button class="edit-comment-btn" onclick="editComment(this)">Edit</button>
+              <button class="delete-comment-btn" onclick="deleteComment(this)">Delete</button>
+            </div>
+          </div>
+          <p class="comment-text">${commentText}</p>
+        `;
+        
+        // Add to comments list
+        commentsList.appendChild(newComment);
+        
+        // Clear input
+        commentInput.value = '';
+        
+        // Update comment count
+        updateCommentCount(button.closest('.comments-section'));
+        
+        // Show comments if hidden
+        if (commentsList.style.display === 'none') {
+          toggleComments(button.closest('.comments-section').querySelector('.toggle-comments-btn'));
+        }
+      }
+
+      function editComment(button) {
+        const commentItem = button.closest('.comment-item');
+        const commentText = commentItem.querySelector('.comment-text');
+        const currentText = commentText.textContent;
+        
+        // Add edit input
+        const editInput = document.createElement('textarea');
+        editInput.className = 'comment-edit-input';
+        editInput.value = currentText;
+        
+        // Add edit actions
+        const editActions = document.createElement('div');
+        editActions.className = 'comment-edit-actions';
+        editActions.innerHTML = `
+          <button class="save-comment-btn" onclick="saveComment(this)">Save</button>
+          <button class="cancel-edit-btn" onclick="cancelEdit(this)">Cancel</button>
+        `;
+        
+        // Insert edit elements
+        commentText.parentNode.insertBefore(editInput, commentText);
+        commentText.parentNode.insertBefore(editActions, commentText.nextSibling);
+        
+        // Add editing class
+        commentItem.classList.add('editing');
+        
+        // Focus on input
+        editInput.focus();
+        editInput.select();
+      }
+
+      function saveComment(button) {
+        const commentItem = button.closest('.comment-item');
+        const editInput = commentItem.querySelector('.comment-edit-input');
+        const commentText = commentItem.querySelector('.comment-text');
+        const newText = editInput.value.trim();
+        
+        if (!newText) {
+          alert('Comment cannot be empty.');
+          return;
+        }
+        
+        // Update comment text
+        commentText.textContent = newText;
+        
+        // Remove edit elements
+        editInput.remove();
+        button.closest('.comment-edit-actions').remove();
+        
+        // Remove editing class
+        commentItem.classList.remove('editing');
+      }
+
+      function cancelEdit(button) {
+        const commentItem = button.closest('.comment-item');
+        
+        // Remove edit elements
+        commentItem.querySelector('.comment-edit-input').remove();
+        button.closest('.comment-edit-actions').remove();
+        
+        // Remove editing class
+        commentItem.classList.remove('editing');
+      }
+
+      function deleteComment(button) {
+        if (confirm('Are you sure you want to delete this comment?')) {
+          const commentItem = button.closest('.comment-item');
+          const commentsSection = commentItem.closest('.comments-section');
+          
+          commentItem.remove();
+          
+          // Update comment count
+          updateCommentCount(commentsSection);
+        }
+      }
+
+      function updateCommentCount(commentsSection) {
+        const commentsList = commentsSection.querySelector('.comments-list');
+        const commentCount = commentsList.querySelectorAll('.comment-item').length;
+        const countElement = commentsSection.querySelector('.comments-count');
+        
+        countElement.textContent = `${commentCount} comment${commentCount !== 1 ? 's' : ''}`;
+      }
+
+      // Kebab menu functionality
+      function toggleKebabMenu(button) {
+        const kebabMenu = button.nextElementSibling;
+        const isVisible = kebabMenu.style.display !== 'none';
+        
+        // Close all other kebab menus
+        document.querySelectorAll('.kebab-menu').forEach(menu => {
+          if (menu !== kebabMenu) {
+            menu.style.display = 'none';
+          }
+        });
+        
+        if (isVisible) {
+          kebabMenu.style.display = 'none';
+        } else {
+          kebabMenu.style.display = 'block';
+        }
+      }
+
+      function editReview(button) {
+        const reviewItem = button.closest('.review-item');
+        const reviewText = reviewItem.querySelector('.review-text');
+        const reviewRating = reviewItem.querySelector('.stars');
+        const currentText = reviewText.textContent;
+        
+        // Get current rating from stars
+        const currentRating = (reviewRating.textContent.match(/★/g) || []).length;
+        
+        // Create edit form
+        const editForm = document.createElement('div');
+        editForm.className = 'review-edit-form';
+        editForm.innerHTML = `
+          <div class="edit-rating-section">
+            <label class="edit-rating-label">Rating:</label>
+            <div class="edit-star-rating">
+              <input type="radio" id="edit-star5" name="edit-rating" value="5" ${currentRating === 5 ? 'checked' : ''}>
+              <label for="edit-star5" class="edit-star">★</label>
+              <input type="radio" id="edit-star4" name="edit-rating" value="4" ${currentRating === 4 ? 'checked' : ''}>
+              <label for="edit-star4" class="edit-star">★</label>
+              <input type="radio" id="edit-star3" name="edit-rating" value="3" ${currentRating === 3 ? 'checked' : ''}>
+              <label for="edit-star3" class="edit-star">★</label>
+              <input type="radio" id="edit-star2" name="edit-rating" value="2" ${currentRating === 2 ? 'checked' : ''}>
+              <label for="edit-star2" class="edit-star">★</label>
+              <input type="radio" id="edit-star1" name="edit-rating" value="1" ${currentRating === 1 ? 'checked' : ''}>
+              <label for="edit-star1" class="edit-star">★</label>
+            </div>
+          </div>
+          <textarea class="review-edit-input" placeholder="Edit your review...">${currentText}</textarea>
+          <div class="review-edit-actions">
+            <button class="save-review-btn" onclick="saveReview(this)">Save</button>
+            <button class="cancel-edit-review-btn" onclick="cancelEditReview(this)">Cancel</button>
+          </div>
+        `;
+        
+        // Replace review text with edit form
+        reviewText.parentNode.insertBefore(editForm, reviewText);
+        reviewText.style.display = 'none';
+        
+        // Close kebab menu
+        button.closest('.kebab-menu').style.display = 'none';
+        
+        // Add star rating functionality to edit form
+        const editStarInputs = editForm.querySelectorAll('.edit-star-rating input[type="radio"]');
+        const editStarLabels = editForm.querySelectorAll('.edit-star-rating label.edit-star');
+        
+        editStarLabels.forEach((label, index) => {
+          label.addEventListener('click', () => {
+            // Uncheck all stars
+            editStarInputs.forEach(input => input.checked = false);
+            // Check stars up to clicked one
+            for (let i = 0; i <= index; i++) {
+              editStarInputs[i].checked = true;
+            }
+          });
+        });
+        
+        // Focus on textarea
+        editForm.querySelector('.review-edit-input').focus();
+        editForm.querySelector('.review-edit-input').select();
+      }
+
+      function saveReview(button) {
+        const reviewItem = button.closest('.review-item');
+        const editForm = button.closest('.review-edit-form');
+        const editInput = editForm.querySelector('.review-edit-input');
+        const reviewText = reviewItem.querySelector('.review-text');
+        const reviewRating = reviewItem.querySelector('.stars');
+        const newText = editInput.value.trim();
+        
+        if (!newText) {
+          alert('Review cannot be empty.');
+          return;
+        }
+        
+        // Get new rating from edit form
+        const selectedRating = editForm.querySelector('input[name="edit-rating"]:checked');
+        const newRating = selectedRating ? parseInt(selectedRating.value) : 4;
+        
+        // Update review text
+        reviewText.textContent = newText;
+        reviewText.style.display = 'block';
+        
+        // Update star rating
+        const filledStars = '★'.repeat(newRating);
+        const emptyStars = '☆'.repeat(5 - newRating);
+        reviewRating.textContent = filledStars + emptyStars;
+        
+        // Update rating distribution
+        updateRatingDistribution();
+        
+        // Remove edit form
+        editForm.remove();
+      }
+
+      function cancelEditReview(button) {
+        const reviewItem = button.closest('.review-item');
+        const editForm = button.closest('.review-edit-form');
+        const reviewText = reviewItem.querySelector('.review-text');
+        
+        // Show original review text
+        reviewText.style.display = 'block';
+        
+        // Remove edit form
+        editForm.remove();
+      }
+
+      function deleteReview(button) {
+        if (confirm('Are you sure you want to delete this review?')) {
+          const reviewItem = button.closest('.review-item');
+          reviewItem.remove();
+          
+          // Update rating distribution
+          updateRatingDistribution();
+        }
+      }
+
+      // Close kebab menus when clicking outside
+      document.addEventListener('click', function(event) {
+        if (!event.target.closest('.review-options')) {
+          document.querySelectorAll('.kebab-menu').forEach(menu => {
+            menu.style.display = 'none';
+          });
+        }
+      });
+
+      // Filter functions
+      function applyFilters() {
+        const rating = document.getElementById('rating-filter').value;
+        const activity = document.getElementById('activity-filter').value;
+        const sortBy = document.getElementById('date-sort').value;
+        
+        // First filter by rating
+        filterReviewsByRating(rating);
+        
+        // Then filter by activity
+        filterReviewsByActivity(activity);
+        
+        // Then sort by date if requested
+        if (sortBy !== 'none') {
+          sortReviewsByDate(sortBy);
+        }
+      }
+
+      function filterReviewsByRating(rating) {
+        const reviewItems = document.querySelectorAll('.review-item');
+        const filterStatus = document.getElementById('filter-status');
+        let visibleCount = 0;
+        
+        reviewItems.forEach(item => {
+          const starsElement = item.querySelector('.stars');
+          const currentRating = (starsElement.textContent.match(/★/g) || []).length;
+          
+          if (rating === 'all' || currentRating === parseInt(rating)) {
+            item.style.display = 'block';
+            visibleCount++;
+          } else {
+            item.style.display = 'none';
+          }
+        });
+        
+        // Update filter status
+        if (rating === 'all') {
+          filterStatus.textContent = `Showing all reviews (${visibleCount} total)`;
+        } else {
+          const starText = '★'.repeat(parseInt(rating)) + '☆'.repeat(5 - parseInt(rating));
+          filterStatus.textContent = `Showing ${starText} reviews (${visibleCount} found)`;
+        }
+      }
+
+      function filterReviewsByActivity(activity) {
+        const reviewItems = document.querySelectorAll('.review-item');
+        
+        reviewItems.forEach(item => {
+          const activityElement = item.querySelector('.review-activity');
+          const currentActivity = activityElement ? activityElement.textContent.toLowerCase() : '';
+          
+          if (activity === 'all' || currentActivity === activity) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      }
+
+      function sortReviewsByDate(sortBy) {
+        const reviewsList = document.querySelector('.reviews-list');
+        const reviewItems = Array.from(document.querySelectorAll('.review-item'));
+        
+        // Filter only visible items
+        const visibleItems = reviewItems.filter(item => item.style.display !== 'none');
+        
+        // Sort by date
+        visibleItems.sort((a, b) => {
+          const dateA = parseReviewDate(a.querySelector('.review-date').textContent);
+          const dateB = parseReviewDate(b.querySelector('.review-date').textContent);
+          
+          if (sortBy === 'newest') {
+            return dateB - dateA; // Newest first
+          } else {
+            return dateA - dateB; // Oldest first
+          }
+        });
+        
+        // Reorder the DOM elements
+        visibleItems.forEach(item => {
+          reviewsList.appendChild(item);
+        });
+      }
+
+      function parseReviewDate(dateString) {
+        // Parse date string like "28 Aug 2025, 2:30 PM" or "13 Oct 2025, 7:15 PM"
+        const months = {
+          'Jan': 0, 'Feb': 1, 'Mar': 2, 'Apr': 3, 'May': 4, 'Jun': 5,
+          'Jul': 6, 'Aug': 7, 'Sep': 8, 'Oct': 9, 'Nov': 10, 'Dec': 11
+        };
+        
+        // Split by comma to separate date and time
+        const dateTimeParts = dateString.trim().split(', ');
+        if (dateTimeParts.length === 2) {
+          const datePart = dateTimeParts[0].trim();
+          const timePart = dateTimeParts[1].trim();
+          
+          const parts = datePart.split(' ');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = months[parts[1]];
+            const year = parseInt(parts[2]);
+            
+            if (!isNaN(day) && month !== undefined && !isNaN(year)) {
+              // Parse time (e.g., "2:30 PM" or "10:45 AM")
+              const timeMatch = timePart.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+              if (timeMatch) {
+                let hours = parseInt(timeMatch[1]);
+                const minutes = parseInt(timeMatch[2]);
+                const ampm = timeMatch[3].toUpperCase();
+                
+                // Convert to 24-hour format
+                if (ampm === 'PM' && hours !== 12) {
+                  hours += 12;
+                } else if (ampm === 'AM' && hours === 12) {
+                  hours = 0;
+                }
+                
+                return new Date(year, month, day, hours, minutes).getTime();
+              } else {
+                // If time parsing fails, just use the date
+                return new Date(year, month, day).getTime();
+              }
+            }
+          }
+        } else {
+          // Fallback for old format without time
+          const parts = dateString.trim().split(' ');
+          if (parts.length === 3) {
+            const day = parseInt(parts[0]);
+            const month = months[parts[1]];
+            const year = parseInt(parts[2]);
+            
+            if (!isNaN(day) && month !== undefined && !isNaN(year)) {
+              return new Date(year, month, day).getTime();
+            }
+          }
+        }
+        
+        // Fallback to current date if parsing fails
+        return new Date().getTime();
+      }
+
+      function clearFilter() {
+        const ratingFilter = document.getElementById('rating-filter');
+        const activityFilter = document.getElementById('activity-filter');
+        const dateSort = document.getElementById('date-sort');
+        
+        ratingFilter.value = 'all';
+        activityFilter.value = 'all';
+        dateSort.value = 'newest';
+        
+        applyFilters();
+      }
+
+      // Helper function to get coach display name
+      function getCoachName(coachValue) {
+        const coachNames = {
+          'sarah-chen': 'Sarah Chen',
+          'maria-rodriguez': 'Maria Rodriguez',
+          'emma-thompson': 'Emma Thompson'
+        };
+        return coachNames[coachValue] || coachValue;
+      }
+
+      // Function to calculate and update rating distribution
+      function updateRatingDistribution() {
+        const reviewItems = document.querySelectorAll('.review-item');
+        const ratingCounts = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
+        let totalReviews = 0;
+        
+        // Count ratings from all reviews
+        reviewItems.forEach(item => {
+          const starsElement = item.querySelector('.stars');
+          if (starsElement) {
+            const rating = (starsElement.textContent.match(/★/g) || []).length;
+            if (rating >= 1 && rating <= 5) {
+              ratingCounts[rating]++;
+              totalReviews++;
+            }
+          }
+        });
+        
+        // Calculate percentages
+        const percentages = {};
+        for (let i = 1; i <= 5; i++) {
+          percentages[i] = totalReviews > 0 ? Math.round((ratingCounts[i] / totalReviews) * 100) : 0;
+        }
+        
+        // Update the rating distribution display
+        const ratingBars = document.querySelectorAll('.rating-bar');
+        ratingBars.forEach((bar, index) => {
+          const rating = 5 - index; // 5, 4, 3, 2, 1
+          const fillElement = bar.querySelector('.fill');
+          const percentageElement = bar.querySelector('.percentage');
+          
+          if (fillElement && percentageElement) {
+            const percentage = percentages[rating];
+            fillElement.style.width = `${percentage}%`;
+            percentageElement.textContent = `${percentage}%`;
+          }
+        });
+      }
+    </script>
+  </body>
+</html>

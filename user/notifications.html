@@ -1,0 +1,351 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Notifications</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="notifications.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+
+      <form class="search" role="search" action="#">
+        <input type="text" placeholder="Search notification..." aria-label="Search notifications" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <nav class="top-actions" aria-label="Top actions">
+        <a href="notifications.html" class="action"><span>🔔</span><span class="label">Notification</span></a>
+        <a href="my-profile.html" class="action"><span>👤</span><span class="label">Profile</span></a>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a class="mobile-nav-item" href="home.html"><span>🏠</span>Home</a>
+      <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="mobile-nav-item" href="bookings.html"><span>📅</span>Booking</a>
+      <a class="mobile-nav-item" href="location.html"><span>📍</span>Location</a>
+      <a class="mobile-nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="location.html"><span>📍</span>Location</a>
+        <a class="nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+
+        <div class="promos">
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip">View Retreat</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">Claim Offer</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">See Schedule</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content notifications">
+        <div class="notifications-header">
+          <div class="search-actions">
+            <form class="notification-search" role="search" action="#">
+              <input type="text" placeholder="Search notification..." aria-label="Search notifications" />
+              <button type="submit" aria-label="Search">🔍</button>
+            </form>
+            <button class="btn mark-read" id="markAllRead">
+              <span>✉️</span>
+              <span>Mark As all Read</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="notifications-list">
+          <!-- Notification Item 1 -->
+          <article class="notification-item unread" data-id="1">
+            <div class="notification-indicator">
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notification-avatar">
+              <div class="avatar-circle">A</div>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-sender">New customer</span>
+                <span class="notification-time">Posted on: Jun 30, 2025, 3:54 PM</span>
+              </div>
+              <div class="notification-message">
+                Hi everyone, Please be informed that Wednesday's class will be 
+                <span class="highlighted-text">postponed as I have a meeting that will extend in</span>
+                the afternoon. We will reschedule for Thursday at the same time. Thank you for your understanding.
+              </div>
+            </div>
+          </article>
+
+          <!-- Notification Item 2 -->
+          <article class="notification-item unread" data-id="2">
+            <div class="notification-indicator">
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notification-avatar">
+              <div class="avatar-circle">A</div>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-sender">New customer</span>
+                <span class="notification-time">Posted on: Jun 30, 2025, 3:54 PM</span>
+              </div>
+              <div class="notification-message">
+                Hi everyone, Please be informed that Wednesday's class will be 
+                <span class="highlighted-text">postponed as I have a meeting that will extend in</span>
+                the afternoon. We will reschedule for Thursday at the same time. Thank you for your understanding.
+              </div>
+            </div>
+          </article>
+
+          <!-- Notification Item 3 -->
+          <article class="notification-item unread" data-id="3">
+            <div class="notification-indicator">
+              <div class="unread-dot"></div>
+            </div>
+            <div class="notification-avatar">
+              <div class="avatar-circle">A</div>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-sender">New customer</span>
+                <span class="notification-time">Posted on: Jun 30, 2025, 3:54 PM</span>
+              </div>
+              <div class="notification-message">
+                Hi everyone, Please be informed that Wednesday's class will be 
+                <span class="highlighted-text">postponed as I have a meeting that will extend in</span>
+                the afternoon. We will reschedule for Thursday at the same time. Thank you for your understanding.
+              </div>
+            </div>
+          </article>
+
+          <!-- Read Notification Item -->
+          <article class="notification-item read" data-id="4">
+            <div class="notification-indicator">
+              <!-- No dot for read notifications -->
+            </div>
+            <div class="notification-avatar">
+              <div class="avatar-circle">S</div>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-sender">Sarah Chen</span>
+                <span class="notification-time">Posted on: Jun 29, 2025, 2:30 PM</span>
+              </div>
+              <div class="notification-message">
+                Great news! We've added new yoga mats to the studio. Please feel free to use them during your next class.
+              </div>
+            </div>
+          </article>
+
+          <!-- Read Notification Item -->
+          <article class="notification-item read" data-id="5">
+            <div class="notification-indicator">
+              <!-- No dot for read notifications -->
+            </div>
+            <div class="notification-avatar">
+              <div class="avatar-circle">M</div>
+            </div>
+            <div class="notification-content">
+              <div class="notification-header">
+                <span class="notification-sender">Maria Rodriguez</span>
+                <span class="notification-time">Posted on: Jun 28, 2025, 10:15 AM</span>
+              </div>
+              <div class="notification-message">
+                The Zumba class this Friday will have a special theme - Latin Night! Come dressed in your best Latin-inspired outfit.
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" style="display: none;">
+          <div class="empty-icon">🔔</div>
+          <h3>No notifications found</h3>
+          <p>Try adjusting your search or check back later for new updates.</p>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const notificationItems = document.querySelectorAll('.notification-item');
+        const markAllReadBtn = document.getElementById('markAllRead');
+        const searchInput = document.querySelector('.notification-search input');
+        const emptyState = document.querySelector('.empty-state');
+
+        // Mark individual notification as read when clicked
+        notificationItems.forEach(item => {
+          item.addEventListener('click', function() {
+            if (this.classList.contains('unread')) {
+              this.classList.remove('unread');
+              this.classList.add('read');
+              this.querySelector('.unread-dot')?.remove();
+            }
+          });
+        });
+
+        // Mark all notifications as read
+        markAllReadBtn.addEventListener('click', function() {
+          notificationItems.forEach(item => {
+            if (item.classList.contains('unread')) {
+              item.classList.remove('unread');
+              item.classList.add('read');
+              item.querySelector('.unread-dot')?.remove();
+            }
+          });
+        });
+
+        // Search functionality
+        searchInput.addEventListener('input', function() {
+          const searchTerm = this.value.toLowerCase();
+          let visibleCount = 0;
+
+          notificationItems.forEach(item => {
+            const message = item.querySelector('.notification-message').textContent.toLowerCase();
+            const sender = item.querySelector('.notification-sender').textContent.toLowerCase();
+            
+            if (message.includes(searchTerm) || sender.includes(searchTerm)) {
+              item.style.display = 'flex';
+              visibleCount++;
+            } else {
+              item.style.display = 'none';
+            }
+          });
+
+          // Show/hide empty state
+          if (visibleCount === 0 && searchTerm !== '') {
+            emptyState.style.display = 'block';
+          } else {
+            emptyState.style.display = 'none';
+          }
+        });
+
+        // Prevent search form submission
+        document.querySelector('.notification-search')?.addEventListener('submit', (e) => e.preventDefault());
+        document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+      });
+
+      // Mobile Menu Toggle
+      (function(){
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        var isOpen = false;
+
+        function openMenu(){
+          isOpen = true;
+          mobileMenu.classList.add('open');
+          mobileMenuOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuToggle.classList.add('active');
+        }
+
+        function closeMenu(){
+          isOpen = false;
+          mobileMenu.classList.remove('open');
+          mobileMenuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          menuToggle.classList.remove('active');
+        }
+
+        if(menuToggle){
+          menuToggle.addEventListener('click', function(){
+            if(isOpen){
+              closeMenu();
+            } else {
+              openMenu();
+            }
+          });
+        }
+
+        if(mobileMenuOverlay){
+          mobileMenuOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when clicking on a menu item
+        if(mobileMenu){
+          mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+            item.addEventListener('click', function(){
+              closeMenu();
+            });
+          });
+        }
+      })();
+    </script>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <p>Follow us on social media to get the latest news</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/17bD2Xt7NX/" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://static.vecteezy.com/system/resources/previews/018/930/698/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/amberchamber.ss15?igsh=MTltaGdvaXBpOGVtYQ==" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png" alt="Instagram">
+            </a>
+          </div>
+          <div class="policy-links">
+            <a href="#" class="policy-link">COOKIES POLICY</a>
+            <a href="#" class="policy-link">PRIVACY POLICY</a>
+            <a href="#" class="policy-link">TERMS AND CONDITIONS</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Explore More</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Founder Message</a></li>
+            <li><a href="#">Our Concepts</a></li>
+            <li><a href="location.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Our Studios</h3>
+          <ul class="footer-links">
+            <li><a href="location.html">Our Locations</a></li>
+            <li><a href="#">Past Events</a></li>
+            <li><a href="#">Opportunities</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Copyright © 2024. Amber Sdn Bhd. All rights reserved</p>
+      </div>
+    </footer>
+
+  </body>
+</html>

@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login / Register / Forgot Password</title>
+<!-- External CSS -->
+  <link rel="stylesheet" href="style.css">
+
+  <!-- FontAwesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="wrapper">
+      <!-- Left side image -->
+  <div class="image-box">
+    <img src="https://amber-7q7.pages.dev/logo.jpg" alt="Side Image">
+      </div>
+  
+      <!-- Right side form -->
+      <div class="container">
+        <div class="form-box">
+          <!-- Login Form -->
+          <form id="loginForm">
+            <h2>Login</h2>
+            <div class="input-group">
+              <i class="fa fa-envelope"></i>
+              <input type="email" id="loginEmail" placeholder="Email" required>
+            </div>
+            <div class="input-group">
+              <i class="fa fa-lock"></i>
+              <input type="password" id="loginPassword" placeholder="Password" required>
+              <span class="toggle-password" onclick="togglePassword('loginPassword', this)">
+                <i class="fa fa-eye"></i>
+              </span>
+            </div>
+
+            <div class="options">
+              <label><input type="checkbox" id="rememberMe" > Remember me</label>
+              <a onclick="showForm('forgotForm')">Forgot password?</a>
+            </div>
+            <button type="submit">Login</button>
+            <span class="link" onclick="showForm('registerForm')">Don’t have an account? Register</span>
+  
+            <!-- Google login -->
+  <div id="g_id_onload"
+       data-client_id="YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com"
+       data-context="signin"
+       data-ux_mode="popup"
+       data-callback="handleGoogleResponse"
+       data-auto_prompt="false"></div>
+  
+  
+  <div class="g_id_signin" data-type="standard" data-text="continue_with"></div>
+  <script src="https://accounts.google.com/gsi/client" async defer></script>
+  
+  
+            <!-- Facebook login -->
+             <a href="https://www.facebook.com/login.php" target="_blank">
+            <button type="button" class="social-btn facebook-btn" onclick="facebookLogin()">
+              <i class="fab fa-facebook-f"></i> Continue with Facebook
+            </button>
+             </a>
+          </form>
+  
+          <!-- Register Form -->
+          <form id="registerForm" class="hidden">
+            <h2>Register</h2>
+            <div class="input-group">
+              <i class="fa fa-user"></i>
+              <input type="text" id="registerUsername" placeholder="Username" required>
+            </div>
+            <div class="input-group">
+              <i class="fa fa-envelope"></i>
+              <input type="email" id="registerEmail" placeholder="Email" required>
+            </div>
+  <!-- Phone number input (full row) -->
+  <div class="input-group">
+    <i class="fa fa-phone"></i>
+    <input type="tel" id="phoneNumber" placeholder="Phone Number" required>
+  </div>
+  
+  <!-- OTP input + Send button in one row -->
+  <div class="input-group otp-group">
+    <i class="fa-solid fa-key"></i>
+    <input type="text" id="otpCode" placeholder="Enter OTP" required maxlength="6" pattern="[0-9]*" inputmode="numeric" disabled>
+    <button type="button" class="otp-btn" onclick="sendOTP()">Send</button>
+  </div>
+  
+  
+            <div class="input-group">
+              <i class="fa fa-lock"></i>
+              <input type="password" id="registerPassword" placeholder="Password" required >
+              <span class="toggle-password" onclick="togglePassword('registerPassword', this)">
+                <i class="fa fa-eye"></i>
+              </span>
+            </div>
+            <div class="input-group">
+              <i class="fa fa-lock"></i>
+              <input type="password" id="registerConfirmPassword" placeholder="Confirm Password" required>
+              <span class="toggle-password" onclick="togglePassword('registerConfirmPassword', this)">
+                <i class="fa fa-eye"></i>
+              </span>
+              </div>
+              
+            <!-- Password Match Error Message -->
+            <div class="password-match-error" id="passwordMatchError" style="display: none;">
+              <i class="fa fa-exclamation-circle"></i>
+              <span>Password not match</span>
+            </div>
+              
+            <!-- Password Requirements -->
+            <div class="password-requirements" id="passwordRequirements">
+              <p class="requirements-title">Password Requirements:</p>
+              <ul class="requirements-list">
+                <li id="req-length" class="requirement-item">
+                  <i class="fa fa-circle requirement-icon"></i> <span>At least 8 characters</span>
+                </li>
+                <li id="req-uppercase" class="requirement-item">
+                  <i class="fa fa-circle requirement-icon"></i> <span>One uppercase letter</span>
+                </li>
+                <li id="req-lowercase" class="requirement-item">
+                  <i class="fa fa-circle requirement-icon"></i> <span>One lowercase letter</span>
+                </li>
+                <li id="req-number" class="requirement-item">
+                  <i class="fa fa-circle requirement-icon"></i> <span>One number</span>
+                </li>
+                <li id="req-special" class="requirement-item">
+                  <i class="fa fa-circle requirement-icon"></i> <span>One special character (!@#$%^&*)</span>
+                </li>
+              </ul>
+            </div>
+              
+            <button type="submit">Register</button>
+            <span class="link" onclick="showForm('loginForm')">Back to Login</span>
+          </form>
+  
+          <!-- Forgot Password Form -->
+          <form id="forgotForm" class="hidden">
+            <h2>Reset Password</h2>
+            <div class="input-group">
+              <i class="fa fa-envelope"></i>
+              <input type="email" placeholder="Enter your email" required>
+            </div>
+            <button type="submit">Send Reset Link</button>
+            <span class="link" onclick="showForm('loginForm')">Back to Login</span>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="login.js"></script>
+  <!-- Facebook SDK -->
+<script async defer crossorigin="anonymous" 
+        src="https://connect.facebook.net/en_US/sdk.js"></script>
+  </body> 
+  </html>

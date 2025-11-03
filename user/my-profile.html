@@ -437,9 +437,31 @@
         .substring(0, 2);
     }
 
+    // Logout functionality
+    function handleLogout(e) {
+      e.preventDefault();
+      
+      // Clear stored login credentials
+      localStorage.removeItem('email');
+      localStorage.removeItem('password');
+      
+      // Optionally clear profile data (or keep it for next login)
+      // localStorage.removeItem('userProfile');
+      // localStorage.removeItem('userProfilePhoto');
+      
+      // Redirect to login page
+      window.location.href = 'login.html';
+    }
+
     // Load profile data when page loads
     document.addEventListener('DOMContentLoaded', function() {
       loadProfileData();
+      
+      // Attach logout handler to logout link
+      const logoutLink = document.querySelector('.profile-nav-link.logout');
+      if (logoutLink) {
+        logoutLink.addEventListener('click', handleLogout);
+      }
     });
 
     // Mobile Menu Toggle

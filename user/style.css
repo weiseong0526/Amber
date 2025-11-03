@@ -296,6 +296,23 @@ button {
   transform: translateY(0);
 }
 
+/* Reset Password form button - Orange color */
+#forgotForm button[type="submit"] {
+  background: #FF8C00;
+  box-shadow: 0 4px 15px rgba(255, 140, 0, 0.3);
+}
+
+#forgotForm button[type="submit"]:hover {
+  background: #FF7700;
+  box-shadow: 0 8px 25px rgba(255, 140, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+#forgotForm button[type="submit"]:active {
+  background: #E67600;
+  transform: translateY(0);
+}
+
 button::before {
   content: '';
   position: absolute;

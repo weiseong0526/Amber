@@ -1,0 +1,2134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Settings</title>
+  <link rel="stylesheet" href="Settings.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span>Amber</span>
+    </div>
+    <form class="search-container" role="search" action="#">
+      <input type="text" class="search-input" placeholder="Search Yoga, Weaving, dance" aria-label="Search classes">
+      <button class="search-button" type="submit" aria-label="Search">🔍</button>
+    </form>
+    <div class="header-right">
+      <a href="notifications.html" class="header-item" onclick="showNotificationPageNotification(event)">
+        <span>🔔</span>
+        <span class="label">Notification</span>
+      </a>
+      <a href="my-profile.html" class="header-item" onclick="showProfileNotification(event)">
+        <span>👤</span>
+        <span class="label">Profile</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a class="mobile-nav-item" href="home.html"><span>🏠</span>Home</a>
+    <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+    <a class="mobile-nav-item" href="bookings.html"><span>📅</span>Booking</a>
+    <a class="mobile-nav-item" href="location.html"><span>📍</span>Location</a>
+    <a class="mobile-nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+  </nav>
+
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+      <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+      <a class="nav-item" href="location.html"><span>📍</span>Location</a>
+      <a class="nav-item settings-bright" href="Settings.html"><span>⚙️</span>Settings</a>
+
+      <div class="promos">
+        <div class="promo">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="chip">View Retreat</button>
+        </div>
+        <div class="promo">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="chip ghost">Claim Offer</button>
+        </div>
+        <div class="promo">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="chip ghost">See Schedule</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-wrapper">
+        <!-- Left Profile Summary -->
+        <div class="profile-summary">
+          <div class="profile-avatar">UB</div>
+          <div class="profile-name">ubi</div>
+          <div class="profile-email">ubi@email.com</div>
+          
+          <ul class="profile-nav">
+            <li class="profile-nav-item">
+              <a href="my-profile.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                My Profile
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="Settings.html" class="profile-nav-link active">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
+                Settings
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="privacy-policy.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.6C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                Privacy and Policy
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="terms-conditions.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                Terms and Conditions
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="#" class="profile-nav-link logout">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                </svg>
+                Log out
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Panel - Settings -->
+        <div class="profile-form-section">
+          <div class="profile-form-header">
+            <h2 class="profile-form-title">Settings</h2>
+            <p class="profile-form-subtitle">Please set your settings in below:</p>
+          </div>
+
+          <div class="profile-form-content">
+            <div class="settings-list">
+            <!-- Notifications Setting -->
+            <div class="setting-item">
+              <div class="setting-left">
+                <svg class="setting-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 22c1.1 0 2-.9 2-2h-4c0 1.1.89 2 2 2zm6-6v-5c0-3.07-1.64-5.64-4.5-6.32V4c0-.83-.67-1.5-1.5-1.5s-1.5.67-1.5 1.5v.68C7.63 5.36 6 7.92 6 11v5l-2 2v1h16v-1l-2-2z"/>
+                </svg>
+                <span class="setting-label">Notifications</span>
+              </div>
+              <div class="setting-control">
+                <label class="toggle-switch">
+                  <input type="checkbox" checked>
+                  <span class="slider"></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Reset Password Setting -->
+            <div class="setting-item">
+              <div class="setting-left">
+                <svg class="setting-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
+                </svg>
+                <span class="setting-label">Reset Password</span>
+              </div>
+              <div class="setting-control">
+                <button class="btn btn-reset">Reset</button>
+              </div>
+            </div>
+
+            <!-- Manage Payment Method Setting -->
+            <div class="setting-item">
+              <div class="setting-left">
+                <svg class="setting-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+                </svg>
+                <span class="setting-label">Manage Payment Method</span>
+              </div>
+              <div class="setting-control">
+                <button class="btn btn-manage">MANAGE</button>
+              </div>
+            </div>
+
+            <!-- Delete Account Setting -->
+            <div class="setting-item">
+              <div class="setting-left">
+                <svg class="setting-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/>
+                </svg>
+                <span class="setting-label">Delete Account</span>
+              </div>
+              <div class="setting-control">
+                <button class="btn btn-delete" id="deleteAccountBtn">DELETE</button>
+              </div>
+            </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+          &#8593;
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Reset Password Modal -->
+  <div class="modal-overlay" id="resetPasswordModal">
+    <div class="modal">
+      <button class="modal-close" id="closeModal">&times;</button>
+      
+      <div class="success-message" id="successMessage">
+        <div class="success-icon">&#10003;</div>
+        <div class="success-text">Password reset successfully!</div>
+      </div>
+
+      <form id="resetPasswordForm">
+        <div class="modal-header">
+          <h2 class="modal-title">Reset Password</h2>
+        </div>
+        <div class="form-group">
+          <p class="modal-subtitle">Enter your current password and choose a new secure password</p>
+          <label for="currentPassword" class="form-label">Current Password</label>
+          <div class="password-input-container">
+            <input type="password" id="currentPassword" class="form-input" placeholder="Enter your current password" required>
+            <button type="button" class="password-toggle" id="toggleCurrentPassword" onclick="togglePasswordVisibility('currentPassword', 'toggleCurrentPassword')">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="error-message" id="currentPasswordError">Please enter your current password</div>
+        </div>
+
+        <div class="form-group">
+          <label for="newPassword" class="form-label">New Password</label>
+          <div class="password-input-container">
+            <input type="password" id="newPassword" class="form-input" placeholder="Enter your new password" required>
+            <button type="button" class="password-toggle" id="toggleNewPassword" onclick="togglePasswordVisibility('newPassword', 'toggleNewPassword')">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="error-message" id="newPasswordError">Please enter a valid new password</div>
+          
+          <div class="password-requirements" id="passwordRequirements">
+            <h4>Password Requirements:</h4>
+            <ul>
+              <li id="req-length">At least 8 characters long</li>
+              <li id="req-uppercase">Contains at least one uppercase letter</li>
+              <li id="req-lowercase">Contains at least one lowercase letter</li>
+              <li id="req-number">Contains at least one number</li>
+              <li id="req-special">Contains at least one special character</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword" class="form-label">Confirm New Password</label>
+          <div class="password-input-container">
+            <input type="password" id="confirmPassword" class="form-input" placeholder="Confirm your new password" required>
+            <button type="button" class="password-toggle" id="toggleConfirmPassword" onclick="togglePasswordVisibility('confirmPassword', 'toggleConfirmPassword')">
+              <svg viewBox="0 0 24 24" fill="currentColor">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+              </svg>
+            </button>
+          </div>
+          <div class="error-message" id="confirmPasswordError">Passwords do not match</div>
+        </div>
+
+        <div class="modal-actions">
+          <button type="button" class="btn-modal btn-modal-secondary" id="cancelReset">Cancel</button>
+          <button type="submit" class="btn-modal btn-modal-primary" id="submitReset">Reset Password</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Payment Method Management Modal -->
+  <div class="modal-overlay" id="paymentMethodModal">
+    <div class="modal payment-modal-content">
+      <div class="payment-header">
+        <button class="payment-back-btn" id="closePaymentModal">&#8592;</button></button>
+        <h1 class="payment-title">All Payment Methods</h1>
+      </div>
+
+      <div class="payment-sections">
+        <!-- Currently Linked Section -->
+        <div class="payment-section">
+          <h2 class="payment-section-title">Currently Linked</h2>
+          <div class="payment-methods-list" id="paymentMethodsList">
+            <!-- Payment methods will be dynamically loaded here -->
+          </div>
+        </div>
+
+        <!-- Add Methods Section -->
+        <div class="payment-section">
+          <h2 class="payment-section-title">Add methods</h2>
+          <div class="add-methods-list" id="addMethodsList">
+            <div class="add-method-item" onclick="showAddPaymentForm('touchngo')">
+              <div class="add-method-info">
+                <div class="add-method-icon touchngo">
+                  <span class="tng-ewallet">eWallet</span>
+                </div>
+                <div class="add-method-details">
+                  <div class="add-method-name">Touch 'n Go</div>
+                  <div class="add-method-subtitle">Earn up to 0.5x in Rewards</div>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+
+            <div class="add-method-item" onclick="showAddPaymentForm('gx')">
+              <div class="add-method-info">
+                <div class="add-method-icon gx">GX</div>
+                <div class="add-method-details">
+                  <div class="add-method-name">GX Account</div>
+                  <div class="add-method-subtitle">Earn up to 0.5x in GrabRewards</div>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+
+            <div class="add-method-item" onclick="showAddPaymentForm('cards')">
+              <div class="add-method-info">
+                <div class="add-method-icon cards">&#128179;</div>
+                <div class="add-method-details">
+                  <div class="add-method-name">Cards</div>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+
+            <div class="add-method-item" onclick="showAddPaymentForm('bank')">
+              <div class="add-method-info">
+                <div class="add-method-icon bank">&#127976;¦</div>
+                <div class="add-method-details">
+                  <div class="add-method-name">Bank account</div>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+
+            <div class="add-method-item" onclick="showAddPaymentForm('alipay')">
+              <div class="add-method-info">
+                <div class="add-method-icon alipay">ä¹‹</div>
+                <div class="add-method-details">
+                  <div class="add-method-name">Alipay</div>
+                </div>
+                <div class="add-method-partner">
+                  Alipay+ PARTNER <span style="color: #1677ff;">+</span>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+
+            <div class="add-method-item" onclick="showAddPaymentForm('alipayhk')">
+              <div class="add-method-info">
+                <div class="add-method-icon alipay">ä¹‹</div>
+                <div class="add-method-details">
+                  <div class="add-method-name">AlipayHK</div>
+                </div>
+                <div class="add-method-partner">
+                  Alipay+ PARTNER <span style="color: #1677ff;">+</span>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+
+            <div class="add-method-item" onclick="showAddPaymentForm('kakao')">
+              <div class="add-method-info">
+                <div class="add-method-icon kakao">pay</div>
+                <div class="add-method-details">
+                  <div class="add-method-name">Kakao Pay</div>
+                </div>
+                <div class="add-method-partner">
+                  Alipay+ PARTNER <span style="color: #1677ff;">+</span>
+                </div>
+                <div class="add-method-chevron">&#8250;</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add/Edit Payment Form (Hidden by default) -->
+      <div class="payment-form" id="paymentForm">
+        <div class="add-card-header">
+          <button class="add-card-back-btn" id="addCardBackBtn">&#8592;</button></button>
+          <h1 class="add-card-title" id="addCardTitle">Add Card</h1>
+        </div>
+
+        <div class="add-card-content">
+
+          <!-- Add Card Form -->
+          <div class="add-card-form">
+            <form id="paymentMethodForm">
+              <!-- Card Number Field -->
+              <div class="form-field-group">
+                <label for="cardNumber" class="form-field-label">
+                  Card number
+                  <span class="info-icon">&#8505;&#65039;</span></span>
+                </label>
+                <div style="position: relative;">
+                  <span style="position: absolute; left: 16px; top: 50%; transform: translateY(-50%); color: #999;">&#128179;</span>
+                  <input type="text" id="cardNumber" class="form-field-input" placeholder="Card number" maxlength="19" required style="padding-left: 45px;">
+                </div>
+                <div class="error-message" id="cardNumberError">Please enter a valid card number</div>
+              </div>
+
+              <!-- Expiry Date & CVV Row -->
+              <div class="form-field-row">
+                <div class="form-field-group">
+                  <label for="expiryDate" class="form-field-label">Expiry date</label>
+                  <input type="text" id="expiryDate" class="form-field-input" placeholder="MM / YY" maxlength="5" required>
+                  <div class="error-message" id="expiryDateError">Please enter expiry date (MM/YY)</div>
+                </div>
+                <div class="form-field-group">
+                  <label for="cvv" class="form-field-label">CVV</label>
+                  <input type="text" id="cvv" class="form-field-input" placeholder="CVV" maxlength="4" required>
+                  <div class="error-message" id="cvvError">Please enter CVV</div>
+                </div>
+              </div>
+
+              <!-- Card Holder Field -->
+              <div class="form-field-group">
+                <label for="cardHolder" class="form-field-label">
+                  Cardholder name
+                  <span class="info-icon">&#8505;&#65039;</span></span>
+                </label>
+                <input type="text" id="cardHolder" class="form-field-input" placeholder="Cardholder name" required>
+                <div class="error-message" id="cardHolderError">Please enter cardholder name</div>
+              </div>
+
+              <!-- Billing Address Field -->
+              <div class="form-field-group">
+                <label for="billingAddress" class="form-field-label">
+                  Billing address
+                  <span class="info-icon">&#8505;&#65039;</span></span>
+                </label>
+                <input type="text" id="billingAddress" class="form-field-input" placeholder="Billing address" required>
+                <div class="error-message" id="billingAddressError">Please enter billing address</div>
+              </div>
+
+              <!-- Set as Default Method -->
+              <div class="default-method-section">
+                <span class="default-method-label">Set as default method</span>
+                <label class="toggle-switch">
+                  <input type="checkbox" id="setAsDefault">
+                  <span class="toggle-slider"></span>
+                </label>
+              </div>
+
+              <!-- Security Information -->
+              <div class="security-info">
+                <p class="security-text">Your card details will be saved securely.</p>
+                <p class="security-text">Your card may be charged to make sure it's valid. That amount will be automatically refunded. By adding a card, you have read and agree to our <span class="terms-link" onclick="showTerms()">terms and conditions</span>.</p>
+              </div>
+
+              <!-- Continue Button -->
+              <button type="submit" class="continue-button" id="continueButton" disabled>Continue</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Payment Method Details Modal -->
+  <div class="payment-details-modal" id="paymentDetailsModal">
+    <div class="payment-details-container">
+      <div class="details-header">
+        <button class="details-back-btn" id="closeDetailsModal">&#8592;</button></button>
+        <h1 class="details-title">Details</h1>
+      </div>
+
+      <div class="details-content">
+        <!-- Card Display -->
+        <div class="card-display">
+          <div class="card-logo visa">
+            <span class="visa-text">VISA</span>
+          </div>
+          <div class="card-info">
+            <div class="card-type">Visa</div>
+            <div class="card-number" id="detailsCardNumber">**8666</div>
+          </div>
+        </div>
+
+        <!-- Card Details -->
+        <div class="card-details">
+          <div class="detail-row">
+            <span class="detail-label">Expiry date</span>
+            <span class="detail-value" id="detailsExpiryDate">12/2028</span>
+          </div>
+          
+          <div class="detail-row">
+            <span class="detail-label">Set as default</span>
+            <label class="toggle-switch">
+              <input type="checkbox" id="detailsSetAsDefault">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+          
+          <div class="detail-row delete-row" onclick="deletePaymentMethod()">
+            <span class="detail-label delete-text">Delete</span>
+          </div>
+        </div>
+
+        <!-- Footer Info -->
+        <div class="details-footer">
+          <p class="footer-text">
+            Depending on your bank, releasing each transaction can take up to 30 days. 
+            <span class="learn-more-link">Learn more.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Delete Account Validation Modal -->
+  <div class="modal-overlay" id="deleteAccountModal">
+    <div class="modal">
+      <button class="modal-close" id="closeDeleteModal">&times;</button>
+      
+      <div class="modal-body">
+        <h2 class="modal-title">Delete Account</h2>
+        
+        <div class="warning-message">
+          <p><strong>This action cannot be undone!</strong></p>
+          <p>To delete your account, please verify your information below:</p>
+        </div>
+        
+        <form id="deleteAccountForm">
+          <div class="form-group">
+            <label for="deleteEmail">Email Address *</label>
+            <div class="input-container">
+              <input type="email" id="deleteEmail" class="form-input" placeholder="Enter your email address" required>
+            </div>
+            <div class="error-message" id="deleteEmailError"></div>
+          </div>
+          
+          <div class="form-group">
+            <label for="deletePassword">Current Password *</label>
+            <div class="input-container">
+              <input type="password" id="deletePassword" class="form-input" placeholder="Enter your current password" required>
+              <span class="password-toggle" id="toggleDeletePassword" onclick="togglePasswordVisibility('deletePassword', 'toggleDeletePassword')">ðŸ‘ï¸</span>
+            </div>
+            <div class="error-message" id="deletePasswordError"></div>
+          </div>
+          
+          <div class="modal-actions">
+            <button type="button" class="btn btn-cancel" id="cancelDeleteBtn">CANCEL</button>
+            <button type="button" class="btn btn-delete" id="confirmDeleteBtn" disabled>DELETE ACCOUNT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Helper function to get initials from full name
+    function getInitials(fullName) {
+      if (!fullName) return 'UB';
+      return fullName
+        .split(' ')
+        .map(name => name.charAt(0).toUpperCase())
+        .join('')
+        .substring(0, 2);
+    }
+
+    // Load and sync profile data from localStorage
+    function loadProfileData() {
+      const savedProfile = localStorage.getItem('userProfile');
+      
+      // Use the same selector pattern as my-profile.html for consistency
+      const profileName = document.querySelector('.profile-summary .profile-name');
+      const profileEmail = document.querySelector('.profile-summary .profile-email');
+      const profileAvatar = document.querySelector('.profile-summary .profile-avatar');
+      
+      if (savedProfile) {
+        try {
+          const profileData = JSON.parse(savedProfile);
+          
+          // Update profile name in left panel
+          if (profileName && profileData.fullName) {
+            profileName.textContent = profileData.fullName;
+          }
+
+          // Update profile email in left panel
+          if (profileEmail && profileData.email) {
+            profileEmail.textContent = profileData.email;
+          }
+
+          // Update profile avatar
+          if (profileAvatar) {
+            const savedPhoto = localStorage.getItem('userProfilePhoto');
+            if (savedPhoto) {
+              profileAvatar.style.backgroundImage = `url(${savedPhoto})`;
+              profileAvatar.style.backgroundSize = 'cover';
+              profileAvatar.style.backgroundPosition = 'center';
+              profileAvatar.style.color = 'transparent';
+              profileAvatar.textContent = '';
+            } else if (profileData.fullName) {
+              const initials = getInitials(profileData.fullName);
+              profileAvatar.textContent = initials;
+              profileAvatar.style.backgroundImage = 'none';
+              profileAvatar.style.color = 'white';
+            }
+          }
+        } catch (error) {
+          console.error('Error loading profile data:', error);
+        }
+      } else {
+        // Load saved profile photo even if no profile data exists
+        const savedPhoto = localStorage.getItem('userProfilePhoto');
+        if (savedPhoto && profileAvatar) {
+          profileAvatar.style.backgroundImage = `url(${savedPhoto})`;
+          profileAvatar.style.backgroundSize = 'cover';
+          profileAvatar.style.backgroundPosition = 'center';
+          profileAvatar.style.color = 'transparent';
+          profileAvatar.textContent = '';
+        }
+      }
+    }
+
+    // Load profile data when page loads - multiple methods to ensure it runs
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', loadProfileData);
+    } else {
+      // DOM already loaded, run immediately
+      loadProfileData();
+    }
+    
+    // Also run on window load as backup
+    window.addEventListener('load', loadProfileData);
+    
+    // Listen for storage changes to auto-update when profile is updated on other pages
+    window.addEventListener('storage', function(e) {
+      if (e.key === 'userProfile' || e.key === 'userProfilePhoto') {
+        loadProfileData();
+      }
+    });
+    
+    // Also listen for custom events (for same-tab updates)
+    window.addEventListener('profileUpdated', function() {
+      loadProfileData();
+    });
+  </script>
+
+  <script>
+    function showNotification(message, type) {
+      // Notification function disabled - no notifications will be shown
+      return;
+    }
+
+    // Settings Functions
+    function toggleNotifications() {
+      const toggle = document.querySelector('.toggle-switch input');
+      const isEnabled = toggle.checked;
+      showNotification(
+        isEnabled ? "ðŸ”” Notifications enabled!" : "ðŸ”• Notifications disabled!", 
+        "success"
+      );
+    }
+
+    function resetPassword() {
+      // Open the reset password modal
+      const modal = document.getElementById('resetPasswordModal');
+      if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      }
+    }
+
+    function closeResetPasswordModal() {
+      const modal = document.getElementById('resetPasswordModal');
+      if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+        resetForm();
+      }
+    }
+
+    function resetForm() {
+      // Reset form fields
+      document.getElementById('currentPassword').value = '';
+      document.getElementById('newPassword').value = '';
+      document.getElementById('confirmPassword').value = '';
+      
+      // Reset password fields to hidden state
+      const passwordInputs = ['currentPassword', 'newPassword', 'confirmPassword'];
+      passwordInputs.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (input) {
+          input.type = 'password';
+        }
+      });
+      
+      // Reset toggle buttons to default state
+      const toggleButtons = ['toggleCurrentPassword', 'toggleNewPassword', 'toggleConfirmPassword'];
+      toggleButtons.forEach(buttonId => {
+        const button = document.getElementById(buttonId);
+        if (button) {
+          button.classList.remove('active');
+          button.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+          `;
+        }
+      });
+      
+      // Clear error states
+      clearAllErrors();
+      
+      // Hide success message
+      const successMessage = document.getElementById('successMessage');
+      if (successMessage) {
+        successMessage.classList.remove('show');
+      }
+      
+      // Reset password requirements
+      updatePasswordRequirements('');
+    }
+
+    function clearAllErrors() {
+      const errorMessages = document.querySelectorAll('.error-message');
+      const errorInputs = document.querySelectorAll('.form-input.error');
+      
+      errorMessages.forEach(msg => msg.classList.remove('show'));
+      errorInputs.forEach(input => input.classList.remove('error'));
+    }
+
+    function showError(inputId, messageId, message) {
+      const input = document.getElementById(inputId);
+      const errorMsg = document.getElementById(messageId);
+      
+      if (input && errorMsg) {
+        input.classList.add('error');
+        errorMsg.textContent = message;
+        errorMsg.classList.add('show');
+      }
+    }
+
+    function clearError(inputId, messageId) {
+      const input = document.getElementById(inputId);
+      const errorMsg = document.getElementById(messageId);
+      
+      if (input && errorMsg) {
+        input.classList.remove('error');
+        errorMsg.classList.remove('show');
+      }
+    }
+
+    function validatePassword(password) {
+      const requirements = {
+        length: password.length >= 8,
+        uppercase: /[A-Z]/.test(password),
+        lowercase: /[a-z]/.test(password),
+        number: /\d/.test(password),
+        special: /[!@#$%^&*(),.?":{}|<>]/.test(password)
+      };
+      
+      return requirements;
+    }
+
+    function updatePasswordRequirements(password) {
+      const requirements = validatePassword(password);
+      
+      // Update each requirement indicator
+      Object.keys(requirements).forEach((req, index) => {
+        const element = document.getElementById(`req-${req}`);
+        if (element) {
+          if (requirements[req]) {
+            element.classList.remove('invalid');
+            element.classList.add('valid');
+          } else {
+            element.classList.remove('valid');
+            element.classList.add('invalid');
+          }
+        }
+      });
+    }
+
+    function validateForm() {
+      const currentPassword = document.getElementById('currentPassword').value;
+      const newPassword = document.getElementById('newPassword').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+      
+      let isValid = true;
+      
+      // Clear previous errors
+      clearAllErrors();
+      
+      // Validate current password
+      if (!currentPassword.trim()) {
+        showError('currentPassword', 'currentPasswordError', 'Please enter your current password');
+        isValid = false;
+      }
+      
+      // Validate new password
+      if (!newPassword.trim()) {
+        showError('newPassword', 'newPasswordError', 'Please enter a new password');
+        isValid = false;
+      } else {
+        const requirements = validatePassword(newPassword);
+        const allRequirementsMet = Object.values(requirements).every(req => req);
+        
+        if (!allRequirementsMet) {
+          showError('newPassword', 'newPasswordError', 'Password does not meet all requirements');
+          isValid = false;
+        }
+      }
+      
+      // Validate password confirmation
+      if (!confirmPassword.trim()) {
+        showError('confirmPassword', 'confirmPasswordError', 'Please confirm your new password');
+        isValid = false;
+      } else if (newPassword !== confirmPassword) {
+        showError('confirmPassword', 'confirmPasswordError', 'Passwords do not match');
+        isValid = false;
+      }
+      
+      // Check if new password is different from current password
+      if (currentPassword && newPassword && currentPassword === newPassword) {
+        showError('newPassword', 'newPasswordError', 'New password must be different from current password');
+        isValid = false;
+      }
+      
+      return isValid;
+    }
+
+    function handlePasswordReset(event) {
+      event.preventDefault();
+      
+      if (!validateForm()) {
+        return;
+      }
+      
+      // Simulate password reset process
+      const submitBtn = document.getElementById('submitReset');
+      const originalText = submitBtn.textContent;
+      
+      // Show loading state
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Resetting...';
+      
+      // Simulate API call
+      setTimeout(() => {
+        // Show success message
+        const successMessage = document.getElementById('successMessage');
+        const form = document.getElementById('resetPasswordForm');
+        
+        if (successMessage && form) {
+          form.style.display = 'none';
+          successMessage.classList.add('show');
+          
+          // Auto close modal after 3 seconds
+          setTimeout(() => {
+            closeResetPasswordModal();
+            showNotification("ðŸ” Password reset successfully!", "success");
+          }, 3000);
+        }
+        
+        // Reset button state
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalText;
+      }, 2000);
+    }
+
+    function togglePasswordVisibility(inputId, buttonId) {
+      const input = document.getElementById(inputId);
+      const button = document.getElementById(buttonId);
+      
+      if (input && button) {
+        const isPassword = input.type === 'password';
+        
+        // Toggle input type
+        input.type = isPassword ? 'text' : 'password';
+        
+        // Toggle button state and icon
+        if (isPassword) {
+          // Show password - change to eye-off icon
+          button.classList.add('active');
+          button.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/>
+            </svg>
+          `;
+        } else {
+          // Hide password - change to eye icon
+          button.classList.remove('active');
+          button.innerHTML = `
+            <svg viewBox="0 0 24 24" fill="currentColor">
+              <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+            </svg>
+          `;
+        }
+      }
+    }
+
+    function managePaymentMethod() {
+      // Open the payment method management modal
+      const modal = document.getElementById('paymentMethodModal');
+      if (modal) {
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        loadPaymentMethods();
+      }
+    }
+
+    function closePaymentMethodModal() {
+      const modal = document.getElementById('paymentMethodModal');
+      if (modal) {
+        modal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+        hidePaymentForm();
+      }
+    }
+
+    // Payment Methods Data (in real app, this would come from API)
+    let paymentMethods = [
+      {
+        id: 1,
+        cardNumber: 'Touch \'n Go',
+        cardType: 'touchngo',
+        cardHolder: 'John Doe',
+        expiryDate: '',
+        isDefault: true,
+        category: '',
+        subtitle: 'Balance &#8226; RM0.15',
+        phoneNumber: '60123456789',
+        showPhoneNumber: false
+      },
+      {
+        id: 2,
+        cardNumber: '**8666',
+        cardType: 'visa',
+        cardHolder: 'John Doe',
+        expiryDate: '12/2028',
+        isDefault: false,
+        category: '',
+        subtitle: ''
+      }
+    ];
+
+    let editingPaymentId = null;
+
+    // Function to mask phone number
+    function maskPhoneNumber(phoneNumber) {
+      if (!phoneNumber) return '';
+      const cleaned = phoneNumber.replace(/\D/g, '');
+      if (cleaned.length < 10) return phoneNumber;
+      
+      const start = cleaned.substring(0, 3);
+      const end = cleaned.substring(cleaned.length - 2);
+      const middle = '*'.repeat(cleaned.length - 5);
+      
+      return `${start}${middle}${end}`;
+    }
+
+    // Function to toggle phone number visibility
+    function togglePhoneNumberVisibility(paymentId) {
+      const payment = paymentMethods.find(p => p.id === paymentId);
+      if (payment && payment.cardType === 'touchngo') {
+        payment.showPhoneNumber = !payment.showPhoneNumber;
+        loadPaymentMethods(); // Refresh the display
+      }
+    }
+
+    function loadPaymentMethods() {
+      const listContainer = document.getElementById('paymentMethodsList');
+      
+      if (paymentMethods.length === 0) {
+        listContainer.innerHTML = '<div style="text-align: center; padding: 40px; color: #8e8e93;">No payment methods linked</div>';
+        return;
+      }
+      
+      listContainer.innerHTML = paymentMethods.map(payment => `
+            <div class="payment-method-item" data-id="${payment.id}" onclick="editPaymentMethod(${payment.id})">
+              <div class="payment-method-info">
+                <div class="payment-method-icon ${payment.cardType}">
+                  ${payment.cardType === 'touchngo' ? '<span class="tng-ewallet">eWallet</span>' : getCardIcon(payment.cardType)}
+                </div>
+            <div class="payment-method-details">
+              ${payment.category ? `<div class="payment-method-category">ðŸ‘¥ ${payment.category}</div>` : ''}
+              <div class="payment-method-name">
+                ${payment.cardNumber}
+                ${payment.isDefault ? '<span class="payment-method-badge">Default</span>' : ''}
+              </div>
+              ${payment.cardType === 'touchngo' && payment.phoneNumber ? 
+                `<div class="payment-method-subtitle" onclick="event.stopPropagation(); togglePhoneNumberVisibility(${payment.id})" style="cursor: pointer;">
+                  TNG eWallet: ${payment.showPhoneNumber ? payment.phoneNumber : maskPhoneNumber(payment.phoneNumber)}
+                </div>` : 
+                (payment.subtitle ? `<div class="payment-method-subtitle">${payment.subtitle}</div>` : '')
+              }
+            </div>
+            <div class="payment-method-chevron">&#8250;</div>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    function getCardIcon(cardType) {
+      const icons = {
+        visa: '', // Will be handled by CSS ::after
+        mastercard: '', // Will be handled by CSS ::after
+        amex: '', // Will be handled by CSS ::after
+        touchngo: 'TNG',
+        gx: 'GX',
+        cards: '&#128179;',
+        bank: '&#127976;¦',
+        alipay: 'ä¹‹',
+        kakao: 'pay',
+        default: '&#128179;'
+      };
+      return icons[cardType] || icons.default;
+    }
+
+    function showAddPaymentForm(type = 'cards') {
+      const form = document.getElementById('paymentForm');
+      const formTitle = document.getElementById('addCardTitle');
+      const sections = document.querySelector('.payment-sections');
+      
+      editingPaymentId = null;
+      formTitle.textContent = 'Add Card';
+      form.classList.add('show');
+      sections.style.display = 'none';
+      
+      // Reset form
+      document.getElementById('paymentMethodForm').reset();
+      updateContinueButton();
+    }
+
+
+    function updateContinueButton() {
+      const cardNumber = document.getElementById('cardNumber').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const cvv = document.getElementById('cvv').value;
+      const cardHolder = document.getElementById('cardHolder').value;
+      const billingAddress = document.getElementById('billingAddress').value;
+      const continueBtn = document.getElementById('continueButton');
+      
+      const isFormValid = cardNumber.trim() && expiryDate.trim() && cvv.trim() && cardHolder.trim() && billingAddress.trim();
+      
+      if (isFormValid) {
+        continueBtn.classList.add('active');
+        continueBtn.disabled = false;
+      } else {
+        continueBtn.classList.remove('active');
+        continueBtn.disabled = true;
+      }
+    }
+
+    function showTerms() {
+      showNotification("ðŸ“„ Opening Terms and Conditions...", "info");
+      // Here you can add actual terms and conditions page
+    }
+
+    function hidePaymentForm() {
+      const form = document.getElementById('paymentForm');
+      const sections = document.querySelector('.payment-sections');
+      
+      form.classList.remove('show');
+      sections.style.display = 'block';
+      editingPaymentId = null;
+    }
+
+    function editPaymentMethod(id) {
+      const payment = paymentMethods.find(p => p.id === id);
+      if (!payment) return;
+
+      editingPaymentId = id;
+      showPaymentDetails(payment);
+    }
+
+    function showPaymentDetails(payment) {
+      const modal = document.getElementById('paymentDetailsModal');
+      
+      // Update card logo and type based on card type
+      const cardLogo = document.querySelector('.card-logo');
+      const cardType = document.querySelector('.card-type');
+      const visaText = document.querySelector('.visa-text');
+      
+      // Remove all existing classes
+      cardLogo.className = 'card-logo';
+      
+      // Set card type specific styling
+      if (payment.cardType === 'visa') {
+        cardLogo.classList.add('visa');
+        cardType.textContent = 'Visa';
+        visaText.textContent = 'VISA';
+      } else if (payment.cardType === 'mastercard') {
+        cardLogo.classList.add('mastercard');
+        cardType.textContent = 'Mastercard';
+        visaText.textContent = 'MC';
+      } else if (payment.cardType === 'amex') {
+        cardLogo.classList.add('amex');
+        cardType.textContent = 'American Express';
+        visaText.textContent = 'AMEX';
+      } else if (payment.cardType === 'touchngo') {
+        cardLogo.classList.add('touchngo');
+        cardType.textContent = 'Touch \'n Go';
+        visaText.innerHTML = 'Touch \'n GO<br><span style="color: #ffd700; font-size: 10px; font-weight: bold;">eWallet</span>';
+      } else {
+        cardLogo.classList.add('visa'); // Default to visa
+        cardType.textContent = 'Card';
+        visaText.textContent = 'CARD';
+      }
+      
+      // Populate details
+      document.getElementById('detailsCardNumber').textContent = payment.cardNumber;
+      document.getElementById('detailsExpiryDate').textContent = payment.expiryDate;
+      document.getElementById('detailsSetAsDefault').checked = payment.isDefault;
+      
+      // Set editing payment ID
+      editingPaymentId = payment.id;
+      
+      // Show modal
+      modal.classList.add('show');
+    }
+
+    function setAsDefault(id) {
+      paymentMethods.forEach(payment => {
+        payment.isDefault = payment.id === id;
+      });
+      loadPaymentMethods();
+      showNotification("âœ… Default payment method updated!", "success");
+    }
+
+    function closePaymentDetailsModal() {
+      const modal = document.getElementById('paymentDetailsModal');
+      modal.classList.remove('show');
+      editingPaymentId = null;
+      
+      // Return to payment methods list
+      const paymentModal = document.getElementById('paymentMethodModal');
+      if (paymentModal) {
+        paymentModal.classList.add('show');
+      }
+    }
+
+    function updateDefaultStatus() {
+      if (editingPaymentId) {
+        const isDefault = document.getElementById('detailsSetAsDefault').checked;
+        
+        // Update the payment method
+        const payment = paymentMethods.find(p => p.id === editingPaymentId);
+        if (payment) {
+          payment.isDefault = isDefault;
+          
+          // If setting as default, unset others
+          if (isDefault) {
+            paymentMethods.forEach(p => {
+              if (p.id !== editingPaymentId) p.isDefault = false;
+            });
+          }
+          
+          loadPaymentMethods();
+          showNotification("âœ… Default payment method updated!", "success");
+        }
+      }
+    }
+
+    function deletePaymentMethod() {
+      if (editingPaymentId && confirm("Are you sure you want to delete this payment method?")) {
+        const index = paymentMethods.findIndex(p => p.id === editingPaymentId);
+        if (index !== -1) {
+          paymentMethods.splice(index, 1);
+          loadPaymentMethods();
+          closePaymentDetailsModal();
+          showNotification("âœ… Payment method deleted!", "success");
+        }
+      }
+    }
+
+    function updateCardPreview() {
+      const cardNumber = document.getElementById('cardNumber').value || '**** **** **** ****';
+      const cardHolder = document.getElementById('cardHolder').value || 'CARD HOLDER';
+      const expiryDate = document.getElementById('expiryDate').value || 'MM/YY';
+      
+      document.getElementById('previewCardNumber').textContent = formatCardNumber(cardNumber);
+      document.getElementById('previewCardHolder').textContent = cardHolder.toUpperCase();
+      document.getElementById('previewCardExpiry').textContent = expiryDate;
+    }
+
+    function formatCardNumber(number) {
+      // Remove all non-digits
+      const cleaned = number.replace(/\D/g, '');
+      // Add spaces every 4 digits
+      const formatted = cleaned.replace(/(\d{4})(?=\d)/g, '$1 ');
+      // Show only last 4 digits, mask the rest
+      if (formatted.length > 4) {
+        const last4 = formatted.slice(-4);
+        const masked = '*'.repeat(formatted.length - 4).replace(/(.{4})/g, '$1 ');
+        return masked + last4;
+      }
+      return formatted;
+    }
+
+    function validatePaymentForm() {
+      const cardNumber = document.getElementById('cardNumber').value;
+      const cardHolder = document.getElementById('cardHolder').value;
+      const expiryDate = document.getElementById('expiryDate').value;
+      const cvv = document.getElementById('cvv').value;
+      const billingAddress = document.getElementById('billingAddress').value;
+
+      console.log('Validating form:', { cardNumber, cardHolder, expiryDate, cvv, billingAddress });
+      let isValid = true;
+      clearAllPaymentErrors();
+
+      // Validate card number
+      if (!cardNumber || cardNumber.replace(/\D/g, '').length < 13) {
+        showPaymentError('cardNumber', 'cardNumberError', 'Please enter a valid card number');
+        isValid = false;
+      }
+
+      // Validate cardholder name
+      if (!cardHolder.trim()) {
+        showPaymentError('cardHolder', 'cardHolderError', 'Please enter cardholder name');
+        isValid = false;
+      }
+
+      // Validate expiry date
+      if (!expiryDate || !/^\d{2}\/\d{2}$/.test(expiryDate)) {
+        showPaymentError('expiryDate', 'expiryDateError', 'Please enter expiry date (MM/YY)');
+        isValid = false;
+      }
+
+      // Validate CVV
+      if (!cvv || cvv.length < 3) {
+        showPaymentError('cvv', 'cvvError', 'Please enter a valid CVV');
+        isValid = false;
+      }
+
+      // Validate billing address
+      if (!billingAddress.trim()) {
+        showPaymentError('billingAddress', 'billingAddressError', 'Please enter billing address');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    function showPaymentError(inputId, messageId, message) {
+      const input = document.getElementById(inputId);
+      const errorMsg = document.getElementById(messageId);
+      
+      if (input && errorMsg) {
+        input.classList.add('error');
+        errorMsg.textContent = message;
+        errorMsg.classList.add('show');
+      }
+    }
+
+    function clearAllPaymentErrors() {
+      const errorMessages = document.querySelectorAll('#paymentMethodForm .error-message');
+      const errorInputs = document.querySelectorAll('#paymentMethodForm .form-input.error');
+      
+      errorMessages.forEach(msg => msg.classList.remove('show'));
+      errorInputs.forEach(input => input.classList.remove('error'));
+    }
+
+    function clearPaymentError(inputId, messageId) {
+      const input = document.getElementById(inputId);
+      const errorMsg = document.getElementById(messageId);
+      
+      if (input && errorMsg) {
+        input.classList.remove('error');
+        errorMsg.classList.remove('show');
+      }
+    }
+
+    function handlePaymentFormSubmit(event) {
+      event.preventDefault();
+      console.log('Form submission triggered');
+      
+      if (!validatePaymentForm()) {
+        console.log('Form validation failed');
+        return;
+      }
+      
+      console.log('Form validation passed, processing...');
+
+      const formData = {
+        cardNumber: document.getElementById('cardNumber').value,
+        cardHolder: document.getElementById('cardHolder').value,
+        expiryDate: document.getElementById('expiryDate').value,
+        cvv: document.getElementById('cvv').value,
+        billingAddress: document.getElementById('billingAddress').value,
+        isDefault: document.getElementById('setAsDefault').checked
+      };
+
+      if (editingPaymentId) {
+        // Update existing payment method
+        const index = paymentMethods.findIndex(p => p.id === editingPaymentId);
+        if (index !== -1) {
+          paymentMethods[index] = {
+            ...paymentMethods[index],
+            cardNumber: '**' + formData.cardNumber.slice(-4),
+            cardHolder: formData.cardHolder,
+            expiryDate: formData.expiryDate,
+            billingAddress: formData.billingAddress,
+            isDefault: formData.isDefault
+          };
+          
+          // If setting as default, unset others
+          if (formData.isDefault) {
+            paymentMethods.forEach((p, i) => {
+              if (i !== index) p.isDefault = false;
+            });
+          }
+        }
+        showNotification("âœ… Payment method updated!", "success");
+      } else {
+        // Add new payment method
+        const newPayment = {
+          id: Date.now(), // Simple ID generation
+          cardNumber: '**' + formData.cardNumber.slice(-4),
+          cardType: 'visa', // Default card type for display
+          cardHolder: formData.cardHolder,
+          expiryDate: formData.expiryDate,
+          billingAddress: formData.billingAddress,
+          isDefault: formData.isDefault,
+          category: '',
+          subtitle: ''
+        };
+
+        // If setting as default, unset others
+        if (formData.isDefault) {
+          paymentMethods.forEach(p => p.isDefault = false);
+        }
+
+        paymentMethods.push(newPayment);
+        showNotification("âœ… Card added successfully!", "success");
+        
+        // Show the details modal for the newly added card
+        setTimeout(() => {
+          showPaymentDetails(newPayment);
+        }, 500); // Small delay to ensure the form is hidden and payment list is updated
+      }
+
+      loadPaymentMethods();
+      hidePaymentForm();
+    }
+
+    function deleteAccount() {
+      console.log('Delete account button clicked!'); // Debug log
+      
+      // Close any other open modals first
+      const resetModal = document.getElementById('resetPasswordModal');
+      if (resetModal) {
+        resetModal.classList.remove('show');
+        document.body.style.overflow = 'auto'; // Restore scrolling
+      }
+      
+      // Show the validation modal
+      const modal = document.getElementById('deleteAccountModal');
+      if (modal) {
+        console.log('Modal found, showing...'); // Debug log
+        modal.classList.add('show');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+      } else {
+        console.error('Modal not found!'); // Debug log
+      }
+      
+      // Clear any previous errors and form data
+      clearDeleteFormErrors();
+      clearDeleteForm();
+      
+      // Ensure delete button is disabled initially
+      checkDeleteFormFields();
+      
+      // Don't pre-fill any data - user must enter everything manually
+      // This ensures they know their information and prevents accidental deletion
+    }
+
+    function getCurrentUserData() {
+      // Get user data from localStorage
+      const savedProfile = localStorage.getItem('userProfile');
+      if (savedProfile) {
+        try {
+          const profileData = JSON.parse(savedProfile);
+          return {
+            fullName: profileData.fullName || 'User',
+            email: profileData.email || 'user@email.com',
+            phone: profileData.phoneNumber || '',
+            password: 'stored_password_hash' // This should be hashed
+          };
+        } catch (error) {
+          console.error('Error parsing profile data:', error);
+        }
+      }
+      
+      // Fallback to default values if no profile data exists
+      return {
+        fullName: 'User',
+        email: 'user@email.com',
+        phone: '',
+        password: 'stored_password_hash'
+      };
+    }
+
+    function validateDeleteAccount() {
+      const email = document.getElementById('deleteEmail').value.trim();
+      const password = document.getElementById('deletePassword').value;
+
+      let isValid = true;
+      const currentUser = getCurrentUserData();
+
+      // Clear previous errors
+      clearDeleteFormErrors();
+
+      // Validate email - must be exact match
+      if (!email) {
+        showDeleteError('deleteEmailError', 'Email address is required');
+        isValid = false;
+      } else if (!isValidEmail(email)) {
+        showDeleteError('deleteEmailError', 'Please enter a valid email address');
+        isValid = false;
+      } else if (email.toLowerCase() !== currentUser.email.toLowerCase()) {
+        showDeleteError('deleteEmailError', 'Email address does not match your account. Please enter your exact email address as it appears in your profile.');
+        isValid = false;
+      }
+
+      // Validate password - must be correct
+      if (!password) {
+        showDeleteError('deletePasswordError', 'Current password is required');
+        isValid = false;
+      } else if (!validatePassword(password, currentUser.password)) {
+        showDeleteError('deletePasswordError', 'Password is incorrect. Please enter your current password.');
+        isValid = false;
+      }
+
+      return isValid;
+    }
+
+    function checkDeleteFormFields() {
+      const email = document.getElementById('deleteEmail').value.trim();
+      const password = document.getElementById('deletePassword').value;
+      const deleteBtn = document.getElementById('confirmDeleteBtn');
+      
+      // Enable button only if both fields are filled
+      if (deleteBtn) {
+        if (email && password) {
+          deleteBtn.disabled = false;
+        } else {
+          deleteBtn.disabled = true;
+        }
+      }
+    }
+
+    function isValidEmail(email) {
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      return emailRegex.test(email);
+    }
+
+    function isValidPhone(phone) {
+      const phoneRegex = /^[\+]?[1-9][\d]{0,15}$/;
+      return phoneRegex.test(phone.replace(/\s/g, ''));
+    }
+
+    function validatePassword(inputPassword, storedPassword) {
+      // In a real application, you would hash the input password and compare with stored hash
+      // For demo purposes, we'll do a simple comparison
+      return inputPassword === storedPassword;
+    }
+
+    function showDeleteError(errorId, message) {
+      const errorElement = document.getElementById(errorId);
+      errorElement.textContent = message;
+      errorElement.classList.add('show');
+      
+      // Also highlight the input field
+      const inputId = errorId.replace('Error', '');
+      const inputElement = document.getElementById(inputId);
+      if (inputElement) {
+        inputElement.classList.add('error');
+      }
+    }
+
+    function clearDeleteFormErrors() {
+      const errorElements = document.querySelectorAll('#deleteAccountForm .error-message');
+      errorElements.forEach(element => {
+        element.classList.remove('show');
+        element.textContent = '';
+      });
+
+      const inputElements = document.querySelectorAll('#deleteAccountForm .form-input');
+      inputElements.forEach(element => {
+        element.classList.remove('error');
+      });
+    }
+
+    function clearDeleteForm() {
+      // Clear all form fields
+      document.getElementById('deleteEmail').value = '';
+      document.getElementById('deletePassword').value = '';
+      // Reset button state
+      const deleteBtn = document.getElementById('confirmDeleteBtn');
+      if (deleteBtn) {
+        deleteBtn.disabled = true;
+      }
+    }
+
+    function confirmDeleteAccount() {
+      // First validate all fields
+      if (!validateDeleteAccount()) {
+        showNotification("âŒ Please fill in all information correctly before proceeding.", "error");
+        return;
+      }
+
+      // Additional security check - verify all information one more time
+      const email = document.getElementById('deleteEmail').value.trim();
+      const password = document.getElementById('deletePassword').value;
+      // Double-check that all required fields are filled
+      if (!email || !password) {
+        showNotification("âŒ All fields must be completed before deletion.", "error");
+        return;
+      }
+
+      // Show final confirmation with user's information
+      const confirmMessage = `ðŸš¨ FINAL CONFIRMATION: You are about to permanently delete the account for:
+      
+Email: ${email}
+
+This action CANNOT be undone and will permanently delete ALL your data.
+
+Are you absolutely certain you want to proceed?`;
+
+      if (confirm(confirmMessage)) {
+        // One more confirmation
+        if (confirm("âš ï¸ LAST CHANCE: This is your final opportunity to cancel. Click OK to permanently delete your account.")) {
+          // Close modal
+          const modal = document.getElementById('deleteAccountModal');
+          modal.classList.remove('show');
+          document.body.style.overflow = 'auto'; // Restore scrolling
+          
+          // Show success message
+          showNotification("ðŸ—‘ï¸ Account deletion initiated. You will receive a confirmation email.", "success");
+          
+          // Here you would typically make an API call to delete the account
+          // deleteUserAccount();
+          
+          // For demo purposes, we'll just show a message
+          setTimeout(() => {
+            alert("Account deletion process completed. In a real application, this would delete your account from the server.");
+          }, 2000);
+        }
+      }
+    }
+
+    function cancelDeleteAccount() {
+      const modal = document.getElementById('deleteAccountModal');
+      modal.classList.remove('show');
+      document.body.style.overflow = 'auto'; // Restore scrolling
+      clearDeleteFormErrors();
+    }
+
+    function updateProfile() {
+      showNotification("âœ… Profile updated successfully!", "success");
+      // Here you can add form validation and AJAX request to save profile data
+    }
+
+    // Back to top functionality
+    function scrollToTop() {
+      const settingsContent = document.querySelector('.settings-content');
+      if (settingsContent) {
+        settingsContent.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    }
+
+    // Show/hide back to top button based on scroll position
+    function toggleBackToTop() {
+      const backToTop = document.getElementById('backToTop');
+      const settingsContent = document.querySelector('.settings-content');
+      
+      if (backToTop && settingsContent) {
+        if (settingsContent.scrollTop > 300) {
+          backToTop.classList.add('show');
+        } else {
+          backToTop.classList.remove('show');
+        }
+      }
+    }
+
+
+    // Navigation Functions
+    function navigateToMyProfile() {
+      console.log('navigateToMyProfile called');
+      setTimeout(() => {
+        try {
+          window.location.href = 'my-profile.html';
+        } catch (error) {
+          console.error('Error navigating to My Profile:', error);
+        }
+      }, 500);
+    }
+
+    function navigateToSettings() {
+      console.log('navigateToSettings called');
+      showNotification("⚙️ You are already on the Settings page!", "info");
+      // Refresh profile data to ensure it's up-to-date
+      loadAndSyncProfileData();
+    }
+
+    function showCustomersNotification(event) {
+      event.preventDefault();
+      showNotification("ðŸ‘¥ Customers page coming soon!", "info");
+    }
+
+    function showNotificationPageNotification(event) {
+      showNotification("ðŸ”” Redirecting to notifications...", "info");
+      // Let the default link behavior happen
+    }
+
+    function showProfileNotification(event) {
+      // Let the default link behavior happen
+    }
+
+    function navigateToPrivacyPolicy() {
+      console.log('navigateToPrivacyPolicy called');
+      setTimeout(() => {
+        try {
+          window.location.href = 'privacy-policy.html';
+        } catch (error) {
+          console.error('Error navigating to Privacy Policy:', error);
+        }
+      }, 500);
+    }
+
+    function navigateToTerms() {
+      console.log('navigateToTerms called');
+      setTimeout(() => {
+        try {
+          window.location.href = 'terms-conditions.html';
+        } catch (error) {
+          console.error('Error navigating to Terms and Conditions:', error);
+          showNotification("âŒ Error navigating to Terms and Conditions page", "error");
+        }
+      }, 500);
+    }
+
+    function logout() {
+      console.log('logout called');
+      if (confirm("ðŸšª Are you sure you want to log out?")) {
+        showNotification("ðŸ‘‹ Logging out... Goodbye!", "success");
+        setTimeout(() => {
+          showNotification("âœ… Successfully logged out!", "success");
+          // Clear any saved login data
+          localStorage.removeItem("email");
+          localStorage.removeItem("password");
+          localStorage.removeItem("userProfile");
+          localStorage.removeItem("userProfilePhoto");
+          // Redirect to login page
+          window.location.href = 'login.html';
+        }, 1000);
+      }
+    }
+
+    // Retreat Card Functions
+    function viewRetreat() {
+      showNotification("ðŸ–ï¸ Opening retreat details...", "info");
+      // Here you can add actual retreat viewing logic
+    }
+
+    function claimOffer() {
+      showNotification("ðŸŽ Processing your retreat offer claim...", "info");
+      setTimeout(() => {
+        showNotification("ðŸŽ‰ Offer claimed successfully! Check your email for details.", "success");
+      }, 1500);
+    }
+
+    function seeSchedule() {
+      showNotification("ðŸ“… Opening retreat schedule...", "info");
+      // Here you can add actual schedule viewing logic
+    }
+
+
+    // Initialize page
+    document.addEventListener('DOMContentLoaded', function() {
+      // Load profile data on page load (already loaded in first script, but ensure it's called)
+      loadProfileData();
+
+      // Set up periodic refresh to keep profile data synchronized
+      // This ensures the Settings page always shows the latest profile information
+      setInterval(loadProfileData, 5000); // Refresh every 5 seconds
+
+      // Setup back to top button functionality
+      const settingsContent = document.querySelector('.settings-content');
+      if (settingsContent) {
+        settingsContent.addEventListener('scroll', toggleBackToTop);
+      }
+
+      // Settings buttons
+      const toggleSwitch = document.querySelector('.toggle-switch input');
+      if (toggleSwitch) {
+        toggleSwitch.addEventListener('change', toggleNotifications);
+      }
+
+      const resetBtn = document.querySelector('.btn-reset');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', resetPassword);
+      }
+
+      // Reset Password Modal Event Listeners
+      const modal = document.getElementById('resetPasswordModal');
+      const closeModalBtn = document.getElementById('closeModal');
+      const cancelBtn = document.getElementById('cancelReset');
+      const resetForm = document.getElementById('resetPasswordForm');
+      const newPasswordInput = document.getElementById('newPassword');
+
+      // Close modal events
+      if (closeModalBtn) {
+        closeModalBtn.addEventListener('click', closeResetPasswordModal);
+      }
+
+      if (cancelBtn) {
+        cancelBtn.addEventListener('click', closeResetPasswordModal);
+      }
+
+      // Close modal when clicking outside
+      if (modal) {
+        modal.addEventListener('click', function(e) {
+          if (e.target === modal) {
+            closeResetPasswordModal();
+          }
+        });
+      }
+
+      // Form submission
+      if (resetForm) {
+        resetForm.addEventListener('submit', handlePasswordReset);
+      }
+
+      // Real-time password validation
+      if (newPasswordInput) {
+        newPasswordInput.addEventListener('input', function() {
+          updatePasswordRequirements(this.value);
+          clearError('newPassword', 'newPasswordError');
+        });
+      }
+
+      // Clear errors on input focus
+      const formInputs = document.querySelectorAll('.form-input');
+      formInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          const inputId = this.id;
+          const errorId = inputId + 'Error';
+          clearError(inputId, errorId);
+        });
+      });
+
+      const manageBtn = document.querySelector('.btn-manage');
+      if (manageBtn) {
+        manageBtn.addEventListener('click', managePaymentMethod);
+      }
+
+      // Payment Method Modal Event Listeners
+      const paymentModal = document.getElementById('paymentMethodModal');
+      const closePaymentModalBtn = document.getElementById('closePaymentModal');
+      const addCardBackBtn = document.getElementById('addCardBackBtn');
+      const paymentForm = document.getElementById('paymentMethodForm');
+
+      // Close payment modal events
+      if (closePaymentModalBtn) {
+        closePaymentModalBtn.addEventListener('click', closePaymentMethodModal);
+      }
+
+      if (addCardBackBtn) {
+        addCardBackBtn.addEventListener('click', hidePaymentForm);
+      }
+
+      // Close modal when clicking outside
+      if (paymentModal) {
+        paymentModal.addEventListener('click', function(e) {
+          if (e.target === paymentModal) {
+            closePaymentMethodModal();
+          }
+        });
+      }
+
+      // Payment Details Modal Event Listeners
+      const detailsModal = document.getElementById('paymentDetailsModal');
+      const closeDetailsModalBtn = document.getElementById('closeDetailsModal');
+      const detailsSetAsDefault = document.getElementById('detailsSetAsDefault');
+
+      // Close details modal events
+      if (closeDetailsModalBtn) {
+        closeDetailsModalBtn.addEventListener('click', closePaymentDetailsModal);
+      }
+
+      // Close modal when clicking outside
+      if (detailsModal) {
+        detailsModal.addEventListener('click', function(e) {
+          if (e.target === detailsModal) {
+            closePaymentDetailsModal();
+          }
+        });
+      }
+
+      // Toggle default status
+      if (detailsSetAsDefault) {
+        detailsSetAsDefault.addEventListener('change', updateDefaultStatus);
+      }
+
+      // Payment form submission
+      if (paymentForm) {
+        paymentForm.addEventListener('submit', handlePaymentFormSubmit);
+      }
+
+      // Real-time card preview updates
+      const cardInputs = ['cardNumber', 'cardHolder', 'expiryDate'];
+      cardInputs.forEach(inputId => {
+        const input = document.getElementById(inputId);
+        if (input) {
+          input.addEventListener('input', updateCardPreview);
+        }
+      });
+
+      // Card number formatting
+      const cardNumberInput = document.getElementById('cardNumber');
+      if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+          e.target.value = value;
+        });
+      }
+
+      // Expiry date formatting
+      const expiryInput = document.getElementById('expiryDate');
+      if (expiryInput) {
+        expiryInput.addEventListener('input', function(e) {
+          let value = e.target.value.replace(/\D/g, '');
+          if (value.length >= 2) {
+            value = value.substring(0, 2) + '/' + value.substring(2, 4);
+          }
+          e.target.value = value;
+        });
+      }
+
+      // CVV formatting (numbers only)
+      const cvvInput = document.getElementById('cvv');
+      if (cvvInput) {
+        cvvInput.addEventListener('input', function(e) {
+          e.target.value = e.target.value.replace(/\D/g, '');
+        });
+      }
+
+      // Clear payment form errors on input focus
+      const paymentFormInputs = document.querySelectorAll('#paymentMethodForm .form-field-input');
+      paymentFormInputs.forEach(input => {
+        input.addEventListener('focus', function() {
+          const inputId = this.id;
+          const errorId = inputId + 'Error';
+          clearPaymentError(inputId, errorId);
+        });
+
+        // Update continue button on input change
+        input.addEventListener('input', updateContinueButton);
+      });
+
+      const deleteBtn = document.getElementById('deleteAccountBtn');
+      if (deleteBtn) {
+        deleteBtn.addEventListener('click', deleteAccount);
+      }
+
+      // Delete account modal event listeners
+      const closeDeleteModal = document.getElementById('closeDeleteModal');
+      const cancelDeleteBtn = document.getElementById('cancelDeleteBtn');
+      const confirmDeleteBtn = document.getElementById('confirmDeleteBtn');
+
+      if (closeDeleteModal) {
+        closeDeleteModal.addEventListener('click', cancelDeleteAccount);
+      }
+
+      if (cancelDeleteBtn) {
+        cancelDeleteBtn.addEventListener('click', cancelDeleteAccount);
+      }
+
+      if (confirmDeleteBtn) {
+        confirmDeleteBtn.addEventListener('click', confirmDeleteAccount);
+      }
+
+      // Close modal when clicking outside
+      const deleteModal = document.getElementById('deleteAccountModal');
+      if (deleteModal) {
+        deleteModal.addEventListener('click', function(event) {
+          if (event.target === deleteModal) {
+            cancelDeleteAccount();
+          }
+        });
+      }
+
+      // Add event listeners to enable/disable delete button based on form fields
+      const deleteEmailInput = document.getElementById('deleteEmail');
+      const deletePasswordInput = document.getElementById('deletePassword');
+      
+      if (deleteEmailInput) {
+        deleteEmailInput.addEventListener('input', checkDeleteFormFields);
+        deleteEmailInput.addEventListener('blur', checkDeleteFormFields);
+      }
+      
+      if (deletePasswordInput) {
+        deletePasswordInput.addEventListener('input', checkDeleteFormFields);
+        deletePasswordInput.addEventListener('blur', checkDeleteFormFields);
+      }
+
+      // Left navigation links functionality
+      const leftNavLinks = document.querySelectorAll('.left-nav-link');
+      
+      console.log('Found left nav links:', leftNavLinks.length);
+      
+      // Add specific event listener for logout button
+      const logoutLink = document.querySelector('.profile-nav-link.logout');
+      if (logoutLink) {
+        console.log('Logout link found:', logoutLink);
+        logoutLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log('Logout link clicked directly');
+          logout();
+        });
+      } else {
+        console.log('Logout link not found');
+      }
+      
+      leftNavLinks.forEach((link, index) => {
+        console.log(`Link ${index}:`, link.href, link.textContent.trim());
+        
+        link.addEventListener('click', function(e) {
+          e.preventDefault();
+          console.log(`Clicked link ${index}:`, link.textContent.trim());
+          
+          // Handle each link based on its href or position
+          if (link.href.includes('my-profile.html') || link.textContent.trim() === 'My Profile') {
+            console.log('Navigating to My Profile');
+            navigateToMyProfile();
+          } else if (link.href.includes('privacy-policy.html') || link.textContent.trim() === 'Privacy and Policy') {
+            console.log('Navigating to Privacy Policy');
+            navigateToPrivacyPolicy();
+          } else if (link.href.includes('terms-conditions.html') || link.textContent.trim() === 'Terms and Conditions') {
+            console.log('Navigating to Terms and Conditions');
+            navigateToTerms();
+          } else if (link.classList.contains('active') || link.textContent.trim() === 'Settings') {
+            console.log('Settings clicked');
+            navigateToSettings();
+          } else if (index === leftNavLinks.length - 1 || link.textContent.trim() === 'Log out') {
+            console.log('Logout clicked');
+            logout();
+          } else {
+            console.log('Unknown link clicked:', link.textContent.trim());
+            showNotification("ðŸ”— Link clicked: " + link.textContent.trim(), "info");
+          }
+        });
+        
+        // Add visual feedback on hover
+        link.addEventListener('mouseenter', function() {
+          this.style.transform = 'translateX(5px)';
+          this.style.transition = 'transform 0.2s ease';
+        });
+        
+        link.addEventListener('mouseleave', function() {
+          this.style.transform = 'translateX(0)';
+        });
+      });
+
+      // Retreat card buttons
+      const viewRetreatBtn = document.querySelector('.retreat-button:not(.ghost)');
+      if (viewRetreatBtn) {
+        viewRetreatBtn.addEventListener('click', viewRetreat);
+      }
+
+      const claimOfferBtn = document.querySelector('.retreat-button.ghost:first-of-type');
+      if (claimOfferBtn) {
+        claimOfferBtn.addEventListener('click', claimOffer);
+      }
+
+      const seeScheduleBtn = document.querySelector('.retreat-button.ghost:last-of-type');
+      if (seeScheduleBtn) {
+        seeScheduleBtn.addEventListener('click', seeSchedule);
+      }
+
+      // Profile picture click
+      const profileAvatar = document.querySelector('.profile-avatar');
+      if (profileAvatar) {
+        profileAvatar.addEventListener('click', function() {
+          showNotification("ðŸ“· Profile picture upload feature coming soon!", "info");
+        });
+      }
+
+      // Header navigation
+      const notificationHeader = document.querySelector('.header-item:first-of-type');
+      if (notificationHeader) {
+        notificationHeader.addEventListener('click', function(e) {
+          // Let the default link behavior happen
+        });
+      }
+
+      const profileHeader = document.querySelector('.header-item:last-of-type');
+      if (profileHeader) {
+        profileHeader.addEventListener('click', function(e) {
+          // Let the default link behavior happen
+        });
+      }
+
+      // Search functionality
+      const searchInput = document.querySelector('.search-input');
+      const searchButton = document.querySelector('.search-button');
+      
+      if (searchInput && searchButton) {
+        const performSearch = () => {
+          const query = searchInput.value.trim();
+          if (query) {
+            showNotification(`ðŸ” Searching for "${query}"...`, "info");
+            // Here you can add actual search logic
+          } else {
+            showNotification("ðŸ” Please enter a search term!", "info");
+          }
+        };
+
+        searchButton.addEventListener('click', performSearch);
+        searchInput.addEventListener('keypress', function(e) {
+          if (e.key === 'Enter') {
+            performSearch();
+          }
+        });
+      }
+    });
+
+    // Mobile Menu Toggle
+    (function(){
+      var menuToggle = document.getElementById('menuToggle');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      var isOpen = false;
+
+      function openMenu(){
+        isOpen = true;
+        mobileMenu.classList.add('open');
+        mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        menuToggle.classList.add('active');
+      }
+
+      function closeMenu(){
+        isOpen = false;
+        mobileMenu.classList.remove('open');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        menuToggle.classList.remove('active');
+      }
+
+      if(menuToggle){
+        menuToggle.addEventListener('click', function(){
+          if(isOpen){
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+
+      if(mobileMenuOverlay){
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+      }
+
+      // Close menu when clicking on a menu item
+      if(mobileMenu){
+        mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+          item.addEventListener('click', function(){
+            closeMenu();
+          });
+        });
+      }
+
+      // Prevent search form submission
+      var searchForm = document.querySelector('.search-container');
+      if(searchForm){
+        searchForm.addEventListener('submit', function(e){
+          e.preventDefault();
+        });
+      }
+    })();
+  </script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <p>Follow us on social media to get the latest news</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/17bD2Xt7NX/" class="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://static.vecteezy.com/system/resources/previews/018/930/698/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/amberchamber.ss15?igsh=MTltaGdvaXBpOGVtYQ==" class="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png" alt="Instagram">
+          </a>
+        </div>
+        <div class="policy-links">
+          <a href="#" class="policy-link">COOKIES POLICY</a>
+          <a href="#" class="policy-link">PRIVACY POLICY</a>
+          <a href="#" class="policy-link">TERMS AND CONDITIONS</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Explore More</h3>
+        <ul class="footer-links">
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Founder Message</a></li>
+          <li><a href="#">Our Concepts</a></li>
+          <li><a href="location.html">Contact Us</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Our Studios</h3>
+        <ul class="footer-links">
+          <li><a href="location.html">Our Locations</a></li>
+          <li><a href="#">Past Events</a></li>
+          <li><a href="#">Opportunities</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>Copyright © 2024. Amber Sdn Bhd. All rights reserved</p>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Confirm Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="confirmbooking.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+      <nav class="top-nav" style="justify-self: end;"><a id="backBooking" href="#" style="color:#fff; text-decoration:none; font-weight:600;">Back to Booking</a></nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a class="mobile-nav-item" href="home.html"><span>🏠</span>Home</a>
+      <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="mobile-nav-item" href="bookings.html"><span>📅</span>Booking</a>
+      <a class="mobile-nav-item" href="location.html"><span>📍</span>Location</a>
+      <a class="mobile-nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+    </nav>
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="location.html"><span>📍</span>Location</a>
+        <a class="nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+      </aside>
+      <main class="content">
+        <div class="booking-wrap">
+        <div class="progress-header">
+          <div class="progress-step">
+            <div class="progress-badge active">1</div>
+            <strong>Booking</strong>
+          </div>
+          <div class="progress-line active"></div>
+          <div class="progress-step">
+            <div class="progress-badge active">2</div>
+            <strong>Confirm Booking</strong>
+          </div>
+          <div class="progress-line"></div>
+          <div class="progress-step">
+            <div class="progress-badge">3</div>
+            <span class="muted">Payment</span>
+          </div>
+        </div>
+
+          <div class="card">
+            <h3 style="margin:6px 0 10px;">Confirm Your Booking</h3>
+            <div class="summary">
+              <div class="card summary-card">
+                <div class="activity-name" id="sumActivity">-</div>
+                <div class="muted" id="sumDate">-</div>
+                <div class="muted" id="sumCount">-</div>
+              </div>
+              <div class="pill" id="sumNote">You are booking for 1 person.</div>
+              <div class="promo">
+                <input id="promo" type="text" placeholder="Enter Promo Code" />
+                <button class="btn btn-secondary" type="button" onclick="alert('Demo: promo applied')">Apply</button>
+              </div>
+              <div class="card pricing-card">
+                <div><strong>Subtotal:</strong> <span id="subtotal">Rm 0.00</span></div>
+                <div class="total-price">Total Price: <span id="total">Rm 0.00</span></div>
+              </div>
+
+              <div class="card info-card" id="yourInfo"></div>
+              <div class="card info-card" id="friendsInfo"></div>
+              <div class="rule">
+                <div class="rule-title">Rules of the Policy</div>
+                <ol class="rule-list">
+                  <li>No refunds within 2 days before the activity starts.</li>
+                  <li>Helmet are not allow to the room.</li>
+                  <li>Dating are no allow.</li>
+                  <li>Do not bring pet to the shop.</li>
+                </ol>
+              </div>
+              <label class="policy-checkbox">
+                <input id="agreePolicy" type="checkbox" />
+                <span>I have read the Rules of the policy</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="confirm-footer">
+            <div class="card" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+              <button id="proceedPay" class="btn btn-primary" type="button" disabled>Next</button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script>
+      function fmtRM(n){
+        return 'Rm ' + (Number(n).toFixed(2));
+      }
+      var qs = new URLSearchParams(window.location.search);
+      var dataRaw = qs.get('data');
+      try{
+        var payload = JSON.parse(decodeURIComponent(dataRaw || ''));
+        var count = (payload.bookingFor === 'friend_only') ? (payload.friends?.length || 0) : (1 + (payload.friends?.length || 0));
+        document.getElementById('sumActivity').textContent = payload.activity || 'Activity';
+        document.getElementById('sumDate').textContent = new Date(payload.date).toLocaleString('en-US', { 
+          weekday: 'short', 
+          month: 'short', 
+          day: 'numeric',
+          hour: 'numeric',
+          minute: '2-digit',
+          hour12: true
+        });
+        document.getElementById('sumCount').textContent = 'Price per person: Rm50';
+        document.getElementById('sumNote').textContent = 'You are booking for ' + count + ' ' + (count===1?'person':'people') + '.';
+        var pricePer = 50; var subtotal = pricePer * count; // demo price
+        document.getElementById('subtotal').textContent = fmtRM(subtotal);
+        document.getElementById('total').textContent = fmtRM(subtotal);
+
+        // Your info
+        var yourInfo = document.getElementById('yourInfo');
+        if(payload.bookingFor !== 'friend_only'){
+          yourInfo.innerHTML = '<div style="font-weight:700;margin-bottom:6px">Your Personal information</div>' +
+            '<div>Name : ' + payload.user.name + '</div>' +
+            '<div>Phone : ' + payload.user.phone + '</div>' +
+            '<div>Email : ' + payload.user.email + '</div>' +
+            '<div>Gender : ' + payload.user.gender + '</div>';
+        } else {
+          yourInfo.style.display = 'none';
+        }
+
+        // Friends info
+        var fInfo = document.getElementById('friendsInfo');
+        if((payload.friends||[]).length){
+          var html = '<div style="font-weight:700;margin-bottom:6px">Friend</div>';
+          payload.friends.forEach(function(f){
+            html += '<div style="margin-bottom:8px">' +
+              '<div>Name : ' + f.name + '</div>' +
+              '<div>Phone : ' + f.phone + '</div>' +
+              '<div>Email : ' + f.email + '</div>' +
+              '<div>Gender : ' + f.gender + '</div>' +
+            '</div>';
+          });
+          fInfo.innerHTML = html;
+        } else {
+          fInfo.style.display = 'none';
+        }
+
+        var back = document.getElementById('backBooking');
+        if(back){
+          // Navigate back to booking page with full booking data
+          var backUrl = new URL('booking.html', window.location.href);
+          if(payload.date) backUrl.searchParams.set('date', payload.date);
+          if(payload.activity) backUrl.searchParams.set('activity', payload.activity);
+          // Pass the full booking data so friends and mode can be restored
+          backUrl.searchParams.set('data', encodeURIComponent(JSON.stringify(payload)));
+          back.setAttribute('href', backUrl.toString());
+        }
+
+        var nextBtn = document.getElementById('proceedPay');
+        var agree = document.getElementById('agreePolicy');
+        function updateNext(){ nextBtn.disabled = !agree.checked; }
+        agree.addEventListener('change', updateNext);
+        updateNext();
+        nextBtn.addEventListener('click', function(){
+          if(!agree.checked){
+            alert('Please confirm you have read the Rules of the policy.');
+            agree.focus();
+            return;
+          }
+          
+          // Navigate to payment page with booking data
+          var paymentUrl = new URL('payment.html', window.location.href);
+          paymentUrl.searchParams.set('data', encodeURIComponent(JSON.stringify(payload)));
+          window.location.href = paymentUrl.toString();
+        });
+      } catch(e){
+        console.error('Failed to parse booking data', e);
+      }
+
+      // Mobile Menu Toggle
+      (function(){
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        var isOpen = false;
+
+        function openMenu(){
+          isOpen = true;
+          mobileMenu.classList.add('open');
+          mobileMenuOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuToggle.classList.add('active');
+        }
+
+        function closeMenu(){
+          isOpen = false;
+          mobileMenu.classList.remove('open');
+          mobileMenuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          menuToggle.classList.remove('active');
+        }
+
+        if(menuToggle){
+          menuToggle.addEventListener('click', function(){
+            if(isOpen){
+              closeMenu();
+            } else {
+              openMenu();
+            }
+          });
+        }
+
+        if(mobileMenuOverlay){
+          mobileMenuOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when clicking on a menu item
+        if(mobileMenu){
+          mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+            item.addEventListener('click', function(){
+              closeMenu();
+            });
+          });
+        }
+      })();
+    </script>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <p>Follow us on social media to get the latest news</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/17bD2Xt7NX/" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://static.vecteezy.com/system/resources/previews/018/930/698/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/amberchamber.ss15?igsh=MTltaGdvaXBpOGVtYQ==" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png" alt="Instagram">
+            </a>
+          </div>
+          <div class="policy-links">
+            <a href="#" class="policy-link">COOKIES POLICY</a>
+            <a href="#" class="policy-link">PRIVACY POLICY</a>
+            <a href="#" class="policy-link">TERMS AND CONDITIONS</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Explore More</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Founder Message</a></li>
+            <li><a href="#">Our Concepts</a></li>
+            <li><a href="location.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Our Studios</h3>
+          <ul class="footer-links">
+            <li><a href="location.html">Our Locations</a></li>
+            <li><a href="#">Past Events</a></li>
+            <li><a href="#">Opportunities</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Copyright © 2024. Amber Sdn Bhd. All rights reserved</p>
+      </div>
+    </footer>
+
+  </body>
+</html>
+
+

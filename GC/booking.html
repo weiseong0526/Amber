@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Booking</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="booking.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+      <nav class="top-nav" style="justify-self: end;"><a href="activities.html" style="color:#fff; text-decoration:none; font-weight:600;">Back to Activities</a></nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a class="mobile-nav-item" href="home.html"><span>🏠</span>Home</a>
+      <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="mobile-nav-item active" href="bookings.html"><span>📅</span>Booking</a>
+      <a class="mobile-nav-item" href="#"><span>👥</span>Customer</a>
+      <a class="mobile-nav-item" href="#"><span>⚙️</span>Settings</a>
+    </nav>
+    <div class="layout">
+        <aside class="sidebar" aria-label="Main navigation">
+          <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+          <a class="nav-item active" href="activities.html"><span>🎯</span>Activities</a>
+          <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+          <a class="nav-item" href="#"><span>👥</span>Customers</a>
+          <a class="nav-item" href="#"><span>⚙️</span>Settings</a>
+        </aside>
+      <main class="content">
+        <div class="booking-wrap">
+        <div class="header" style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <div class="badge" style="background:#00ff00; color:#065f46;">1</div><strong>Booking</strong>
+          <div style="height:2px;background:#e5e7eb;flex:1;margin:0 8px;"></div>
+          <div class="badge" style="background:#e5e7eb;color:#6b7280;">2</div><span class="muted">Confirm Booking</span>
+          <div style="height:2px;background:#e5e7eb;flex:1;margin:0 8px;"></div>
+          <div class="badge" style="background:#e5e7eb;color:#6b7280;">3</div><span class="muted">Payment</span>
+        </div>
+
+        <div class="card">
+          <h3 style="margin:6px 0 10px;">Who is this booking for?</h3>
+          <div class="toggle" role="tablist" aria-label="Booking for">
+            <button id="tabMyself" class="active" aria-selected="true">Myself</button>
+            <button id="tabFriend" aria-selected="false">Friend/Other</button>
+          </div>
+        </div>
+
+        <div id="myselfSection" class="card section" aria-labelledby="yourInfoTitle">
+          <h3 id="yourInfoTitle" style="margin:6px 0 12px;">Your Information</h3>
+          <div class="grid two">
+            <div class="field">
+              <label>Name</label>
+              <input id="userName" type="text" value="Koh Koh" readonly />
+            </div>
+            <div class="field">
+              <label>Phone number</label>
+              <input id="userPhone" type="tel" value="0123456789" readonly />
+            </div>
+            <div class="field">
+              <label>Email</label>
+              <input id="userEmail" type="email" value="koh@gmail.com" readonly />
+            </div>
+            <div class="field">
+              <label>Gender</label>
+              <input id="userGender" type="text" value="Male" readonly />
+            </div>
+          </div>
+          <p class="note" style="margin-top:10px;">These details are linked to your account and cannot be changed here.</p>
+        </div>
+
+        <div id="friendsSection" class="card section">
+          <h3 style="margin:6px 0 12px;">Friend Information</h3>
+          <div id="friends" class="friends"></div>
+          <button id="addFriend" class="btn btn-secondary" type="button">Add Friend</button>
+        </div>
+
+        <div class="booking-footer">
+          <div class="card" style="display:flex; flex-direction:column; align-items:center; gap:12px;">
+            <div>
+              <strong>Selected date:</strong> <span id="selectedDate">-</span>
+              <span style="margin:0 8px; color:#d1d5db">|</span>
+              <strong>Activity:</strong> <span id="selectedActivity">-</span>
+            </div>
+            <button id="nextBtn" class="btn btn-primary" type="button">Next</button>
+          </div>
+        </div>
+        </div>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <p>Follow us on social media to get the latest news</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/17bD2Xt7NX/" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://static.vecteezy.com/system/resources/previews/018/930/698/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/amberchamber.ss15?igsh=MTltaGdvaXBpOGVtYQ==" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png" alt="Instagram">
+            </a>
+          </div>
+          <div class="policy-links">
+            <a href="#" class="policy-link">COOKIES POLICY</a>
+            <a href="#" class="policy-link">PRIVACY POLICY</a>
+            <a href="#" class="policy-link">TERMS AND CONDITIONS</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Explore More</h3>
+          <ul class="footer-links">
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Founder Message</a></li>
+            <li><a href="#">Our Concepts</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Our Studios</h3>
+          <ul class="footer-links">
+            <li><a href="location.html">Our Locations</a></li>
+            <li><a href="#">Past Events</a></li>
+            <li><a href="#">Opportunities</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Copyright © 2024. Amber Sdn Bhd. All rights reserved</p>
+      </div>
+    </footer>
+
+    <template id="friendTemplate">
+      <div class="friend" data-friend>
+        <div class="grid two">
+          <div class="field">
+            <label>Name</label>
+            <input type="text" name="friendName" placeholder="Full Name" required />
+          </div>
+          <div class="field">
+            <label>Phone number</label>
+            <input type="tel" name="friendPhone" placeholder="60123456789" required />
+          </div>
+          <div class="field">
+            <label>Email</label>
+            <input type="email" name="friendEmail" placeholder="sample@gmail.com" required />
+          </div>
+          <div class="field">
+            <label>Gender</label>
+            <select name="friendGender" required>
+              <option value="" selected disabled>Male/Female</option>
+              <option>Male</option>
+              <option>Female</option>
+              <option>Prefer not to say</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:flex; justify-content:flex-end; margin-top:10px;">
+          <button type="button" class="btn btn-danger" data-remove>Remove</button>
+        </div>
+      </div>
+    </template>
+
+    <script>
+      // Read selected date from query string
+      var qs = new URLSearchParams(window.location.search);
+      var selectedDate = qs.get('date');
+      var dateSpan = document.getElementById('selectedDate');
+      var activity = qs.get('activity');
+      var activitySpan = document.getElementById('selectedActivity');
+      dateSpan.textContent = selectedDate ? new Date(selectedDate).toLocaleString('en-US', { 
+        weekday: 'short', 
+        month: 'short', 
+        day: 'numeric',
+        hour: 'numeric',
+        minute: '2-digit',
+        hour12: true
+      }) : 'Not selected';
+      activitySpan.textContent = activity || 'Not selected';
+
+      var tabMyself = document.getElementById('tabMyself');
+      var tabFriend = document.getElementById('tabFriend');
+      var myselfSection = document.getElementById('myselfSection');
+      var friendsSection = document.getElementById('friendsSection');
+
+      function switchMode(mode){
+        var isMyself = mode === 'myself';
+        tabMyself.classList.toggle('active', isMyself);
+        tabFriend.classList.toggle('active', !isMyself);
+        tabMyself.setAttribute('aria-selected', isMyself ? 'true' : 'false');
+        tabFriend.setAttribute('aria-selected', !isMyself ? 'true' : 'false');
+        // In Friend/Other mode we hide the user's info and require at least one friend
+        myselfSection.classList.toggle('hidden', !isMyself);
+        friendsSection.classList.remove('hidden');
+      }
+
+      [tabMyself, tabFriend].forEach(function(btn){
+        btn.addEventListener('click', function(){
+          switchMode(btn === tabMyself ? 'myself' : 'friend');
+          if(btn === tabFriend){ document.getElementById('addFriend').focus(); }
+        });
+      });
+
+      var friendsContainer = document.getElementById('friends');
+      var addFriendBtn = document.getElementById('addFriend');
+      var tpl = document.getElementById('friendTemplate');
+      
+      // Function to add a friend entry
+      function addFriendEntry(friendData){
+        var node = tpl.content.firstElementChild.cloneNode(true);
+        if(friendData){
+          node.querySelector('[name="friendName"]').value = friendData.name || '';
+          node.querySelector('[name="friendPhone"]').value = friendData.phone || '';
+          node.querySelector('[name="friendEmail"]').value = friendData.email || '';
+          node.querySelector('[name="friendGender"]').value = friendData.gender || '';
+        }
+        node.querySelector('[data-remove]').addEventListener('click', function(){ node.remove(); });
+        friendsContainer.appendChild(node);
+        if(!friendData){
+          node.querySelector('input[name="friendName"]').focus();
+        }
+      }
+      
+      addFriendBtn.addEventListener('click', function(){
+        addFriendEntry(null);
+      });
+      
+      // Restore booking data if coming back from confirm booking page
+      var bookingDataRaw = qs.get('data');
+      if(bookingDataRaw){
+        try{
+          var bookingData = JSON.parse(decodeURIComponent(bookingDataRaw));
+          
+          // Restore booking mode
+          if(bookingData.bookingFor === 'friend_only'){
+            switchMode('friend');
+          } else {
+            switchMode('myself');
+          }
+          
+          // Restore user information if available
+          if(bookingData.user){
+            if(bookingData.user.name) document.getElementById('userName').value = bookingData.user.name;
+            if(bookingData.user.phone) document.getElementById('userPhone').value = bookingData.user.phone;
+            if(bookingData.user.email) document.getElementById('userEmail').value = bookingData.user.email;
+            if(bookingData.user.gender) document.getElementById('userGender').value = bookingData.user.gender;
+          }
+          
+          // Restore friends information
+          if(bookingData.friends && bookingData.friends.length > 0){
+            bookingData.friends.forEach(function(friend){
+              addFriendEntry(friend);
+            });
+          }
+        } catch(e){
+          console.error('Failed to restore booking data', e);
+        }
+      }
+
+      document.getElementById('nextBtn').addEventListener('click', function(){
+        if(!selectedDate){
+          alert('No date selected. Please go back and pick a date.');
+          return;
+        }
+        var friendBlocks = Array.prototype.slice.call(document.querySelectorAll('[data-friend]'));
+        var isFriendOnly = tabFriend.classList.contains('active');
+        if(isFriendOnly && friendBlocks.length === 0){
+          alert('Please add at least one friend when booking for Friend/Other.');
+          document.getElementById('addFriend').focus();
+          return;
+        }
+        for(var i=0;i<friendBlocks.length;i++){
+          var inputs = friendBlocks[i].querySelectorAll('input, select');
+          for(var j=0;j<inputs.length;j++){
+            var el = inputs[j];
+            if(!el.checkValidity()){
+              el.reportValidity();
+              el.focus();
+              return;
+            }
+          }
+        }
+        var payload = {
+          date: selectedDate,
+          bookingFor: isFriendOnly ? 'friend_only' : (friendBlocks.length ? 'myself_and_friends' : 'myself'),
+          user: {
+            name: document.getElementById('userName').value,
+            phone: document.getElementById('userPhone').value,
+            email: document.getElementById('userEmail').value,
+            gender: document.getElementById('userGender').value
+          },
+          friends: friendBlocks.map(function(b){
+            return {
+              name: b.querySelector('[name="friendName"]').value.trim(),
+              phone: b.querySelector('[name="friendPhone"]').value.trim(),
+              email: b.querySelector('[name="friendEmail"]').value.trim(),
+              gender: b.querySelector('[name="friendGender"]').value
+            }
+          }),
+          activity: (new URLSearchParams(window.location.search)).get('activity') || ''
+        };
+        var url = new URL('confirmbooking.html', window.location.href);
+        url.searchParams.set('data', encodeURIComponent(JSON.stringify(payload)));
+        window.location.href = url.toString();
+      });
+
+      // Initialize default mode to "myself" only if no booking data to restore
+      if(!bookingDataRaw){
+        switchMode('myself');
+      }
+
+      // Mobile Menu Toggle
+      (function(){
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        var isOpen = false;
+
+        function openMenu(){
+          isOpen = true;
+          mobileMenu.classList.add('open');
+          mobileMenuOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuToggle.classList.add('active');
+        }
+
+        function closeMenu(){
+          isOpen = false;
+          mobileMenu.classList.remove('open');
+          mobileMenuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          menuToggle.classList.remove('active');
+        }
+
+        if(menuToggle){
+          menuToggle.addEventListener('click', function(){
+            if(isOpen){
+              closeMenu();
+            } else {
+              openMenu();
+            }
+          });
+        }
+
+        if(mobileMenuOverlay){
+          mobileMenuOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when clicking on a menu item
+        if(mobileMenu){
+          mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+            item.addEventListener('click', function(){
+              closeMenu();
+            });
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>
+
+

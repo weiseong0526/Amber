@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Amber • Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="home.css" />
+  </head>
+  <body>
+    <header class="topbar">
+      <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="brand">
+        <span class="logo-dot"></span>
+        <span class="brand-name">Amber</span>
+      </div>
+
+      <form class="search" role="search" action="#">
+        <input type="text" placeholder="Search Yoga, Weaving, dance" aria-label="Search classes" />
+        <button type="submit" aria-label="Search">🔍</button>
+      </form>
+
+      <nav class="top-actions" aria-label="Top actions">
+        <a href="notifications.html" class="action"><span>🔔</span><span class="label">Notification</span></a>
+        <a href="my-profile.html" class="action"><span>👤</span><span class="label">Profile</span></a>
+      </nav>
+    </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+      <a class="mobile-nav-item active" href="home.html"><span>🏠</span>Home</a>
+      <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="mobile-nav-item" href="bookings.html"><span>📅</span>Booking</a>
+      <a class="mobile-nav-item" href="location.html"><span>📍</span>Location</a>
+      <a class="mobile-nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+    </nav>
+
+    <div class="layout">
+      <aside class="sidebar" aria-label="Main navigation">
+        <a class="nav-item active" href="home.html"><span>🏠</span>Home</a>
+        <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+        <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+        <a class="nav-item" href="location.html"><span>📍</span>Location</a>
+        <a class="nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+
+        <div class="promos">
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip">View Retreat</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">Claim Offer</button>
+          </div>
+          <div class="promo">
+            <h4>Weekend Retreat</h4>
+            <p>Recharge with 2 days of yoga & breath work.</p>
+            <button class="chip ghost">See Schedule</button>
+          </div>
+        </div>
+      </aside>
+
+      <main class="content home">
+        <section class="hero">
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?q=80&w=1600&auto=format&fit=crop" alt="" />
+          <div class="hero-overlay">
+            <p class="kicker">Your one-stop destination for booking enriching activities like yoga, weaving, and more</p>
+            <h1>Welcome to Amber</h1>
+            <a href="activities.html" class="btn cta">Book Now</a>
+          </div>
+        </section>
+
+        <section class="about-us" id="about-us">
+          <div class="about-content">
+            <div class="about-image">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop" alt="Our team at Amber" />
+            </div>
+            <div class="about-text">
+              <h2>About us</h2>
+              <p>Our name "Jal" means water in Hindi. Water adapts to overcome obstacles and rises to incredible heights and we believe you can too.</p>
+              <p>Regardless of your age, fitness background and body type, you can practise Yoga, Barre and Pilates and find your path to better health and wellness.</p>
+              <p>We invite you to be a part of a global community of over 4,000 practitioners across Singapore, Malaysia and Indonesia.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="intro">
+          <h2>Join Our Creative & Wellness Classes</h2>
+          <p>Discover new skills, relax your mind, and connect with others through our wide range of classes.</p>
+        </section>
+
+        <section class="cards">
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1518617840859-acd0eac7b3fd?q=80&w=1200&auto=format&fit=crop" alt="Yoga Basics" />
+            <div class="card-body">
+              <h3>Yoga Basics</h3>
+              <a href="yoga-basics.html" class="btn slim">Learn More</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" alt="Zumba Dance" />
+            <div class="card-body">
+              <h3>Zumba Dance</h3>
+              <a href="zumba-dance.html" class="btn slim">Learn More</a>
+            </div>
+          </article>
+          <article class="card">
+            <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?q=80&w=1200&auto=format&fit=crop" alt="Weaving Workshop" />
+            <div class="card-body">
+              <h3>Weaving Workshop</h3>
+              <a href="weaving-workshop.html" class="btn slim">Learn More</a>
+            </div>
+          </article>
+        </section>
+
+        <section class="upcoming-section">
+          <h2>Stay Tuned for Upcoming Activities</h2>
+          <p class="subtitle">Explore new adventures and experiences coming soon to Amber.</p>
+          
+          <div class="upcoming-cards">
+            <article class="upcoming-card">
+              <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=1200&auto=format&fit=crop" alt="Mindfulness and Meditation Series" />
+              <div class="upcoming-card-content">
+                <h3>Mindfulness and Meditation Series</h3>
+                <div class="date">20 Jan 2025</div>
+              </div>
+            </article>
+
+            <article class="upcoming-card">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop" alt="Spring Yoga Retreat" />
+              <div class="upcoming-card-content">
+                <h3>Spring Yoga Retreat</h3>
+                <div class="date">27 Jan 2025</div>
+              </div>
+            </article>
+
+            <article class="upcoming-card">
+              <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?q=80&w=1200&auto=format&fit=crop" alt="Weaving Festival" />
+              <div class="upcoming-card-content">
+                <h3>Weaving Festival</h3>
+                <div class="date">28 Jan 2025</div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section class="why-join-us">
+          <h2>Why join us?</h2>
+          <div class="benefits-row">
+            <div class="benefit-item">
+              <div class="benefit-icon">🧘‍♀️</div>
+              <p>Experience Yoga in its most authentic form</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">👥</div>
+              <p>Enjoy classes catered for all ages, fitness levels, body types</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🔥</div>
+              <p>Enjoy one-of-a-kind therapeutic infra heat classes</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">⭐</div>
+              <p>Rated 4.9-star on Google across the globe</p>
+            </div>
+            <div class="benefit-item">
+              <div class="benefit-icon">🌍</div>
+              <p>Global brand with over 4,000 practitioners</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="our-instructors">
+          <div class="instructors-content">
+            <div class="instructors-text">
+              <h2>Our instructors</h2>
+              <p>Embark on your wellness journey with our passionate instructors, each accredited by globally recognised Yoga institutions.</p>
+              <p>Our full-time teachers go beyond just teaching - they're committed to ensuring you feel safe, comfortable and personally supported throughout your practice.</p>
+              <p>We don't just teach; we're genuinely invested in your health and wellness.</p>
+            </div>
+            <div class="instructors-image">
+              <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1200&auto=format&fit=crop" alt="Our instructors at Amber" />
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <footer class="footer">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h3>Connect With Us</h3>
+          <p>Follow us on social media to get the latest news</p>
+          <div class="social-links">
+            <a href="https://www.facebook.com/share/17bD2Xt7NX/" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://static.vecteezy.com/system/resources/previews/018/930/698/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/amberchamber.ss15?igsh=MTltaGdvaXBpOGVtYQ==" class="social-link" target="_blank" rel="noopener noreferrer">
+              <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png" alt="Instagram">
+            </a>
+          </div>
+          <div class="policy-links">
+            <a href="#" class="policy-link">COOKIES POLICY</a>
+            <a href="privacy-policy.html" class="policy-link">PRIVACY POLICY</a>
+            <a href="terms-conditions.html" class="policy-link">TERMS AND CONDITIONS</a>
+          </div>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Explore More</h3>
+          <ul class="footer-links">
+            <li><a href="#about-us">About Us</a></li>
+            <li><a href="#">Founder Message</a></li>
+            <li><a href="#">Our Concepts</a></li>
+            <li><a href="location.html">Contact Us</a></li>
+          </ul>
+        </div>
+        
+        <div class="footer-section">
+          <h3>Our Studios</h3>
+          <ul class="footer-links">
+            <li><a href="location.html">Our Locations</a></li>
+            <li><a href="#">Past Events</a></li>
+            <li><a href="#">Opportunities</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="footer-bottom">
+        <p>Copyright © 2024. Amber Sdn Bhd. All rights reserved</p>
+      </div>
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/60162139681" class="whatsapp-bubble" target="_blank" rel="noopener noreferrer" aria-label="Contact us on WhatsApp">
+      <img src="https://logos-world.net/wp-content/uploads/2020/05/WhatsApp-Symbol.png" alt="WhatsApp" />
+    </a>
+
+    <script>
+      // optional: prevent submit from navigating on demo search
+      document.querySelector('.search')?.addEventListener('submit', (e) => e.preventDefault());
+
+      // Mobile Menu Toggle
+      (function(){
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileMenu = document.getElementById('mobileMenu');
+        var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+        var isOpen = false;
+
+        function openMenu(){
+          isOpen = true;
+          mobileMenu.classList.add('open');
+          mobileMenuOverlay.classList.add('active');
+          document.body.style.overflow = 'hidden';
+          menuToggle.classList.add('active');
+        }
+
+        function closeMenu(){
+          isOpen = false;
+          mobileMenu.classList.remove('open');
+          mobileMenuOverlay.classList.remove('active');
+          document.body.style.overflow = '';
+          menuToggle.classList.remove('active');
+        }
+
+        if(menuToggle){
+          menuToggle.addEventListener('click', function(){
+            if(isOpen){
+              closeMenu();
+            } else {
+              openMenu();
+            }
+          });
+        }
+
+        if(mobileMenuOverlay){
+          mobileMenuOverlay.addEventListener('click', closeMenu);
+        }
+
+        // Close menu when clicking on a menu item
+        if(mobileMenu){
+          mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+            item.addEventListener('click', function(){
+              closeMenu();
+            });
+          });
+        }
+      })();
+    </script>
+  </body>
+</html>

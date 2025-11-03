@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Amber</title>
+  <link rel="stylesheet" href="privacy-policy.css">
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <button class="menu-toggle" aria-label="Toggle menu" id="menuToggle">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <div class="logo">
+      <span class="logo-dot"></span>
+      <span>Amber</span>
+    </div>
+    <form class="search-container" role="search" action="#">
+      <input type="text" class="search-input" placeholder="Search Yoga, Weaving, dance" aria-label="Search classes">
+      <button class="search-button" type="submit" aria-label="Search">🔍</button>
+    </form>
+    <div class="header-right">
+      <a href="notifications.html" class="header-item" onclick="showNotificationPageNotification(event)">
+        <span>🔔</span>
+        <span class="label">Notification</span>
+      </a>
+      <a href="my-profile.html" class="header-item" onclick="showProfilePageNotification(event)">
+        <span>👤</span>
+        <span class="label">Profile</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- Mobile Menu Overlay -->
+  <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation">
+    <a class="mobile-nav-item" href="home.html"><span>🏠</span>Home</a>
+    <a class="mobile-nav-item" href="activities.html"><span>🎯</span>Activities</a>
+    <a class="mobile-nav-item" href="bookings.html"><span>📅</span>Booking</a>
+    <a class="mobile-nav-item" href="location.html"><span>📍</span>Locations</a>
+    <a class="mobile-nav-item" href="Settings.html"><span>⚙️</span>Settings</a>
+  </nav>
+
+  <div class="main-container">
+    <!-- Sidebar -->
+    <aside class="sidebar" aria-label="Main navigation">
+      <a class="nav-item" href="home.html"><span>🏠</span>Home</a>
+      <a class="nav-item" href="activities.html"><span>🎯</span>Activities</a>
+      <a class="nav-item" href="bookings.html"><span>📅</span>Bookings</a>
+      <a class="nav-item" href="location.html"><span>📍</span>Location</a>
+      <a class="nav-item settings-bright" href="Settings.html"><span>⚙️</span>Settings</a>
+
+      <div class="promos">
+        <div class="promo">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="chip">View Retreat</button>
+        </div>
+        <div class="promo">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="chip ghost">Claim Offer</button>
+        </div>
+        <div class="promo">
+          <h4>Weekend Retreat</h4>
+          <p>Recharge with 2 days of yoga & breath work.</p>
+          <button class="chip ghost">See Schedule</button>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content -->
+    <div class="main-content">
+      <div class="content-wrapper">
+        <!-- Left Profile Summary -->
+        <div class="profile-summary">
+          <div class="profile-avatar">JD</div>
+          <div class="profile-name">John Doe</div>
+          <div class="profile-email">John Doe@email.com</div>
+          
+          <ul class="profile-nav">
+            <li class="profile-nav-item">
+              <a href="my-profile.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
+                </svg>
+                My Profile
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="Settings.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M19.14,12.94c0.04-0.3,0.06-0.61,0.06-0.94c0-0.32-0.02-0.64-0.07-0.94l2.03-1.58c0.18-0.14,0.23-0.41,0.12-0.61 l-1.92-3.32c-0.12-0.22-0.37-0.29-0.59-0.22l-2.39,0.96c-0.5-0.38-1.03-0.7-1.62-0.94L14.4,2.81c-0.04-0.24-0.24-0.41-0.48-0.41 h-3.84c-0.24,0-0.43,0.17-0.47,0.41L9.25,5.35C8.66,5.59,8.12,5.92,7.63,6.29L5.24,5.33c-0.22-0.08-0.47,0-0.59,0.22L2.74,8.87 C2.62,9.08,2.66,9.34,2.86,9.48l2.03,1.58C4.84,11.36,4.8,11.69,4.8,12s0.02,0.64,0.07,0.94l-2.03,1.58 c-0.18,0.14-0.23,0.41-0.12,0.61l1.92,3.32c0.12,0.22,0.37,0.29,0.59,0.22l2.39-0.96c0.5,0.38,1.03,0.7,1.62,0.94l0.36,2.54 c0.05,0.24,0.24,0.41,0.48,0.41h3.84c0.24,0,0.44-0.17,0.47-0.41l0.36-2.54c0.59-0.24,1.13-0.56,1.62-0.94l2.39,0.96 c0.22,0.08,0.47,0,0.59-0.22l1.92-3.32c0.12-0.22,0.07-0.47-0.12-0.61L19.14,12.94z M12,15.6c-1.98,0-3.6-1.62-3.6-3.6 s1.62-3.6,3.6-3.6s3.6,1.62,3.6,3.6S13.98,15.6,12,15.6z"/>
+                </svg>
+                Settings
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="privacy-policy.html" class="profile-nav-link active">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11.5C15.4,11.5 16,12.1 16,12.7V16.2C16,16.8 15.4,17.3 14.8,17.3H9.2C8.6,17.3 8,16.8 8,16.2V12.6C8,12.1 8.6,11.5 9.2,11.5V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.5,8.7 10.5,10V11.5H13.5V10C13.5,8.7 12.8,8.2 12,8.2Z"/>
+                </svg>
+                Privacy and Policy
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="terms-conditions.html" class="profile-nav-link">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M14,2H6A2,2 0 0,0 4,4V20A2,2 0 0,0 6,22H18A2,2 0 0,0 20,20V8L14,2M18,20H6V4H13V9H18V20Z"/>
+                </svg>
+                Terms and Conditions
+              </a>
+            </li>
+            <li class="profile-nav-item">
+              <a href="#" class="profile-nav-link logout">
+                <svg class="profile-nav-icon" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M17 7l-1.41 1.41L18.17 11H8v2h10.17l-2.58 2.58L17 17l5-5zM4 5h8V3H4c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h8v-2H4V5z"/>
+                </svg>
+                Log out
+              </a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Privacy Policy Content -->
+        <div class="profile-form-section">
+          <div class="profile-form-header">
+            <h2 class="profile-form-title">Privacy Policy</h2>
+            <p class="profile-form-subtitle">Your privacy is important to us. This policy explains how we collect, use, and protect your personal information.</p>
+          </div>
+
+          <div class="profile-form-content">
+            <div class="policy-content">
+              <section class="policy-section">
+                <h3 class="section-title"><span class="orange-bullet">•</span> 1. Introduction</h3>
+                <p class="section-text">
+                  Welcome to Amber, your one-stop destination for booking enriching activities like yoga, weaving, and more. We are committed to protecting your privacy and ensuring the security of your personal information.
+                </p>
+                <p class="section-text">
+                  This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                </p>
+                <div class="callout-box">
+                  <div class="callout-icon">🔒</div>
+                  <p class="callout-text">Your privacy matters to us. We follow industry best practices to keep your data safe and secure.</p>
+                  <div class="callout-lightbulb">💡</div>
+                </div>
+              </section>
+
+              <section class="policy-section">
+                <h3 class="section-title"><span class="orange-bullet">•</span> 2. Information We Collect</h3>
+                <p class="section-text">
+                  We may collect personal information that you voluntarily provide to us when you:
+                </p>
+                <ul class="section-list">
+                  <li><span class="checkmark">✓</span> Register for an account</li>
+                  <li><span class="checkmark">✓</span> Book classes or activities</li>
+                  <li><span class="checkmark">✓</span> Subscribe to our newsletter</li>
+                  <li><span class="checkmark">✓</span> Contact us for support</li>
+                </ul>
+                <p class="section-text">
+                  This information may include your name, email address, phone number, and preferences.
+                </p>
+                <div class="callout-box">
+                  <div class="callout-icon">📄</div>
+                  <p class="callout-text">We only collect information that is necessary to provide you with our services.</p>
+                  <div class="callout-lightbulb">💡</div>
+                </div>
+              </section>
+
+              <section class="policy-section">
+                <h3 class="section-title"><span class="orange-bullet">•</span> 3. How We Use Your Information</h3>
+                <p class="section-text">
+                  We use the information we collect for various purposes, including:
+                </p>
+                <ul class="section-list">
+                  <li><span class="checkmark">✓</span> Providing and maintaining our services</li>
+                  <li><span class="checkmark">✓</span> Processing your bookings</li>
+                  <li><span class="checkmark">✓</span> Sending you important updates</li>
+                  <li><span class="checkmark">✓</span> Responding to your inquiries</li>
+                  <li><span class="checkmark">✓</span> Improving our services</li>
+                </ul>
+                <div class="callout-box">
+                  <div class="callout-icon">🎯</div>
+                  <p class="callout-text">We use your information to enhance your experience and provide better services.</p>
+                  <div class="callout-lightbulb">💡</div>
+                </div>
+              </section>
+
+              <section class="policy-section">
+                <h3 class="section-title"><span class="orange-bullet">•</span> 4. Data Security</h3>
+                <p class="section-text">
+                  We implement appropriate security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction.
+                </p>
+                <p class="section-text">
+                  While we strive to protect your information, no method of transmission over the internet is 100% secure.
+                </p>
+                <div class="callout-box">
+                  <div class="callout-icon">🛡️</div>
+                  <p class="callout-text">We use industry-standard encryption and security protocols to protect your data.</p>
+                  <div class="callout-lightbulb">💡</div>
+                </div>
+              </section>
+
+              <section class="policy-section">
+                <h3 class="section-title"><span class="orange-bullet">•</span> 5. Your Rights</h3>
+                <p class="section-text">
+                  You have certain rights regarding your personal information, including:
+                </p>
+                <ul class="section-list">
+                  <li><span class="checkmark">✓</span> Access to your personal information</li>
+                  <li><span class="checkmark">✓</span> Correction of inaccurate information</li>
+                  <li><span class="checkmark">✓</span> Deletion of your information</li>
+                  <li><span class="checkmark">✓</span> Opt-out from marketing communications</li>
+                </ul>
+                <div class="callout-box">
+                  <div class="callout-icon">⚖️</div>
+                  <p class="callout-text">You have full control over your personal data and can exercise your rights at any time.</p>
+                  <div class="callout-lightbulb">💡</div>
+                </div>
+              </section>
+
+              <div class="terms-link-callout">
+                <div class="terms-link-icon">📝</div>
+                <p class="terms-link-text">For more information about our service terms and conditions, please review our <a href="terms-conditions.html" class="terms-link">Terms and Conditions.</a></p>
+                <div class="callout-lightbulb">💡</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop" onclick="scrollToTop()">
+          ↑
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Load profile data from localStorage
+    function loadProfileData() {
+      const savedProfile = localStorage.getItem('userProfile');
+      if (savedProfile) {
+        try {
+          const profileData = JSON.parse(savedProfile);
+          
+          // Update profile name
+          const profileName = document.querySelector('.profile-name');
+          if (profileName && profileData.fullName) {
+            profileName.textContent = profileData.fullName;
+          }
+
+          // Update profile email
+          const profileEmail = document.querySelector('.profile-email');
+          if (profileEmail && profileData.email) {
+            profileEmail.textContent = profileData.email;
+          }
+
+          // Update profile avatar
+          const profileAvatar = document.querySelector('.profile-avatar');
+          if (profileAvatar) {
+            const savedPhoto = localStorage.getItem('userProfilePhoto');
+            if (savedPhoto) {
+              profileAvatar.style.backgroundImage = `url(${savedPhoto})`;
+              profileAvatar.style.backgroundSize = 'cover';
+              profileAvatar.style.backgroundPosition = 'center';
+              profileAvatar.style.color = 'transparent';
+              profileAvatar.textContent = '';
+            } else if (profileData.fullName) {
+              const initials = getInitials(profileData.fullName);
+              profileAvatar.textContent = initials;
+              profileAvatar.style.backgroundImage = 'none';
+              profileAvatar.style.color = 'white';
+            }
+          }
+        } catch (error) {
+          console.error('Error loading profile data:', error);
+        }
+      } else {
+        // Load saved profile photo even if no profile data exists
+        const savedPhoto = localStorage.getItem('userProfilePhoto');
+        if (savedPhoto) {
+          const profileAvatar = document.querySelector('.profile-avatar');
+          if (profileAvatar) {
+            profileAvatar.style.backgroundImage = `url(${savedPhoto})`;
+            profileAvatar.style.backgroundSize = 'cover';
+            profileAvatar.style.backgroundPosition = 'center';
+            profileAvatar.style.color = 'transparent';
+            profileAvatar.textContent = '';
+          }
+        }
+      }
+    }
+
+    function getInitials(fullName) {
+      if (!fullName) return 'JD';
+      return fullName
+        .split(' ')
+        .map(name => name.charAt(0).toUpperCase())
+        .join('')
+        .substring(0, 2);
+    }
+
+    // Prevent search form submission
+    document.querySelector('.search-container')?.addEventListener('submit', (e) => e.preventDefault());
+
+    // Back to top functionality
+    function scrollToTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
+    }
+
+    // Show/hide back to top button
+    window.addEventListener('scroll', function() {
+      const backToTop = document.getElementById('backToTop');
+      if (window.pageYOffset > 300) {
+        backToTop.style.display = 'flex';
+      } else {
+        backToTop.style.display = 'none';
+      }
+    });
+
+    // Logout functionality
+    document.querySelector('.profile-nav-link.logout')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (confirm("🚪 Are you sure you want to log out?")) {
+        localStorage.removeItem("email");
+        localStorage.removeItem("password");
+        localStorage.removeItem("userProfile");
+        localStorage.removeItem("userProfilePhoto");
+        window.location.href = 'login.html';
+      }
+    });
+
+    // Notification functions
+    function showNotificationPageNotification(event) {
+      console.log('Notification page clicked');
+    }
+
+    function showProfilePageNotification(event) {
+      console.log('Profile page clicked');
+    }
+
+    // Load profile data when page loads
+    document.addEventListener('DOMContentLoaded', function() {
+      loadProfileData();
+    });
+
+    // Mobile Menu Toggle
+    (function(){
+      var menuToggle = document.getElementById('menuToggle');
+      var mobileMenu = document.getElementById('mobileMenu');
+      var mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+      var isOpen = false;
+
+      function openMenu(){
+        isOpen = true;
+        mobileMenu.classList.add('open');
+        mobileMenuOverlay.classList.add('active');
+        document.body.style.overflow = 'hidden';
+        menuToggle.classList.add('active');
+      }
+
+      function closeMenu(){
+        isOpen = false;
+        mobileMenu.classList.remove('open');
+        mobileMenuOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+        menuToggle.classList.remove('active');
+      }
+
+      if(menuToggle){
+        menuToggle.addEventListener('click', function(){
+          if(isOpen){
+            closeMenu();
+          } else {
+            openMenu();
+          }
+        });
+      }
+
+      if(mobileMenuOverlay){
+        mobileMenuOverlay.addEventListener('click', closeMenu);
+      }
+
+      // Close menu when clicking on a menu item
+      if(mobileMenu){
+        mobileMenu.querySelectorAll('.mobile-nav-item').forEach(function(item){
+          item.addEventListener('click', function(){
+            closeMenu();
+          });
+        });
+      }
+
+      // Prevent search form submission
+      var searchForm = document.querySelector('.search-container');
+      if(searchForm){
+        searchForm.addEventListener('submit', function(e){
+          e.preventDefault();
+        });
+      }
+    })();
+  </script>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Connect With Us</h3>
+        <p>Follow us on social media to get the latest news</p>
+        <div class="social-links">
+          <a href="https://www.facebook.com/share/17bD2Xt7NX/" class="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://static.vecteezy.com/system/resources/previews/018/930/698/non_2x/facebook-logo-facebook-icon-transparent-free-png.png" alt="Facebook">
+          </a>
+          <a href="https://www.instagram.com/amberchamber.ss15?igsh=MTltaGdvaXBpOGVtYQ==" class="social-link" target="_blank" rel="noopener noreferrer">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a5/Instagram_icon.png/1200px-Instagram_icon.png" alt="Instagram">
+          </a>
+        </div>
+        <div class="policy-links">
+          <a href="#" class="policy-link">COOKIES POLICY</a>
+          <a href="privacy-policy.html" class="policy-link">PRIVACY POLICY</a>
+          <a href="terms-conditions.html" class="policy-link">TERMS AND CONDITIONS</a>
+        </div>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Explore More</h3>
+        <ul class="footer-links">
+          <li><a href="home.html#about-us">About Us</a></li>
+          <li><a href="#">Founder Message</a></li>
+          <li><a href="#">Our Concepts</a></li>
+          <li><a href="location.html">Contact Us</a></li>
+        </ul>
+      </div>
+      
+      <div class="footer-section">
+        <h3>Our Studios</h3>
+        <ul class="footer-links">
+          <li><a href="location.html">Our Locations</a></li>
+          <li><a href="#">Past Events</a></li>
+          <li><a href="#">Opportunities</a></li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="footer-bottom">
+      <p>Copyright © 2024. Amber Sdn Bhd. All rights reserved</p>
+    </div>
+  </footer>
+
+</body>
+</html>
+
